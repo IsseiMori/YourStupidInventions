@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        // Configuration of using Parse code in Back4App
+        let parseConfig = ParseClientConfiguration { (ParseMutableClientConfiguration) in
+            
+            // Accessing Heroku App using id & keys
+            ParseMutableClientConfiguration.applicationId = "T2JD8e6uEAxbSCLXBUMXb7WUQxC4B75J8oBlS4cm"
+            ParseMutableClientConfiguration.clientKey = "tBkdOLH6YpmtpViV4yjIRJbB1q3tks8UuE4957bx"
+            ParseMutableClientConfiguration.server = "https://parseapi.back4app.com/"
+        }
+        
+        // Initialize Parse with configuration
+        Parse.initialize(with: parseConfig)
+        
+        
+        
         return true
     }
 
