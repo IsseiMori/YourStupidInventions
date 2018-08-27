@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class commentHeaderCell: UITableViewCell {
+class commentHeaderCell: UITableViewCell{
 
     // theme picture
     @IBOutlet weak var themeImg: UIImageView!
