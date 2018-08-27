@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse with configuration
         Parse.initialize(with: parseConfig)
         
-        
+        // color of window
+        window?.backgroundColor = .white
         
         return true
     }

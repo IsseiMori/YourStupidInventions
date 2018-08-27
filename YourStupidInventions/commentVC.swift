@@ -15,24 +15,73 @@ var commentowner = [String]()
 
 class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    // UI objects
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var commentTxt: UITextView!
+    @IBOutlet weak var sendBtn: UIButton!
+    var refresher = UIRefreshControl()
+    var placeholderLbl = UILabel()
+    
+    // values for resting UI to default
+    var tableViewHeight: CGFloat = 0
+    var commentY: CGFloat = 0
+    var commentHeight: CGFloat = 0
+    
+    // variable to hold keyboard frame
+    var keyboard = CGRect()
     
     // arrays to hold data from server
     var commentArray = [String]()
     var usernameArray = [String]()
     var dateArray = [Date?]()
     
+    
     // page size
     var page: Int = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // title at the top
+        self.navigationItem.title = "Comments"
 
         // present commentHeaderCell as header
         let headerCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
         let headerView: UIView = headerCell.contentView
         tableView.tableHeaderView = headerView
         
+        
+        // tap to start editing
+        let commentTap = UITapGestureRecognizer(target: self, action: #selector(self.showKeyboardTap))
+        commentTap.numberOfTapsRequired = 1
+        commentTxt.isUserInteractionEnabled = true
+        commentTxt.addGestureRecognizer(commentTap)
+        
+        // declare hide keyboard tap
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboardTap))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+        
+        // set delegate to use tableView and textView functions
+        commentTxt.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        
+        // create placeholder label programmatically
+        let placeholderX: CGFloat = self.view.frame.size.width / 75
+        let placeholderY: CGFloat = 0
+        let placeholderWidth: CGFloat = commentTxt.bounds.width - placeholderX
+        let placeholderHeight: CGFloat = commentTxt.bounds.height
+        let placeholderFontSize = self.view.frame.size.width / 25
+        
+        placeholderLbl.frame = CGRect(x: placeholderX, y: placeholderY, width: placeholderWidth, height: placeholderHeight)
+        placeholderLbl.text = "Enter text..."
+        placeholderLbl.font = UIFont(name: "HelveticaNeue", size: placeholderFontSize)
+        placeholderLbl.textColor = UIColor.lightGray
+        placeholderLbl.textAlignment = NSTextAlignment.left
+        commentTxt.addSubview(placeholderLbl)
         
         // call alignment func
         alignment()
@@ -42,14 +91,55 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     }
     
     
+    // show keyboard if clicked commentTxt
+    @objc func showKeyboardTap(recognizer: UITapGestureRecognizer) {
+        
+        // open keyboard
+        commentTxt.becomeFirstResponder()
+    }
+    
+    
+    // hide keyboard if tapped
+    @objc func hideKeyboardTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
     // alignment func
     func alignment() {
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        // alignment
+        let width = self.view.frame.size.width
+        let height = self.view.frame.size.height
         
-        // start tableView from the top
-        tableView.frame.origin.y = 0
+        tableView.frame = CGRect(x: 0, y: 0, width: width, height: height / 1.096 - self.navigationController!.navigationBar.frame.size.height - 20)
+        tableView.estimatedRowHeight = width / 5.333
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        commentTxt.frame = CGRect(x: 10, y: tableView.frame.size.height + height / 56.8, width: width / 1.306, height: 33)
+        commentTxt.layer.cornerRadius = commentTxt.frame.size.width / 50
+        
+        sendBtn.frame = CGRect(x: commentTxt.frame.origin.x + commentTxt.frame.size.width + width / 32, y: commentTxt.frame.origin.y, width: width - (commentTxt.frame.origin.x + commentTxt.frame.size.width) - (width / 32) * 2, height: commentTxt.frame.size.height)
+        
+        // assign resting values
+        tableViewHeight = tableView.frame.size.height
+        commentHeight = commentTxt.frame.size.height
+        commentY = commentTxt.frame.origin.y
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touch")
+    }
+    
+    // preload func
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    
+    // post laod func
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     
