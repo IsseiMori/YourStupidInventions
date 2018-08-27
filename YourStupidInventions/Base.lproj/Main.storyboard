@@ -452,7 +452,7 @@
         <!--CommentVC-->
         <scene sceneID="Gfl-36-4uV">
             <objects>
-                <tableViewController id="i8X-44-tDE" customClass="commentVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="commentVC" id="i8X-44-tDE" customClass="commentVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="27" sectionFooterHeight="28" id="HWM-8J-z4H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -549,6 +549,9 @@
                             <outlet property="delegate" destination="i8X-44-tDE" id="1P2-as-3gm"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="tableView" destination="HWM-8J-z4H" id="6cm-dg-VFI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKg-mo-00R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

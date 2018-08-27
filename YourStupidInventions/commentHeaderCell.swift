@@ -30,6 +30,62 @@ class commentHeaderCell: UITableViewCell {
     // default
     override func awakeFromNib() {
         super.awakeFromNib()
+    
+        let query = PFQuery(className: "posts")
+        query.whereKey("uuid", equalTo: commentuuid.last!)
+        query.getFirstObjectInBackground { (object, error) in
+            if error == nil {
+                
+                self.ideaLbl.text = object?.object(forKey: "idea") as? String
+                self.hashtagsLbl.text = object?.object(forKey: "hashtags") as? String
+                self.likeLbl.text = String(object?.value(forKey: "likes") as! Int)
+                self.uuidLbl.text = commentuuid.last!
+                self.usernameBtn.setTitle(commentowner.last!, for: UIControlState.normal)
+                
+                // place theme image
+                (object?.object(forKey: "theme") as! PFFile).getDataInBackground { (data, error) in
+                    if error == nil {
+                        self.themeImg.image = UIImage(data: data!)
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                }
+                
+                // calculate date
+                let from = object?.createdAt
+                let now = Date()
+                let components: NSCalendar.Unit = [.second, .minute, .hour, .day, .weekOfMonth]
+                let difference = (Calendar.current as NSCalendar).components(components, from: from!, to: now, options: [])
+                
+                if difference.second! <= 0 {
+                    self.dateLbl.text = "now"
+                }
+                if difference.second! > 0 && difference.minute! == 0 {
+                    self.dateLbl.text = "\(difference.second!)s. ago"
+                }
+                if difference.minute! > 0 && difference.hour! == 0 {
+                    self.dateLbl.text = "\(difference.minute!)m. ago"
+                }
+                if difference.hour! > 0 && difference.day! == 0 {
+                    self.dateLbl.text = "\(difference.hour!)h. ago"
+                }
+                if difference.day! > 0 && difference.weekOfMonth! == 0 {
+                    self.dateLbl.text = "\(difference.day!)d. ago"
+                }
+                if difference.weekOfMonth! > 0 {
+                    self.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
+                }
+                
+            }
+        }
+        
+        // call align func
+        alignment()
+    }
+    
+    
+    // alignment func
+    func alignment() {
         
         let width = UIScreen.main.bounds.width
         
