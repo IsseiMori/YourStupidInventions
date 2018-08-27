@@ -7,18 +7,47 @@
 //
 
 import UIKit
+import Parse
 
 class commentCell: UITableViewCell {
+    
+    
+    // UI objects
+    @IBOutlet weak var commentLbl: UILabel!
+    @IBOutlet weak var usernameBtn: UIButton!
+    @IBOutlet weak var dateLbl: UILabel!
+    
 
+    // default
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        // alignment
+        commentLbl.translatesAutoresizingMaskIntoConstraints = false
+        usernameBtn.translatesAutoresizingMaskIntoConstraints = false
+        dateLbl.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-5-[username]-0-[comment]-10-|",
+            options: [], metrics: nil, views: ["username": usernameBtn, "comment": commentLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-10-[date]",
+            options: [], metrics: nil, views: ["date": dateLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[username]",
+            options: [], metrics: nil, views: ["username": usernameBtn]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:[date]-10-|",
+            options: [], metrics: nil, views: ["date": dateLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[comment]-10-|",
+            options: [], metrics: nil, views: ["comment": commentLbl]))
+        
+        
     }
 
 }

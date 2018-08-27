@@ -84,7 +84,7 @@ class postCell: UITableViewCell {
             options: [], metrics: nil, views: ["username": usernameBtn, "date":dateLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-5-[bg]-5-|",
+            withVisualFormat: "V:|-10-[bg]-0-|",
             options: [], metrics: nil, views: ["bg": bgView]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
