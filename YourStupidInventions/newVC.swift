@@ -1,5 +1,5 @@
 //
-//  postVC.swift
+//  newVC.swift
 //  YourStupidInventions
 //
 //  Created by MoriIssei on 8/26/18.
@@ -9,8 +9,8 @@
 import UIKit
 import Parse
 
-class rankingVC: UITableViewController {
-    
+class newVC: UITableViewController {
+
     // UI objects
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     var refresher = UIRefreshControl()
@@ -24,7 +24,7 @@ class rankingVC: UITableViewController {
     var fullnameArray = [String]()
     var dateArray = [Date?]()
     var likesArray = [Int]()
-
+    
     
     // page size
     var page: Int = 10
@@ -32,9 +32,9 @@ class rankingVC: UITableViewController {
     // default
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // title at the top
-        self.navigationItem.title = "Top Ideas"
+        self.navigationItem.title = "New Ideas"
         
         // automatic row height - dynamic cell
         //tableView.estimatedRowHeight = 300
@@ -48,14 +48,14 @@ class rankingVC: UITableViewController {
         loadPosts()
         
     }
-
+    
     
     // load posts
     func loadPosts() {
         
         let query = PFQuery(className: "posts")
         query.limit = page
-        query.addDescendingOrder("likes")
+        query.addAscendingOrder("createAt")
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
@@ -91,7 +91,7 @@ class rankingVC: UITableViewController {
             }
         }
     }
-
+    
     
     // number of cells
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,7 +104,7 @@ class rankingVC: UITableViewController {
         
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! postCell
-    
+        
         // cell color
         cell.backgroundColor = UIColor.clear
         
@@ -157,12 +157,6 @@ class rankingVC: UITableViewController {
         
         
         return cell
-    }
-    
-    
-    // selected a cell
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
     }
 
 }

@@ -186,5 +186,6 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.dismiss(animated: true, completion: nil)
     }
     
+    
 
 }
