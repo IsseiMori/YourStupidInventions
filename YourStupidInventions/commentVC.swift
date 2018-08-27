@@ -50,6 +50,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let headerView: UIView = headerCell.contentView
         tableView.tableHeaderView = headerView
         
+        // receive show and hide keyboard notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
         // tap to start editing
         let commentTap = UITapGestureRecognizer(target: self, action: #selector(self.showKeyboardTap))
@@ -105,6 +108,90 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     }
     
     
+    // move up UI when keyboard shows up
+    @objc func keyboardWillShow(notification: Notification) {
+        
+        
+        // define keyboard frame size
+        keyboard = ((notification.userInfo?[UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue)!
+        
+        // move up UI
+        UIView.animate(withDuration: 0.4) {
+            
+            self.tableView.frame.size.height = self.tableViewHeight - self.keyboard.height - self.commentTxt.frame.size.height + self.commentHeight
+            
+            self.commentTxt.frame.origin.y = self.commentY - self.keyboard.height - self.commentTxt.frame.size.height + self.commentHeight
+            self.sendBtn.frame.origin.y = self.commentTxt.frame.origin.y
+            
+            // scroll the height of keyboard
+            self.tableView.setContentOffset(CGPoint(x: 0, y: self.keyboard.height), animated: false)
+            
+        }
+        
+    }
+    
+    
+    // move down UI when keyboard hides
+    @objc func keyboardWillHide(notification: Notification) {
+        
+        // move down UI
+        self.tableView.frame.size.height = self.tableViewHeight
+        self.commentTxt.frame.origin.y = self.commentY
+        self.sendBtn.frame.origin.y = self.commentY
+    }
+    
+    
+    // while writing
+    func textViewDidChange(_ textView: UITextView) {
+        
+        // disable button if entered no text
+        let spacing = NSCharacterSet.whitespacesAndNewlines
+        
+        // entered something
+        if !commentTxt.text.trimmingCharacters(in: spacing).isEmpty {
+            sendBtn.isEnabled = true
+            placeholderLbl.isHidden = true
+            
+            // text is not entered
+        } else {
+            sendBtn.isEnabled = false
+            placeholderLbl.isHidden = false
+        }
+        
+        // + paragraph
+        if textView.contentSize.height > textView.frame.size.height && textView.frame.height < 130 {
+            
+            // define difference to add
+            let difference = textView.contentSize.height - textView.frame.size.height
+            
+            // redefine frame of commentTxt
+            textView.frame.origin.y = textView.frame.origin.y - difference
+            textView.frame.size.height = textView.contentSize.height
+            
+            // move up tableView
+            if textView.contentSize.height + keyboard.height + commentY >= tableView.frame.size.height {
+                tableView.frame.size.height = tableView.frame.size.height - difference
+            }
+        }
+            
+            // - paragraph
+        else if textView.contentSize.height < textView.frame.size.height {
+            
+            // define difference to subtract
+            let difference = textView.frame.size.height - textView.contentSize.height
+            
+            // redefine frame of commentTxt
+            textView.frame.origin.y = textView.frame.origin.y + difference
+            textView.frame.size.height = textView.contentSize.height
+            
+            // move down tableView
+            if textView.contentSize.height + keyboard.height + commentY > tableView.frame.size.height {
+                tableView.frame.size.height = tableView.frame.size.height + difference
+            }
+        }
+    }
+    
+    
     // alignment func
     func alignment() {
         
@@ -126,10 +213,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         commentHeight = commentTxt.frame.size.height
         commentY = commentTxt.frame.origin.y
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
-    }
+
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
@@ -223,11 +307,13 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             cell.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
         }
         
-        
-        
         return cell
     }
     
+    
+    // clicked send button
+    @IBAction func sendBtn_clicked(_ sender: Any) {
+    }
     
 
 }
