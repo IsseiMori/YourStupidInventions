@@ -27,8 +27,6 @@ class homeHeaderView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        print("header")
-        
         // alignment
         let width = UIScreen.main.bounds.width
         

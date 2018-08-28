@@ -450,20 +450,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="INB-JQ-civ">
-                            <size key="itemSize" width="108" height="108"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="INB-JQ-civ">
+                            <size key="itemSize" width="157" height="149"/>
                             <size key="headerReferenceSize" width="50" height="149"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="XbO-3r-fbt" customClass="homePostCell" customModule="YourStupidInventions" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="149" width="108" height="108"/>
+                                <rect key="frame" x="0.0" y="149" width="157" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="157" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-6y-cqi">
+                                            <rect key="frame" x="0.0" y="0.0" width="157" height="149"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eb9-JN-7eb">
+                                            <rect key="frame" x="0.0" y="0.0" width="157" height="104"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uba-xJ-uGC">
+                                            <rect key="frame" x="0.0" y="108" width="157" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-XS-ge7">
+                                            <rect key="frame" x="131" y="128" width="26" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8K-t8-LHB">
+                                            <rect key="frame" x="0.0" y="129" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="Button" image="like.png"/>
+                                        </button>
+                                    </subviews>
                                 </view>
+                                <connections>
+                                    <outlet property="bgView" destination="kYF-6y-cqi" id="8OR-sT-VK1"/>
+                                    <outlet property="ideaLbl" destination="uba-xJ-uGC" id="Zf1-hE-LVL"/>
+                                    <outlet property="likeBtn" destination="H8K-t8-LHB" id="9KX-eH-qPW"/>
+                                    <outlet property="likesLbl" destination="JGI-XS-ge7" id="VCt-wc-SE8"/>
+                                    <outlet property="themeImg" destination="eb9-JN-7eb" id="zHF-QD-xt8"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="homeHeaderView" id="vyx-B2-tYf" customClass="homeHeaderView" customModule="YourStupidInventions" customModuleProvider="target">
@@ -733,6 +771,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="like.png" width="270" height="270"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
         <image name="unlike.png" width="270" height="270"/>
