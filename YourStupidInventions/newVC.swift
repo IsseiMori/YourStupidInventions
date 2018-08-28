@@ -158,5 +158,21 @@ class newVC: UITableViewController {
         
         return cell
     }
+    
+    
+    // selected a cell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // call cell for further cell data
+        let cell = tableView.cellForRow(at: indexPath) as! postCell
+        
+        commentuuid.append(cell.uuidLbl.text!)
+        commentowner.append(cell.usernameBtn.titleLabel!.text!)
+        
+        // present commentVC
+        let comment = self.storyboard?.instantiateViewController(withIdentifier: "commentVC") as! commentVC
+        self.navigationController?.pushViewController(comment, animated: true)
+        
+    }
 
 }

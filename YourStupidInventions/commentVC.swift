@@ -315,8 +315,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
         // STEP 1: add row in tableView
-        //usernameArray.append(PFUser.current()!.username!)
-        usernameArray.append("yamada")
+        usernameArray.append(PFUser.current()!.username!)
         commentArray.append(commentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
         
         dateArray.append(Date())
@@ -324,8 +323,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         
         // STEP 2: send comment to server
         let commentObj = PFObject(className: "comments")
-        //commentObj["username"] = PFUser.current()?.username
-        commentObj["username"] = "yamada"
+        commentObj["username"] = PFUser.current()?.username
         commentObj["to"] = commentuuid.last!
         commentObj["comment"] = commentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         commentObj.saveEventually()
