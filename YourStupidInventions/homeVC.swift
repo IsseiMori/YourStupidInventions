@@ -186,7 +186,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             }
         }
 
-        
         return header
     }
 

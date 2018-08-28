@@ -30,7 +30,7 @@ class homeHeaderView: UICollectionReusableView {
         // alignment
         let width = UIScreen.main.bounds.width
         
-        avaImg.frame = CGRect(x: width / 16, y: width / 16, width: width / 5, height: width / 5)
+        avaImg.frame = CGRect(x: width / 16, y: width / 16, width: width / 6, height: width / 6)
         
         ideas.frame = CGRect(x: width / 2.5, y: avaImg.frame.origin.y + 5, width: 50, height: 30)
         likes.frame = CGRect(x: width / 1.7, y: avaImg.frame.origin.y + 5, width: 50, height: 30)
