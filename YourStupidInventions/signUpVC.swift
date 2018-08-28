@@ -1,5 +1,5 @@
 //
-//  SignUpVC.swift
+//  signUpVC.swift
 //  YourStupidInventions
 //
 //  Created by MoriIssei on 8/26/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // profile image
     @IBOutlet weak var avaImg: UIImageView!
@@ -38,6 +38,8 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "Sign Up"
 
         // scrollView frame size
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -75,7 +77,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         fullnameTxt.frame = CGRect(x: 10, y: emailTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
         bioTxt.frame = CGRect(x: 10, y: fullnameTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
         
-        signUpBtn.frame = CGRect(x: 10, y: bioTxt.frame.origin.y + 50, width: self.view.frame.size.width / 4, height: 30)
+        signUpBtn.frame = CGRect(x: 20, y: bioTxt.frame.origin.y + 50, width: self.view.frame.size.width / 4, height: 30)
         signUpBtn.layer.cornerRadius = signUpBtn.frame.size.width / 20
         
         cancelBtn.frame = CGRect(x: self.view.frame.size.width - self.view.frame.size.width / 4 - 20, y: signUpBtn.frame.origin.y, width: self.view.frame.size.width / 4, height: 30)
@@ -134,7 +136,7 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     @objc func hideKeyboard(notification: NSNotification) {
         // move down UI
         UIView.animate(withDuration: 0.4) {
-            self.scrollView.frame.size.height = self.view.frame.height
+            self.scrollView.frame.size.height = self.scrollViewHeight
         }
     }
     
@@ -163,6 +165,37 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
+        // send data to server to related columns
+        let user = PFUser()
+        user.username = usernameTxt.text?.lowercased()
+        user.email = emailTxt.text?.lowercased()
+        user.password = passwordTxt.text
+        user["fullname"] = fullnameTxt.text?.lowercased()
+        user["bio"] = bioTxt.text
+        
+        // convert profile image for sending to server
+        let avaData = UIImageJPEGRepresentation(avaImg.image!, 0.5)
+        let avaFile = PFFile(name: "ava.jpg", data: avaData!)
+        user["ava"] = avaFile
+        
+        // save data in server
+        user.signUpInBackground { (success, error) in
+            if success {
+                
+                // remember logged in user
+                UserDefaults.standard.set(user.username, forKey: "username")
+                UserDefaults.standard.synchronize()
+                
+                // call login func from AppDeligate.swift  class
+                let appDeligate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDeligate.login()
+                
+            } else {
+                // alert message
+                self.alert(title: "Error", message: error!.localizedDescription)
+            }
+        }
+        
         
     }
     
@@ -182,8 +215,8 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         // hide keyboard
         self.view.endEditing(true)
         
-        // go back to the previous VC
-        self.dismiss(animated: true, completion: nil)
+        // push back
+        self.navigationController?.popViewController(animated: true)
     }
     
     

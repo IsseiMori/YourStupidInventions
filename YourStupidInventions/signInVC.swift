@@ -1,5 +1,5 @@
 //
-//  SignIn.swift
+//  signInVC.swift
 //  YourStupidInventions
 //
 //  Created by MoriIssei on 8/26/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignIn: UIViewController {
+class signInVC: UIViewController {
     
     // text fields
     @IBOutlet weak var label: UILabel!
@@ -25,10 +25,20 @@ class SignIn: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Sign In"
+        
+        // call alignment func
+        alignment()
+        
+    }
+    
+    
+    // alignment func
+    func alignment() {
+        
         // font of label
         label.font = UIFont(name: "Pacifico", size: 25)
         
-        // alignment
         label.frame = CGRect(x: 10, y: 80, width: self.view.frame.size.width - 20, height: 50)
         usernameTxt.frame = CGRect(x: 10, y: label.frame.origin.y + 70, width: self.view.frame.size.width - 20, height: 30)
         passwordTxt.frame = CGRect(x: 10, y: usernameTxt.frame.origin.y + 40, width: self.view.frame.size.width - 20, height: 30)
@@ -45,7 +55,7 @@ class SignIn: UIViewController {
         bg.image = UIImage(named: "bg.jpg")
         bg.layer.zPosition = -1
         self.view.addSubview(bg)
-        
     }
+
 
 }

@@ -13,7 +13,7 @@
         <!--TabbarVC-->
         <scene sceneID="DBN-TF-R0H">
             <objects>
-                <tabBarController id="eGt-fO-XdI" customClass="tabbarVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" id="eGt-fO-XdI" customClass="tabbarVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aYC-2y-kRm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="NIG-lu-1HJ" kind="relationship" relationship="viewControllers" id="CaQ-4O-uUG"/>
                         <segue destination="KwK-iN-IRp" kind="relationship" relationship="viewControllers" id="G1F-he-LrI"/>
+                        <segue destination="9qX-94-Qd4" kind="relationship" relationship="viewControllers" id="uCm-Nd-ewj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0D-g0-eW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -139,10 +140,10 @@
             </objects>
             <point key="canvasLocation" x="911.20000000000005" y="62.518740629685162"/>
         </scene>
-        <!--Sign In-->
+        <!--Sign InVC-->
         <scene sceneID="gcT-sL-acW">
             <objects>
-                <viewController id="no7-Cm-F6A" customClass="SignIn" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signInVC" id="no7-Cm-F6A" customClass="signInVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GFV-Hh-fbw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -159,7 +160,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your-Stupid-Inventions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttx-KR-ZFM">
                                 <rect key="frame" x="16" y="170" width="343" height="57"/>
@@ -194,7 +195,7 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Wyd-ya-goY" kind="show" id="GHe-ch-XKS"/>
+                                    <segue destination="Wyd-ya-goY" kind="show" id="FGx-Pl-yiG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -202,22 +203,22 @@
                         <viewLayoutGuide key="safeArea" id="9Z5-iw-m2L"/>
                     </view>
                     <connections>
-                        <outlet property="forgotBtn" destination="kUy-bh-KHc" id="QJj-2t-vLU"/>
-                        <outlet property="label" destination="ttx-KR-ZFM" id="TcT-be-SKn"/>
-                        <outlet property="passwordTxt" destination="nmo-5a-FZt" id="4sJ-Xs-vOZ"/>
-                        <outlet property="signInBtn" destination="uV5-OZ-UfT" id="VAc-oh-yQv"/>
-                        <outlet property="signUpBtn" destination="w9c-b1-YCH" id="Njx-jH-p9c"/>
-                        <outlet property="usernameTxt" destination="Cg1-Vj-6SY" id="pT5-wf-uHI"/>
+                        <outlet property="forgotBtn" destination="kUy-bh-KHc" id="p8a-Du-nBZ"/>
+                        <outlet property="label" destination="ttx-KR-ZFM" id="IRO-BF-8hF"/>
+                        <outlet property="passwordTxt" destination="nmo-5a-FZt" id="c5y-Ke-LG4"/>
+                        <outlet property="signInBtn" destination="uV5-OZ-UfT" id="2dV-b6-hRb"/>
+                        <outlet property="signUpBtn" destination="w9c-b1-YCH" id="1hF-2l-CDW"/>
+                        <outlet property="usernameTxt" destination="Cg1-Vj-6SY" id="b65-d9-UTu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXG-xZ-nmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656.8" y="62.518740629685162"/>
+            <point key="canvasLocation" x="1817" y="1483"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="aTJ-U5-6DN">
             <objects>
-                <viewController id="Wyd-ya-goY" customClass="SignUpVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signUpVC" id="Wyd-ya-goY" customClass="signUpVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WWf-Fa-GqY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -242,14 +243,14 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="repeat password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="5nr-BW-1u7">
                                         <rect key="frame" x="8" y="192" width="359" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UIO-4Q-fWd">
                                         <rect key="frame" x="8" y="230" width="359" height="30"/>
@@ -281,7 +282,7 @@
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="singUpBtn_clicked:" destination="Wyd-ya-goY" eventType="touchUpInside" id="sD6-CO-dps"/>
+                                            <action selector="singUpBtn_clicked:" destination="Wyd-ya-goY" eventType="touchUpInside" id="e6R-Rc-LPP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x09-9F-IhT">
@@ -293,7 +294,7 @@
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelBtn_clicked:" destination="Wyd-ya-goY" eventType="touchUpInside" id="JG4-T5-2bh"/>
+                                            <action selector="cancelBtn_clicked:" destination="Wyd-ya-goY" eventType="touchUpInside" id="xak-EK-TSe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -303,21 +304,21 @@
                         <viewLayoutGuide key="safeArea" id="6Qw-gi-5XV"/>
                     </view>
                     <connections>
-                        <outlet property="avaImg" destination="ZUo-Kh-cOy" id="ZS3-NT-AEW"/>
-                        <outlet property="bioTxt" destination="pYm-ZT-r9f" id="TNz-aI-9o2"/>
-                        <outlet property="cancelBtn" destination="x09-9F-IhT" id="1wD-Y8-mNi"/>
-                        <outlet property="emailTxt" destination="UIO-4Q-fWd" id="yR0-hZ-SUA"/>
-                        <outlet property="fullnameTxt" destination="1j9-Sd-PIe" id="i2M-fx-K9S"/>
-                        <outlet property="passwordTxt" destination="afc-FC-07i" id="rU4-AE-whM"/>
-                        <outlet property="repeatPasswordTxt" destination="5nr-BW-1u7" id="zPw-v0-pte"/>
-                        <outlet property="scrollView" destination="8Fq-0Q-tSp" id="qVn-i0-PH3"/>
-                        <outlet property="signUpBtn" destination="kDV-gU-HXO" id="Fua-zO-G9i"/>
-                        <outlet property="usernameTxt" destination="agv-y0-UUd" id="zg2-YU-BDn"/>
+                        <outlet property="avaImg" destination="ZUo-Kh-cOy" id="310-J0-MK0"/>
+                        <outlet property="bioTxt" destination="pYm-ZT-r9f" id="WGs-vY-vGo"/>
+                        <outlet property="cancelBtn" destination="x09-9F-IhT" id="lpd-8w-8lo"/>
+                        <outlet property="emailTxt" destination="UIO-4Q-fWd" id="7aQ-2y-jxc"/>
+                        <outlet property="fullnameTxt" destination="1j9-Sd-PIe" id="XAe-ex-aU6"/>
+                        <outlet property="passwordTxt" destination="afc-FC-07i" id="HBz-Zt-b0a"/>
+                        <outlet property="repeatPasswordTxt" destination="5nr-BW-1u7" id="5vo-N2-Gwh"/>
+                        <outlet property="scrollView" destination="8Fq-0Q-tSp" id="EQu-pi-PtA"/>
+                        <outlet property="signUpBtn" destination="kDV-gU-HXO" id="yr5-Yt-Nl5"/>
+                        <outlet property="usernameTxt" destination="agv-y0-UUd" id="4Wo-VF-QZS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9v-2A-M5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2306.4000000000001" y="62.518740629685162"/>
+            <point key="canvasLocation" x="2465" y="1483"/>
         </scene>
         <!--Top-->
         <scene sceneID="7cJ-ru-ZQk">
@@ -448,6 +449,45 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="911" y="779"/>
+        </scene>
+        <!--HomeVC-->
+        <scene sceneID="x5f-vc-lx6">
+            <objects>
+                <collectionViewController storyboardIdentifier="homeVC" id="N1Q-zE-5dd" customClass="homeVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6aC-jm-Tha">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="INB-JQ-civ">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="50" height="208"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XbO-3r-fbt">
+                                <rect key="frame" x="0.0" y="208" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vyx-B2-tYf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="N1Q-zE-5dd" id="55X-KA-8Yx"/>
+                            <outlet property="delegate" destination="N1Q-zE-5dd" id="Edh-9Q-XVp"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="fS0-RT-Io6"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKS-ug-bfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909.60000000000002" y="1482.9085457271365"/>
         </scene>
         <!--CommentVC-->
         <scene sceneID="HZf-Yq-42h">
@@ -622,6 +662,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FFq-RI-b6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-28" y="779"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Lb5-x4-RoF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9qX-94-Qd4" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="eUo-Du-4ti"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qqc-bL-Iol">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="N1Q-zE-5dd" kind="relationship" relationship="rootViewController" id="nSc-Jx-70g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9bz-bs-yjS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28" y="1483"/>
         </scene>
     </scenes>
     <resources>

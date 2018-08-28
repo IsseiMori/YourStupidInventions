@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse with configuration
         Parse.initialize(with: parseConfig)
         
+        // call login function
+        login()
+        
         // color of window
         window?.backgroundColor = .white
         
@@ -60,6 +63,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 
+    func login() {
+        
+        // remember user's login
+        let username: String? = UserDefaults.standard.string(forKey: "username")
+        
+        // if logged in
+        if username != nil {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+            window?.rootViewController = myTabBar
+        }
+    }
 
 }
 
