@@ -313,6 +313,107 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
+        
+        // STEP 1: add row in tableView
+        //usernameArray.append(PFUser.current()!.username!)
+        usernameArray.append("yamada")
+        commentArray.append(commentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
+        
+        dateArray.append(Date())
+        tableView.reloadData()
+        
+        // STEP 2: send comment to server
+        let commentObj = PFObject(className: "comments")
+        //commentObj["username"] = PFUser.current()?.username
+        commentObj["username"] = "yamada"
+        commentObj["to"] = commentuuid.last!
+        commentObj["comment"] = commentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        commentObj.saveEventually()
+        
+        
+        /*
+        // STEP 3: send #hashtag to server
+        let words: [String] = commentTxt.text!.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        
+        // define taged word
+        for var word in words {
+            
+            // save #hashtag in server
+            if word.hasPrefix("#") {
+                
+                // cut symbols
+                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                word = word.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                
+                let wordObj = PFObject(className: "hashtags")
+                wordObj["to"] = commentuuid.last!
+                wordObj["by"] = PFUser.current()?.username
+                wordObj["hashtag"] = word.lowercased()
+                wordObj["comment"] = commentTxt.text
+                wordObj.saveInBackground { (success, error) in
+                    if success {
+                        // print("hashtag \(word) is created")
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                }
+                
+            }
+        }
+        
+        // STEP 4: send notification as @mention
+        var mentionNotification = Bool(false)
+        for var word in words {
+            
+            // check mentions for user
+            if word.hasPrefix("@") {
+                
+                // cut symbols
+                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                word = word.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                
+                let newsObj = PFObject(className: "news")
+                newsObj["by"] = PFUser.current()?.username
+                newsObj["to"] = word
+                newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
+                newsObj["owner"] = commentowner.last!
+                newsObj["uuid"] = commentuuid.last!
+                newsObj["type"] = "mention"
+                newsObj["checked"] = "no"
+                newsObj.saveEventually()
+                
+                mentionNotification = true
+            }
+        }
+        
+        
+        // STEP 5: send notification as comment
+        if commentowner.last != PFUser.current()?.username && mentionNotification == false {
+            
+            let newsObj = PFObject(className: "news")
+            newsObj["by"] = PFUser.current()?.username
+            newsObj["to"] = commentowner.last!
+            newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
+            newsObj["owner"] = commentowner.last!
+            newsObj["uuid"] = commentuuid.last!
+            newsObj["type"] = "comment"
+            newsObj["checked"] = "no"
+            newsObj.saveEventually()
+        }
+        
+        */
+        
+        
+        // scroll to bottom
+        self.tableView.scrollToRow(at: IndexPath(row: commentArray.count - 1, section: 0), at: UITableViewScrollPosition.bottom, animated: false)
+        
+        // STEP 6: reset UI
+        sendBtn.isEnabled = false
+        placeholderLbl.isHidden = false
+        commentTxt.text = ""
+        commentTxt.frame.size.height = commentHeight
+        commentTxt.frame.origin.y = sendBtn.frame.origin.y
+        tableView.frame.size.height = self.tableViewHeight - self.keyboard.height - self.commentTxt.frame.size.height + self.commentHeight
     }
     
 
