@@ -150,6 +150,21 @@ class newVC: UITableViewController {
             cell.dateLbl.text = "\(String(describing: difference.weekOfMonth!))w."
         }
         
+        // change like button color depending on whether user liked or not
+        let didLike = PFQuery(className: "likes")
+        didLike.whereKey("by", equalTo: PFUser.current()!.username!)
+        didLike.whereKey("uuid", equalTo: cell.uuidLbl.text!)
+        didLike.countObjectsInBackground { (count, error) in
+            // if no likes are found, else found likes
+            if count == 0 {
+                cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
+                cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
+            } else {
+                cell.likeBtn.setTitle("like", for: UIControlState.normal)
+                cell.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+            }
+        }
+        
         
         // assign index
         cell.usernameBtn.layer.setValue(indexPath, forKey: "index")

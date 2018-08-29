@@ -40,6 +40,10 @@ class rankingVC: UITableViewController {
         //tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        // pull to refresh
+        refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+        
         
         // centering indicator
         indicator.center.x = tableView.center.x
@@ -51,7 +55,7 @@ class rankingVC: UITableViewController {
 
     
     // load posts
-    func loadPosts() {
+    @objc func loadPosts() {
         
         let query = PFQuery(className: "posts")
         query.limit = page
