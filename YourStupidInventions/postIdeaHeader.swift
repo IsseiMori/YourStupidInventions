@@ -37,13 +37,13 @@ class postIdeaHeader: UITableViewCell {
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
-        postIdeaHeaderHeight = themeHeight + 160 + 5
+        postIdeaHeaderHeight = themeHeight + 160 + 15
         
         bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
-        themeImg.frame = CGRect(x: bgView.frame.origin.x, y: bgView.frame.origin.y, width: themeWidth, height: themeHeight)
-        ideaTxt.frame = CGRect(x: themeImg.frame.origin.x, y: themeImg.frame.origin.y + themeImg.frame.size.height, width: bgView.frame.size.width, height: 80)
-        hashtagsLbl.frame = CGRect(x: bgView.frame.origin.x, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height, width: bgView.frame.size.width, height: 50)
-        sendBtn.frame = CGRect(x: bgView.frame.origin.x, y: hashtagsLbl.frame.origin.y + hashtagsLbl.frame.size.height, width: bgView.frame.size.width, height: 30)
+        themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: themeHeight)
+        ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height, width: bgView.frame.size.width - 20, height: 80)
+        hashtagsLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height, width: bgView.frame.size.width - 20, height: 50)
+        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: hashtagsLbl.frame.origin.y + hashtagsLbl.frame.size.height, width: bgView.frame.size.width - 20, height: 30)
         
         ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         

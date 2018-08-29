@@ -31,6 +31,9 @@ class postCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // clear like button text color
+        likeBtn.setTitleColor(UIColor.clear, for: UIControlState.normal)
+        
         let width = UIScreen.main.bounds.width
         
         themeImg.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +100,87 @@ class postCell: UITableViewCell {
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
         
+    }
+    
+    
+    @IBAction func likeBtn_clicked(_ sender: Any) {
+        // declear title of button
+        let button = sender as! UIButton
+        let title = button.title(for: UIControlState.normal)
+        
+        // to like
+        if title == "unlike" {
+            
+            let object = PFObject(className: "likes")
+            object["by"] = PFUser.current()?.username
+            object["to"] = usernameBtn.titleLabel?.text
+            object["uuid"] = uuidLbl.text
+            object.saveInBackground { (success, error) in
+                if success {
+                    self.likeBtn.setTitle("like", for: UIControlState.normal)
+                    self.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+                    
+                    // send notification if user liked to refresh tableview
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "liked"), object: nil)
+                    
+                    if self.usernameBtn.titleLabel!.text! != PFUser.current()?.username {
+                        // send notification as like
+                        let newsObj = PFObject(className: "news")
+                        newsObj["by"] = PFUser.current()?.username
+                        newsObj["to"] = self.usernameBtn.titleLabel!.text!
+                        newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
+                        newsObj["owner"] = self.usernameBtn.titleLabel!.text!
+                        newsObj["uuid"] = self.uuidLbl.text
+                        newsObj["type"] = "like"
+                        newsObj["checked"] = "no"
+                        newsObj.saveEventually()
+                    }
+                }
+            }
+            // to unlike
+        } else {
+            
+            // request existing likes of current to shown post
+            let query = PFQuery(className: "likes")
+            query.whereKey("by", equalTo: PFUser.current()!.username!)
+            query.whereKey("uuid", equalTo: uuidLbl.text!)
+            query.findObjectsInBackground { (objects, error) in
+                
+                // find likes
+                for object in objects! {
+                    
+                    // delete likes
+                    object.deleteInBackground(block: { (success, error) in
+                        if success {
+                            self.likeBtn.setTitle("unlike", for: UIControlState.normal)
+                            self.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
+                            
+                            // send notification if user liked to refresh tableview
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "liked"), object: nil)
+                            
+                            // delete notification: like
+                            if self.usernameBtn.titleLabel!.text! != PFUser.current()?.username {
+                                
+                            }
+                            let newsQuery = PFQuery(className: "news")
+                            newsQuery.whereKey("by", equalTo: PFUser.current()!.username!)
+                            newsQuery.whereKey("to", equalTo: self.usernameBtn.titleLabel!.text!)
+                            newsQuery.whereKey("uuid", equalTo: self.uuidLbl.text!)
+                            newsQuery.whereKey("type", equalTo: "like")
+                            newsQuery.findObjectsInBackground(block: { (objects, error) in
+                                if error == nil {
+                                    for object in objects! {
+                                        object.deleteEventually()
+                                    }
+                                } else {
+                                    print(error!.localizedDescription)
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+        }
     }
     
 }
