@@ -29,7 +29,11 @@ class rankingVC: UITableViewController {
 
     
     // page size
-    var page: Int = 10
+    var page: Int = 2
+    
+    
+    // loading status to avoid keep loading
+    var isLoading = false
     
     // default
     override func viewDidLoad() {
@@ -43,7 +47,7 @@ class rankingVC: UITableViewController {
         }
         
         // automatic row height - dynamic cell
-        //tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         
         // pull to refresh
@@ -116,6 +120,81 @@ class rankingVC: UITableViewController {
             } else {
                 print(error!.localizedDescription)
             }
+        }
+    }
+    
+    
+    // scrolled down
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
+        let distanceToBottom = maximumOffset - currentOffsetY
+        
+        if distanceToBottom < 50 {
+            // don't load more if still loading
+            if !isLoading {
+                loadMore()
+            }
+        }
+    }
+    
+    
+    // pagination
+    func loadMore() {
+        
+        // set loading status to processing
+        isLoading = true
+        
+        // if posts on server are more than show
+        if page <= self.uuidArray.count {
+            
+            // start indicator animation
+            indicator.startAnimating()
+            
+            let query = PFQuery(className: "posts")
+            
+            // load only the next page size posts
+            query.skip = page
+            query.limit = page
+            
+            // increase page size
+            page = page + 2
+            
+            // if tab is ranking(0) sort by likes
+            // if tab is new(1) sort by time
+            if tabBarController?.selectedIndex == 0 {
+                query.addDescendingOrder("likes")
+            } else {
+                query.addDescendingOrder("createdAt")
+            }
+            
+            query.findObjectsInBackground { (objects, error) in
+                if error == nil {
+                    
+                    // find related objects
+                    for object in objects! {
+                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                        self.themeArray.append(object.object(forKey: "theme") as! PFFile)
+                        self.ideaArray.append(object.object(forKey: "idea") as! String)
+                        self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
+                        self.usernameArray.append(object.object(forKey: "username") as! String)
+                        self.fullnameArray.append(object.object(forKey: "fullname") as! String)
+                        self.dateArray.append(object.createdAt!)
+                        self.likesArray.append(object.value(forKey: "likes") as! Int)
+                    }
+                    
+                    // reload tableView and end refresh animation
+                    self.tableView.reloadData()
+                    self.refresher.endRefreshing()
+                    
+                    // set loading status to finished
+                    self.isLoading = false
+                    
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+            
         }
     }
 
