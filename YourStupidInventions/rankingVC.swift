@@ -14,7 +14,6 @@ import Parse
 class rankingVC: UITableViewController {
     
     // UI objects
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     var refresher = UIRefreshControl()
     
     // arrays to hold data from server
@@ -26,10 +25,12 @@ class rankingVC: UITableViewController {
     var fullnameArray = [String]()
     var dateArray = [Date?]()
     var likesArray = [Int]()
-
     
     // page size
-    var page: Int = 2
+    var page: Int = 5
+    
+    // # of posts to load at each loadMore()
+    var pageLimit: Int = 5
     
     
     // loading status to avoid keep loading
@@ -47,19 +48,19 @@ class rankingVC: UITableViewController {
         }
         
         // automatic row height - dynamic cell
-        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // need this for pagination?
+        tableView.estimatedRowHeight = 300
         
         // pull to refresh
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
+        
         // receive post cell liked notification to update tableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
-
         
-        // centering indicator
-        indicator.center.x = tableView.center.x
         
         // call load posts func
         loadPosts()
@@ -69,58 +70,41 @@ class rankingVC: UITableViewController {
     
     // refreshing func after like to update tableView
     @objc func refresh() {
-        //tableView.reloadData()
+        self.tableView.reloadData()
+        
+        // stop refresh animation
+        refresher.endRefreshing()
     }
 
     
     // load posts
     @objc func loadPosts() {
         
+        // set loading status to processing
+        isLoading = true
+        
+        // clean up
+        self.uuidArray.removeAll(keepingCapacity: false)
+        self.themeArray.removeAll(keepingCapacity: false)
+        self.ideaArray.removeAll(keepingCapacity: false)
+        self.hashtagsArray.removeAll(keepingCapacity: false)
+        self.usernameArray.removeAll(keepingCapacity: false)
+        self.fullnameArray.removeAll(keepingCapacity: false)
+        self.dateArray.removeAll(keepingCapacity: false)
+        self.likesArray.removeAll(keepingCapacity: false)
+    
         let query = PFQuery(className: "posts")
-        query.limit = page
+        query.limit = self.page
         
         // if tab is ranking(0) sort by likes
         // if tab is new(1) sort by time
-        if tabBarController?.selectedIndex == 0 {
+        if self.tabBarController?.selectedIndex == 0 {
             query.addDescendingOrder("likes")
         } else {
             query.addDescendingOrder("createdAt")
         }
         
-        query.findObjectsInBackground { (objects, error) in
-            if error == nil {
-                
-                // clean up
-                self.uuidArray.removeAll(keepingCapacity: false)
-                self.themeArray.removeAll(keepingCapacity: false)
-                self.ideaArray.removeAll(keepingCapacity: false)
-                self.hashtagsArray.removeAll(keepingCapacity: false)
-                self.usernameArray.removeAll(keepingCapacity: false)
-                self.fullnameArray.removeAll(keepingCapacity: false)
-                self.dateArray.removeAll(keepingCapacity: false)
-                self.likesArray.removeAll(keepingCapacity: false)
-                
-                // find related objects
-                for object in objects! {
-                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                    self.themeArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.ideaArray.append(object.object(forKey: "idea") as! String)
-                    self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
-                    self.usernameArray.append(object.object(forKey: "username") as! String)
-                    self.fullnameArray.append(object.object(forKey: "fullname") as! String)
-                    self.dateArray.append(object.createdAt!)
-                    self.likesArray.append(object.value(forKey: "likes") as! Int)
-                }
-                
-                // reload tableView and end refresh animation
-                self.tableView.reloadData()
-                self.refresher.endRefreshing()
-                
-                
-            } else {
-                print(error!.localizedDescription)
-            }
-        }
+        self.processQuery(query: query)
     }
     
     
@@ -140,64 +124,74 @@ class rankingVC: UITableViewController {
     
     
     // pagination
-    func loadMore() {
+    @objc func loadMore() {
         
         // set loading status to processing
         isLoading = true
         
-        // if posts on server are more than show
-        if page <= self.uuidArray.count {
+        // count total comments to enable or disable refresher
+        let countQuery = PFQuery(className: "posts")
+        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
-            // start indicator animation
-            indicator.startAnimating()
+            // self refresher
+            self.refresher.endRefreshing()
             
-            let query = PFQuery(className: "posts")
-            
-            // load only the next page size posts
-            query.skip = page
-            query.limit = page
-            
-            // increase page size
-            page = page + 2
-            
-            // if tab is ranking(0) sort by likes
-            // if tab is new(1) sort by time
-            if tabBarController?.selectedIndex == 0 {
-                query.addDescendingOrder("likes")
-            } else {
-                query.addDescendingOrder("createdAt")
-            }
-            
-            query.findObjectsInBackground { (objects, error) in
-                if error == nil {
-                    
-                    // find related objects
-                    for object in objects! {
-                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                        self.themeArray.append(object.object(forKey: "theme") as! PFFile)
-                        self.ideaArray.append(object.object(forKey: "idea") as! String)
-                        self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
-                        self.usernameArray.append(object.object(forKey: "username") as! String)
-                        self.fullnameArray.append(object.object(forKey: "fullname") as! String)
-                        self.dateArray.append(object.createdAt!)
-                        self.likesArray.append(object.value(forKey: "likes") as! Int)
-                    }
-                    
-                    // reload tableView and end refresh animation
-                    self.tableView.reloadData()
-                    self.refresher.endRefreshing()
-                    
-                    // set loading status to finished
-                    self.isLoading = false
-                    
+            // if posts on server are more than shown
+            if self.uuidArray.count < count {
+                
+                let query = PFQuery(className: "posts")
+                
+                // load only the next page size posts
+                query.skip = self.page
+                query.limit = self.pageLimit
+                
+                // increase page size
+                self.page = self.page + self.pageLimit
+                
+                // if tab is ranking(0) sort by likes
+                // if tab is new(1) sort by time
+                if self.tabBarController?.selectedIndex == 0 {
+                    query.addDescendingOrder("likes")
                 } else {
-                    print(error!.localizedDescription)
+                    query.addDescendingOrder("createdAt")
                 }
+                
+                self.processQuery(query: query)
+                
             }
-            
+        })
+    }
+    
+    
+    // process query and
+    func processQuery(query: PFQuery<PFObject>) {
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                
+                // find related objects
+                for object in objects! {
+                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                    self.themeArray.append(object.object(forKey: "theme") as! PFFile)
+                    self.ideaArray.append(object.object(forKey: "idea") as! String)
+                    self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
+                    self.usernameArray.append(object.object(forKey: "username") as! String)
+                    self.fullnameArray.append(object.object(forKey: "fullname") as! String)
+                    self.dateArray.append(object.createdAt!)
+                    self.likesArray.append(object.value(forKey: "likes") as! Int)
+                }
+                
+                // reload tableView and end refresh animation
+                self.tableView.reloadData()
+                self.refresher.endRefreshing()
+                
+                // set loading status to finished
+                self.isLoading = false
+                
+            } else {
+                print(error!.localizedDescription)
+            }
         }
     }
-
     
     // number of cells
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

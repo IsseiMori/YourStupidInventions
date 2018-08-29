@@ -40,17 +40,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="es5-7Z-hJz">
-                            <rect key="frame" x="0.0" y="512" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="L0S-5A-PMw">
-                                    <rect key="frame" x="177" y="12" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
-                            </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="484" id="I3Y-WK-BAc" customClass="postCell" customModule="YourStupidInventions" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="484"/>
@@ -140,9 +129,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ZjI-mU-9ug"/>
-                    <connections>
-                        <outlet property="indicator" destination="L0S-5A-PMw" id="GUW-JK-Gop"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="911.20000000000005" y="62.518740629685162"/>
@@ -480,17 +466,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="OY7-5c-0K6">
-                            <rect key="frame" x="0.0" y="289" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aas-UJ-QJw">
-                                    <rect key="frame" x="177" y="12" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="261" id="FEb-fr-GfW" customClass="themeCell" customModule="YourStupidInventions" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="261"/>
@@ -563,9 +538,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="uMp-UH-eAG"/>
-                    <connections>
-                        <outlet property="indicator" destination="aas-UJ-QJw" id="nZb-g0-nGc"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFF-Bd-wlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

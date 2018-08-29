@@ -37,7 +37,13 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     
     
     // page size
-    var page: Int = 15
+    var page: Int = 10
+    
+    // # of posts to load at each loadMore()
+    var pageLimit: Int = 10
+    
+    // loading status to avoid keep loading
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +77,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         tableView.delegate = self
         tableView.dataSource = self
         
+        // pull to refresh
+        self.refresher.addTarget(self, action: #selector(self.loadComments), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(self.refresher)
         
         // create placeholder label programmatically
         let placeholderX: CGFloat = self.view.frame.size.width / 75
@@ -228,31 +237,87 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     
     
     // load comments
-    func loadComments() {
+    @objc func loadComments() {
+        
+        // set loading status to processing
+        isLoading = true
         
         // get comments to this post
         let query = PFQuery(className: "comments")
         query.whereKey("to", equalTo: commentuuid.last!)
-        query.limit = page
+        query.limit = self.page
         query.addAscendingOrder("createdAt")
+        processQuery(query: query)
+    }
+    
+    
+    // scrolled down
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
+        let distanceToBottom = maximumOffset - currentOffsetY
+        
+        if distanceToBottom < 50 {
+            // don't load more if still loading
+            if !isLoading {
+                loadMore()
+            }
+        }
+    }
+    
+    // pagination
+    @objc func loadMore() {
+        
+        // set loading status to processing
+        isLoading = true
+        
+        // count total comments to enable or disable refresher
+        let countQuery = PFQuery(className: "comments")
+        countQuery.whereKey("to", equalTo: commentuuid.last!)
+        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
+            
+            // self refresher
+            self.refresher.endRefreshing()
+            
+            
+            // Load more comments
+            if self.page < count {
+                
+                // get comments to this post
+                let query = PFQuery(className: "comments")
+                query.whereKey("to", equalTo: commentuuid.last!)
+                query.skip = self.page
+                query.limit = self.pageLimit
+                
+                self.page = self.page + self.pageLimit
+                
+                query.addAscendingOrder("createdAt")
+                self.processQuery(query: query)
+            }
+        })
+    }
+    
+    
+    // process query and store data in array
+    func processQuery(query: PFQuery<PFObject>) {
+ 
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
-                
-                // clean up arrays
-                self.commentArray.removeAll(keepingCapacity: false)
-                self.usernameArray.removeAll(keepingCapacity: false)
-                self.dateArray.removeAll(keepingCapacity: false)
                 
                 // store comments in arrays
                 for object in objects! {
                     self.commentArray.append(object.object(forKey: "comment") as! String)
                     self.usernameArray.append(object.object(forKey: "username") as! String)
                     self.dateArray.append(object.createdAt)
-                    self.tableView.reloadData()
-                    
-                    // scroll to bottom
-                    self.tableView.scrollToRow(at: IndexPath(row: self.commentArray.count - 1, section: 0), at: UITableViewScrollPosition.bottom, animated: false)
                 }
+                
+                // reload tableView and end refresh animation
+                self.tableView.reloadData()
+                self.refresher.endRefreshing()
+                
+                
+                // set loading status to finished
+                self.isLoading = false
             } else {
                 print(error!.localizedDescription)
             }
