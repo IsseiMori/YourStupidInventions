@@ -892,12 +892,12 @@
         <scene sceneID="zHH-bz-h7q">
             <objects>
                 <tableViewController storyboardIdentifier="postIdeaVC" id="2ys-aa-7hS" customClass="postIdeaVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FLI-Tw-YPn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="FLI-Tw-YPn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="c2g-rk-jF2">
-                            <rect key="frame" x="0.0" y="594" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="684.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3e2-Hp-TU8">
@@ -908,11 +908,11 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postIdeaHeader" rowHeight="305" id="IMz-YR-anR" customClass="postIdeaHeader" customModule="YourStupidInventions" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="305"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postIdeaHeader" rowHeight="350" id="IMz-YR-anR" customClass="postIdeaHeader" customModule="YourStupidInventions" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IMz-YR-anR" id="8VU-1c-thj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="305"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aIl-WK-M27">
@@ -952,9 +952,13 @@
                                             <state key="normal" title="Send">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="sendBtn_clicked:" destination="IMz-YR-anR" eventType="touchUpInside" id="KP9-Z5-bSW"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="bgView" destination="aIl-WK-M27" id="ICH-Nb-LtI"/>
                                     <outlet property="hashtagsLbl" destination="NDP-wG-eTl" id="4Kk-zk-X2S"/>
@@ -965,10 +969,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="261" id="Oaz-EX-YI9" customClass="postCell" customModule="YourStupidInventions" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="333" width="375" height="261"/>
+                                <rect key="frame" x="0.0" y="405.5" width="375" height="261"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oaz-EX-YI9" id="ShB-gB-CZB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-H2-wtA">
@@ -1049,7 +1053,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="7Ic-4u-RXu"/>
                     <connections>
-                        <outlet property="indicator" destination="3e2-Hp-TU8" id="Def-Sz-XrO"/>
+                        <outlet property="indicator" destination="3e2-Hp-TU8" id="tIc-3H-L57"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4cZ-sB-fUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

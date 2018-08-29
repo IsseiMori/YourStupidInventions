@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Parse
+
+var postIdeaHeaderHeight: CGFloat = 0
 
 class postIdeaHeader: UITableViewCell {
 
@@ -18,57 +21,71 @@ class postIdeaHeader: UITableViewCell {
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var bgView: UIView!
     
+    var themeImgPFFile: PFFile!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         
+        // call alignment func
+        alignment()
+    }
+    
+    func alignment() {
+        
         let width = UIScreen.main.bounds.width
-        
-        themeImg.translatesAutoresizingMaskIntoConstraints = false
-        ideaTxt.translatesAutoresizingMaskIntoConstraints = false
-        hashtagsLbl.translatesAutoresizingMaskIntoConstraints = false
-        themeuuidLbl.translatesAutoresizingMaskIntoConstraints = false
-        sendBtn.translatesAutoresizingMaskIntoConstraints = false
-        bgView.translatesAutoresizingMaskIntoConstraints = false
-        
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
+        postIdeaHeaderHeight = themeHeight + 160 + 5
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[idea(200)]-5-[hashtags)]-5-[send(20)]-5-|",
-            options: [], metrics: nil, views: ["theme": themeImg, "idea": ideaTxt, "hashtags": hashtagsLbl, "send": sendBtn]))
+        bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
+        themeImg.frame = CGRect(x: bgView.frame.origin.x, y: bgView.frame.origin.y, width: themeWidth, height: themeHeight)
+        ideaTxt.frame = CGRect(x: themeImg.frame.origin.x, y: themeImg.frame.origin.y + themeImg.frame.size.height, width: bgView.frame.size.width, height: 80)
+        hashtagsLbl.frame = CGRect(x: bgView.frame.origin.x, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height, width: bgView.frame.size.width, height: 50)
+        sendBtn.frame = CGRect(x: bgView.frame.origin.x, y: hashtagsLbl.frame.origin.y + hashtagsLbl.frame.size.height, width: bgView.frame.size.width, height: 30)
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[theme]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg]))
+        ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[idea]-25-|",
-            options: [], metrics: nil, views: ["idea": ideaTxt]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[hashtags]-25-|",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[send]-25-|",
-            options: [], metrics: nil, views: ["send": sendBtn]))
-    
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[bg]-5-|",
-            options: [], metrics: nil, views: ["bg": bgView]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-10-[bg]-10-|",
-            options: [], metrics: nil, views: ["bg": bgView]))
+        ideaTxt.textContainer.maximumNumberOfLines = 3
         
         
         bgView.layer.zPosition = -1
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
+        
+        sendBtn.layer.cornerRadius = self.frame.size.width / 100
+        sendBtn.clipsToBounds = true
     }
 
+    
+    // clicked send button
+    @IBAction func sendBtn_clicked(_ sender: Any) {
+        
+        let object = PFObject(className: "posts")
+
+        // generate uuid for the new post
+        let uuid = UUID().uuidString
+        object["uuid"] = "\(PFUser.current()!.username!) \(uuid)"
+        
+        object["theme"] = themeImgPFFile
+        object["idea"] = ideaTxt.text
+        object["hashtags"] = hashtagsLbl.text
+        object["username"] = PFUser.current()?.username
+        object["fullname"] = PFUser.current()?.object(forKey: "fullname")
+        object["likes"] = 0
+        
+        // copy the themeuuid
+        object["themeuuid"] = themeuuidLbl.text
+        
+        object.saveInBackground { (success, error) in
+            if success {
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+ 
+    }
 }

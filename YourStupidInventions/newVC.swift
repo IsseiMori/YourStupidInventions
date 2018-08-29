@@ -55,7 +55,7 @@ class newVC: UITableViewController {
         
         let query = PFQuery(className: "posts")
         query.limit = page
-        query.addAscendingOrder("createAt")
+        query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
