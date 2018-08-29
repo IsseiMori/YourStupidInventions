@@ -27,6 +27,7 @@ class postCell: UITableViewCell {
     
     @IBOutlet weak var bgView: UIView!
     
+    
     // default
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -111,6 +112,19 @@ class postCell: UITableViewCell {
         // to like
         if title == "unlike" {
             
+            // update total # of likes of the post in posts table
+            let totalLikesQuery = PFQuery(className: "posts")
+            totalLikesQuery.whereKey("uuid", equalTo: uuidLbl.text!)
+            totalLikesQuery.getFirstObjectInBackground { (object, error) in
+                object?.incrementKey("likes", byAmount: 1)
+                object?.saveInBackground(block: { (success, error) in
+                    if success {
+                        self.likeLbl.text = String((self.likeLbl.layer.value(forKey: "likes") as! NSString).intValue + 1)
+                    }
+                })
+            }
+            
+            // add new like to likes table
             let object = PFObject(className: "likes")
             object["by"] = PFUser.current()?.username
             object["to"] = usernameBtn.titleLabel?.text
@@ -128,7 +142,7 @@ class postCell: UITableViewCell {
                         let newsObj = PFObject(className: "news")
                         newsObj["by"] = PFUser.current()?.username
                         newsObj["to"] = self.usernameBtn.titleLabel!.text!
-                        newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
+                        // newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
                         newsObj["owner"] = self.usernameBtn.titleLabel!.text!
                         newsObj["uuid"] = self.uuidLbl.text
                         newsObj["type"] = "like"
@@ -137,8 +151,20 @@ class postCell: UITableViewCell {
                     }
                 }
             }
-            // to unlike
+        // to unlike
         } else {
+            
+            // update total # of likes of the post in posts table
+            let totalLikesQuery = PFQuery(className: "posts")
+            totalLikesQuery.whereKey("uuid", equalTo: uuidLbl.text!)
+            totalLikesQuery.getFirstObjectInBackground { (object, error) in
+                object?.incrementKey("likes", byAmount: -1)
+                object?.saveInBackground(block: { (success, error) in
+                    if success {
+                        self.likeLbl.text = String(self.likeLbl.layer.value(forKey: "likes") as! NSString)
+                    }
+                })
+            }
             
             // request existing likes of current to shown post
             let query = PFQuery(className: "likes")

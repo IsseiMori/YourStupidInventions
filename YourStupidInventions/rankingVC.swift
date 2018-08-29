@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+// ranking and new feeds share this class
+
 class rankingVC: UITableViewController {
     
     // UI objects
@@ -34,7 +36,11 @@ class rankingVC: UITableViewController {
         super.viewDidLoad()
 
         // title at the top
-        self.navigationItem.title = "Top Ideas"
+        if tabBarController?.selectedIndex == 0 {
+            self.navigationItem.title = "Top Ideas"
+        } else {
+            self.navigationItem.title = "New Ideas"
+        }
         
         // automatic row height - dynamic cell
         //tableView.estimatedRowHeight = 300
@@ -44,6 +50,9 @@ class rankingVC: UITableViewController {
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
+        // receive post cell liked notification to update tableView
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
+
         
         // centering indicator
         indicator.center.x = tableView.center.x
@@ -52,6 +61,12 @@ class rankingVC: UITableViewController {
         loadPosts()
         
     }
+    
+    
+    // refreshing func after like to update tableView
+    @objc func refresh() {
+        //tableView.reloadData()
+    }
 
     
     // load posts
@@ -59,7 +74,15 @@ class rankingVC: UITableViewController {
         
         let query = PFQuery(className: "posts")
         query.limit = page
-        query.addDescendingOrder("likes")
+        
+        // if tab is ranking(0) sort by likes
+        // if tab is new(1) sort by time
+        if tabBarController?.selectedIndex == 0 {
+            query.addDescendingOrder("likes")
+        } else {
+            query.addDescendingOrder("createdAt")
+        }
+        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
@@ -172,6 +195,7 @@ class rankingVC: UITableViewController {
         
         // assign index
         cell.usernameBtn.layer.setValue(indexPath, forKey: "index")
+        cell.likeLbl.layer.setValue(cell.likeLbl.text!, forKey: "likes")
         
         
         

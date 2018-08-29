@@ -357,41 +357,17 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 }
                 
             }
-        }
+        }*/
         
-        // STEP 4: send notification as @mention
-        var mentionNotification = Bool(false)
-        for var word in words {
-            
-            // check mentions for user
-            if word.hasPrefix("@") {
-                
-                // cut symbols
-                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
-                word = word.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                
-                let newsObj = PFObject(className: "news")
-                newsObj["by"] = PFUser.current()?.username
-                newsObj["to"] = word
-                newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
-                newsObj["owner"] = commentowner.last!
-                newsObj["uuid"] = commentuuid.last!
-                newsObj["type"] = "mention"
-                newsObj["checked"] = "no"
-                newsObj.saveEventually()
-                
-                mentionNotification = true
-            }
-        }
         
         
         // STEP 5: send notification as comment
-        if commentowner.last != PFUser.current()?.username && mentionNotification == false {
+        if commentowner.last != PFUser.current()?.username {
             
             let newsObj = PFObject(className: "news")
             newsObj["by"] = PFUser.current()?.username
             newsObj["to"] = commentowner.last!
-            newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
+            // newsObj["ava"] = PFUser.current()?.object(forKey: "ava") as! PFFile
             newsObj["owner"] = commentowner.last!
             newsObj["uuid"] = commentuuid.last!
             newsObj["type"] = "comment"
@@ -399,7 +375,6 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             newsObj.saveEventually()
         }
         
-        */
         
         
         // scroll to bottom
