@@ -144,4 +144,20 @@ class notificationsVC: UITableViewController {
         }
     }
 
+    
+    // clicked username button
+    @IBAction func usernameBtn_clicked(_ sender: Any) {
+        // call index of current button
+        let button = sender as! UIButton
+        
+        // if user tapped on his username go home, otherwise go guest
+        if button.titleLabel?.text == PFUser.current()?.username {
+            let home = self.storyboard?.instantiateViewController(withIdentifier: "homeVC") as! homeVC
+            self.navigationController?.pushViewController(home, animated: true)
+        } else {
+            guestname.append((button.titleLabel?.text)!)
+            let guest = self.storyboard?.instantiateViewController(withIdentifier: "guestVC") as! guestVC
+            self.navigationController?.pushViewController(guest, animated: true)
+        }
+    }
 }

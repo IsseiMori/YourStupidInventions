@@ -1,16 +1,17 @@
 //
-//  homeVC.swift
+//  guestVC.swift
 //  YourStupidInventions
 //
-//  Created by MoriIssei on 8/27/18.
+//  Created by MoriIssei on 8/29/18.
 //  Copyright © 2018 IsseiMori. All rights reserved.
 //
 
 import UIKit
 import Parse
 
+var guestname = [String]()
 
-class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // refresher variable
     var refresher = UIRefreshControl()
@@ -28,19 +29,19 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var themeImgArray = [PFFile]()
     var ideaArray = [String]()
     var likesArray = [Int]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // always vertical scroll
         self.collectionView?.alwaysBounceVertical = true
         
         // background color
         collectionView?.backgroundColor = .white
         
-        // title at the top
-        self.navigationItem.title = PFUser.current()?.username?.lowercased()
-
+        // top title
+        self.navigationItem.title = guestname.last
+        
         // pull to refresh
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
@@ -49,13 +50,15 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // receive notification from editVC
         NotificationCenter.default.addObserver(self, selector: #selector(self.reload), name: NSNotification.Name(rawValue: "reload"), object: nil)
         
-        // new back button if not root
-        if (self.navigationController?.viewControllers.first != self.navigationController?.visibleViewController) {
-            
-            self.navigationItem.hidesBackButton = true
-            let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
-            self.navigationItem.leftBarButtonItem = backBtn
-        }
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
         
         // load posts func
         loadPosts()
@@ -94,7 +97,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.likesArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "posts")
-        query.whereKey("username", equalTo: PFUser.current()!.username!)
+        query.whereKey("username", equalTo: guestname.last!)
         query.limit = page
         query.addDescendingOrder("createdAt")
         processQuery(query: query)
@@ -123,9 +126,9 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // set loading status to processing
         isLoading = true
         
-        // count total comments to enable or disable refresher
+        // count total posts of the user to enable or disable refresher
         let countQuery = PFQuery(className: "posts")
-        countQuery.whereKey("username", equalTo: PFUser.current()!.username!)
+        countQuery.whereKey("username", equalTo: guestname.last!)
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -135,8 +138,8 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             if self.uuidArray.count < count {
                 
                 let query = PFQuery(className: "posts")
-                query.whereKey("username", equalTo: PFUser.current()!.username!)
-                 query.addDescendingOrder("createdAt")
+                query.whereKey("username", equalTo: guestname.last!)
+                query.addDescendingOrder("createdAt")
                 
                 // load only the next page size posts
                 query.skip = self.page
@@ -183,22 +186,11 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     
-    // preload func
-    override func viewWillAppear(_ animated: Bool) {
-        // go to log in if not yet signed in
-        let username: String? = UserDefaults.standard.string(forKey: "username")
-        
-        if username == nil {
-            let signIn = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as! signInVC
-            self.navigationController?.pushViewController(signIn, animated: true)
-        }
-    }
-    
-
     // number of cells
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return uuidArray.count
     }
+    
     
     // cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -208,11 +200,12 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         return size
     }
     
+    
     // cell config
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! homePostCell
         
-    
+        
         themeImgArray[indexPath.row].getDataInBackground { (data, error) in
             if error == nil {
                 cell.themeImg.image = UIImage(data: data!)
@@ -223,7 +216,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         cell.ideaLbl.text = ideaArray[indexPath.row]
         cell.likesLbl.text = String(likesArray[indexPath.row])
-    
+        
         return cell
     }
     
@@ -234,18 +227,45 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // define header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "homeHeaderView", for: indexPath) as! homeHeaderView
         
-        // get user data with connections to columns of PFUser class
-        header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()
-        header.usernameLbl.text = PFUser.current()?.username!
-        
-        let avaQuery = PFUser.current()?.object(forKey: "ava") as! PFFile
-        avaQuery.getDataInBackground { (data, error) in
-            header.avaImg.image = UIImage(data: data!)
+        // load data of guest
+        let infoQuery = PFQuery(className: "_User")
+        infoQuery.whereKey("username", equalTo: guestname.last!)
+        infoQuery.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                
+                // shown wrong user
+                if objects!.isEmpty {
+                    // call alert
+                    let alert = UIAlertController(title: "\(guestname.last!)", message: "does not exist", preferredStyle: UIAlertControllerStyle.alert)
+                    let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { (UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                for object in objects! {
+                    
+                    // find related to user information
+                    header.fullnameLbl.text = (object.value(forKey: "fullname") as? String)?.uppercased()
+                    header.usernameLbl.text = guestname.last!
+                    let avaFile: PFFile = (object.value(forKey: "ava") as? PFFile)!
+                    avaFile.getDataInBackground(block: { (data, error) in
+                        if error == nil {
+                            header.avaImg.image = UIImage(data: data!)
+                        } else {
+                            print(error!.localizedDescription)
+                        }
+                    })
+                }
+            } else {
+                print(error!.localizedDescription)
+            }
         }
-
+        
         // count total posts
         let posts = PFQuery(className: "posts")
-        posts.whereKey("username", equalTo: PFUser.current()!.username!)
+        posts.whereKey("username", equalTo: guestname.last!)
         posts.countObjectsInBackground { (count, error) in
             if error == nil {
                 header.ideas.text = "\(count)"
@@ -254,13 +274,13 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // count total likes
         let likes = PFQuery(className: "likes")
-        likes.whereKey("to", equalTo: PFUser.current()!.username!)
+        likes.whereKey("to", equalTo: guestname.last!)
         likes.countObjectsInBackground { (count, error) in
             if error == nil {
                 header.likes.text = "\(count)"
             }
         }
-
+        
         return header
     }
     
@@ -270,13 +290,14 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // send uuid to "postuuid" variable
         commentuuid.append(uuidArray[indexPath.row])
-        commentowner.append((PFUser.current()?.username)!)
+        commentowner.append(guestname.last!)
         
         // navigate to postVC
         let comment = self.storyboard?.instantiateViewController(withIdentifier: "commentVC") as! commentVC
         self.navigationController?.pushViewController(comment, animated: true)
     }
-
     
-
+    
+    
 }
+

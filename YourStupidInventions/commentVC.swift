@@ -372,6 +372,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             cell.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
         }
         
+        // assign indexes of buttons
+        cell.usernameBtn.layer.setValue(indexPath, forKey: "index")
+        
         return cell
     }
     
@@ -454,5 +457,21 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         tableView.frame.size.height = self.tableViewHeight - self.keyboard.height - self.commentTxt.frame.size.height + self.commentHeight
     }
     
-
+    
+    // clicked usename button
+    @IBAction func usernameBtn_clicked(_ sender: Any) {
+        // call index of current button
+        let button = sender as! UIButton
+        
+        // if user tapped on his username go home, otherwise go guest
+        if button.titleLabel?.text == PFUser.current()?.username {
+            let home = self.storyboard?.instantiateViewController(withIdentifier: "homeVC") as! homeVC
+            self.navigationController?.pushViewController(home, animated: true)
+        } else {
+            guestname.append((button.titleLabel?.text)!)
+            let guest = self.storyboard?.instantiateViewController(withIdentifier: "guestVC") as! guestVC
+            self.navigationController?.pushViewController(guest, animated: true)
+        }
+    }
+    
 }
