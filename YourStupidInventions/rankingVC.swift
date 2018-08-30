@@ -250,18 +250,20 @@ class rankingVC: UITableViewController {
             cell.dateLbl.text = "\(String(describing: difference.weekOfMonth!))w."
         }
         
-        // change like button color depending on whether user liked or not
-        let didLike = PFQuery(className: "likes")
-        didLike.whereKey("by", equalTo: PFUser.current()!.username!)
-        didLike.whereKey("uuid", equalTo: cell.uuidLbl.text!)
-        didLike.countObjectsInBackground { (count, error) in
-            // if no likes are found, else found likes
-            if count == 0 {
-                cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
-                cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
-            } else {
-                cell.likeBtn.setTitle("like", for: UIControlState.normal)
-                cell.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+        // change like button color depending on whether user liked or not if user loged in
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            let didLike = PFQuery(className: "likes")
+            didLike.whereKey("by", equalTo: PFUser.current()!.username!)
+            didLike.whereKey("uuid", equalTo: cell.uuidLbl.text!)
+            didLike.countObjectsInBackground { (count, error) in
+                // if no likes are found, else found likes
+                if count == 0 {
+                    cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
+                    cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
+                } else {
+                    cell.likeBtn.setTitle("like", for: UIControlState.normal)
+                    cell.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+                }
             }
         }
         

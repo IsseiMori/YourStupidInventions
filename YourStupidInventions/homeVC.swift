@@ -31,6 +31,8 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewWillAppear(false)
 
         // always vertical scroll
         self.collectionView?.alwaysBounceVertical = true
@@ -57,8 +59,10 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             self.navigationItem.leftBarButtonItem = backBtn
         }
         
-        // load posts func
-        loadPosts()
+        // load posts if user has logged in
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            loadPosts()
+        }
     }
     
     
@@ -185,11 +189,13 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
-        // go to log in if not yet signed in
+        print("pre")
+        // go to login if not yet signed in
         let username: String? = UserDefaults.standard.string(forKey: "username")
         
         if username == nil {
             let signIn = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as! signInVC
+            print("go")
             self.navigationController?.pushViewController(signIn, animated: true)
         }
     }
