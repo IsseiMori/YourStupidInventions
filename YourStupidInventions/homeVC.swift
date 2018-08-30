@@ -16,7 +16,13 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var refresher = UIRefreshControl()
     
     // page size
-    var page: Int = 12
+    var page: Int = 8
+    
+    // # of posts to load at each loadMore()
+    var pageLimit: Int = 4
+    
+    // loading status to avoid keep loading
+    var isLoading = false
     
     var uuidArray = [String]()
     var themeImgArray = [PFFile]()
@@ -37,7 +43,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
         // pull to refresh
         refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         collectionView?.addSubview(refresher)
         
         // receive notification from editVC
@@ -76,21 +82,81 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     // load posts func
-    func loadPosts() {
+    @objc func loadPosts() {
+        
+        // set loading status to processing
+        isLoading = true
+        
+        // clean up
+        self.uuidArray.removeAll(keepingCapacity: false)
+        self.themeImgArray.removeAll(keepingCapacity: false)
+        self.ideaArray.removeAll(keepingCapacity: false)
+        self.likesArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "posts")
         query.whereKey("username", equalTo: PFUser.current()!.username!)
         query.limit = page
         query.addDescendingOrder("createdAt")
+        processQuery(query: query)
+        
+    }
+    
+    
+    // scrolled down
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
+        let distanceToBottom = maximumOffset - currentOffsetY
+        
+        if distanceToBottom < 50 {
+            // don't load more if still loading
+            if !isLoading {
+                loadMore()
+            }
+        }
+    }
+    
+    
+    // pagination
+    @objc func loadMore() {
+        
+        // set loading status to processing
+        isLoading = true
+        
+        // count total comments to enable or disable refresher
+        let countQuery = PFQuery(className: "posts")
+        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
+            
+            // self refresher
+            self.refresher.endRefreshing()
+            
+            // if posts on server are more than shown
+            if self.uuidArray.count < count {
+                
+                let query = PFQuery(className: "posts")
+                query.whereKey("username", equalTo: PFUser.current()!.username!)
+                 query.addDescendingOrder("createdAt")
+                
+                // load only the next page size posts
+                query.skip = self.page
+                query.limit = self.pageLimit
+                
+                // increase page size
+                self.page = self.page + self.pageLimit
+                
+                self.processQuery(query: query)
+                
+            }
+        })
+    }
+    
+    
+    // process query and store data in array
+    func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
             
             if error == nil {
                 
-                // clean up
-                self.uuidArray.removeAll(keepingCapacity: false)
-                self.themeImgArray.removeAll(keepingCapacity: false)
-                self.ideaArray.removeAll(keepingCapacity: false)
-                self.likesArray.removeAll(keepingCapacity: false)
                 
                 // find objects related to our request
                 for object in objects! {
@@ -102,13 +168,21 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                     self.likesArray.append(object.value(forKey: "likes") as! Int)
                 }
                 
+                // reload collectionView and end refresh animation
                 self.collectionView?.reloadData()
+                self.refresher.endRefreshing()
+                
+                // set loading status to finished
+                self.isLoading = false
+                
             } else {
                 print(error!.localizedDescription)
             }
         }
     }
     
+    
+    // preload func
     override func viewWillAppear(_ animated: Bool) {
         // go to log in if not yet signed in
         let username: String? = UserDefaults.standard.string(forKey: "username")
