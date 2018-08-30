@@ -122,10 +122,12 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 UserDefaults.standard.removeObject(forKey: "username")
                 UserDefaults.standard.synchronize()
                 
-                let home = self.storyboard?.instantiateViewController(withIdentifier: "homeVC") as! homeVC
+                self.view.endEditing(true)
+                self.dismiss(animated: true, completion: nil)
+                
+                /*let root = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! tabbarVC
                 let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = home
-                print("a")
+                appDelegate.window?.rootViewController = root*/
             }
         }
     }

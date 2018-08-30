@@ -181,6 +181,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signInBtn_clicked:" destination="no7-Cm-F6A" eventType="touchUpInside" id="ws0-kv-eCb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9c-b1-YCH">
                                 <rect key="frame" x="268" y="339" width="90" height="30"/>
@@ -380,7 +383,7 @@
         <scene sceneID="7cJ-ru-ZQk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NIG-lu-1HJ" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Top" id="AIq-V3-ZE6"/>
+                    <tabBarItem key="tabBarItem" title="Top" image="ranking.png" id="AIq-V3-ZE6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lVI-EQ-NtG">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -785,7 +788,7 @@
         <scene sceneID="k6X-4j-tMb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KwK-iN-IRp" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="New" id="RgT-IS-YYT"/>
+                    <tabBarItem key="tabBarItem" title="New" image="leaf.png" id="RgT-IS-YYT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Pt-fn-HSk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -800,27 +803,11 @@
             </objects>
             <point key="canvasLocation" x="-28" y="779"/>
         </scene>
-        <!--Login CheckVC-->
-        <scene sceneID="CHL-ET-bxz">
-            <objects>
-                <viewController storyboardIdentifier="loginCheckVC" id="xkD-d9-JSK" customClass="loginCheckVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MlX-wx-pFM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="O02-w7-khy"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="LnJ-cO-Khh"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nuh-68-raT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1059" y="789"/>
-        </scene>
         <!--Home-->
         <scene sceneID="Lb5-x4-RoF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9qX-94-Qd4" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="eUo-Du-4ti"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home.png" id="eUo-Du-4ti"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qqc-bL-Iol">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -828,7 +815,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="xkD-d9-JSK" kind="relationship" relationship="rootViewController" id="Jlj-mF-b0Q"/>
+                        <segue destination="N1Q-zE-5dd" kind="relationship" relationship="rootViewController" id="pNt-CS-jDy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9bz-bs-yjS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -839,7 +826,7 @@
         <scene sceneID="ODV-BU-a1w">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NrB-SM-uuc" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Idea" id="S7f-iW-e5c"/>
+                    <tabBarItem key="tabBarItem" title="Idea" image="idea.png" id="S7f-iW-e5c"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ABf-c8-Ujw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1089,7 +1076,7 @@
         <scene sceneID="eum-hH-jD4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5ih-n8-oGg" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" id="bEb-KT-udN"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="notification.png" id="bEb-KT-udN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1KF-K6-3Rd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1258,9 +1245,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home.png" width="30" height="30"/>
+        <image name="idea.png" width="30" height="30"/>
+        <image name="leaf.png" width="30" height="30"/>
         <image name="like.png" width="270" height="270"/>
+        <image name="notification.png" width="30" height="30"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
+        <image name="ranking.png" width="30" height="30"/>
         <image name="unlike.png" width="270" height="270"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -28,35 +28,39 @@ class notificationsVC: UITableViewController {
         // title on the top
         navigationItem.title = "Notifications"
         
-        // request query
-        let query = PFQuery(className: "news")
-        query.whereKey("to", equalTo: PFUser.current()!.username!)
-        query.limit = 30
-        query.findObjectsInBackground { (objects, error) in
-            if error == nil {
-                
-                // clean up
-                self.usernameArray.removeAll(keepingCapacity: false)
-                self.typeArray.removeAll(keepingCapacity: false)
-                self.dateArray.removeAll(keepingCapacity: false)
-                self.uuidArray.removeAll(keepingCapacity: false)
-                self.ownerArray.removeAll(keepingCapacity: false)
-                
-                // find related objects
-                for object in objects! {
-                    self.usernameArray.append(object.object(forKey: "by") as! String)
-                    self.typeArray.append(object.object(forKey: "type") as! String)
-                    self.dateArray.append(object.createdAt)
-                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                    self.ownerArray.append(object.object(forKey: "owner") as! String)
+        // load posts if user has logged in
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            
+            // request query
+            let query = PFQuery(className: "news")
+            query.whereKey("to", equalTo: PFUser.current()!.username!)
+            query.limit = 30
+            query.findObjectsInBackground { (objects, error) in
+                if error == nil {
                     
-                    // save notifications as checked
-                    object["checked"] = "yes"
-                    object.saveEventually()
+                    // clean up
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.typeArray.removeAll(keepingCapacity: false)
+                    self.dateArray.removeAll(keepingCapacity: false)
+                    self.uuidArray.removeAll(keepingCapacity: false)
+                    self.ownerArray.removeAll(keepingCapacity: false)
+                    
+                    // find related objects
+                    for object in objects! {
+                        self.usernameArray.append(object.object(forKey: "by") as! String)
+                        self.typeArray.append(object.object(forKey: "type") as! String)
+                        self.dateArray.append(object.createdAt)
+                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                        self.ownerArray.append(object.object(forKey: "owner") as! String)
+                        
+                        // save notifications as checked
+                        object["checked"] = "yes"
+                        object.saveEventually()
+                    }
+                    
+                    // reload tableView
+                    self.tableView.reloadData()
                 }
-                
-                // reload tableView
-                self.tableView.reloadData()
             }
         }
     }

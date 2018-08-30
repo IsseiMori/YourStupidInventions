@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+
 
 class signInVC: UIViewController {
     
@@ -57,5 +59,58 @@ class signInVC: UIViewController {
         self.view.addSubview(bg)
     }
 
-
+    
+    // clicked sign in button
+    @IBAction func signInBtn_clicked(_ sender: Any) {
+        
+        // hide keyboard
+        self.view.endEditing(true)
+        
+        // if textfields are empty
+        if usernameTxt.text!.isEmpty || passwordTxt.text!.isEmpty {
+            
+            // alert message
+            alert(title: "Error", message: "fill in fields")
+        }
+        
+        // login functions
+        PFUser.logInWithUsername(inBackground: usernameTxt.text!, password: passwordTxt.text!) { (user, error) in
+            if error == nil {
+                
+                // remember user
+                UserDefaults.standard.set(user!.username, forKey: "username")
+                UserDefaults.standard.synchronize()
+                
+                // call login function from AppDeligate.swift class
+                let appDeligate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDeligate.login()
+                
+            } else {
+                // alert message
+                self.alert(title: "Error", message: error!.localizedDescription)
+            }
+        }
+    }
+    
+    
+    // preload
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    
+    // postload
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }

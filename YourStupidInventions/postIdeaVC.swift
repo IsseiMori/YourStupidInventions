@@ -48,6 +48,9 @@ class postIdeaVC: UITableViewController {
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
+        // receive notification from postIdeaHeader
+        NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
+        
         
         // centering indicator
         indicator.center.x = tableView.center.x
@@ -57,6 +60,12 @@ class postIdeaVC: UITableViewController {
         loadPosts()
 
         
+    }
+    
+    // receive uploaded notification from postIdeaHeader and show newVC
+    @objc func uploaded(notification: NSNotification) {
+        // go to newVC
+        self.tabBarController?.selectedIndex = 1
     }
     
     

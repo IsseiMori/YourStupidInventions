@@ -37,7 +37,11 @@
 		850C2BE52137067F0095A3D7 /* notificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2BE42137067F0095A3D7 /* notificationsVC.swift */; };
 		850C2BE72137BF890095A3D7 /* guestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2BE62137BF890095A3D7 /* guestVC.swift */; };
 		850C2BE92137D74E0095A3D7 /* editVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2BE82137D74E0095A3D7 /* editVC.swift */; };
-		850C2BEB2137E5200095A3D7 /* loginCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2BEA2137E5200095A3D7 /* loginCheckVC.swift */; };
+		850C2C0E2138818E0095A3D7 /* ranking@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C0D2138818E0095A3D7 /* ranking@3x.png */; };
+		850C2C10213881CC0095A3D7 /* leaf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C0F213881CB0095A3D7 /* leaf@3x.png */; };
+		850C2C122138820E0095A3D7 /* idea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C112138820D0095A3D7 /* idea@3x.png */; };
+		850C2C14213882620095A3D7 /* notification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C13213882620095A3D7 /* notification@3x.png */; };
+		850C2C16213882820095A3D7 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C15213882810095A3D7 /* home@3x.png */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -88,7 +92,11 @@
 		850C2BE42137067F0095A3D7 /* notificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationsVC.swift; sourceTree = "<group>"; };
 		850C2BE62137BF890095A3D7 /* guestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = guestVC.swift; sourceTree = "<group>"; };
 		850C2BE82137D74E0095A3D7 /* editVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editVC.swift; sourceTree = "<group>"; };
-		850C2BEA2137E5200095A3D7 /* loginCheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginCheckVC.swift; sourceTree = "<group>"; };
+		850C2C0D2138818E0095A3D7 /* ranking@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranking@3x.png"; sourceTree = "<group>"; };
+		850C2C0F213881CB0095A3D7 /* leaf@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leaf@3x.png"; sourceTree = "<group>"; };
+		850C2C112138820D0095A3D7 /* idea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idea@3x.png"; sourceTree = "<group>"; };
+		850C2C13213882620095A3D7 /* notification@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification@3x.png"; sourceTree = "<group>"; };
+		850C2C15213882810095A3D7 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -155,6 +163,18 @@
 			path = "button items";
 			sourceTree = "<group>";
 		};
+		850C2BEE213873B00095A3D7 /* tabbar items */ = {
+			isa = PBXGroup;
+			children = (
+				850C2C0D2138818E0095A3D7 /* ranking@3x.png */,
+				850C2C0F213881CB0095A3D7 /* leaf@3x.png */,
+				850C2C112138820D0095A3D7 /* idea@3x.png */,
+				850C2C13213882620095A3D7 /* notification@3x.png */,
+				850C2C15213882810095A3D7 /* home@3x.png */,
+			);
+			path = "tabbar items";
+			sourceTree = "<group>";
+		};
 		85C95796213206D000AEFD2E = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +195,7 @@
 		85C957A1213206D000AEFD2E /* YourStupidInventions */ = {
 			isa = PBXGroup;
 			children = (
+				850C2BEE213873B00095A3D7 /* tabbar items */,
 				850C2BA921334A9F0095A3D7 /* button items */,
 				850C2BA0213329210095A3D7 /* placeholder items */,
 				850C2B8E21330DF90095A3D7 /* bg.jpg */,
@@ -204,7 +225,6 @@
 				850C2BE42137067F0095A3D7 /* notificationsVC.swift */,
 				850C2BE62137BF890095A3D7 /* guestVC.swift */,
 				850C2BE82137D74E0095A3D7 /* editVC.swift */,
-				850C2BEA2137E5200095A3D7 /* loginCheckVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -292,13 +312,18 @@
 				850C2BD3213514190095A3D7 /* back@3x.png in Resources */,
 				850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */,
 				850C2BD4213514190095A3D7 /* back@2x.png in Resources */,
+				850C2C14213882620095A3D7 /* notification@3x.png in Resources */,
+				850C2C10213881CC0095A3D7 /* leaf@3x.png in Resources */,
+				850C2C0E2138818E0095A3D7 /* ranking@3x.png in Resources */,
 				850C2BD5213514190095A3D7 /* back.png in Resources */,
 				85C957AD213206D600AEFD2E /* LaunchScreen.storyboard in Resources */,
+				850C2C16213882820095A3D7 /* home@3x.png in Resources */,
 				850C2BA521334A7F0095A3D7 /* unlike.png in Resources */,
 				850C2BA821334A7F0095A3D7 /* more.png in Resources */,
 				85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */,
 				85C957A8213206D000AEFD2E /* Main.storyboard in Resources */,
 				850C2B9321330DF90095A3D7 /* bg.jpg in Resources */,
+				850C2C122138820E0095A3D7 /* idea@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +343,6 @@
 				850C2BD7213538710095A3D7 /* themesVC.swift in Sources */,
 				850C2BB0213359850095A3D7 /* postCell.swift in Sources */,
 				850C2BE32137063F0095A3D7 /* notificationsCell.swift in Sources */,
-				850C2BEB2137E5200095A3D7 /* loginCheckVC.swift in Sources */,
 				850C2BAB21334C840095A3D7 /* rankingVC.swift in Sources */,
 				850C2BB42133C0CA0095A3D7 /* navVC.swift in Sources */,
 				850C2BBC2133D3660095A3D7 /* commentCell.swift in Sources */,

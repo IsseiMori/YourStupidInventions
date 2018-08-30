@@ -31,5 +31,7 @@ class navVC: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    
+    
 
 }

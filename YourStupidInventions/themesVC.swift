@@ -63,7 +63,7 @@ class themesVC: UITableViewController {
         
         let query = PFQuery(className: "themes")
         query.limit = page
-        query.addAscendingOrder("createdAt")
+        query.addDescendingOrder("createdAt")
         processQuery(query: query)
 
     }

@@ -53,7 +53,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // new back button if not root
         if (self.navigationController?.viewControllers.first != self.navigationController?.visibleViewController) {
-            
             self.navigationItem.hidesBackButton = true
             let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
             self.navigationItem.leftBarButtonItem = backBtn
@@ -124,35 +123,39 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // pagination
     @objc func loadMore() {
         
-        // set loading status to processing
-        isLoading = true
+        // load posts if user has logged in
+        if UserDefaults.standard.string(forKey: "username") != nil {
         
-        // count total comments to enable or disable refresher
-        let countQuery = PFQuery(className: "posts")
-        countQuery.whereKey("username", equalTo: PFUser.current()!.username!)
-        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
+            // set loading status to processing
+            isLoading = true
             
-            // self refresher
-            self.refresher.endRefreshing()
-            
-            // if posts on server are more than shown
-            if self.uuidArray.count < count {
+            // count total comments to enable or disable refresher
+            let countQuery = PFQuery(className: "posts")
+            countQuery.whereKey("username", equalTo: PFUser.current()!.username!)
+            countQuery.countObjectsInBackground (block: { (count, error) -> Void in
                 
-                let query = PFQuery(className: "posts")
-                query.whereKey("username", equalTo: PFUser.current()!.username!)
-                 query.addDescendingOrder("createdAt")
+                // self refresher
+                self.refresher.endRefreshing()
                 
-                // load only the next page size posts
-                query.skip = self.page
-                query.limit = self.pageLimit
-                
-                // increase page size
-                self.page = self.page + self.pageLimit
-                
-                self.processQuery(query: query)
-                
-            }
-        })
+                // if posts on server are more than shown
+                if self.uuidArray.count < count {
+                    
+                    let query = PFQuery(className: "posts")
+                    query.whereKey("username", equalTo: PFUser.current()!.username!)
+                     query.addDescendingOrder("createdAt")
+                    
+                    // load only the next page size posts
+                    query.skip = self.page
+                    query.limit = self.pageLimit
+                    
+                    // increase page size
+                    self.page = self.page + self.pageLimit
+                    
+                    self.processQuery(query: query)
+                    
+                }
+            })
+        }
     }
     
     
@@ -189,13 +192,11 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
-        print("pre")
         // go to login if not yet signed in
         let username: String? = UserDefaults.standard.string(forKey: "username")
         
         if username == nil {
             let signIn = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as! signInVC
-            print("go")
             self.navigationController?.pushViewController(signIn, animated: true)
         }
     }
@@ -240,30 +241,34 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // define header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "homeHeaderView", for: indexPath) as! homeHeaderView
         
-        // get user data with connections to columns of PFUser class
-        header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()
-        header.usernameLbl.text = PFUser.current()?.username!
-        
-        let avaQuery = PFUser.current()?.object(forKey: "ava") as! PFFile
-        avaQuery.getDataInBackground { (data, error) in
-            header.avaImg.image = UIImage(data: data!)
-        }
-
-        // count total posts
-        let posts = PFQuery(className: "posts")
-        posts.whereKey("username", equalTo: PFUser.current()!.username!)
-        posts.countObjectsInBackground { (count, error) in
-            if error == nil {
-                header.ideas.text = "\(count)"
+        // create header if user has logged in
+        if UserDefaults.standard.string(forKey: "username") != nil {
+            
+            // get user data with connections to columns of PFUser class
+            header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()
+            header.usernameLbl.text = PFUser.current()?.username!
+            
+            let avaQuery = PFUser.current()?.object(forKey: "ava") as! PFFile
+            avaQuery.getDataInBackground { (data, error) in
+                header.avaImg.image = UIImage(data: data!)
             }
-        }
-        
-        // count total likes
-        let likes = PFQuery(className: "likes")
-        likes.whereKey("to", equalTo: PFUser.current()!.username!)
-        likes.countObjectsInBackground { (count, error) in
-            if error == nil {
-                header.likes.text = "\(count)"
+
+            // count total posts
+            let posts = PFQuery(className: "posts")
+            posts.whereKey("username", equalTo: PFUser.current()!.username!)
+            posts.countObjectsInBackground { (count, error) in
+                if error == nil {
+                    header.ideas.text = "\(count)"
+                }
+            }
+            
+            // count total likes
+            let likes = PFQuery(className: "likes")
+            likes.whereKey("to", equalTo: PFUser.current()!.username!)
+            likes.countObjectsInBackground { (count, error) in
+                if error == nil {
+                    header.likes.text = "\(count)"
+                }
             }
         }
 
