@@ -78,7 +78,15 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         emailTxt.frame = CGRect(x: 10, y: fullnameTxt.frame.origin.y + 40, width: width - 20, height: 30)
         logoutBtn.frame = CGRect(x: 10, y: emailTxt.frame.origin.y + 40, width: width - 20, height: 30)
         
+        // disable username editing
         usernameTxt.isEnabled = false
+        usernameTxt.textColor = UIColor.lightGray
+        
+        // background
+        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        bg.image = UIImage(named: "bg.jpg")
+        bg.layer.zPosition = -1
+        self.view.addSubview(bg)
     }
     
     // user information function
@@ -95,13 +103,11 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         }
         
         // receive text information
-        usernameTxt.text = PFUser.current()?.username
+        usernameTxt.text = String("@" + (PFUser.current()?.username)!)
         fullnameTxt.text = PFUser.current()?.object(forKey: "fullname") as? String
 
         
         emailTxt.text = PFUser.current()?.email
-
-        
         
     }
 
@@ -124,10 +130,6 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 
                 self.view.endEditing(true)
                 self.dismiss(animated: true, completion: nil)
-                
-                /*let root = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! tabbarVC
-                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = root*/
             }
         }
     }
