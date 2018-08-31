@@ -42,14 +42,6 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // top title
         self.navigationItem.title = guestname.last
         
-        // pull to refresh
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
-        collectionView?.addSubview(refresher)
-        
-        // receive notification from editVC
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reload), name: NSNotification.Name(rawValue: "reload"), object: nil)
-        
         // new back button
         self.navigationItem.hidesBackButton = true
         let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
@@ -60,14 +52,30 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
         
+        // pull to refresh
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
+        collectionView?.addSubview(refresher)
+        
+        // receive notification from editVC
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reload), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        
         // load posts func
         loadPosts()
     }
     
     
-    @objc func back(sender: UITabBarItem) {
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
         self.navigationController?.popViewController(animated: true)
+        
+        // pop the last username from guestname array
+        if !guestname.isEmpty {
+            guestname.removeLast()
+        }
     }
+
     
     // refreshing func
     @objc func refresh() {

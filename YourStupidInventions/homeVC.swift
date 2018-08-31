@@ -53,9 +53,16 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         // new back button if not root
         if (self.navigationController?.viewControllers.first != self.navigationController?.visibleViewController) {
+            
+            // new back button
             self.navigationItem.hidesBackButton = true
             let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
             self.navigationItem.leftBarButtonItem = backBtn
+            
+            // swipe to back
+            let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+            backSwipe.direction = UISwipeGestureRecognizerDirection.right
+            self.view.addGestureRecognizer(backSwipe)
         }
         
         // load posts if user has logged in
