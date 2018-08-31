@@ -163,6 +163,20 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
+        // if username is taken by another user
+        let query = PFQuery(className: "_User")
+        query.whereKey("username", contains: usernameTxt.text?.lowercased())
+        query.countObjectsInBackground { (count, error) in
+            if error == nil {
+                if count != 0 {
+                    // alert message
+                    alert(title: "Error", message: "This username is taken by another user.")
+                }
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+        
         // send data to server to related columns
         let user = PFUser()
         user.username = usernameTxt.text?.lowercased()
@@ -215,7 +229,5 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         // push back
         self.navigationController?.popViewController(animated: true)
     }
-    
-    
 
 }
