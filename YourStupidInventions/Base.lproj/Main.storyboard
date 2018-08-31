@@ -1077,6 +1077,9 @@
                                             <rect key="frame" x="16" y="219" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" backgroundImage="unlike.png"/>
+                                            <connections>
+                                                <action selector="likeBtn_clicked:" destination="2ys-aa-7hS" eventType="touchUpInside" id="44e-0H-LgA"/>
+                                            </connections>
                                         </button>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="uuid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iE6-j7-ISk">
                                             <rect key="frame" x="171" y="43" width="33" height="21"/>

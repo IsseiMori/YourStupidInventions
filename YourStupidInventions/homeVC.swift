@@ -59,7 +59,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         
         // load posts if user has logged in
-        if UserDefaults.standard.string(forKey: "username") != nil {
+        if isLoggedIn {
             loadPosts()
         }
     }
@@ -124,7 +124,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @objc func loadMore() {
         
         // load posts if user has logged in
-        if UserDefaults.standard.string(forKey: "username") != nil {
+        if isLoggedIn {
         
             // set loading status to processing
             isLoading = true
@@ -192,10 +192,9 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
-        // go to login if not yet signed in
-        let username: String? = UserDefaults.standard.string(forKey: "username")
         
-        if username == nil {
+        // go to login if not yet signed in
+        if !isLoggedIn {
             let signIn = self.storyboard?.instantiateViewController(withIdentifier: "signInVC") as! signInVC
             self.navigationController?.pushViewController(signIn, animated: true)
         }
@@ -242,7 +241,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "homeHeaderView", for: indexPath) as! homeHeaderView
         
         // create header if user has logged in
-        if UserDefaults.standard.string(forKey: "username") != nil {
+        if isLoggedIn {
             
             // get user data with connections to columns of PFUser class
             header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()

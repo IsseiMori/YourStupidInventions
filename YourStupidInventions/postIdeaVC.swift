@@ -217,5 +217,21 @@ class postIdeaVC: UITableViewController {
     }
     
    
-
+    // clicked like button
+    @IBAction func likeBtn_clicked(_ sender: Any) {
+        if isLoggedIn {
+            
+        } else {
+            alert(title: "Please sign in", message: "Sign in from Home page to like this idea.")
+        }
+    }
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }

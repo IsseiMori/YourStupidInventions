@@ -58,6 +58,16 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         
         // title at the top
         self.navigationItem.title = "Comments"
+        
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to go back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
 
         // present commentHeaderCell as header
         self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
@@ -79,6 +89,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         hideTap.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
+        
+        // disable send button until it has some comment
+        sendBtn.isEnabled = false
         
         // set delegate to use tableView and textView functions
         commentTxt.delegate = self
@@ -114,8 +127,15 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     // show keyboard if clicked commentTxt
     @objc func showKeyboardTap(recognizer: UITapGestureRecognizer) {
         
-        // open keyboard
-        commentTxt.becomeFirstResponder()
+        if isLoggedIn {
+            
+            // open keyboard
+            commentTxt.becomeFirstResponder()
+        } else {
+            
+            alert(title: "Please sign in", message: "Sign in from Home page to comment")
+        }
+        
     }
     
     
@@ -474,20 +494,26 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     // clicked like button
     // can't reload only header so keep it global variable and resubstitute when updated
     @IBAction func likeBtn_clicked(_ sender: Any) {
-        // change background image
-        if header.likeBtn.titleLabel?.text != "like" {
-            header.likeBtn.setTitle("like", for: UIControlState.normal)
-            header.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+        
+        if isLoggedIn {
+            // change background image
+            if header.likeBtn.titleLabel?.text != "like" {
+                header.likeBtn.setTitle("like", for: UIControlState.normal)
+                header.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+            }
+            
+            // increment likeLbl
+            header.likeLbl.text = String(Int(header.likeLbl.text!)! + 1)
+            
+            // increment didLike
+            didLike = didLike + 1
+            
+            // present updated header
+            tableView.tableHeaderView = header.contentView
+        } else {
+            alert(title: "Please sing in", message: "Sign in from home page to like this idea.")
         }
         
-        // increment likeLbl
-        header.likeLbl.text = String(Int(header.likeLbl.text!)! + 1)
-        
-        // increment didLike
-        didLike = didLike + 1
-        
-        // present updated header
-        tableView.tableHeaderView = header.contentView
     }
     
     
@@ -505,7 +531,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         self.tabBarController?.tabBar.isHidden = false
         
         // save number of likeBtn taps to server
-        if didLike != 0 {
+        if didLike != 0 && isLoggedIn {
             
             // update total likes in each post
             let query = PFQuery(className: "posts")
@@ -527,6 +553,31 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 })
             }
         }
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
+        self.navigationController?.popViewController(animated: true)
+        
+        // clean comment uuid from holding last information
+        if !commentuuid.isEmpty {
+            commentuuid.removeLast()
+        }
+        
+        // clean comment owner from last holding information
+        if !commentowner.isEmpty {
+            commentowner.removeLast()
+        }
+    }
+    
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
 
 }

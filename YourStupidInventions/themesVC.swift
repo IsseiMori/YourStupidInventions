@@ -184,9 +184,9 @@ class themesVC: UITableViewController {
     
     // clicked a cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("a")
+        
         themeuuid.append(themeuuidArray[indexPath.row])
-        print(themeuuidArray[indexPath.row])
+        
         // present postIdeaVC
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
         self.navigationController?.pushViewController(postIdea, animated: true)

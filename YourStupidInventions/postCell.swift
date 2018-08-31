@@ -106,14 +106,17 @@ class postCell: UITableViewCell {
     
     @IBAction func likeBtn_clicked(_ sender: Any) {
         
-        // change background image
-        if likeBtn.titleLabel?.text != "like" {
-            likeBtn.setTitle("like", for: UIControlState.normal)
-            likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+        if isLoggedIn {
+            
+            // change background image
+            if likeBtn.titleLabel?.text != "like" {
+                likeBtn.setTitle("like", for: UIControlState.normal)
+                likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+            }
+            
+            // increment likeLbl
+            likeLbl.text = String(Int(likeLbl.text!)! + 1)
         }
-        
-        // increment likeLbl
-        likeLbl.text = String(Int(likeLbl.text!)! + 1)
     }
     
 }

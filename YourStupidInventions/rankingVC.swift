@@ -305,12 +305,19 @@ class rankingVC: UITableViewController {
     // like button clicked
     @IBAction func likeBtn_clicked(_ sender: Any) {
         
-        // get index of the button
-        let button = sender as! UIButton
-        let index = button.layer.value(forKey: "index") as! IndexPath
-        
-        // increment addLikeArray
-        self.addLikeArray[index.row] = self.addLikeArray[index.row] + 1
+        if isLoggedIn {
+            
+            // get index of the button
+            let button = sender as! UIButton
+            let index = button.layer.value(forKey: "index") as! IndexPath
+            
+            // increment addLikeArray
+            self.addLikeArray[index.row] = self.addLikeArray[index.row] + 1
+            
+        } else {
+            alert(title: "Please sign in", message: "Sign in from Home page to like this idea.")
+        }
+
     }
     
     
@@ -324,30 +331,42 @@ class rankingVC: UITableViewController {
     // postload func
     override func viewWillDisappear(_ animated: Bool) {
         
-        // save number of likeBtn taps to server
-        for index in 0 ..< addLikeArray.count {
-            if addLikeArray[index] != 0 {
-                
-                // update total likes in each post
-                let query = PFQuery(className: "posts")
-                query.whereKey("uuid", equalTo: uuidArray[index])
-                query.getFirstObjectInBackground { (object, error) in
-                    object?.incrementKey("likes", byAmount: self.addLikeArray[index] as NSNumber)
-                    object?.saveInBackground(block: { (success, error) in
-                        if error == nil {
-                            // add new like to likes table
-                            let object = PFObject(className: "likes")
-                            object["by"] = PFUser.current()?.username
-                            object["to"] = self.usernameArray[index]
-                            object["uuid"] = self.uuidArray[index]
-                            object["count"] = self.addLikeArray[index]
-                            object.saveInBackground()
-                        } else {
-                            print(error!.localizedDescription)
-                        }
-                    })
+        if isLoggedIn {
+            
+            // save number of likeBtn taps to server
+            for index in 0 ..< addLikeArray.count {
+                if addLikeArray[index] != 0 {
+                    
+                    // update total likes in each post
+                    let query = PFQuery(className: "posts")
+                    query.whereKey("uuid", equalTo: uuidArray[index])
+                    query.getFirstObjectInBackground { (object, error) in
+                        object?.incrementKey("likes", byAmount: self.addLikeArray[index] as NSNumber)
+                        object?.saveInBackground(block: { (success, error) in
+                            if error == nil {
+                                // add new like to likes table
+                                let object = PFObject(className: "likes")
+                                object["by"] = PFUser.current()?.username
+                                object["to"] = self.usernameArray[index]
+                                object["uuid"] = self.uuidArray[index]
+                                object["count"] = self.addLikeArray[index]
+                                object.saveInBackground()
+                            } else {
+                                print(error!.localizedDescription)
+                            }
+                        })
+                    }
                 }
             }
         }
+    }
+    
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
 }

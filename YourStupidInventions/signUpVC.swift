@@ -170,7 +170,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             if error == nil {
                 if count != 0 {
                     // alert message
-                    alert(title: "Error", message: "This username is taken by another user.")
+                    self.alert(title: "Error", message: "This username is taken by another user.")
                 }
             } else {
                 print(error!.localizedDescription)

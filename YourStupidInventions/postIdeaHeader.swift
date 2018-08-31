@@ -26,6 +26,10 @@ class postIdeaHeader: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // unable sendBtn if not yet logged in
+        if !isLoggedIn {
+            sendBtn.isEnabled = false
+        }
         
         // call alignment func
         alignment()

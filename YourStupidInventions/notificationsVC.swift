@@ -29,7 +29,7 @@ class notificationsVC: UITableViewController {
         navigationItem.title = "Notifications"
         
         // load posts if user has logged in
-        if UserDefaults.standard.string(forKey: "username") != nil {
+        if isLoggedIn {
             
             // request query
             let query = PFQuery(className: "news")
