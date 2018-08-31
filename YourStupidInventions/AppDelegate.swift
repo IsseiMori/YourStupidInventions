@@ -9,11 +9,13 @@
 import UIKit
 import Parse
 
+// global variable for maintain login status
+var isLoggedIn = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -73,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
             window?.rootViewController = myTabBar
+            isLoggedIn = true
         }
     }
 

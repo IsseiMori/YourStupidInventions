@@ -128,6 +128,8 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 UserDefaults.standard.removeObject(forKey: "username")
                 UserDefaults.standard.synchronize()
                 
+                isLoggedIn = false
+                
                 self.view.endEditing(true)
                 self.dismiss(animated: true, completion: nil)
             }
