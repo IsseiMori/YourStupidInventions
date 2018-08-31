@@ -174,11 +174,9 @@ class themesVC: UITableViewController {
             }
         })
         
-        
         // assign index
-        cell.postsBtn.layer.setValue(indexPath, forKey: "index")
-        cell.postsBtn.layer.setValue(themeuuidArray[indexPath.row], forKey: "themeuuid")
-        
+        cell.postIdeaBtn.layer.setValue(indexPath, forKey: "index")
+        cell.postIdeaBtn.layer.setValue(themeuuidArray[indexPath.row], forKey: "themeuuid")
         
         return cell
     }
@@ -186,9 +184,9 @@ class themesVC: UITableViewController {
     
     // clicked a cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        print("a")
         themeuuid.append(themeuuidArray[indexPath.row])
-        
+        print(themeuuidArray[indexPath.row])
         // present postIdeaVC
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
         self.navigationController?.pushViewController(postIdea, animated: true)
@@ -200,12 +198,14 @@ class themesVC: UITableViewController {
         
         // call the button
         let button = sender as! UIButton
+        print(button.layer.value(forKey: "themeuuid")!)
         
-        themeuuid.append(button.value(forKey: "themeuuid") as! String)
+        themeuuid.append(button.layer.value(forKey: "themeuuid") as! String)
         
         // present postIdeaVC
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
         self.navigationController?.pushViewController(postIdea, animated: true)
+        
     }
     
 }

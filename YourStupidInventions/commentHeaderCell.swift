@@ -30,7 +30,7 @@ class commentHeaderCell: UITableViewCell{
     // default
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+        
         let query = PFQuery(className: "posts")
         query.whereKey("uuid", equalTo: commentuuid.last!)
         query.getFirstObjectInBackground { (object, error) in
@@ -44,6 +44,7 @@ class commentHeaderCell: UITableViewCell{
                 
                 // place theme image
                 (object?.object(forKey: "theme") as! PFFile).getDataInBackground { (data, error) in
+                    
                     if error == nil {
                         self.themeImg.image = UIImage(data: data!)
                     } else {
@@ -152,6 +153,12 @@ class commentHeaderCell: UITableViewCell{
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
+        
+        likeBtn.setTitle("unlike", for: UIControlState.normal)
+        
+        // clear like button text color
+        likeBtn.setTitleColor(UIColor.clear, for: UIControlState.normal)
+        
         
     }
 

@@ -154,6 +154,8 @@ class rankingVC: UITableViewController {
                     query.addDescendingOrder("createdAt")
                 }
                 
+                self.processQuery(query: query)
+                
             }
         })
     }
@@ -162,7 +164,6 @@ class rankingVC: UITableViewController {
     // process query and
     func processQuery(query: PFQuery<PFObject>) {
 
-        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 

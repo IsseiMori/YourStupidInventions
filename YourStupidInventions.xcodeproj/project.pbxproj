@@ -43,6 +43,7 @@
 		850C2C14213882620095A3D7 /* notification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C13213882620095A3D7 /* notification@3x.png */; };
 		850C2C16213882820095A3D7 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C15213882810095A3D7 /* home@3x.png */; };
 		850C2C18213883FF0095A3D7 /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C17213883FE0095A3D7 /* setting@3x.png */; };
+		850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C19213926380095A3D7 /* resetPasswordVC.swift */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		850C2C13213882620095A3D7 /* notification@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification@3x.png"; sourceTree = "<group>"; };
 		850C2C15213882810095A3D7 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
 		850C2C17213883FE0095A3D7 /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
+		850C2C19213926380095A3D7 /* resetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordVC.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				850C2BE42137067F0095A3D7 /* notificationsVC.swift */,
 				850C2BE62137BF890095A3D7 /* guestVC.swift */,
 				850C2BE82137D74E0095A3D7 /* editVC.swift */,
+				850C2C19213926380095A3D7 /* resetPasswordVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				850C2B98213322410095A3D7 /* signUpVC.swift in Sources */,
 				850C2BCA2135008A0095A3D7 /* homeHeaderView.swift in Sources */,
 				850C2BE92137D74E0095A3D7 /* editVC.swift in Sources */,
+				850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */,
 				850C2BBA2133D3530095A3D7 /* commentVC.swift in Sources */,
 				850C2BB22133C0AB0095A3D7 /* tabbarVC.swift in Sources */,
 				850C2BDB21353A060095A3D7 /* themeCell.swift in Sources */,

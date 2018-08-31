@@ -28,6 +28,7 @@ class signInVC: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Sign In"
+        self.navigationItem.hidesBackButton = true
         
         // call alignment func
         alignment()
@@ -90,18 +91,6 @@ class signInVC: UIViewController {
                 self.alert(title: "Error", message: error!.localizedDescription)
             }
         }
-    }
-    
-    
-    // preload
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    
-    // postload
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = false
     }
     
     

@@ -22,6 +22,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     var refresher = UIRefreshControl()
     var placeholderLbl = UILabel()
     
+    // global variable
+    var likeLbl: UILabel!
+    
     // values for resting UI to default
     var tableViewHeight: CGFloat = 0
     var commentY: CGFloat = 0
@@ -35,6 +38,11 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     var usernameArray = [String]()
     var dateArray = [Date?]()
     
+    // header cell
+    var header: commentHeaderCell!
+    
+    // number of likeBtn tap
+    var didLike: Int = 0
     
     // page size
     var page: Int = 10
@@ -52,9 +60,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         self.navigationItem.title = "Comments"
 
         // present commentHeaderCell as header
-        let headerCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
-        let headerView: UIView = headerCell.contentView
-        tableView.tableHeaderView = headerView
+        self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
+        //let headerView: UIView = headerCell.contentView
+        tableView.tableHeaderView = header.contentView
         
         // receive show and hide keyboard notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -223,18 +231,6 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         commentY = commentTxt.frame.origin.y
     }
 
-    
-    // preload func
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    
-    // post laod func
-    override func viewWillDisappear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     
     // load comments
     @objc func loadComments() {
@@ -474,4 +470,63 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         }
     }
     
+    
+    // clicked like button
+    // can't reload only header so keep it global variable and resubstitute when updated
+    @IBAction func likeBtn_clicked(_ sender: Any) {
+        // change background image
+        if header.likeBtn.titleLabel?.text != "like" {
+            header.likeBtn.setTitle("like", for: UIControlState.normal)
+            header.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+        }
+        
+        // increment likeLbl
+        header.likeLbl.text = String(Int(header.likeLbl.text!)! + 1)
+        
+        // increment didLike
+        didLike = didLike + 1
+        
+        // present updated header
+        tableView.tableHeaderView = header.contentView
+    }
+    
+    
+    // preload func
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        
+        // reset like count
+        didLike = 0
+    }
+    
+    
+    // post laod func
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        
+        // save number of likeBtn taps to server
+        if didLike != 0 {
+            
+            // update total likes in each post
+            let query = PFQuery(className: "posts")
+            query.whereKey("uuid", equalTo: commentuuid.last!)
+            query.getFirstObjectInBackground { (object, error) in
+                object?.incrementKey("likes", byAmount: self.didLike as NSNumber)
+                object?.saveInBackground(block: { (success, error) in
+                    if error == nil {
+                        // add new like to likes table
+                        let object = PFObject(className: "likes")
+                        object["by"] = PFUser.current()?.username
+                        object["to"] = commentowner.last!
+                        object["uuid"] = commentuuid.last!
+                        object["count"] = self.didLike
+                        object.saveInBackground()
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                })
+            }
+        }
+    }
+
 }
