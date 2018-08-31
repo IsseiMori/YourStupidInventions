@@ -42,6 +42,7 @@
 		850C2C122138820E0095A3D7 /* idea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C112138820D0095A3D7 /* idea@3x.png */; };
 		850C2C14213882620095A3D7 /* notification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C13213882620095A3D7 /* notification@3x.png */; };
 		850C2C16213882820095A3D7 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C15213882810095A3D7 /* home@3x.png */; };
+		850C2C18213883FF0095A3D7 /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C17213883FE0095A3D7 /* setting@3x.png */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -97,6 +98,7 @@
 		850C2C112138820D0095A3D7 /* idea@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idea@3x.png"; sourceTree = "<group>"; };
 		850C2C13213882620095A3D7 /* notification@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification@3x.png"; sourceTree = "<group>"; };
 		850C2C15213882810095A3D7 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
+		850C2C17213883FE0095A3D7 /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		850C2BA921334A9F0095A3D7 /* button items */ = {
 			isa = PBXGroup;
 			children = (
+				850C2C17213883FE0095A3D7 /* setting@3x.png */,
 				850C2BD2213514190095A3D7 /* back.png */,
 				850C2BD1213514180095A3D7 /* back@2x.png */,
 				850C2BD0213514180095A3D7 /* back@3x.png */,
@@ -317,6 +320,7 @@
 				850C2C0E2138818E0095A3D7 /* ranking@3x.png in Resources */,
 				850C2BD5213514190095A3D7 /* back.png in Resources */,
 				85C957AD213206D600AEFD2E /* LaunchScreen.storyboard in Resources */,
+				850C2C18213883FF0095A3D7 /* setting@3x.png in Resources */,
 				850C2C16213882820095A3D7 /* home@3x.png in Resources */,
 				850C2BA521334A7F0095A3D7 /* unlike.png in Resources */,
 				850C2BA821334A7F0095A3D7 /* more.png in Resources */,

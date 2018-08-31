@@ -177,6 +177,7 @@ class themesVC: UITableViewController {
         
         // assign index
         cell.postsBtn.layer.setValue(indexPath, forKey: "index")
+        cell.postsBtn.layer.setValue(themeuuidArray[indexPath.row], forKey: "themeuuid")
         
         
         return cell
@@ -193,5 +194,18 @@ class themesVC: UITableViewController {
         self.navigationController?.pushViewController(postIdea, animated: true)
     }
 
-
+    
+    // clicked post idea button
+    @IBAction func postIdeaBtn_clicked(_ sender: Any) {
+        
+        // call the button
+        let button = sender as! UIButton
+        
+        themeuuid.append(button.value(forKey: "themeuuid") as! String)
+        
+        // present postIdeaVC
+        let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
+        self.navigationController?.pushViewController(postIdea, animated: true)
+    }
+    
 }

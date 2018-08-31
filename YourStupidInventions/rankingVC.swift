@@ -25,6 +25,7 @@ class rankingVC: UITableViewController {
     var fullnameArray = [String]()
     var dateArray = [Date?]()
     var likesArray = [Int]()
+    var addLikeArray = [Int]()
     
     // page size
     var page: Int = 5
@@ -57,10 +58,8 @@ class rankingVC: UITableViewController {
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
-        
         // receive post cell liked notification to update tableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
-        
         
         // call load posts func
         loadPosts()
@@ -71,9 +70,7 @@ class rankingVC: UITableViewController {
     // refreshing func after like to update tableView
     @objc func refresh() {
         self.tableView.reloadData()
-        
-        // stop refresh animation
-        refresher.endRefreshing()
+        print("reload")
     }
 
     
@@ -92,6 +89,7 @@ class rankingVC: UITableViewController {
         self.fullnameArray.removeAll(keepingCapacity: false)
         self.dateArray.removeAll(keepingCapacity: false)
         self.likesArray.removeAll(keepingCapacity: false)
+        self.addLikeArray.removeAll(keepingCapacity: false)
     
         let query = PFQuery(className: "posts")
         query.limit = self.page
@@ -156,8 +154,6 @@ class rankingVC: UITableViewController {
                     query.addDescendingOrder("createdAt")
                 }
                 
-                self.processQuery(query: query)
-                
             }
         })
     }
@@ -165,6 +161,8 @@ class rankingVC: UITableViewController {
     
     // process query and
     func processQuery(query: PFQuery<PFObject>) {
+
+        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
@@ -178,6 +176,8 @@ class rankingVC: UITableViewController {
                     self.fullnameArray.append(object.object(forKey: "fullname") as! String)
                     self.dateArray.append(object.createdAt!)
                     self.likesArray.append(object.value(forKey: "likes") as! Int)
+                    self.addLikeArray.append(0)
+                    
                 }
                 
                 // reload tableView and end refresh animation
@@ -193,6 +193,8 @@ class rankingVC: UITableViewController {
         }
     }
     
+    
+    
     // number of cells
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.uuidArray.count
@@ -201,7 +203,7 @@ class rankingVC: UITableViewController {
     
     // cell config
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! postCell
     
@@ -211,7 +213,7 @@ class rankingVC: UITableViewController {
         // connect objects with data from arrays
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
         cell.hashtagsLbl.text = self.hashtagsArray[indexPath.row]
-        cell.likeLbl.text = String(self.likesArray[indexPath.row])
+        cell.likeLbl.text = String(self.likesArray[indexPath.row] + self.addLikeArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
         cell.uuidLbl.text = self.uuidArray[indexPath.row]
         
@@ -250,28 +252,16 @@ class rankingVC: UITableViewController {
             cell.dateLbl.text = "\(String(describing: difference.weekOfMonth!))w."
         }
         
-        // change like button color depending on whether user liked or not if user loged in
-        if UserDefaults.standard.string(forKey: "username") != nil {
-            let didLike = PFQuery(className: "likes")
-            didLike.whereKey("by", equalTo: PFUser.current()!.username!)
-            didLike.whereKey("uuid", equalTo: cell.uuidLbl.text!)
-            didLike.countObjectsInBackground { (count, error) in
-                // if no likes are found, else found likes
-                if count == 0 {
-                    cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
-                    cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
-                } else {
-                    cell.likeBtn.setTitle("like", for: UIControlState.normal)
-                    cell.likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
-                }
-            }
+        // set likeBtn to unlike
+         if cell.likeBtn.titleLabel?.text != "like" {
+            cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
+            cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
         }
-        
         
         // assign index
         cell.usernameBtn.layer.setValue(indexPath, forKey: "index")
+        cell.likeBtn.layer.setValue(indexPath, forKey: "index")
         cell.likeLbl.layer.setValue(cell.likeLbl.text!, forKey: "likes")
-        
         
         
         return cell
@@ -307,6 +297,56 @@ class rankingVC: UITableViewController {
             guestname.append((button.titleLabel?.text)!)
             let guest = self.storyboard?.instantiateViewController(withIdentifier: "guestVC") as! guestVC
             self.navigationController?.pushViewController(guest, animated: true)
+        }
+    }
+    
+    
+    // like button clicked
+    @IBAction func likeBtn_clicked(_ sender: Any) {
+        
+        // get index of the button
+        let button = sender as! UIButton
+        let index = button.layer.value(forKey: "index") as! IndexPath
+        
+        // increment addLikeArray
+        self.addLikeArray[index.row] = self.addLikeArray[index.row] + 1
+    }
+    
+    
+    // preload func
+    override func viewWillAppear(_ animated: Bool) {
+        // reset addLikeArray to 0
+        addLikeArray = Array(repeatElement(0, count: uuidArray.count))
+    }
+    
+    
+    // postload func
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        // save number of likeBtn taps to server
+        for index in 0 ..< addLikeArray.count {
+            if addLikeArray[index] != 0 {
+                
+                // update total likes in each post
+                let query = PFQuery(className: "posts")
+                query.whereKey("uuid", equalTo: uuidArray[index])
+                query.getFirstObjectInBackground { (object, error) in
+                    object?.incrementKey("likes", byAmount: self.addLikeArray[index] as NSNumber)
+                    object?.saveInBackground(block: { (success, error) in
+                        if error == nil {
+                            // add new like to likes table
+                            let object = PFObject(className: "likes")
+                            object["by"] = PFUser.current()?.username
+                            object["to"] = self.usernameArray[index]
+                            object["uuid"] = self.uuidArray[index]
+                            object["count"] = self.addLikeArray[index]
+                            object.saveInBackground()
+                        } else {
+                            print(error!.localizedDescription)
+                        }
+                    })
+                }
+            }
         }
     }
 }

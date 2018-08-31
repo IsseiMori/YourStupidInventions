@@ -92,7 +92,8 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="likeBtn_clicked:" destination="I3Y-WK-BAc" eventType="touchUpInside" id="vGn-ZF-Pca"/>
+                                                <action selector="likeBtn_clicked:" destination="ogW-92-BN7" eventType="touchUpInside" id="Nrz-xw-dtc"/>
+                                                <action selector="likeBtn_clicked:" destination="I3Y-WK-BAc" eventType="touchUpInside" id="Zbb-ml-et2"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fer-Jh-SsP">
@@ -527,7 +528,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="fS0-RT-Io6">
-                        <barButtonItem key="rightBarButtonItem" title="Setting" id="hJ3-yI-gvN">
+                        <barButtonItem key="rightBarButtonItem" image="setting.png" id="hJ3-yI-gvN">
                             <connections>
                                 <segue destination="VB3-8e-P74" kind="show" id="EHS-qR-oh2"/>
                             </connections>
@@ -542,7 +543,7 @@
         <scene sceneID="4EL-jv-JLp">
             <objects>
                 <tableViewController storyboardIdentifier="themesVC" id="NGh-9N-GCt" customClass="themesVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bhu-vy-VCG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bhu-vy-VCG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -597,6 +598,9 @@
                                             <state key="normal" title="Post your idea">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="postIdeaBtn_clicked:" destination="NGh-9N-GCt" eventType="touchUpInside" id="Gbm-8e-Kkq"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -1253,6 +1257,7 @@
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
         <image name="ranking.png" width="30" height="30"/>
+        <image name="setting.png" width="30" height="30"/>
         <image name="unlike.png" width="270" height="270"/>
     </resources>
     <inferredMetricsTieBreakers>
