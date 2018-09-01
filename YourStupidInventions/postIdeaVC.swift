@@ -31,6 +31,13 @@ class postIdeaVC: UITableViewController {
     
     // page size
     var page: Int = 10
+    
+    // # of posts to load at each loadMore()
+    var pageLimit: Int = 5
+    
+    // loading status to avoid keep loading
+    var isLoading = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,21 +118,82 @@ class postIdeaVC: UITableViewController {
     // load posts
     func loadPosts() {
         
+        // set loading status to processing
+        isLoading = true
+        
+        // clean up
+        self.uuidArray.removeAll(keepingCapacity: false)
+        self.themeArray.removeAll(keepingCapacity: false)
+        self.ideaArray.removeAll(keepingCapacity: false)
+        self.hashtagsArray.removeAll(keepingCapacity: false)
+        self.usernameArray.removeAll(keepingCapacity: false)
+        self.fullnameArray.removeAll(keepingCapacity: false)
+        self.dateArray.removeAll(keepingCapacity: false)
+        self.likesArray.removeAll(keepingCapacity: false)
+        
         let query = PFQuery(className: "posts")
         query.limit = page
+        query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.addDescendingOrder("likes")
+        
+        processQuery(query: query)
+    }
+    
+    
+    // scrolled down
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffsetY = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
+        let distanceToBottom = maximumOffset - currentOffsetY
+        
+        if distanceToBottom < 50 {
+            // don't load more if still loading
+            if !isLoading {
+                loadMore()
+            }
+        }
+    }
+    
+    
+    // pagination
+    @objc func loadMore() {
+        
+        // set loading status to processing
+        isLoading = true
+        
+        // count total comments to enable or disable refresher
+        let countQuery = PFQuery(className: "posts")
+        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
+            
+            // self refresher
+            self.refresher.endRefreshing()
+            
+            // if posts on server are more than shown
+            if self.uuidArray.count < count {
+                
+                let query = PFQuery(className: "posts")
+                
+                // load only the next page size posts
+                query.skip = self.page
+                query.whereKey("themeuuid", equalTo: themeuuid.last!)
+                query.addDescendingOrder("likes")
+                query.limit = self.pageLimit
+                
+                // increase page size
+                self.page = self.page + self.pageLimit
+                
+                self.processQuery(query: query)
+                
+            }
+        })
+    }
+    
+    // process query and
+    func processQuery(query: PFQuery<PFObject>) {
+        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
-                // clean up
-                self.uuidArray.removeAll(keepingCapacity: false)
-                self.themeArray.removeAll(keepingCapacity: false)
-                self.ideaArray.removeAll(keepingCapacity: false)
-                self.hashtagsArray.removeAll(keepingCapacity: false)
-                self.usernameArray.removeAll(keepingCapacity: false)
-                self.fullnameArray.removeAll(keepingCapacity: false)
-                self.dateArray.removeAll(keepingCapacity: false)
-                self.likesArray.removeAll(keepingCapacity: false)
                 
                 // find related objects
                 for object in objects! {
@@ -143,6 +211,8 @@ class postIdeaVC: UITableViewController {
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
                 
+                // set loading status to finished
+                self.isLoading = false
                 
             } else {
                 print(error!.localizedDescription)
