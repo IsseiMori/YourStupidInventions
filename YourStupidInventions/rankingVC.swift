@@ -92,7 +92,7 @@ class rankingVC: UITableViewController {
         self.addLikeArray.removeAll(keepingCapacity: false)
     
         let query = PFQuery(className: "posts")
-        query.limit = self.page
+        query.limit = self.pageLimit
         
         // if tab is ranking(0) sort by likes
         // if tab is new(1) sort by time

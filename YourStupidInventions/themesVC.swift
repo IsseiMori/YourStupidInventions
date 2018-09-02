@@ -62,7 +62,7 @@ class themesVC: UITableViewController {
         self.hashtagsArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "themes")
-        query.limit = page
+        query.limit = pageLimit
         query.addDescendingOrder("createdAt")
         processQuery(query: query)
 

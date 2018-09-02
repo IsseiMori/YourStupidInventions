@@ -28,6 +28,7 @@ class postIdeaVC: UITableViewController {
     var fullnameArray = [String]()
     var dateArray = [Date?]()
     var likesArray = [Int]()
+    var addLikeArray = [Int]()
     
     // page size
     var page: Int = 10
@@ -130,9 +131,10 @@ class postIdeaVC: UITableViewController {
         self.fullnameArray.removeAll(keepingCapacity: false)
         self.dateArray.removeAll(keepingCapacity: false)
         self.likesArray.removeAll(keepingCapacity: false)
+        self.addLikeArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "posts")
-        query.limit = page
+        query.limit = pageLimit
         query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.addDescendingOrder("likes")
         
@@ -205,6 +207,7 @@ class postIdeaVC: UITableViewController {
                     self.fullnameArray.append(object.object(forKey: "fullname") as! String)
                     self.dateArray.append(object.createdAt!)
                     self.likesArray.append(object.value(forKey: "likes") as! Int)
+                    self.addLikeArray.append(0)
                 }
                 
                 // reload tableView and end refresh animation
@@ -280,6 +283,7 @@ class postIdeaVC: UITableViewController {
         
         // assign index
         cell.usernameBtn.layer.setValue(indexPath, forKey: "index")
+        cell.likeBtn.layer.setValue(indexPath, forKey: "index")
         
         
         
@@ -291,8 +295,56 @@ class postIdeaVC: UITableViewController {
     @IBAction func likeBtn_clicked(_ sender: Any) {
         if isLoggedIn {
             
+            // get index of the button
+            let button = sender as! UIButton
+            let index = button.layer.value(forKey: "index") as! IndexPath
+            
+            // increment addLikeArray
+            self.addLikeArray[index.row] = self.addLikeArray[index.row] + 1
+            
         } else {
             alert(title: "Please sign in", message: "Sign in from Home page to like this idea.")
+        }
+    }
+    
+    
+    // preload func
+    override func viewWillAppear(_ animated: Bool) {
+        // reset addLikeArray to 0
+        addLikeArray = Array(repeatElement(0, count: uuidArray.count))
+    }
+    
+    
+    // postload func
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        if isLoggedIn {
+            
+            // save number of likeBtn taps to server
+            for index in 0 ..< addLikeArray.count {
+                if addLikeArray[index] != 0 {
+                    
+                    // update total likes in each post
+                    let query = PFQuery(className: "posts")
+                    query.whereKey("uuid", equalTo: uuidArray[index])
+                    query.getFirstObjectInBackground { (object, error) in
+                        object?.incrementKey("likes", byAmount: self.addLikeArray[index] as NSNumber)
+                        object?.saveInBackground(block: { (success, error) in
+                            if error == nil {
+                                // add new like to likes table
+                                let object = PFObject(className: "likes")
+                                object["by"] = PFUser.current()?.username
+                                object["to"] = self.usernameArray[index]
+                                object["uuid"] = self.uuidArray[index]
+                                object["count"] = self.addLikeArray[index]
+                                object.saveInBackground()
+                            } else {
+                                print(error!.localizedDescription)
+                            }
+                        })
+                    }
+                }
+            }
         }
     }
     

@@ -261,7 +261,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // get comments to this post
         let query = PFQuery(className: "comments")
         query.whereKey("to", equalTo: commentuuid.last!)
-        query.limit = self.page
+        query.limit = self.pageLimit
         query.addAscendingOrder("createdAt")
         processQuery(query: query)
     }

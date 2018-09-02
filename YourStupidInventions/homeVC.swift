@@ -105,7 +105,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         let query = PFQuery(className: "posts")
         query.whereKey("username", equalTo: PFUser.current()!.username!)
-        query.limit = page
+        query.limit = pageLimit
         query.addDescendingOrder("createdAt")
         processQuery(query: query)
         
