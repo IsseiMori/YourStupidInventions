@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251CC09772C2FEBE5353F648 /* Pods_YourStupidInventions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17110D20E6DDDB48CAB574F9 /* Pods_YourStupidInventions.framework */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17110D20E6DDDB48CAB574F9 /* Pods_YourStupidInventions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourStupidInventions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 		85C957C721320C3700AEFD2E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		85F7443721321C540097638F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		85F7443821321C550097638F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		B9975DACAF43956E9A34CD83 /* Pods-YourStupidInventions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourStupidInventions.release.xcconfig"; path = "Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions.release.xcconfig"; sourceTree = "<group>"; };
+		F1BF93EDFF89707C64EA1A9F /* Pods-YourStupidInventions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourStupidInventions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 				85C957B821320B5400AEFD2E /* libz.tbd in Frameworks */,
 				85F7443A21321C560097638F /* Parse.framework in Frameworks */,
 				85C957B621320B4500AEFD2E /* libsqlite3.tbd in Frameworks */,
+				251CC09772C2FEBE5353F648 /* Pods_YourStupidInventions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +191,7 @@
 				85C957A1213206D000AEFD2E /* YourStupidInventions */,
 				85C957A0213206D000AEFD2E /* Products */,
 				85C957B421320B4500AEFD2E /* Frameworks */,
+				EC57EACB3E9BA09656E0A96C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,8 +256,18 @@
 				85C957B921320BFD00AEFD2E /* SystemConfiguration.framework */,
 				85C957B721320B5400AEFD2E /* libz.tbd */,
 				85C957B521320B4500AEFD2E /* libsqlite3.tbd */,
+				17110D20E6DDDB48CAB574F9 /* Pods_YourStupidInventions.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC57EACB3E9BA09656E0A96C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F1BF93EDFF89707C64EA1A9F /* Pods-YourStupidInventions.debug.xcconfig */,
+				B9975DACAF43956E9A34CD83 /* Pods-YourStupidInventions.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +277,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85C957B1213206D600AEFD2E /* Build configuration list for PBXNativeTarget "YourStupidInventions" */;
 			buildPhases = (
+				3701C33A062485AEA8D49EBE /* [CP] Check Pods Manifest.lock */,
 				85C9579B213206D000AEFD2E /* Sources */,
 				85C9579C213206D000AEFD2E /* Frameworks */,
 				85C9579D213206D000AEFD2E /* Resources */,
+				F1F595C311B21CF3439506E6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -335,6 +353,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3701C33A062485AEA8D49EBE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YourStupidInventions-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1F595C311B21CF3439506E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85C9579B213206D000AEFD2E /* Sources */ = {
@@ -504,6 +569,7 @@
 		};
 		85C957B2213206D600AEFD2E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1BF93EDFF89707C64EA1A9F /* Pods-YourStupidInventions.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -526,6 +592,7 @@
 		};
 		85C957B3213206D600AEFD2E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9975DACAF43956E9A34CD83 /* Pods-YourStupidInventions.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
