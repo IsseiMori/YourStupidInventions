@@ -13,6 +13,8 @@ import XLPagerTabStrip
 // ranking and new feeds share this class
 
 class rankingVC: UITableViewController, IndicatorInfoProvider {
+
+    
     
     // UI objects
     var refresher = UIRefreshControl()
@@ -39,19 +41,17 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var isLoading = false
     
     // Title for XLPagerTabStrip
-    var itemInfo: IndicatorInfo!
+    var itemInfo: IndicatorInfo = "-"
+    
+    // set up in menuVC
+    var sortBy: String = ""
+    var filterBy: String = ""
     
     // default
     override func viewDidLoad() {
 
         super.viewDidLoad()
-
-        // title at the top
-        if tabBarController?.selectedIndex == 0 {
-            self.navigationItem.title = "Top Ideas"
-        } else {
-            self.navigationItem.title = "New Ideas"
-        }
+        
         
         // automatic row height - dynamic cell
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -99,13 +99,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         let query = PFQuery(className: "posts")
         query.limit = self.pageLimit
         
-        // if tab is ranking(0) sort by likes
-        // if tab is new(1) sort by time
-        if self.tabBarController?.selectedIndex == 0 {
-            query.addDescendingOrder("likes")
-        } else {
-            query.addDescendingOrder("createdAt")
-        }
+        // sort by likes or time
+        query.addDescendingOrder(self.sortBy)
         
         self.processQuery(query: query)
     }
@@ -151,13 +146,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 // increase page size
                 self.page = self.page + self.pageLimit
                 
-                // if tab is ranking(0) sort by likes
-                // if tab is new(1) sort by time
-                if self.tabBarController?.selectedIndex == 0 {
-                    query.addDescendingOrder("likes")
-                } else {
-                    query.addDescendingOrder("createdAt")
-                }
+                // sort by likes or time
+                query.addDescendingOrder(self.sortBy)
                 
                 self.processQuery(query: query)
                 
@@ -328,6 +318,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
+
         // reset addLikeArray to 0
         addLikeArray = Array(repeatElement(0, count: uuidArray.count))
     }

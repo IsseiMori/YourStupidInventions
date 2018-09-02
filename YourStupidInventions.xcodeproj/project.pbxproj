@@ -45,8 +45,8 @@
 		850C2C16213882820095A3D7 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C15213882810095A3D7 /* home@3x.png */; };
 		850C2C18213883FF0095A3D7 /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C17213883FE0095A3D7 /* setting@3x.png */; };
 		850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C19213926380095A3D7 /* resetPasswordVC.swift */; };
-		850C2C1D213C4CEC0095A3D7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C1C213C4CEC0095A3D7 /* MainViewController.swift */; };
-		850C2C1F213C6BAE0095A3D7 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C1E213C6BAE0095A3D7 /* TopViewController.swift */; };
+		850C2C1D213C4CEC0095A3D7 /* newMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */; };
+		850C2C1F213C6BAE0095A3D7 /* topMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -105,8 +105,8 @@
 		850C2C15213882810095A3D7 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
 		850C2C17213883FE0095A3D7 /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
 		850C2C19213926380095A3D7 /* resetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordVC.swift; sourceTree = "<group>"; };
-		850C2C1C213C4CEC0095A3D7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		850C2C1E213C6BAE0095A3D7 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newMenuViewController.swift; sourceTree = "<group>"; };
+		850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = topMenuViewController.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 				850C2BE62137BF890095A3D7 /* guestVC.swift */,
 				850C2BE82137D74E0095A3D7 /* editVC.swift */,
 				850C2C19213926380095A3D7 /* resetPasswordVC.swift */,
-				850C2C1C213C4CEC0095A3D7 /* MainViewController.swift */,
-				850C2C1E213C6BAE0095A3D7 /* TopViewController.swift */,
+				850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */,
+				850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				850C2BCC213507FA0095A3D7 /* homePostCell.swift in Sources */,
-				850C2C1D213C4CEC0095A3D7 /* MainViewController.swift in Sources */,
+				850C2C1D213C4CEC0095A3D7 /* newMenuViewController.swift in Sources */,
 				850C2BE72137BF890095A3D7 /* guestVC.swift in Sources */,
 				850C2BDF2135C3FD0095A3D7 /* postIdeaHeader.swift in Sources */,
 				85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */,
@@ -416,7 +416,7 @@
 				850C2BE32137063F0095A3D7 /* notificationsCell.swift in Sources */,
 				850C2BAB21334C840095A3D7 /* rankingVC.swift in Sources */,
 				850C2BB42133C0CA0095A3D7 /* navVC.swift in Sources */,
-				850C2C1F213C6BAE0095A3D7 /* TopViewController.swift in Sources */,
+				850C2C1F213C6BAE0095A3D7 /* topMenuViewController.swift in Sources */,
 				850C2BBC2133D3660095A3D7 /* commentCell.swift in Sources */,
 				850C2B98213322410095A3D7 /* signUpVC.swift in Sources */,
 				850C2BCA2135008A0095A3D7 /* homeHeaderView.swift in Sources */,

@@ -866,10 +866,10 @@
             </objects>
             <point key="canvasLocation" x="-28" y="779"/>
         </scene>
-        <!--Main View Controller-->
+        <!--New Menu View Controller-->
         <scene sceneID="Ld3-uV-0D2">
             <objects>
-                <viewController storyboardIdentifier="Main" id="l18-cd-7oR" customClass="MainViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="l18-cd-7oR" customClass="newMenuViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aD5-1Q-N4U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1348,10 +1348,11 @@
             </objects>
             <point key="canvasLocation" x="3166" y="1846"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Top Menu View Controller-->
         <scene sceneID="Vaf-23-WQD">
             <objects>
-                <viewController storyboardIdentifier="Top" id="v9O-r0-t8y" customClass="MainViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHb-oS-xMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="v9O-r0-t8y" customClass="topMenuViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8oW-GC-RjV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1382,7 +1383,6 @@
                         <outlet property="containerView" destination="0ky-iz-FcY" id="ZPK-49-TAb"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YHb-oS-xMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="911" y="63"/>
         </scene>
