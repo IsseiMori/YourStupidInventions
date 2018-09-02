@@ -34,7 +34,6 @@
         <!--RankingVC-->
         <scene sceneID="9CZ-ha-yaB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8cT-GV-1Xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="rankingVC" id="ogW-92-BN7" customClass="rankingVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LIu-6a-hfe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -134,8 +133,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ZjI-mU-9ug"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8cT-GV-1Xq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="911.20000000000005" y="62.518740629685162"/>
+            <point key="canvasLocation" x="1593" y="63"/>
         </scene>
         <!--Reset PasswordVC-->
         <scene sceneID="2Yr-WJ-VzT">
@@ -448,7 +448,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ogW-92-BN7" kind="relationship" relationship="rootViewController" id="guj-sW-Ha6"/>
+                        <segue destination="v9O-r0-t8y" kind="relationship" relationship="rootViewController" id="k2K-VW-1jh"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRk-d5-HoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -845,7 +845,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xwk-Wq-1dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1742" y="63"/>
+            <point key="canvasLocation" x="1694" y="779"/>
         </scene>
         <!--New-->
         <scene sceneID="k6X-4j-tMb">
@@ -859,12 +859,50 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ogW-92-BN7" kind="relationship" relationship="rootViewController" id="MGX-39-dhw"/>
+                        <segue destination="l18-cd-7oR" kind="relationship" relationship="rootViewController" id="uB6-ld-kkC"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FFq-RI-b6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-28" y="779"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="Ld3-uV-0D2">
+            <objects>
+                <viewController storyboardIdentifier="Main" id="l18-cd-7oR" customClass="MainViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aD5-1Q-N4U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ht-TY-evs">
+                                <rect key="frame" x="0.0" y="43" width="375" height="575"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bro-Q0-QYy" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NA0-Qd-ZZP">
+                                    <size key="itemSize" width="79" height="42"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TXl-kY-lK5"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yBS-HT-6ag"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="bro-Q0-QYy" id="uAH-YB-fvO"/>
+                        <outlet property="containerView" destination="5ht-TY-evs" id="9C5-O2-i7M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R1G-Aa-moh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909.60000000000002" y="778.56071964017997"/>
         </scene>
         <!--Home-->
         <scene sceneID="Lb5-x4-RoF">
@@ -1310,6 +1348,44 @@
             </objects>
             <point key="canvasLocation" x="3166" y="1846"/>
         </scene>
+        <!--Main View Controller-->
+        <scene sceneID="Vaf-23-WQD">
+            <objects>
+                <viewController storyboardIdentifier="Top" id="v9O-r0-t8y" customClass="MainViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8oW-GC-RjV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ky-iz-FcY">
+                                <rect key="frame" x="0.0" y="43" width="375" height="575"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ft6-j6-2UY" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YSM-bR-Fft">
+                                    <size key="itemSize" width="79" height="42"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="w82-cK-ogW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Mk-Ud-b1W"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="ft6-j6-2UY" id="cHr-Jk-021"/>
+                        <outlet property="containerView" destination="0ky-iz-FcY" id="ZPK-49-TAb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHb-oS-xMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911" y="63"/>
+        </scene>
     </scenes>
     <resources>
         <image name="home.png" width="30" height="30"/>
@@ -1323,7 +1399,4 @@
         <image name="setting.png" width="30" height="30"/>
         <image name="unlike.png" width="270" height="270"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="MGX-39-dhw"/>
-    </inferredMetricsTieBreakers>
 </document>

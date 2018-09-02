@@ -8,9 +8,10 @@
 
 import UIKit
 import Parse
+import XLPagerTabStrip
 
 
-class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, IndicatorInfoProvider {
     
     // refresher variable
     var refresher = UIRefreshControl()
@@ -294,6 +295,11 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.navigationController?.pushViewController(comment, animated: true)
     }
 
+    var itemInfo: IndicatorInfo = "First"
+
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
+    }
     
 
 }

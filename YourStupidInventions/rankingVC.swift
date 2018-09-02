@@ -8,10 +8,11 @@
 
 import UIKit
 import Parse
+import XLPagerTabStrip
 
 // ranking and new feeds share this class
 
-class rankingVC: UITableViewController {
+class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // UI objects
     var refresher = UIRefreshControl()
@@ -31,14 +32,18 @@ class rankingVC: UITableViewController {
     var page: Int = 5
     
     // # of posts to load at each loadMore()
-    var pageLimit: Int = 5
+    var pageLimit: Int = 2
     
     
     // loading status to avoid keep loading
     var isLoading = false
     
+    // Title for XLPagerTabStrip
+    var itemInfo: IndicatorInfo!
+    
     // default
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         // title at the top
@@ -368,5 +373,10 @@ class rankingVC: UITableViewController {
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+    
+    // required for XLPagerTabStrip
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
     }
 }
