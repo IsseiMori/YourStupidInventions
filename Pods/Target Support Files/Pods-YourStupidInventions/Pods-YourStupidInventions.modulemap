@@ -1,0 +1,6 @@
+framework module Pods_YourStupidInventions {
+  umbrella header "Pods-YourStupidInventions-umbrella.h"
+
+  export *
+  module * { export * }
+}
