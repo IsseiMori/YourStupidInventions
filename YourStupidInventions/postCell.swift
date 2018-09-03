@@ -19,6 +19,7 @@ class postCell: UITableViewCell {
     @IBOutlet weak var likeLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var uuidLbl: UILabel!
+    @IBOutlet weak var titleLbl: UILabel!
     
     // buttons
     @IBOutlet weak var likeBtn: UIButton!
@@ -36,7 +37,8 @@ class postCell: UITableViewCell {
         
         let width = UIScreen.main.bounds.width
         
-        themeImg.translatesAutoresizingMaskIntoConstraints = false
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
+        // themeImg.translatesAutoresizingMaskIntoConstraints = false
         ideaLbl.translatesAutoresizingMaskIntoConstraints = false
         likeLbl.translatesAutoresizingMaskIntoConstraints = false
         dateLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -46,12 +48,19 @@ class postCell: UITableViewCell {
         bgView.translatesAutoresizingMaskIntoConstraints = false
         
         let themeWidth = width - 40
-        let themeHeight = themeWidth / 16 * 9
+        let themeHeight = themeWidth / themeImg.frame.size.width * themeImg.frame.size.height
+        print("constrain")
         
+        // themeImg.frame.size.width = themeWidth
+        themeImg.contentMode = UIViewContentMode.scaleAspectFit
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
+            withVisualFormat: "H:|-0-[theme(\(themeWidth))]-0-|",
+            options: [], metrics: nil, views: ["theme": themeImg]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-20-[title]-10-[theme]-10-[idea]-5-[like(30)]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "V:[idea]-10-[likes]",
@@ -64,6 +73,14 @@ class postCell: UITableViewCell {
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "V:[idea]-12-[date]",
             options: [], metrics: nil, views: ["idea": ideaLbl, "date": dateLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[title]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl]))
+        
+        /* self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[theme]-15-|",
+            options: [], metrics: nil, views: ["theme": themeImg])) */
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-15-[theme]-15-|",
@@ -93,7 +110,7 @@ class postCell: UITableViewCell {
         bgView.layer.zPosition = -1
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
-        bgView.backgroundColor = .white
+        bgView.backgroundColor = UIColor.darkGray
         
     }
     

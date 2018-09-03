@@ -20,6 +20,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var refresher = UIRefreshControl()
     
     // arrays to hold data from server
+    var titleArray = [String]()
     var uuidArray = [String]()
     var themeArray = [PFFile]()
     var ideaArray = [String]()
@@ -85,6 +86,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         isLoading = true
         
         // clean up
+        self.titleArray.removeAll(keepingCapacity: false)
         self.uuidArray.removeAll(keepingCapacity: false)
         self.themeArray.removeAll(keepingCapacity: false)
         self.ideaArray.removeAll(keepingCapacity: false)
@@ -162,6 +164,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 
                 // find related objects
                 for object in objects! {
+                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
                     self.uuidArray.append(object.object(forKey: "uuid") as! String)
                     self.themeArray.append(object.object(forKey: "theme") as! PFFile)
                     self.ideaArray.append(object.object(forKey: "idea") as! String)
@@ -204,6 +207,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         cell.backgroundColor = UIColor.clear
         
         // connect objects with data from arrays
+        cell.titleLbl.text = self.titleArray[indexPath.row]
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
         cell.likeLbl.text = String(self.likesArray[indexPath.row] + self.addLikeArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
@@ -213,6 +217,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         self.themeArray[indexPath.row].getDataInBackground { (data, error) in
             if error == nil {
                 cell.themeImg.image = UIImage(data: data!)
+                print("img placed")
             } else {
                 print(error!.localizedDescription)
             }

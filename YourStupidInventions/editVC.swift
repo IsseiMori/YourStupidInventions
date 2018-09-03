@@ -8,12 +8,60 @@
 
 import UIKit
 import Parse
+import RSKImageCropper
 
-class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource {
+    func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
+        /*var maskSize: CGSize
+        var width, height: CGFloat!
+        
+        width = self.view.frame.width
+        
+        // 縦横比 = 1 : 2でトリミングしたい場合
+        height = self.view.frame.width / 2
+        
+        
+        maskSize = CGSize(width: self.view.frame.width, height: height)
+        
+        let viewWidth: CGFloat = controller.view.frame.size.width
+        let viewHeight: CGFloat = controller.view.frame.size.height
+        
+        let maskRect: CGRect = CGRect(x: (viewWidth - maskSize.width) * 0.5, y: (viewHeight - maskSize.height) * 0.5, width: maskSize.width, height: maskSize.height)
+
+        return maskRect*/
+        
+        let width = self.view.frame.size.width - 40
+        let height = width / 16 * 9
+        
+        return CGRect(x: 20, y: self.view.center.y - height / 2, width: width, height: height)
+    }
+    
+    func imageCropViewControllerCustomMaskPath(_ controller: RSKImageCropViewController) -> UIBezierPath {
+        /*let rect: CGRect = controller.maskRect
+        
+        let point1: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
+        let point2: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
+        let point3: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
+        let point4: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
+        
+        let square: UIBezierPath = UIBezierPath()
+        square.move(to: point1)
+        square.addLine(to: point2)
+        square.addLine(to: point3)
+        square.addLine(to: point4)
+        square.close()
+        
+        return square*/
+        
+        return UIBezierPath(rect: controller.maskRect)
+    }
+    
+    func imageCropViewControllerCustomMovementRect(_ controller: RSKImageCropViewController) -> CGRect {
+        return controller.maskRect
+    }
+    
 
     // UI objects
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var avaImg: UIImageView!
     
     @IBOutlet weak var fullnameTxt: UITextField!
@@ -49,15 +97,56 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
+        picker.allowsEditing = false
         present(picker, animated: true, completion: nil)
+        
+        /*let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: UIImage(named:"avaImg")!, aspectWidth: 4, aspectHeight: 3)
+        self.navigationController?.present(shittyVC, animated: true, completion: nil)*/
+        
+        /*
+        let image = UIImage(named: "bg.jpg")!
+        let imageCropVC = RSKImageCropViewController(image: image, cropMode: .circle)
+        imageCropVC.moveAndScaleLabel.text = "select"
+        imageCropVC.cancelButton.setTitle("cancel", for: .normal)
+        imageCropVC.chooseButton.setTitle("done", for: .normal)
+        imageCropVC.delegate = self
+        present(imageCropVC, animated: true)
+         */
+        
+        
+    }
+    
+    
+    //キャンセルを押した時の処理
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //完了を押した後の処理
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
+        dismiss(animated: true)
+        avaImg.image = croppedImage
     }
     
     
     // method to finilize UIImagePickerController action
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        
+        // dissmiss image picker
         self.dismiss(animated: true, completion: nil)
+        
+        // show RSKImageCropper
+        let image =  info[UIImagePickerControllerOriginalImage] as? UIImage
+        let imageCropVC = RSKImageCropViewController(image: image!, cropMode: .custom)
+        imageCropVC.moveAndScaleLabel.isHidden = true
+        imageCropVC.cancelButton.setTitle("Cancel", for: .normal)
+        imageCropVC.chooseButton.setTitle("Choose", for: .normal)
+        imageCropVC.delegate = self
+        imageCropVC.dataSource = self
+        present(imageCropVC, animated: true)
+        
+        /*avaImg.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)*/
     }
     
     @objc func hideKeyboard() {

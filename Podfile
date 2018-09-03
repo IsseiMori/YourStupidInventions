@@ -8,5 +8,6 @@ target 'YourStupidInventions' do
   # Pods for YourStupidInventions
 
   pod 'XLPagerTabStrip'
+  pod 'RSKImageCropper'
 
 end

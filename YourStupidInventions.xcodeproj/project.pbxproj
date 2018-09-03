@@ -49,6 +49,8 @@
 		850C2C1F213C6BAE0095A3D7 /* topMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */; };
 		850C2C21213CCB490095A3D7 /* dollar_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C20213CCB470095A3D7 /* dollar_like.png */; };
 		850C2C23213CCB4C0095A3D7 /* dollar_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */; };
+		850C2C25213D73F60095A3D7 /* ShittyImageCropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C24213D73F60095A3D7 /* ShittyImageCropVC.swift */; };
+		850C2C27213D9DCA0095A3D7 /* cropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C26213D9DCA0095A3D7 /* cropVC.swift */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -111,6 +113,8 @@
 		850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = topMenuViewController.swift; sourceTree = "<group>"; };
 		850C2C20213CCB470095A3D7 /* dollar_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_like.png; sourceTree = "<group>"; };
 		850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_unlike.png; sourceTree = "<group>"; };
+		850C2C24213D73F60095A3D7 /* ShittyImageCropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShittyImageCropVC.swift; sourceTree = "<group>"; };
+		850C2C26213D9DCA0095A3D7 /* cropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cropVC.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				850C2C19213926380095A3D7 /* resetPasswordVC.swift */,
 				850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */,
 				850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */,
+				850C2C24213D73F60095A3D7 /* ShittyImageCropVC.swift */,
+				850C2C26213D9DCA0095A3D7 /* cropVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -394,10 +400,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RSKImageCropper/RSKImageCropper.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKImageCropper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,8 +440,10 @@
 				850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */,
 				850C2BBA2133D3530095A3D7 /* commentVC.swift in Sources */,
 				850C2BB22133C0AB0095A3D7 /* tabbarVC.swift in Sources */,
+				850C2C27213D9DCA0095A3D7 /* cropVC.swift in Sources */,
 				850C2BDB21353A060095A3D7 /* themeCell.swift in Sources */,
 				850C2BC02133D3FE0095A3D7 /* commentHeaderCell.swift in Sources */,
+				850C2C25213D73F60095A3D7 /* ShittyImageCropVC.swift in Sources */,
 				850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */,
 				850C2BE52137067F0095A3D7 /* notificationsVC.swift in Sources */,
 			);
@@ -593,8 +603,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
 		};
@@ -616,8 +628,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;
 		};
