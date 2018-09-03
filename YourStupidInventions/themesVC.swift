@@ -8,17 +8,18 @@
 
 import UIKit
 import Parse
+import XLPagerTabStrip
 
-class themesVC: UITableViewController {
+class themesVC: UITableViewController, IndicatorInfoProvider {
     
     // UI objects
     var refresher = UIRefreshControl()
     
     
     // arrays to hold data
+    var titleArray = [String]()
     var themeuuidArray = [String]()
     var themeImgArray = [PFFile]()
-    var hashtagsArray = [String]()
     
     // page size
     var page: Int = 5
@@ -28,6 +29,13 @@ class themesVC: UITableViewController {
     
     // loading status to avoid keep loading
     var isLoading = false
+    
+    // Title for XLPagerTabStrip
+    var itemInfo: IndicatorInfo = "-"
+    
+    // set up in menuVC
+    var sortBy: String = ""
+    var filterBy: String = ""
     
 
     override func viewDidLoad() {
@@ -57,9 +65,9 @@ class themesVC: UITableViewController {
         isLoading = true
         
         // clean up arrays
+        self.titleArray.removeAll(keepingCapacity: false)
         self.themeuuidArray.removeAll(keepingCapacity: false)
         self.themeImgArray.removeAll(keepingCapacity: false)
-        self.hashtagsArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "themes")
         query.limit = pageLimit
@@ -122,9 +130,9 @@ class themesVC: UITableViewController {
                 
                 // store objects data into arrays
                 for object in objects! {
+                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
                     self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
                     self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
                 }
                 
                 // reload tableView and end refresh animation
@@ -152,8 +160,8 @@ class themesVC: UITableViewController {
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! themeCell
         
+        cell.titleLbl.text = self.titleArray[indexPath.row]
         cell.themeuuidLbl.text = themeuuidArray[indexPath.row]
-        cell.hashtagsLbl.text = hashtagsArray[indexPath.row]
         
         themeImgArray[indexPath.row].getDataInBackground { (data, error) in
             if error == nil {
@@ -205,6 +213,12 @@ class themesVC: UITableViewController {
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
         self.navigationController?.pushViewController(postIdea, animated: true)
         
+    }
+    
+    
+    // required for XLPagerTabStrip
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
     }
     
 }

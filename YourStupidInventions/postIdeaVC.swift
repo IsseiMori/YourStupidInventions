@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 var themeuuid = [String]()
+var themetitle = [String]()
 
 class postIdeaVC: UITableViewController {
     
@@ -20,6 +21,7 @@ class postIdeaVC: UITableViewController {
     var header: postIdeaHeader!
     
     // arrays to hold data from server
+    var titleArray = [String]()
     var uuidArray = [String]()
     var themeArray = [PFFile]()
     var ideaArray = [String]()
@@ -57,6 +59,16 @@ class postIdeaVC: UITableViewController {
         
         // receive notification from postIdeaHeader
         NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
+        
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to go back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
         
         
         // centering indicator
@@ -100,8 +112,10 @@ class postIdeaVC: UITableViewController {
         query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
+                
+                self.header.titleLbl.text = "\(object?.object(forKey: "adjective") as! String)  \(object?.object(forKey: "noun") as! String)"
+                
                 self.header.themeuuidLbl.text = themeuuid.last!
-                self.header.hashtagsLbl.text = object?.object(forKey: "hashtags") as? String
                 
                 self.header.themeImgPFFile = object?.object(forKey: "theme") as! PFFile
                 (object?.object(forKey: "theme") as? PFFile)?.getDataInBackground(block: { (data, error) in
@@ -126,6 +140,7 @@ class postIdeaVC: UITableViewController {
         isLoading = true
         
         // clean up
+        self.titleArray.removeAll(keepingCapacity: false)
         self.uuidArray.removeAll(keepingCapacity: false)
         self.themeArray.removeAll(keepingCapacity: false)
         self.ideaArray.removeAll(keepingCapacity: false)
@@ -201,6 +216,7 @@ class postIdeaVC: UITableViewController {
                 
                 // find related objects
                 for object in objects! {
+                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
                     self.uuidArray.append(object.object(forKey: "uuid") as! String)
                     self.themeArray.append(object.object(forKey: "theme") as! PFFile)
                     self.ideaArray.append(object.object(forKey: "idea") as! String)
@@ -240,6 +256,7 @@ class postIdeaVC: UITableViewController {
         cell.backgroundColor = UIColor.clear
         
         // connect objects with data from arrays
+        cell.titleLbl.text = self.titleArray[indexPath.row]
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
         cell.likeLbl.text = String(self.likesArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
@@ -345,6 +362,17 @@ class postIdeaVC: UITableViewController {
                     }
                 }
             }
+        }
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
+        self.navigationController?.popViewController(animated: true)
+        
+        // clean themeuuid from holding last information
+        if !themeuuid.isEmpty {
+            themeuuid.removeLast()
         }
     }
     

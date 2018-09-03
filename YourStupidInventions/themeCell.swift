@@ -12,9 +12,9 @@ class themeCell: UITableViewCell {
     
     
     // UI objects
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
     @IBOutlet weak var themeuuidLbl: UILabel!
-    @IBOutlet weak var hashtagsLbl: UILabel!
     @IBOutlet weak var postsLbl: UILabel!
     @IBOutlet weak var postsBtn: UIButton!
     @IBOutlet weak var postIdeaBtn: UIButton!
@@ -26,7 +26,6 @@ class themeCell: UITableViewCell {
         let width = UIScreen.main.bounds.width
         
         themeImg.translatesAutoresizingMaskIntoConstraints = false
-        hashtagsLbl.translatesAutoresizingMaskIntoConstraints = false
         postsLbl.translatesAutoresizingMaskIntoConstraints = false
         themeuuidLbl.translatesAutoresizingMaskIntoConstraints = false
         postsBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -38,24 +37,24 @@ class themeCell: UITableViewCell {
         
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[hashtags]-5-[posts(30)]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg, "hashtags": hashtagsLbl, "posts": postsBtn]))
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[posts(30)]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "posts": postsBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[hashtags]-10-[posts]",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl, "posts": postsLbl]))
+            withVisualFormat: "V:[theme]-10-[posts]",
+            options: [], metrics: nil, views: ["theme": themeImg, "posts": postsLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[hashtags]-5-[post(30)]",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl, "post": postIdeaBtn]))
+            withVisualFormat: "V:[theme]-5-[post(30)]",
+            options: [], metrics: nil, views: ["theme": themeImg, "post": postIdeaBtn]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[title]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-15-[theme]-15-|",
             options: [], metrics: nil, views: ["theme": themeImg]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[hashtags]-25-|",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-25-[postsBtn(30)]-10-[posts]",
