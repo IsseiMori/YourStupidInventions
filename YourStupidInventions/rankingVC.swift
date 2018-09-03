@@ -247,7 +247,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         // set likeBtn to unlike
          if cell.likeBtn.titleLabel?.text != "like" {
             cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
-            cell.likeBtn.setBackgroundImage(UIImage(named: "unlike.png"), for: UIControlState.normal)
+            cell.likeBtn.setBackgroundImage(UIImage(named: "dollar_unlike.png"), for: UIControlState.normal)
         }
         
         // assign index

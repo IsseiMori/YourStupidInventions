@@ -198,7 +198,6 @@ class themesVC: UITableViewController {
         
         // call the button
         let button = sender as! UIButton
-        print(button.layer.value(forKey: "themeuuid")!)
         
         themeuuid.append(button.layer.value(forKey: "themeuuid") as! String)
         

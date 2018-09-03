@@ -50,7 +50,7 @@ class postCell: UITableViewCell {
         
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[idea]-10-[like(30)]-15-|",
+            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
             options: [], metrics: nil, views: ["theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -105,7 +105,7 @@ class postCell: UITableViewCell {
             // change background image
             if likeBtn.titleLabel?.text != "like" {
                 likeBtn.setTitle("like", for: UIControlState.normal)
-                likeBtn.setBackgroundImage(UIImage(named: "like.png"), for: UIControlState.normal)
+                likeBtn.setBackgroundImage(UIImage(named: "dollar_like.png"), for: UIControlState.normal)
             }
             
             // increment likeLbl

@@ -25,9 +25,10 @@ class newMenuViewController: ButtonBarPagerTabStripViewController {
         // Cell text color
         settings.style.buttonBarItemTitleColor = UIColor.white
         // Select bar color
-        settings.style.selectedBarBackgroundColor = UIColor(red: 254/255, green: 0, blue: 124/255, alpha: 1)
+        settings.style.selectedBarBackgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         
-        settings.style.buttonBarHeight = 50
+        // selected bar height
+        settings.style.selectedBarHeight = 5
         
         super.viewDidLoad()
     }
