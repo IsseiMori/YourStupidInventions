@@ -23,7 +23,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var uuidArray = [String]()
     var themeArray = [PFFile]()
     var ideaArray = [String]()
-    var hashtagsArray = [String]()
     var usernameArray = [String]()
     var fullnameArray = [String]()
     var dateArray = [Date?]()
@@ -89,7 +88,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         self.uuidArray.removeAll(keepingCapacity: false)
         self.themeArray.removeAll(keepingCapacity: false)
         self.ideaArray.removeAll(keepingCapacity: false)
-        self.hashtagsArray.removeAll(keepingCapacity: false)
         self.usernameArray.removeAll(keepingCapacity: false)
         self.fullnameArray.removeAll(keepingCapacity: false)
         self.dateArray.removeAll(keepingCapacity: false)
@@ -167,7 +165,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                     self.uuidArray.append(object.object(forKey: "uuid") as! String)
                     self.themeArray.append(object.object(forKey: "theme") as! PFFile)
                     self.ideaArray.append(object.object(forKey: "idea") as! String)
-                    self.hashtagsArray.append(object.object(forKey: "hashtags") as! String)
                     self.usernameArray.append(object.object(forKey: "username") as! String)
                     self.fullnameArray.append(object.object(forKey: "fullname") as! String)
                     self.dateArray.append(object.createdAt!)
@@ -208,7 +205,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // connect objects with data from arrays
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
-        cell.hashtagsLbl.text = self.hashtagsArray[indexPath.row]
         cell.likeLbl.text = String(self.likesArray[indexPath.row] + self.addLikeArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
         cell.uuidLbl.text = self.uuidArray[indexPath.row]

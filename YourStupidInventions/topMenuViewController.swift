@@ -13,10 +13,11 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         
-        
         // top title
         self.navigationItem.title = "Top Ideas"
         
+        // Bar font size
+        settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)
         // Bar color
         settings.style.buttonBarBackgroundColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
         // Button color

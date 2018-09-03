@@ -16,6 +16,8 @@ class newMenuViewController: ButtonBarPagerTabStripViewController {
         // top title
         self.navigationItem.title = "New Ideas"
         
+        // Bar font size
+        settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)
         // Bar color
         settings.style.buttonBarBackgroundColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
         // Button color
@@ -30,6 +32,14 @@ class newMenuViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
     }
 
+    
+    // after view appears
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // move to All tab
+        moveToViewController(at: 2, animated: false)
+    }
+    
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
