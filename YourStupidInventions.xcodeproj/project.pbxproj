@@ -51,6 +51,8 @@
 		850C2C23213CCB4C0095A3D7 /* dollar_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */; };
 		850C2C2D213DBB010095A3D7 /* themeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */; };
 		850C2C2F213DC6740095A3D7 /* themesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C2E213DC6740095A3D7 /* themesHeaderCell.swift */; };
+		850C2C31213DDABA0095A3D7 /* postThemeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C30213DDABA0095A3D7 /* postThemeVC.swift */; };
+		850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B9E213328FE0095A3D7 /* pbg.jpg */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -115,6 +117,7 @@
 		850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_unlike.png; sourceTree = "<group>"; };
 		850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = themeMenuViewController.swift; sourceTree = "<group>"; };
 		850C2C2E213DC6740095A3D7 /* themesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = themesHeaderCell.swift; sourceTree = "<group>"; };
+		850C2C30213DDABA0095A3D7 /* postThemeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postThemeVC.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 				850C2C1E213C6BAE0095A3D7 /* topMenuViewController.swift */,
 				850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */,
 				850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */,
+				850C2C30213DDABA0095A3D7 /* postThemeVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -348,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */,
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
 				850C2BA621334A7F0095A3D7 /* comment.png in Resources */,
 				850C2C23213CCB4C0095A3D7 /* dollar_unlike.png in Resources */,
@@ -430,6 +435,7 @@
 				850C2BDD2135C2FA0095A3D7 /* postIdeaVC.swift in Sources */,
 				850C2BD7213538710095A3D7 /* themesVC.swift in Sources */,
 				850C2BB0213359850095A3D7 /* postCell.swift in Sources */,
+				850C2C31213DDABA0095A3D7 /* postThemeVC.swift in Sources */,
 				850C2BE32137063F0095A3D7 /* notificationsCell.swift in Sources */,
 				850C2BAB21334C840095A3D7 /* rankingVC.swift in Sources */,
 				850C2BB42133C0CA0095A3D7 /* navVC.swift in Sources */,

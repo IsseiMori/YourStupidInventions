@@ -12,23 +12,6 @@ import RSKImageCropper
 
 class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource {
     func imageCropViewControllerCustomMaskRect(_ controller: RSKImageCropViewController) -> CGRect {
-        /*var maskSize: CGSize
-        var width, height: CGFloat!
-        
-        width = self.view.frame.width
-        
-        // 縦横比 = 1 : 2でトリミングしたい場合
-        height = self.view.frame.width / 2
-        
-        
-        maskSize = CGSize(width: self.view.frame.width, height: height)
-        
-        let viewWidth: CGFloat = controller.view.frame.size.width
-        let viewHeight: CGFloat = controller.view.frame.size.height
-        
-        let maskRect: CGRect = CGRect(x: (viewWidth - maskSize.width) * 0.5, y: (viewHeight - maskSize.height) * 0.5, width: maskSize.width, height: maskSize.height)
-
-        return maskRect*/
         
         let width = self.view.frame.size.width - 40
         let height = width / 16 * 9
@@ -37,21 +20,6 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func imageCropViewControllerCustomMaskPath(_ controller: RSKImageCropViewController) -> UIBezierPath {
-        /*let rect: CGRect = controller.maskRect
-        
-        let point1: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
-        let point2: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
-        let point3: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
-        let point4: CGPoint = CGPoint(x: rect.minX, y: rect.minY)
-        
-        let square: UIBezierPath = UIBezierPath()
-        square.move(to: point1)
-        square.addLine(to: point2)
-        square.addLine(to: point3)
-        square.addLine(to: point4)
-        square.close()
-        
-        return square*/
         
         return UIBezierPath(rect: controller.maskRect)
     }

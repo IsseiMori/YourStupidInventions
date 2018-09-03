@@ -634,6 +634,9 @@
                                             <state key="normal" title="Post your own theme">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="9OQ-RS-xAD" kind="show" id="IrQ-sG-f0s"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -1038,6 +1041,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCe-u9-vhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="911.20000000000005" y="2879.9100449775115"/>
+        </scene>
+        <!--Post ThemeVC-->
+        <scene sceneID="oPP-sg-lqN">
+            <objects>
+                <viewController id="9OQ-RS-xAD" customClass="postThemeVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zfu-qg-rOA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adjective Noun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKU-V0-GWX">
+                                <rect key="frame" x="16" y="82" width="343" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Selet adjective" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o23-6V-hde">
+                                <rect key="frame" x="16" y="318" width="158" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OXq-qK-PhF">
+                                <rect key="frame" x="198" y="318" width="161" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your theme object" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A1d-qq-TW0">
+                                <rect key="frame" x="16" y="356" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOn-aG-jYy">
+                                <rect key="frame" x="16" y="394" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendBtn_clicked:" destination="9OQ-RS-xAD" eventType="touchUpInside" id="8aR-a9-80z"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lYm-hB-C8b">
+                                <rect key="frame" x="16" y="126" width="343" height="172"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dU3-YI-fSA"/>
+                    </view>
+                    <connections>
+                        <outlet property="adjTxt" destination="o23-6V-hde" id="6XK-VY-gol"/>
+                        <outlet property="categoryTxt" destination="OXq-qK-PhF" id="w6b-CP-KVt"/>
+                        <outlet property="nounTxt" destination="A1d-qq-TW0" id="bem-s4-qhs"/>
+                        <outlet property="sendBtn" destination="ZOn-aG-jYy" id="ye0-yo-Cbw"/>
+                        <outlet property="themeImg" destination="lYm-hB-C8b" id="ua7-61-FxS"/>
+                        <outlet property="titleLbl" destination="YKU-V0-GWX" id="B98-qJ-qsK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6g-ao-3EY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="2879.9100449775115"/>
         </scene>
         <!--Post IdeaVC-->
         <scene sceneID="zHH-bz-h7q">

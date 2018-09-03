@@ -51,11 +51,19 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
+        // receive notification from postThemeVC
+        NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "themeUploaded"), object: nil)
+        
         // call load posts func
         loadPosts()
         
     }
     
+    
+    // reload func with posts after receiving notification
+    @objc func uploaded(notification: NSNotification) {
+        loadPosts()
+    }
     
     
     // load posts
@@ -190,11 +198,13 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     }
     
     
+    // header height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
     }
     
     
+    // header config
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableCell(withIdentifier: "themesHeaderCell") as! themesHeaderCell
         return header.contentView
