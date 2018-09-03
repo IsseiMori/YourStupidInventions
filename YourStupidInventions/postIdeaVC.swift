@@ -71,8 +71,12 @@ class postIdeaVC: UITableViewController {
     
     // receive uploaded notification from postIdeaHeader and show newVC
     @objc func uploaded(notification: NSNotification) {
+        
         // go to newVC
         self.tabBarController?.selectedIndex = 1
+        
+        // ba back to themeVC, only this order works
+        self.navigationController?.popViewController(animated: false)
     }
     
     
