@@ -50,6 +50,7 @@
 		850C2C21213CCB490095A3D7 /* dollar_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C20213CCB470095A3D7 /* dollar_like.png */; };
 		850C2C23213CCB4C0095A3D7 /* dollar_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */; };
 		850C2C2D213DBB010095A3D7 /* themeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */; };
+		850C2C2F213DC6740095A3D7 /* themesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2C2E213DC6740095A3D7 /* themesHeaderCell.swift */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -113,6 +114,7 @@
 		850C2C20213CCB470095A3D7 /* dollar_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_like.png; sourceTree = "<group>"; };
 		850C2C22213CCB4C0095A3D7 /* dollar_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_unlike.png; sourceTree = "<group>"; };
 		850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = themeMenuViewController.swift; sourceTree = "<group>"; };
+		850C2C2E213DC6740095A3D7 /* themesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = themesHeaderCell.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				850C2BC92135008A0095A3D7 /* homeHeaderView.swift */,
 				850C2BCB213507FA0095A3D7 /* homePostCell.swift */,
 				850C2BD6213538710095A3D7 /* themesVC.swift */,
+				850C2C2E213DC6740095A3D7 /* themesHeaderCell.swift */,
 				850C2BDA21353A060095A3D7 /* themeCell.swift */,
 				850C2BDC2135C2FA0095A3D7 /* postIdeaVC.swift */,
 				850C2BDE2135C3FD0095A3D7 /* postIdeaHeader.swift */,
@@ -423,6 +426,7 @@
 				850C2BDF2135C3FD0095A3D7 /* postIdeaHeader.swift in Sources */,
 				85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */,
 				850C2BC82134D47B0095A3D7 /* homeVC.swift in Sources */,
+				850C2C2F213DC6740095A3D7 /* themesHeaderCell.swift in Sources */,
 				850C2BDD2135C2FA0095A3D7 /* postIdeaVC.swift in Sources */,
 				850C2BD7213538710095A3D7 /* themesVC.swift in Sources */,
 				850C2BB0213359850095A3D7 /* postCell.swift in Sources */,

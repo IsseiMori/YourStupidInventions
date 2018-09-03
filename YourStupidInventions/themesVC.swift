@@ -190,6 +190,17 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     }
     
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableCell(withIdentifier: "themesHeaderCell") as! themesHeaderCell
+        return header.contentView
+    }
+    
+    
     // clicked a cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
