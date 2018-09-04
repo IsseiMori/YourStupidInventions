@@ -259,6 +259,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         object["adjective"] = adjTxt.text!
         object["noun"] = nounTxt.text!
+        object["title"] = "\(adjTxt.text!) \(nounTxt.text!)"
         
         object["hashtags"] = "#\(adjTxt.text!) #\(categoryTxt.text!) #\(nounTxt.text!)"
         

@@ -15,7 +15,6 @@ var themetitle = [String]()
 class postIdeaVC: UITableViewController {
     
     // UI objects
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     var refresher = UIRefreshControl()
     
     var header: postIdeaHeader!
@@ -71,10 +70,6 @@ class postIdeaVC: UITableViewController {
         self.view.addGestureRecognizer(backSwipe)
         
         
-        // centering indicator
-        indicator.center.x = tableView.center.x
-        
-        
         // call load posts func
         loadPosts()
 
@@ -113,7 +108,7 @@ class postIdeaVC: UITableViewController {
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
                 
-                self.header.titleLbl.text = "\(object?.object(forKey: "adjective") as! String)  \(object?.object(forKey: "noun") as! String)"
+                self.header.titleLbl.text = object?.object(forKey: "title") as? String
                 
                 self.header.themeuuidLbl.text = themeuuid.last!
                 
@@ -216,7 +211,7 @@ class postIdeaVC: UITableViewController {
                 
                 // find related objects
                 for object in objects! {
-                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
+                    self.titleArray.append(object.object(forKey: "title") as! String)
                     self.uuidArray.append(object.object(forKey: "uuid") as! String)
                     self.themeArray.append(object.object(forKey: "theme") as! PFFile)
                     self.ideaArray.append(object.object(forKey: "idea") as! String)

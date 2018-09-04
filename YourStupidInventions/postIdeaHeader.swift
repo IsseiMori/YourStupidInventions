@@ -17,6 +17,8 @@ class postIdeaHeader: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
     @IBOutlet weak var themeuuidLbl: UILabel!
+    @IBOutlet weak var adjLbl: UILabel!
+    @IBOutlet weak var nounLbl: UILabel!
     @IBOutlet weak var ideaTxt: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var bgView: UIView!
@@ -41,10 +43,12 @@ class postIdeaHeader: UITableViewCell {
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
-        postIdeaHeaderHeight = themeHeight + 160 + 15
+        postIdeaHeaderHeight = themeHeight + 190 + 15
         
         bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
-        themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: themeHeight)
+        
+        titleLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: 30)
+        themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 5, width: themeWidth, height: themeHeight)
         ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height, width: bgView.frame.size.width - 20, height: 80)
         sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height, width: bgView.frame.size.width - 20, height: 30)
         
@@ -77,6 +81,9 @@ class postIdeaHeader: UITableViewCell {
         object["username"] = PFUser.current()?.username
         object["fullname"] = PFUser.current()?.object(forKey: "fullname")
         object["likes"] = 0
+        object["title"] = titleLbl.text!
+        object["adjective"] = adjLbl.text!
+        object["noun"] = nounLbl.text!
         
         // copy the themeuuid
         object["themeuuid"] = themeuuidLbl.text
@@ -88,6 +95,7 @@ class postIdeaHeader: UITableViewCell {
                 
                 // reset text field
                 self.ideaTxt.text = ""
+                
             } else {
                 print(error!.localizedDescription)
             }

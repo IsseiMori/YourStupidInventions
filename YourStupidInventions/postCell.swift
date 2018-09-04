@@ -38,7 +38,7 @@ class postCell: UITableViewCell {
         let width = UIScreen.main.bounds.width
         
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
-        // themeImg.translatesAutoresizingMaskIntoConstraints = false
+        themeImg.translatesAutoresizingMaskIntoConstraints = false
         ideaLbl.translatesAutoresizingMaskIntoConstraints = false
         likeLbl.translatesAutoresizingMaskIntoConstraints = false
         dateLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -47,19 +47,11 @@ class postCell: UITableViewCell {
         usernameBtn.translatesAutoresizingMaskIntoConstraints = false
         bgView.translatesAutoresizingMaskIntoConstraints = false
         
-        let themeWidth = width - 40
-        let themeHeight = themeWidth / themeImg.frame.size.width * themeImg.frame.size.height
-        print("constrain")
-        
-        // themeImg.frame.size.width = themeWidth
-        themeImg.contentMode = UIViewContentMode.scaleAspectFit
+        let themeWidth = width - 20
+        let themeHeight = themeWidth / 16 * 9
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-0-[theme(\(themeWidth))]-0-|",
-            options: [], metrics: nil, views: ["theme": themeImg]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[title]-10-[theme]-10-[idea]-5-[like(30)]-15-|",
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
             options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -78,12 +70,12 @@ class postCell: UITableViewCell {
             withVisualFormat: "H:|-15-[title]-15-|",
             options: [], metrics: nil, views: ["title": titleLbl]))
         
-        /* self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[theme]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg])) */
-        
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-15-[theme]-15-|",
+            options: [], metrics: nil, views: ["theme": themeImg]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[theme]-10-|",
             options: [], metrics: nil, views: ["theme": themeImg]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -110,7 +102,7 @@ class postCell: UITableViewCell {
         bgView.layer.zPosition = -1
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
-        bgView.backgroundColor = UIColor.darkGray
+        bgView.backgroundColor = .white
         
     }
     

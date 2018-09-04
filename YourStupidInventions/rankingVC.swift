@@ -13,8 +13,6 @@ import XLPagerTabStrip
 // ranking and new feeds share this class
 
 class rankingVC: UITableViewController, IndicatorInfoProvider {
-
-    
     
     // UI objects
     var refresher = UIRefreshControl()
@@ -34,7 +32,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var page: Int = 5
     
     // # of posts to load at each loadMore()
-    var pageLimit: Int = 2
+    var pageLimit: Int = 5
     
     
     // loading status to avoid keep loading
@@ -52,6 +50,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
 
         super.viewDidLoad()
         
+        // tableView margin in the bottom to avoid the last cell to be hidden by tabBar
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
         
         // automatic row height - dynamic cell
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -163,7 +163,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 
                 // find related objects
                 for object in objects! {
-                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
+                    self.titleArray.append(object.object(forKey: "title") as! String)
                     self.uuidArray.append(object.object(forKey: "uuid") as! String)
                     self.themeArray.append(object.object(forKey: "theme") as! PFFile)
                     self.ideaArray.append(object.object(forKey: "idea") as! String)
@@ -216,7 +216,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         self.themeArray[indexPath.row].getDataInBackground { (data, error) in
             if error == nil {
                 cell.themeImg.image = UIImage(data: data!)
-                print("img placed")
             } else {
                 print(error!.localizedDescription)
             }

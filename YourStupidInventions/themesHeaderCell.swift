@@ -25,6 +25,9 @@ class themesHeaderCell: UITableViewCell {
             options: [], metrics: nil, views: ["button": postThemeBtn]))
         
         postThemeBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
+        postThemeBtn.layer.cornerRadius = 10
+        postThemeBtn.clipsToBounds = true
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

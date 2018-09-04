@@ -32,7 +32,7 @@ class themeCell: UITableViewCell {
         postIdeaBtn.translatesAutoresizingMaskIntoConstraints = false
         bgView.translatesAutoresizingMaskIntoConstraints = false
         
-        let themeWidth = width - 40
+        let themeWidth = width - 20
         let themeHeight = themeWidth / 16 * 9
         
         
@@ -53,7 +53,7 @@ class themeCell: UITableViewCell {
             options: [], metrics: nil, views: ["title": titleLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[theme]-15-|",
+            withVisualFormat: "H:|-10-[theme]-10-|",
             options: [], metrics: nil, views: ["theme": themeImg]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(

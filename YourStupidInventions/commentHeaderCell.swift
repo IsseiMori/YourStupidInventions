@@ -15,8 +15,8 @@ class commentHeaderCell: UITableViewCell{
     @IBOutlet weak var themeImg: UIImageView!
     
     // labels
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var ideaLbl: UILabel!
-    @IBOutlet weak var hashtagsLbl: UILabel!
     @IBOutlet weak var likeLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var uuidLbl: UILabel!
@@ -36,8 +36,8 @@ class commentHeaderCell: UITableViewCell{
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
                 
+                self.titleLbl.text = object?.object(forKey: "title") as? String
                 self.ideaLbl.text = object?.object(forKey: "idea") as? String
-                self.hashtagsLbl.text = object?.object(forKey: "hashtags") as? String
                 self.likeLbl.text = String(object?.value(forKey: "likes") as! Int)
                 self.uuidLbl.text = commentuuid.last!
                 self.usernameBtn.setTitle(commentowner.last!, for: UIControlState.normal)
@@ -90,9 +90,9 @@ class commentHeaderCell: UITableViewCell{
         
         let width = UIScreen.main.bounds.width
         
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
         themeImg.translatesAutoresizingMaskIntoConstraints = false
         ideaLbl.translatesAutoresizingMaskIntoConstraints = false
-        hashtagsLbl.translatesAutoresizingMaskIntoConstraints = false
         likeLbl.translatesAutoresizingMaskIntoConstraints = false
         dateLbl.translatesAutoresizingMaskIntoConstraints = false
         uuidLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -105,20 +105,28 @@ class commentHeaderCell: UITableViewCell{
         
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[theme(\(themeHeight))]-10-[idea]-10-[hashtags]-5-[like(30)]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg, "idea": ideaLbl, "hashtags": hashtagsLbl, "like": likeBtn]))
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[hashtags]-10-[likes]",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl, "likes": likeLbl]))
+            withVisualFormat: "V:[idea]-10-[likes]",
+            options: [], metrics: nil, views: ["idea": ideaLbl, "likes": likeLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[hashtags]-5-[username]",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl, "username": usernameBtn]))
+            withVisualFormat: "V:[idea]-5-[username]",
+            options: [], metrics: nil, views: ["idea": ideaLbl, "username": usernameBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[hashtags]-12-[date]",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl, "date": dateLbl]))
+            withVisualFormat: "V:[idea]-12-[date]",
+            options: [], metrics: nil, views: ["idea": ideaLbl, "date": dateLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[title]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[theme]-15-|",
+            options: [], metrics: nil, views: ["theme": themeImg]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-15-[theme]-15-|",
@@ -129,10 +137,6 @@ class commentHeaderCell: UITableViewCell{
             options: [], metrics: nil, views: ["idea": ideaLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[hashtags]-25-|",
-            options: [], metrics: nil, views: ["hashtags": hashtagsLbl]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-25-[like(30)]-10-[likes]",
             options: [], metrics: nil, views: ["like": likeBtn, "likes": likeLbl]))
         
@@ -141,7 +145,7 @@ class commentHeaderCell: UITableViewCell{
             options: [], metrics: nil, views: ["username": usernameBtn, "date":dateLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-5-[bg]-5-|",
+            withVisualFormat: "V:|-10-[bg]-5-|",
             options: [], metrics: nil, views: ["bg": bgView]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(

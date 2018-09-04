@@ -138,7 +138,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 
                 // store objects data into arrays
                 for object in objects! {
-                    self.titleArray.append("\(object.object(forKey: "adjective") as! String)  \(object.object(forKey: "noun") as! String)")
+                    self.titleArray.append(object.object(forKey: "title") as! String)
                     self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
                     self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
                 }
