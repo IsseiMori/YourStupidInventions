@@ -343,8 +343,10 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 self.refresher.endRefreshing()
                 
                 
-                // set loading status to finished
-                self.isLoading = false
+                // set loading status to finished if loaded something
+                if !(objects?.isEmpty)! {
+                    self.isLoading = false
+                }
             } else {
                 print(error!.localizedDescription)
             }

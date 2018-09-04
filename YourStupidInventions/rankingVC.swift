@@ -231,7 +231,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
                 
-                // set loading status to finished
+                // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {
                     self.isLoading = false
                 }

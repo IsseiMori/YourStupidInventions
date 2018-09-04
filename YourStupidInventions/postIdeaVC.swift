@@ -69,6 +69,8 @@ class postIdeaVC: UITableViewController {
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
         
+        // initialize header
+        iniHeaderConfig()
         
         // call load posts func
         loadPosts()
@@ -98,9 +100,9 @@ class postIdeaVC: UITableViewController {
         return postIdeaHeaderHeight + 10
     }
     
-    
-    // header cell config
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    // initial header config func
+    // call this only in viewDidLoad once
+    func iniHeaderConfig() {
         header = tableView.dequeueReusableCell(withIdentifier: "postIdeaHeader") as! postIdeaHeader
         
         print("postIdeaVC header config")
@@ -129,7 +131,10 @@ class postIdeaVC: UITableViewController {
                 print(error!.localizedDescription)
             }
         }
-        
+    }
+    
+    // header cell config
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return header.contentView
     }
     
@@ -192,6 +197,7 @@ class postIdeaVC: UITableViewController {
         // count total comments to enable or disable refresher
         print("postIdeaVC loadmore count")
         let countQuery = PFQuery(className: "posts")
+        countQuery.whereKey("themeuuid", equalTo: themeuuid.last!)
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -242,8 +248,10 @@ class postIdeaVC: UITableViewController {
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
                 
-                // set loading status to finished
-                self.isLoading = false
+                // set loading status to finished if loaded something
+                if !(objects?.isEmpty)! {
+                    self.isLoading = false
+                }
                 
             } else {
                 print(error!.localizedDescription)
