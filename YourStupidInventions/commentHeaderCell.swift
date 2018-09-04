@@ -31,6 +31,7 @@ class commentHeaderCell: UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        print("commentHeaderCell load header")
         let query = PFQuery(className: "posts")
         query.whereKey("uuid", equalTo: commentuuid.last!)
         query.getFirstObjectInBackground { (object, error) in

@@ -108,6 +108,8 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         query.whereKey("username", equalTo: guestname.last!)
         query.limit = pageLimit
         query.addDescendingOrder("createdAt")
+        
+        print("guestVC loadPosts")
         processQuery(query: query)
         
     }
@@ -119,7 +121,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -135,6 +137,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         isLoading = true
         
         // count total posts of the user to enable or disable refresher
+        print("guestVC loadmore count")
         let countQuery = PFQuery(className: "posts")
         countQuery.whereKey("username", equalTo: guestname.last!)
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
@@ -156,6 +159,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 // increase page size
                 self.page = self.page + self.pageLimit
                 
+                print("guestVC loadmore")
                 self.processQuery(query: query)
                 
             }
@@ -229,6 +233,41 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     
+    // header config (count likes and posts)
+    var postCount: Int32 = 0
+    var likeCount: Int32 = 0
+    
+    func countPostsAndLikes() {
+        // count total posts
+        print("homeVC count total posts")
+        let posts = PFQuery(className: "posts")
+        posts.whereKey("username", equalTo: guestname.last!)
+        posts.countObjectsInBackground { (count, error) in
+            if error == nil {
+                self.postCount = count
+            }
+        }
+        
+        // initialize
+        var totalLikes: Int32 = 0
+        
+        // count total likes
+        print("homeVC count total likes")
+        let likes = PFQuery(className: "posts")
+        likes.whereKey("username", equalTo: guestname.last!)
+        likes.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                for object in objects! {
+                    totalLikes = totalLikes + (object.value(forKey: "likes") as? Int32)!
+                }
+                self.likeCount = totalLikes
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     // header config
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -236,6 +275,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "homeHeaderView", for: indexPath) as! homeHeaderView
         
         // load data of guest
+        print("guestVC get guest's data")
         let infoQuery = PFQuery(className: "_User")
         infoQuery.whereKey("username", equalTo: guestname.last!)
         infoQuery.findObjectsInBackground { (objects, error) in
@@ -271,23 +311,9 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             }
         }
         
-        // count total posts
-        let posts = PFQuery(className: "posts")
-        posts.whereKey("username", equalTo: guestname.last!)
-        posts.countObjectsInBackground { (count, error) in
-            if error == nil {
-                header.ideas.text = "\(count)"
-            }
-        }
-        
-        // count total likes
-        let likes = PFQuery(className: "likes")
-        likes.whereKey("to", equalTo: guestname.last!)
-        likes.countObjectsInBackground { (count, error) in
-            if error == nil {
-                header.likes.text = "\(count)"
-            }
-        }
+        // place counted post and like count
+        header.ideas.text = String(postCount)
+        header.likes.text = String(likeCount)
         
         return header
     }

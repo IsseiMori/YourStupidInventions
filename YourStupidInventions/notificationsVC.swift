@@ -35,6 +35,7 @@ class notificationsVC: UITableViewController {
         if isLoggedIn {
             
             // request query
+            print("notificationsVC loadNotifications")
             let query = PFQuery(className: "news")
             query.whereKey("to", equalTo: PFUser.current()!.username!)
             query.limit = 30

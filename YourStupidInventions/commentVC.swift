@@ -263,6 +263,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         query.whereKey("to", equalTo: commentuuid.last!)
         query.limit = self.pageLimit
         query.addAscendingOrder("createdAt")
+        print("commentVC loadComments")
         processQuery(query: query)
     }
     
@@ -273,7 +274,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -290,6 +291,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // count total comments to enable or disable refresher
         let countQuery = PFQuery(className: "comments")
         countQuery.whereKey("to", equalTo: commentuuid.last!)
+        print("commentVC loadmore count")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -308,6 +310,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 self.page = self.page + self.pageLimit
                 
                 query.addAscendingOrder("createdAt")
+                print("commentVC loadmore")
                 self.processQuery(query: query)
             }
         })
@@ -457,6 +460,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             newsObj["type"] = "comment"
             newsObj["checked"] = "no"
             newsObj.saveEventually()
+            print("commentVC save notification")
         }
         
         
@@ -536,6 +540,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             // update total likes in each post
             let query = PFQuery(className: "posts")
             query.whereKey("uuid", equalTo: commentuuid.last!)
+            print("commentVC send like count")
             query.getFirstObjectInBackground { (object, error) in
                 object?.incrementKey("likes", byAmount: self.didLike as NSNumber)
                 object?.saveInBackground(block: { (success, error) in

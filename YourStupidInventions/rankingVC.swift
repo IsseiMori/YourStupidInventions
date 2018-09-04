@@ -100,7 +100,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // sort by likes or time
         query.addDescendingOrder(self.sortBy)
-        
+        print("ranking loadPosts")
         self.processQuery(query: query)
     }
     
@@ -111,7 +111,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -128,6 +128,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // count total comments to enable or disable refresher
         let countQuery = PFQuery(className: "posts")
+        print("ranking loadmore count")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -148,6 +149,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 // sort by likes or time
                 query.addDescendingOrder(self.sortBy)
                 
+                print("ranking loadmore")
                 self.processQuery(query: query)
                 
             }
@@ -335,6 +337,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                     // update total likes in each post
                     let query = PFQuery(className: "posts")
                     query.whereKey("uuid", equalTo: uuidArray[index])
+                    print("ranking send like count")
                     query.getFirstObjectInBackground { (object, error) in
                         object?.incrementKey("likes", byAmount: self.addLikeArray[index] as NSNumber)
                         object?.saveInBackground(block: { (success, error) in

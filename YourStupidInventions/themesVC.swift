@@ -21,6 +21,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     var themeuuidArray = [String]()
     var themeImgArray = [PFFile]()
     
+    
     // page size
     var page: Int = 5
     
@@ -83,6 +84,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         let query = PFQuery(className: "themes")
         query.limit = pageLimit
         query.addDescendingOrder("createdAt")
+        
+        print("themesVC loadPosts")
         processQuery(query: query)
 
     }
@@ -93,7 +96,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -109,6 +112,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         isLoading = true
         
         // count total comments to enable or disable refresher
+        print("themesVC loadmore count")
         let countQuery = PFQuery(className: "posts")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
@@ -128,6 +132,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 // increase page size
                 self.page = self.page + self.pageLimit
                 
+                print("themesVC loadmore")
                 self.processQuery(query: query)
                 
             }

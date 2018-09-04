@@ -8,10 +8,8 @@
 
 import UIKit
 import Parse
-import XLPagerTabStrip
 
-
-class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, IndicatorInfoProvider {
+class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // refresher variable
     var refresher = UIRefreshControl()
@@ -106,6 +104,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         query.whereKey("username", equalTo: PFUser.current()!.username!)
         query.limit = pageLimit
         query.addDescendingOrder("createdAt")
+        print("homeVC loadPost")
         processQuery(query: query)
         
     }
@@ -118,7 +117,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         let distanceToBottom = maximumOffset - currentOffsetY
         
         // if close to the bottom and the content is larger than screen
-        if distanceToBottom < 50 && maximumOffset > 0{
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -137,6 +136,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
             isLoading = true
             
             // count total comments to enable or disable refresher
+            print("homeVC loadmore count")
             let countQuery = PFQuery(className: "posts")
             countQuery.whereKey("username", equalTo: PFUser.current()!.username!)
             countQuery.countObjectsInBackground (block: { (count, error) -> Void in
@@ -158,6 +158,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
                     // increase page size
                     self.page = self.page + self.pageLimit
                     
+                    print("homeVC loadmore")
                     self.processQuery(query: query)
                     
                 }
@@ -247,6 +248,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
     
     func countPostsAndLikes() {
         // count total posts
+        print("homeVC count total posts")
         let posts = PFQuery(className: "posts")
         posts.whereKey("username", equalTo: PFUser.current()!.username!)
         posts.countObjectsInBackground { (count, error) in
@@ -259,6 +261,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         var totalLikes: Int32 = 0
         
         // count total likes
+        print("homeVC count total likes")
         let likes = PFQuery(className: "posts")
         likes.whereKey("username", equalTo: PFUser.current()!.username!)
         likes.findObjectsInBackground { (objects, error) in
@@ -311,12 +314,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         // navigate to postVC
         let comment = self.storyboard?.instantiateViewController(withIdentifier: "commentVC") as! commentVC
         self.navigationController?.pushViewController(comment, animated: true)
-    }
-
-    var itemInfo: IndicatorInfo = "First"
-
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return itemInfo
     }
     
 

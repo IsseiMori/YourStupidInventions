@@ -103,6 +103,7 @@ class postIdeaVC: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         header = tableView.dequeueReusableCell(withIdentifier: "postIdeaHeader") as! postIdeaHeader
         
+        print("postIdeaVC header config")
         let query = PFQuery(className: "themes")
         query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.getFirstObjectInBackground { (object, error) in
@@ -154,6 +155,7 @@ class postIdeaVC: UITableViewController {
         query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.addDescendingOrder("likes")
         
+        print("postIdeaVC loadPosts")
         processQuery(query: query)
     }
     
@@ -164,7 +166,7 @@ class postIdeaVC: UITableViewController {
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        if distanceToBottom < 50 && maximumOffset > 50{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -180,6 +182,7 @@ class postIdeaVC: UITableViewController {
         isLoading = true
         
         // count total comments to enable or disable refresher
+        print("postIdeaVC loadmore count")
         let countQuery = PFQuery(className: "posts")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
@@ -200,6 +203,7 @@ class postIdeaVC: UITableViewController {
                 // increase page size
                 self.page = self.page + self.pageLimit
                 
+                print("postIdeaVC loadmore")
                 self.processQuery(query: query)
                 
             }
@@ -337,6 +341,7 @@ class postIdeaVC: UITableViewController {
         if isLoggedIn {
             
             // save number of likeBtn taps to server
+            print("postIdeaVC send like count")
             for index in 0 ..< addLikeArray.count {
                 if addLikeArray[index] != 0 {
                     
