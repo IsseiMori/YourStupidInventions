@@ -110,6 +110,8 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         sendBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
+        
+        //adjTxt.edi
     }
 
     /* UIImagePickerControllerDelegate */
@@ -236,6 +238,18 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     func textFieldDidEndEditing(_ textField: UITextField) {
         // update title label
         titleLbl.text = "\(adjTxt.text!) \(nounTxt.text!)"
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print(string)
+        
+        // if entered return, dismiss keyboard
+        if string == "\n" {
+            nounTxt.resignFirstResponder()
+            return false
+        }
+        
+        return true
     }
     
     /* UITextFieldDelegate END*/

@@ -57,7 +57,7 @@ class postIdeaVC: UITableViewController {
         self.view.addGestureRecognizer(hideTap)
         
         // receive notification from postIdeaHeader
-        NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "uploaded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "postUploaded"), object: nil)
         
         // new back button
         self.navigationItem.hidesBackButton = true

@@ -11,7 +11,7 @@ import Parse
 
 var postIdeaHeaderHeight: CGFloat = 0
 
-class postIdeaHeader: UITableViewCell {
+class postIdeaHeader: UITableViewCell, UITextViewDelegate {
 
     // UI objects
     @IBOutlet weak var titleLbl: UILabel!
@@ -36,6 +36,9 @@ class postIdeaHeader: UITableViewCell {
         if !isLoggedIn {
             sendBtn.isEnabled = false
         }
+        
+        // set delegate to detect Enter
+        ideaTxt.delegate = self
         
         // call alignment func
         alignment()
@@ -71,6 +74,17 @@ class postIdeaHeader: UITableViewCell {
         sendBtn.clipsToBounds = true
     }
 
+    // ideaTxt content changed
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        // if hit return key, dissimss keyboard
+        if text == "\n" {
+            ideaTxt.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
     
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
@@ -99,15 +113,16 @@ class postIdeaHeader: UITableViewCell {
         object.saveInBackground { (success, error) in
             if success {
                 // send notification with name "uploaded" to postIdeaVC to show newVC
-                 NotificationCenter.default.post(name: NSNotification.Name.init("uploaded"), object: nil)
+                 NotificationCenter.default.post(name: NSNotification.Name.init("postUploaded"), object: nil)
                 
                 //increment theme totalPosts
                 print("postIdeaVC increment totalPosts")
                 let countQuery = PFQuery(className: "themes")
-                countQuery.whereKey("themeuuid", equalTo: themeuuid.last!)
+                countQuery.whereKey("themeuuid", equalTo: self.themeuuidLbl.text!)
                 countQuery.getFirstObjectInBackground(block: { (object, error) in
                     if error == nil {
                         object?.incrementKey("totalPosts", byAmount: 1)
+                        object?.saveEventually()
                     } else {
                         print(error!.localizedDescription)
                     }

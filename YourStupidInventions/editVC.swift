@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
 
     // UI objects
     @IBOutlet weak var avaImg: UIImageView!
@@ -87,6 +87,10 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         bg.image = UIImage(named: "bg.jpg")
         bg.layer.zPosition = -1
         self.view.addSubview(bg)
+        
+        // set delegate to textField to detect Enter
+        fullnameTxt.delegate = self
+        emailTxt.delegate = self
     }
     
     // user information function
@@ -109,6 +113,23 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         emailTxt.text = PFUser.current()?.email
         
+    }
+    
+    
+    // Changed content in textField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if string == "\n" {
+            if textField == usernameTxt {
+                usernameTxt.resignFirstResponder()
+            }
+            if textField == fullnameTxt {
+                fullnameTxt.resignFirstResponder()
+            }
+            return false
+        }
+        
+        return true
     }
 
     
