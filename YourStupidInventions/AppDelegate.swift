@@ -12,6 +12,11 @@ import Parse
 // global variable for maintain login status
 var isLoggedIn = false
 
+// custom UIColors for this app
+let customColorYellow: UIColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
+let customColorBrown: UIColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
+let customColorLightBlack: UIColor = UIColor(red: 37.0 / 255.0, green: 39.0 / 255.0, blue: 42.0 / 255.0, alpha: 1)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

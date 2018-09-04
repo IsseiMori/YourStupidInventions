@@ -30,11 +30,21 @@ class signInVC: UIViewController {
         self.navigationItem.title = "Sign In"
         self.navigationItem.hidesBackButton = true
         
+        // tap to hide keyboard
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+        
         // call alignment func
         alignment()
         
     }
     
+    // hide keyboard
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
     
     // alignment func
     func alignment() {

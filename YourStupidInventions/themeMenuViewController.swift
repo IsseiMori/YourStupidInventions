@@ -19,13 +19,13 @@ class themeMenuViewController: ButtonBarPagerTabStripViewController {
         // Bar font size
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)
         // Bar color
-        settings.style.buttonBarBackgroundColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
+        settings.style.buttonBarBackgroundColor = customColorBrown
         // Button color
-        settings.style.buttonBarItemBackgroundColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1)
+        settings.style.buttonBarItemBackgroundColor = customColorBrown
         // Cell text color
         settings.style.buttonBarItemTitleColor = UIColor.white
         // Select bar color
-        settings.style.selectedBarBackgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
+        settings.style.selectedBarBackgroundColor = customColorYellow
         
         // selected bar height
         settings.style.selectedBarHeight = 5

@@ -68,6 +68,20 @@ class notificationsVC: UITableViewController {
             }
         }
     }
+    
+    
+    // reset notigications VC
+    // currently not being used
+    @objc func resetView() {
+        // clean up
+        self.usernameArray.removeAll(keepingCapacity: false)
+        self.typeArray.removeAll(keepingCapacity: false)
+        self.dateArray.removeAll(keepingCapacity: false)
+        self.uuidArray.removeAll(keepingCapacity: false)
+        self.ownerArray.removeAll(keepingCapacity: false)
+        
+        tableView.reloadData()
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usernameArray.count
