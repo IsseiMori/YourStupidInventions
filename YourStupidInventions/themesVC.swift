@@ -36,7 +36,9 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     
     // set up in menuVC
     var sortBy: String = ""
-    var filterBy: String = ""
+    var filterByAdj: String = ""
+    var filterByNoun: String = ""
+    var filterByCategory: String = ""
     
 
     override func viewDidLoad() {
@@ -86,6 +88,17 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         query.limit = pageLimit
         query.addDescendingOrder("createdAt")
         
+        // filter
+        if !self.filterByAdj.isEmpty {
+            query.whereKey("adjective", equalTo: self.filterByAdj)
+        }
+        if !self.filterByNoun.isEmpty {
+            query.whereKey("noun", equalTo: self.filterByNoun)
+        }
+        if !self.filterByCategory.isEmpty {
+            query.whereKey("category", equalTo: self.filterByCategory)
+        }
+        
         print("themesVC loadPosts")
         processQuery(query: query)
 
@@ -123,6 +136,18 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // count total comments to enable or disable refresher
         print("themesVC loadmore count")
         let countQuery = PFQuery(className: "themes")
+        
+        // filter
+        if !self.filterByAdj.isEmpty {
+            countQuery.whereKey("adjective", equalTo: self.filterByAdj)
+        }
+        if !self.filterByNoun.isEmpty {
+            countQuery.whereKey("noun", equalTo: self.filterByNoun)
+        }
+        if !self.filterByCategory.isEmpty {
+            countQuery.whereKey("category", equalTo: self.filterByCategory)
+        }
+        
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -138,12 +163,24 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 query.limit = self.pageLimit
                 query.addDescendingOrder("createdAt")
                 
+                // filter
+                if !self.filterByAdj.isEmpty {
+                    query.whereKey("adjective", equalTo: self.filterByAdj)
+                }
+                if !self.filterByNoun.isEmpty {
+                    query.whereKey("noun", equalTo: self.filterByNoun)
+                }
+                if !self.filterByCategory.isEmpty {
+                    query.whereKey("category", equalTo: self.filterByCategory)
+                }
+                
                 // increase page size
                 self.page = self.page + self.pageLimit
                 
-                print("themesVC loadmore")
                 self.isLoading = false
-                //self.processQuery(query: query)
+                
+                print("themesVC loadmore")
+                self.processQuery(query: query)
                 
             }
         })
