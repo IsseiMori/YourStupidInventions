@@ -269,12 +269,21 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
                 }
             }
             
+            // initialize
+            var totalLikes: Int = 0
+            header.likes.text = "0"
+            
             // count total likes
-            let likes = PFQuery(className: "likes")
-            likes.whereKey("to", equalTo: PFUser.current()!.username!)
-            likes.countObjectsInBackground { (count, error) in
+            let likes = PFQuery(className: "posts")
+            likes.whereKey("username", equalTo: PFUser.current()!.username!)
+            likes.findObjectsInBackground { (objects, error) in
                 if error == nil {
-                    header.likes.text = "\(count)"
+                    for object in objects! {
+                        totalLikes = totalLikes + (object.value(forKey: "likes") as? Int)!
+                        header.likes.text = String(totalLikes)
+                    }
+                } else {
+                    print(error!.localizedDescription)
                 }
             }
         }
