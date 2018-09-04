@@ -95,10 +95,23 @@ class postIdeaHeader: UITableViewCell {
         // copy the themeuuid
         object["themeuuid"] = themeuuidLbl.text
         
+        print("postIdea save")
         object.saveInBackground { (success, error) in
             if success {
                 // send notification with name "uploaded" to postIdeaVC to show newVC
                  NotificationCenter.default.post(name: NSNotification.Name.init("uploaded"), object: nil)
+                
+                //increment theme totalPosts
+                print("postIdeaVC increment totalPosts")
+                let countQuery = PFQuery(className: "themes")
+                countQuery.whereKey("themeuuid", equalTo: themeuuid.last!)
+                countQuery.getFirstObjectInBackground(block: { (object, error) in
+                    if error == nil {
+                        object?.incrementKey("totalPosts", byAmount: 1)
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                })
                 
                 // reset text field
                 self.ideaTxt.text = ""
