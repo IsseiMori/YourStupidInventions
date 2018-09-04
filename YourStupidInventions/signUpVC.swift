@@ -82,10 +82,12 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.width / 20
         
         // background
-        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        /*let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named: "bg.jpg")
         bg.layer.zPosition = -1
-        self.view.addSubview(bg)
+        self.view.addSubview(bg)*/
+        
+        signUpBtn.backgroundColor = customColorYellow
         
     }
     

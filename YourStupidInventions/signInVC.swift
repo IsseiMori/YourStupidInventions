@@ -51,6 +51,7 @@ class signInVC: UIViewController {
         
         // font of label
         label.font = UIFont(name: "Pacifico", size: 25)
+        label.textColor = customColorYellow
         
         label.frame = CGRect(x: 10, y: 80, width: self.view.frame.size.width - 20, height: 50)
         usernameTxt.frame = CGRect(x: 10, y: label.frame.origin.y + 70, width: self.view.frame.size.width - 20, height: 30)
@@ -64,10 +65,16 @@ class signInVC: UIViewController {
         signUpBtn.layer.cornerRadius = signUpBtn.frame.size.width / 20
         
         // background
-        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        /*let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named: "bg.jpg")
         bg.layer.zPosition = -1
         self.view.addSubview(bg)
+        */
+        
+        forgotBtn.setTitleColor(customColorYellow, for: UIControlState.normal)
+        
+        signInBtn.backgroundColor = customColorYellow
+        signUpBtn.backgroundColor = customColorYellow
     }
 
     
