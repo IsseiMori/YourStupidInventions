@@ -43,6 +43,9 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
 
         self.navigationItem.title = "Themes"
         
+        // tableView margin in the bottom to avoid the last cell to be hidden by tabBar
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
+        
         //automatic row height - dynamic cell
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300

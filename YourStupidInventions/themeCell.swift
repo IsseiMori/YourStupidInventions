@@ -41,11 +41,11 @@ class themeCell: UITableViewCell {
             options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "posts": postsBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[theme]-10-[posts]",
+            withVisualFormat: "V:[theme]-15-[posts]",
             options: [], metrics: nil, views: ["theme": themeImg, "posts": postsLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[theme]-5-[post(30)]",
+            withVisualFormat: "V:[theme]-10-[post(30)]",
             options: [], metrics: nil, views: ["theme": themeImg, "post": postIdeaBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -77,6 +77,10 @@ class themeCell: UITableViewCell {
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
+        
+        postIdeaBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
+        postIdeaBtn.layer.cornerRadius = 5
+        postIdeaBtn.clipsToBounds = true
     }
 
 

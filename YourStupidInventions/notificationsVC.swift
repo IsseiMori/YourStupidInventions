@@ -20,6 +20,9 @@ class notificationsVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // tableView margin in the bottom to avoid the last cell to be hidden by tabBar
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
 
         // dynamic cell height
         tableView.rowHeight = UITableViewAutomaticDimension
