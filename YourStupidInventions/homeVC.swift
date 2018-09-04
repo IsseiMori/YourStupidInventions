@@ -23,6 +23,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
     var pageLimit: Int = 4
     
     // loading status to avoid keep loading
+    // also false if no more to load
     var isLoading = false
     
     var uuidArray = [String]()
@@ -49,8 +50,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         collectionView?.addSubview(refresher)
         
-        // receive notification from editVC
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reload), name: NSNotification.Name(rawValue: "reload"), object: nil)
         
         // new back button if not root
         if (self.navigationController?.viewControllers.first != self.navigationController?.visibleViewController) {
@@ -87,13 +86,12 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         refresher.endRefreshing()
     }
     
-    // reload func with profile after receiving notification
-    @objc func reload(notification: NSNotification) {
-        collectionView?.reloadData()
-    }
     
     // load posts func
     @objc func loadPosts() {
+        
+        // update posts and likes count
+        countPostsAndLikes()
         
         // set loading status to processing
         isLoading = true
@@ -119,7 +117,8 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
-        if distanceToBottom < 50 {
+        // if close to the bottom and the content is larger than screen
+        if distanceToBottom < 50 && maximumOffset > 0{
             // don't load more if still loading
             if !isLoading {
                 loadMore()
@@ -243,6 +242,38 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
     
     
     // header config
+    var postCount: Int32 = 0
+    var likeCount: Int32 = 0
+    
+    func countPostsAndLikes() {
+        // count total posts
+        let posts = PFQuery(className: "posts")
+        posts.whereKey("username", equalTo: PFUser.current()!.username!)
+        posts.countObjectsInBackground { (count, error) in
+            if error == nil {
+                self.postCount = count
+            }
+        }
+        
+        // initialize
+        var totalLikes: Int32 = 0
+        
+        // count total likes
+        let likes = PFQuery(className: "posts")
+        likes.whereKey("username", equalTo: PFUser.current()!.username!)
+        likes.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                for object in objects! {
+                    totalLikes = totalLikes + (object.value(forKey: "likes") as? Int32)!
+                }
+                self.likeCount = totalLikes
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         // define header
@@ -260,32 +291,10 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, In
                 header.avaImg.image = UIImage(data: data!)
             }
 
-            // count total posts
-            let posts = PFQuery(className: "posts")
-            posts.whereKey("username", equalTo: PFUser.current()!.username!)
-            posts.countObjectsInBackground { (count, error) in
-                if error == nil {
-                    header.ideas.text = "\(count)"
-                }
-            }
-            
-            // initialize
-            var totalLikes: Int = 0
-            header.likes.text = "0"
-            
-            // count total likes
-            let likes = PFQuery(className: "posts")
-            likes.whereKey("username", equalTo: PFUser.current()!.username!)
-            likes.findObjectsInBackground { (objects, error) in
-                if error == nil {
-                    for object in objects! {
-                        totalLikes = totalLikes + (object.value(forKey: "likes") as? Int)!
-                        header.likes.text = String(totalLikes)
-                    }
-                } else {
-                    print(error!.localizedDescription)
-                }
-            }
+            // place counted post and like count
+            header.ideas.text = String(postCount)
+            header.likes.text = String(likeCount)
+
         }
 
         return header
