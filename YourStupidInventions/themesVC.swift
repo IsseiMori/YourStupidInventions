@@ -20,7 +20,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     var titleArray = [String]()
     var themeuuidArray = [String]()
     var themeImgArray = [PFFile]()
-    
+    var totalPostsArray = [Int32]()
     
     // page size
     var page: Int = 5
@@ -45,7 +45,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         self.navigationItem.title = "Themes"
         
         // tableView margin in the bottom to avoid the last cell to be hidden by tabBar
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         
         //automatic row height - dynamic cell
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -80,6 +80,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         self.titleArray.removeAll(keepingCapacity: false)
         self.themeuuidArray.removeAll(keepingCapacity: false)
         self.themeImgArray.removeAll(keepingCapacity: false)
+        self.totalPostsArray.removeAll(keepingCapacity: false)
         
         let query = PFQuery(className: "themes")
         query.limit = pageLimit
@@ -91,16 +92,24 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     }
     
     // scrolled down
+    // isAtBottom to avoid keep requesting query
+    // has to get out the loadMore area once to request another
+    var isAtBottom: Bool = false
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffsetY = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
         if distanceToBottom < 50 && maximumOffset > 50{
+ 
             // don't load more if still loading
-            if !isLoading {
+            // if this is the first time to reach the bottom, loadMore and set isAtBottom to true
+            if !isLoading && !isAtBottom{
+                isAtBottom = true
                 loadMore()
             }
+        } else {
+            isAtBottom = false
         }
     }
     
@@ -113,7 +122,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         
         // count total comments to enable or disable refresher
         print("themesVC loadmore count")
-        let countQuery = PFQuery(className: "posts")
+        let countQuery = PFQuery(className: "themes")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
             // self refresher
@@ -133,7 +142,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 self.page = self.page + self.pageLimit
                 
                 print("themesVC loadmore")
-                self.processQuery(query: query)
+                self.isLoading = false
+                //self.processQuery(query: query)
                 
             }
         })
@@ -149,6 +159,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                     self.titleArray.append(object.object(forKey: "title") as! String)
                     self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
                     self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
+                    self.totalPostsArray.append(object.value(forKey: "totalPosts") as! Int32)
                 }
                 
                 // reload tableView and end refresh animation
@@ -176,7 +187,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! themeCell
         
-        cell.titleLbl.text = self.titleArray[indexPath.row]
+        cell.titleLbl.text = titleArray[indexPath.row]
         cell.themeuuidLbl.text = themeuuidArray[indexPath.row]
         
         themeImgArray[indexPath.row].getDataInBackground { (data, error) in
@@ -187,16 +198,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
             }
         }
         
-        // count number of posts
-        let postsQuery = PFQuery(className: "posts")
-        postsQuery.whereKey("themeuuid", equalTo: self.themeuuidArray[indexPath.row])
-        postsQuery.countObjectsInBackground(block: { (count, error) in
-            if error == nil {
-                cell.postsLbl.text = "\(count)"
-            } else {
-                print(error!.localizedDescription)
-            }
-        })
+        // total posts of the theme
+        cell.postsLbl.text = String(totalPostsArray[indexPath.row])
         
         // assign index
         cell.postIdeaBtn.layer.setValue(indexPath, forKey: "index")

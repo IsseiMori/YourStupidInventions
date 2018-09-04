@@ -269,16 +269,24 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     
     
     // scrolled down
+    // isAtBottom to avoid keep requesting query
+    // has to get out the loadMore area once to request another
+    var isAtBottom: Bool = false
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffsetY = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - self.view.frame.size.height
         let distanceToBottom = maximumOffset - currentOffsetY
         
         if distanceToBottom < 50 && maximumOffset > 50{
+            
             // don't load more if still loading
-            if !isLoading {
+            // if this is the first time to reach the bottom, loadMore and set isAtBottom to true
+            if !isLoading && !isAtBottom{
+                isAtBottom = true
                 loadMore()
             }
+        } else {
+            isAtBottom = false
         }
     }
     
