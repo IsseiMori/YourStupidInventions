@@ -1141,6 +1141,20 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjy-mv-0Fh">
+                                            <rect key="frame" x="153" y="164" width="68" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hashtags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsU-Ea-ga9">
+                                            <rect key="frame" x="153" y="164" width="71" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="noun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sO8-fF-30d">
                                             <rect key="frame" x="146" y="163.5" width="39" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1172,6 +1186,8 @@
                                 <connections>
                                     <outlet property="adjLbl" destination="IAR-TP-Ank" id="yLq-Rp-arF"/>
                                     <outlet property="bgView" destination="aIl-WK-M27" id="ICH-Nb-LtI"/>
+                                    <outlet property="categoryLbl" destination="xjy-mv-0Fh" id="sFL-ga-2u2"/>
+                                    <outlet property="hashtagsLbl" destination="zsU-Ea-ga9" id="0Ah-WB-zud"/>
                                     <outlet property="ideaTxt" destination="edl-Vz-1uC" id="nSF-QH-iXv"/>
                                     <outlet property="nounLbl" destination="sO8-fF-30d" id="Whd-dk-4b8"/>
                                     <outlet property="sendBtn" destination="txt-Ny-sh9" id="gcI-1f-pTT"/>

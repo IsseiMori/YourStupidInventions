@@ -16,12 +16,16 @@ class postIdeaHeader: UITableViewCell {
     // UI objects
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
-    @IBOutlet weak var themeuuidLbl: UILabel!
-    @IBOutlet weak var adjLbl: UILabel!
-    @IBOutlet weak var nounLbl: UILabel!
     @IBOutlet weak var ideaTxt: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var bgView: UIView!
+    
+    // hidden label to save theme data temporary
+    @IBOutlet weak var themeuuidLbl: UILabel!
+    @IBOutlet weak var adjLbl: UILabel!
+    @IBOutlet weak var nounLbl: UILabel!
+    @IBOutlet weak var categoryLbl: UILabel!
+    @IBOutlet weak var hashtagsLbl: UILabel!
     
     var themeImgPFFile: PFFile!
     
@@ -84,6 +88,8 @@ class postIdeaHeader: UITableViewCell {
         object["title"] = titleLbl.text!
         object["adjective"] = adjLbl.text!
         object["noun"] = nounLbl.text!
+        object["category"] = categoryLbl.text!
+        object["hashtags"] = hashtagsLbl.text!
         
         // copy the themeuuid
         object["themeuuid"] = themeuuidLbl.text

@@ -109,6 +109,10 @@ class postIdeaVC: UITableViewController {
             if error == nil {
                 
                 self.header.titleLbl.text = object?.object(forKey: "title") as? String
+                self.header.adjLbl.text = object?.object(forKey: "adjective") as? String
+                self.header.nounLbl.text = object?.object(forKey: "noun") as? String
+                self.header.categoryLbl.text = object?.object(forKey: "category") as? String
+                self.header.hashtagsLbl.text = object?.object(forKey: "hashtags") as? String
                 
                 self.header.themeuuidLbl.text = themeuuid.last!
                 
