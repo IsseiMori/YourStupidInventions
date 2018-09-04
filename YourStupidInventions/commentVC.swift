@@ -69,8 +69,12 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
         
-        let moreBtn = UIBarButtonItem(image: UIImage(named: "moreNav.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.more))
-        self.navigationItem.rightBarButtonItem = moreBtn
+        // more button to delete or complain
+        // delete if to enable delete post func
+        if commentowner.last! != PFUser.current()?.username {
+            let moreBtn = UIBarButtonItem(image: UIImage(named: "moreNav.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.more))
+            self.navigationItem.rightBarButtonItem = moreBtn
+        }
 
         // present commentHeaderCell as header
         self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
