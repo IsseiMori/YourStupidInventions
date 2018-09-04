@@ -66,7 +66,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         tableView.addSubview(refresher)
         
         // receive post cell liked notification to update tableView
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
         
         // call load posts func
         loadPosts()
@@ -116,7 +116,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        
+        print(itemInfo.title!)
         print("ranking loadPosts")
         self.processQuery(query: query)
     }

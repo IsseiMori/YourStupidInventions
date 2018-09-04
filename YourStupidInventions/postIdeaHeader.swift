@@ -98,7 +98,8 @@ class postIdeaHeader: UITableViewCell {
         object.saveInBackground { (success, error) in
             if success {
                 // send notification with name "uploaded" to postIdeaVC to show newVC
-                NotificationCenter.default.post(name: NSNotification.Name.init("uploaded"), object: nil)
+                // change this because this calls every rankingVC
+                // NotificationCenter.default.post(name: NSNotification.Name.init("uploaded"), object: nil)
                 
                 // reset text field
                 self.ideaTxt.text = ""

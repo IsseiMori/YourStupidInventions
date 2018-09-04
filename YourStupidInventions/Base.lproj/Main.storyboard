@@ -784,6 +784,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="themeuuid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anA-es-PQw">
+                                                    <rect key="frame" x="171" y="174" width="82" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4YA-hf-5HF">
                                                     <rect key="frame" x="15" y="59" width="345" height="161"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -814,6 +821,7 @@
                                             <outlet property="likeBtn" destination="lux-UP-3FS" id="RVV-yv-Ebd"/>
                                             <outlet property="likeLbl" destination="Uhd-6e-05L" id="YJy-PT-tpx"/>
                                             <outlet property="themeImg" destination="4YA-hf-5HF" id="8rR-g1-ugg"/>
+                                            <outlet property="themeuuid" destination="anA-es-PQw" id="uY3-QI-beY"/>
                                             <outlet property="titleLbl" destination="1NL-re-xuY" id="ysb-10-1Tx"/>
                                             <outlet property="usernameBtn" destination="P04-KZ-YCV" id="nEo-uc-lr4"/>
                                             <outlet property="uuidLbl" destination="RqA-gr-9rZ" id="HSx-iv-4Ir"/>
@@ -1099,7 +1107,7 @@
         <scene sceneID="zHH-bz-h7q">
             <objects>
                 <tableViewController storyboardIdentifier="postIdeaVC" id="2ys-aa-7hS" customClass="postIdeaVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="FLI-Tw-YPn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="FLI-Tw-YPn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1108,7 +1116,7 @@
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IMz-YR-anR" id="8VU-1c-thj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aIl-WK-M27">
@@ -1200,7 +1208,7 @@
                                 <rect key="frame" x="0.0" y="405.5" width="375" height="261"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oaz-EX-YI9" id="ShB-gB-CZB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="261"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Wx-H2-wtA">

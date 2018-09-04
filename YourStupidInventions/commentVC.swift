@@ -68,6 +68,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
+        
+        let moreBtn = UIBarButtonItem(image: UIImage(named: "moreNav.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.more))
+        self.navigationItem.rightBarButtonItem = moreBtn
 
         // present commentHeaderCell as header
         self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
@@ -584,6 +587,113 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         if !commentowner.isEmpty {
             commentowner.removeLast()
         }
+    }
+    
+    @objc func more(sender: UIBarButtonItem) {
+        
+        // delete action
+        let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.default) { (UIAlertAction) in
+            
+            // delete posts on server
+            print("commentVC delete post")
+            let postQuery = PFQuery(className: "posts")
+            postQuery.whereKey("uuid", equalTo: commentuuid.last!)
+            postQuery.findObjectsInBackground(block: { (objects, error) in
+                if error == nil {
+                    for object in objects! {
+                        object.deleteInBackground(block: { (success, error) in
+                            if success {
+                                // back func, delete uuid
+                                self.back(sender: sender)
+                            } else {
+                                print(error!.localizedDescription)
+                            }
+                        })
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            // delete comments on server
+            print("commentVC delete comments to the post")
+            let commentQuery = PFQuery(className: "comments")
+            commentQuery.whereKey("to", equalTo: commentuuid.last!)
+            commentQuery.findObjectsInBackground(block: { (objects, error) in
+                if error == nil {
+                    for object in objects! {
+                        object.deleteEventually()
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            // decrement totalPosts of the theme
+            print("commentVC decrement totalPosts of the theme")
+            let themeQuery = PFQuery(className: "themes")
+            themeQuery.whereKey("themeuuid", equalTo: self.header.themeuuid.text!)
+            themeQuery.findObjectsInBackground(block: { (objects, error) in
+                if error == nil {
+                    for object in objects! {
+                        object.incrementKey("totalPosts", byAmount: -1)
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            })
+            
+            // delete notifications on server
+            print("commentVC delete comment notifications of the post")
+            let newsQuery = PFQuery(className: "news")
+            newsQuery.whereKey("uuid", equalTo: commentuuid.last!)
+            newsQuery.findObjectsInBackground(block: { (objects, error) in
+                if error == nil {
+                    for object in objects! {
+                        object.deleteEventually()
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            })
+        }
+        
+        
+        // complain action
+        let complain = UIAlertAction(title: "Complain", style: UIAlertActionStyle.default) { (UIAlertAction) in
+            // send complain to server
+            print("commentVC send complain")
+            let complainObj = PFObject(className: "complain")
+            complainObj["by"] = PFUser.current()?.username
+            complainObj["to"] = commentowner.last!
+            complainObj["uuid"] = commentuuid.last!
+            complainObj.saveInBackground(block: { (success, error) in
+                if success {
+                    self.alert(title: "Complain has been made successfully", message: "Thank you! We will consider your complain")
+                } else {
+                    self.alert(title: "Error", message: error!.localizedDescription)
+                }
+            })
+        }
+        
+        // CANCEL ACTION
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        // create menu controller
+        let menu = UIAlertController(title: "Menu", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        
+        // if post belongs to user, they can delete, else they can only complain
+        if commentowner.last! == PFUser.current()?.username {
+            menu.addAction(delete)
+            menu.addAction(cancel)
+        } else {
+            menu.addAction(complain)
+            menu.addAction(cancel)
+        }
+        
+        // show menu
+        self.present(menu, animated: true, completion: nil)
     }
     
     

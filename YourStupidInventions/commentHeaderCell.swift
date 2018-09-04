@@ -20,6 +20,7 @@ class commentHeaderCell: UITableViewCell{
     @IBOutlet weak var likeLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var uuidLbl: UILabel!
+    @IBOutlet weak var themeuuid: UILabel!
     
     // buttons
     @IBOutlet weak var likeBtn: UIButton!
@@ -42,6 +43,7 @@ class commentHeaderCell: UITableViewCell{
                 self.likeLbl.text = String(object?.value(forKey: "likes") as! Int)
                 self.uuidLbl.text = commentuuid.last!
                 self.usernameBtn.setTitle(commentowner.last!, for: UIControlState.normal)
+                self.themeuuid.text = object?.object(forKey: "themeuuid") as? String
                 
                 // place theme image
                 (object?.object(forKey: "theme") as! PFFile).getDataInBackground { (data, error) in
