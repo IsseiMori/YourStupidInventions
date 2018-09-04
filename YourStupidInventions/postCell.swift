@@ -51,7 +51,7 @@ class postCell: UITableViewCell {
         let themeHeight = themeWidth / 16 * 9
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-(-5)-[like(50)]-5-|",
             options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -83,7 +83,7 @@ class postCell: UITableViewCell {
             options: [], metrics: nil, views: ["idea": ideaLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-25-[like(30)]-10-[likes]",
+            withVisualFormat: "H:|-15-[like(50)]-0-[likes]",
             options: [], metrics: nil, views: ["like": likeBtn, "likes": likeLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(

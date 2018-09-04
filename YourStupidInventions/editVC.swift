@@ -133,6 +133,38 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     }
 
     
+    // clicked send button
+    @IBAction func sendBtn_clicked(_ sender: Any) {
+        
+        // save filled in infromation
+        let user = PFUser.current()!
+        user.email = emailTxt.text?.lowercased()
+        user["fullname"] = fullnameTxt.text?.lowercased()
+
+        // save profile picture
+        let avaData = UIImageJPEGRepresentation(avaImg.image!, 0.5)
+        let avaFile = PFFile(name: "ava.jpg", data: avaData!)
+        user["ava"] = avaFile
+        
+        // send filled information to the server
+        user.saveInBackground { (success, error) in
+            if success {
+                
+                // hide keyboard
+                self.view.endEditing(true)
+                
+                //dismiss editVC
+                self.dismiss(animated: true, completion: nil)
+                
+                // send notification to reload homeVC
+                // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil )
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
     // clicked cancel button
     @IBAction func cancel_clicked(_ sender: Any) {
         self.view.endEditing(true)

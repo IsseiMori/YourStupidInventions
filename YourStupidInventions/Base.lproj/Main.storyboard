@@ -422,7 +422,11 @@
                                 <action selector="cancel_clicked:" destination="VGs-Hx-J4e" id="0Ha-3g-bOR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Vqa-Pf-RMn"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Vqa-Pf-RMn">
+                            <connections>
+                                <action selector="sendBtn_clicked:" destination="VGs-Hx-J4e" id="6x5-4U-WT6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="avaImg" destination="duh-V8-xct" id="VHK-Oi-P6V"/>
@@ -1546,7 +1550,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dollar_unlike.png" width="256" height="256"/>
+        <image name="dollar_unlike.png" width="100" height="100"/>
         <image name="home.png" width="30" height="30"/>
         <image name="idea.png" width="30" height="30"/>
         <image name="leaf.png" width="30" height="30"/>
