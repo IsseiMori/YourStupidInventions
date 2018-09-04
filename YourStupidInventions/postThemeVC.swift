@@ -23,9 +23,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // pickerView and pickerData
     var adjPicker: UIPickerView!
-    var adjs = ["Innovative", "Future"]
+    var adjs = ["Innovative", "Unexpected", "Future"]
     var categoryPicker: UIPickerView!
-    var categories = ["Appliance", "Software", "Entertainment", "Sports", "Others"]
+    var categories = ["Appliance", "Software", "Food", "Entertainment", "Sports", "Others"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,9 +199,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // picker text number
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == adjPicker {
-            return 2
+            return 3
         } else {
-            return 5
+            return 6
         }
     }
     

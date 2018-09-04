@@ -60,19 +60,24 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         cat2VC.filterByCategory = "Software"
         
         let cat3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat3VC.itemInfo = "Entertainment"
+        cat3VC.itemInfo = "Food"
         cat3VC.sortBy = "likes"
-        cat3VC.filterByCategory = "Entertainment"
+        cat3VC.filterByCategory = "Food"
         
         let cat4VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat4VC.itemInfo = "Sports"
+        cat4VC.itemInfo = "Entertainment"
         cat4VC.sortBy = "likes"
-        cat4VC.filterByCategory = "Sports"
+        cat4VC.filterByCategory = "Entertainment"
         
         let cat5VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat5VC.itemInfo = "Others"
+        cat5VC.itemInfo = "Sports"
         cat5VC.sortBy = "likes"
-        cat5VC.filterByCategory = "Others"
+        cat5VC.filterByCategory = "Sports"
+        
+        let cat6VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
+        cat6VC.itemInfo = "Others"
+        cat6VC.sortBy = "likes"
+        cat6VC.filterByCategory = "Others"
         
         let adj1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         adj1VC.itemInfo = "Innovative"
@@ -90,7 +95,7 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         adj3VC.sortBy = "likes"
         adj3VC.filterByAdj = "Future"
         
-        let childViewControllers:[UIViewController] = [adj1VC, adj2VC, adj3VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC]
+        let childViewControllers:[UIViewController] = [adj1VC, adj2VC, adj3VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC, cat6VC]
         
         
         return childViewControllers
