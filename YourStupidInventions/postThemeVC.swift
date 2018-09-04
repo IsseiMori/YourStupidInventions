@@ -107,7 +107,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         nounTxt.frame = CGRect(x: 10, y: adjTxt.frame.origin.y + adjTxt.frame.size.height + 10, width: width - 20, height: 30)
         sendBtn.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width - 20, height: 30)
         
-        
+        sendBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
     }
@@ -214,7 +214,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
     }
     
-    // picker selected a gender
+    // picker selected a row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == adjPicker {
@@ -259,7 +259,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         object["adjective"] = adjTxt.text!
         object["noun"] = nounTxt.text!
+        object["category"] = categoryTxt.text!
         object["title"] = "\(adjTxt.text!) \(nounTxt.text!)"
+        
+        object["totalPosts"] = 0
         
         object["hashtags"] = "#\(adjTxt.text!) #\(categoryTxt.text!) #\(nounTxt.text!)"
         

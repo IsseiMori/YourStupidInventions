@@ -38,7 +38,7 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // move to All tab
-        moveToViewController(at: 2, animated: false)
+        moveToViewController(at: 3, animated: false)
     }
     
     
@@ -48,44 +48,49 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         let allVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         allVC.itemInfo = "All"
         allVC.sortBy = "likes"
-        allVC.filterBy = ""
         
         let cat1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         cat1VC.itemInfo = "Appliance"
         cat1VC.sortBy = "likes"
-        cat1VC.filterBy = ""
+        cat1VC.filterByCategory = "Appliance"
         
         let cat2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         cat2VC.itemInfo = "Software"
         cat2VC.sortBy = "likes"
-        cat2VC.filterBy = ""
+        cat2VC.filterByCategory = "Software"
         
         let cat3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         cat3VC.itemInfo = "Entertainment"
         cat3VC.sortBy = "likes"
-        cat3VC.filterBy = ""
+        cat3VC.filterByCategory = "Entertainment"
         
         let cat4VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         cat4VC.itemInfo = "Sports"
         cat4VC.sortBy = "likes"
-        cat4VC.filterBy = ""
+        cat4VC.filterByCategory = "Sports"
         
         let cat5VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         cat5VC.itemInfo = "Others"
         cat5VC.sortBy = "likes"
-        cat5VC.filterBy = ""
+        cat5VC.filterByCategory = "Others"
         
         let adj1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         adj1VC.itemInfo = "Innovative"
+        adj1VC.filterByAdj = "Innovative"
         adj1VC.sortBy = "likes"
-        adj1VC.filterBy = ""
+        adj1VC.filterByAdj = "Innovative"
         
         let adj2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         adj2VC.itemInfo = "Unexpected"
         adj2VC.sortBy = "likes"
-        adj2VC.filterBy = ""
+        adj2VC.filterByAdj = "Unexpected"
         
-        let childViewControllers:[UIViewController] = [adj1VC, adj2VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC]
+        let adj3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
+        adj3VC.itemInfo = "Future"
+        adj3VC.sortBy = "likes"
+        adj3VC.filterByAdj = "Future"
+        
+        let childViewControllers:[UIViewController] = [adj1VC, adj2VC, adj3VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC]
         
         
         return childViewControllers

@@ -47,14 +47,14 @@ class postIdeaHeader: UITableViewCell {
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
-        postIdeaHeaderHeight = themeHeight + 190 + 15
+        postIdeaHeaderHeight = themeHeight + 155 + 15
         
         bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
         
         titleLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: 30)
         themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 5, width: themeWidth, height: themeHeight)
-        ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height, width: bgView.frame.size.width - 20, height: 80)
-        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height, width: bgView.frame.size.width - 20, height: 30)
+        ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 80)
+        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 30)
         
         ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         
@@ -66,6 +66,7 @@ class postIdeaHeader: UITableViewCell {
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
         
+        sendBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         sendBtn.layer.cornerRadius = self.frame.size.width / 100
         sendBtn.clipsToBounds = true
     }

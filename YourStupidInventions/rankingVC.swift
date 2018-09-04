@@ -43,7 +43,9 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // set up in menuVC
     var sortBy: String = ""
-    var filterBy: String = ""
+    var filterByAdj: String = ""
+    var filterByNoun: String = ""
+    var filterByCategory: String = ""
     
     // default
     override func viewDidLoad() {
@@ -99,7 +101,22 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         query.limit = self.pageLimit
         
         // sort by likes or time
-        query.addDescendingOrder(self.sortBy)
+        if !self.sortBy.isEmpty {
+            query.addDescendingOrder(self.sortBy)
+        }
+        
+        // filter
+        if !self.filterByAdj.isEmpty {
+            query.whereKey("adjective", equalTo: self.filterByAdj)
+        }
+        if !self.filterByNoun.isEmpty {
+            query.whereKey("noun", equalTo: self.filterByNoun)
+        }
+        if !self.filterByCategory.isEmpty {
+            query.whereKey("category", equalTo: self.filterByCategory)
+        }
+        
+        
         print("ranking loadPosts")
         self.processQuery(query: query)
     }
@@ -136,6 +153,18 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // count total comments to enable or disable refresher
         let countQuery = PFQuery(className: "posts")
+        
+        // filter
+        if !self.filterByAdj.isEmpty {
+            countQuery.whereKey("adjective", equalTo: self.filterByAdj)
+        }
+        if !self.filterByNoun.isEmpty {
+            countQuery.whereKey("noun", equalTo: self.filterByNoun)
+        }
+        if !self.filterByCategory.isEmpty {
+            countQuery.whereKey("category", equalTo: self.filterByCategory)
+        }
+        
         print("ranking loadmore count")
         countQuery.countObjectsInBackground (block: { (count, error) -> Void in
             
@@ -155,7 +184,20 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 self.page = self.page + self.pageLimit
                 
                 // sort by likes or time
-                query.addDescendingOrder(self.sortBy)
+                if !self.sortBy.isEmpty {
+                    query.addDescendingOrder(self.sortBy)
+                }
+                
+                // filter
+                if !self.filterByAdj.isEmpty {
+                    query.whereKey("adjective", equalTo: self.filterByAdj)
+                }
+                if !self.filterByNoun.isEmpty {
+                    query.whereKey("noun", equalTo: self.filterByNoun)
+                }
+                if !self.filterByCategory.isEmpty {
+                    query.whereKey("category", equalTo: self.filterByCategory)
+                }
                 
                 print("ranking loadmore")
                 self.processQuery(query: query)
@@ -190,7 +232,9 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 self.refresher.endRefreshing()
                 
                 // set loading status to finished
-                self.isLoading = false
+                if !(objects?.isEmpty)! {
+                    self.isLoading = false
+                }
                 
             } else {
                 print(error!.localizedDescription)
