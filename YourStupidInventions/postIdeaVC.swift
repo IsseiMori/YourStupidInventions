@@ -44,7 +44,7 @@ class postIdeaVC: UITableViewController {
         super.viewDidLoad()
         
         // title at the top
-        self.navigationItem.title = "Your idea"
+        self.navigationItem.title = themetitle.last!
         
         // automatic row height - dynamic cell
         //tableView.estimatedRowHeight = 300
@@ -393,6 +393,11 @@ class postIdeaVC: UITableViewController {
         // clean themeuuid from holding last information
         if !themeuuid.isEmpty {
             themeuuid.removeLast()
+        }
+        
+        // clean themetitle from holding last information
+        if !themetitle.isEmpty {
+            themetitle.removeLast()
         }
     }
     

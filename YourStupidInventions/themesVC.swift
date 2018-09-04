@@ -243,6 +243,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // assign index
         cell.postIdeaBtn.layer.setValue(indexPath, forKey: "index")
         cell.postIdeaBtn.layer.setValue(themeuuidArray[indexPath.row], forKey: "themeuuid")
+        cell.postIdeaBtn.layer.setValue(titleArray[indexPath.row], forKey: "title")
         
         return cell
     }
@@ -265,6 +266,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         themeuuid.append(themeuuidArray[indexPath.row])
+        themetitle.append(titleArray[indexPath.row])
         
         // present postIdeaVC
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
@@ -279,6 +281,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         let button = sender as! UIButton
         
         themeuuid.append(button.layer.value(forKey: "themeuuid") as! String)
+        themetitle.append(button.layer.value(forKey: "title") as! String)
         
         // present postIdeaVC
         let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
