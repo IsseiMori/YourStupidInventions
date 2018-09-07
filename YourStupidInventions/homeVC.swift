@@ -136,41 +136,22 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // pagination
     @objc func loadMore() {
         
-        // load posts if user has logged in
-        if isLoggedIn {
+        // set loading status to processing
+        isLoading = true
+                
+        let query = PFQuery(className: "posts")
+        query.whereKey("username", equalTo: PFUser.current()!.username!)
+         query.addDescendingOrder("createdAt")
         
-            // set loading status to processing
-            isLoading = true
-            
-            // count total comments to enable or disable refresher
-            print("homeVC loadmore count")
-            let countQuery = PFQuery(className: "posts")
-            countQuery.whereKey("username", equalTo: PFUser.current()!.username!)
-            countQuery.countObjectsInBackground (block: { (count, error) -> Void in
-                
-                // self refresher
-                self.refresher.endRefreshing()
-                
-                // if posts on server are more than shown
-                if self.uuidArray.count < count {
-                    
-                    let query = PFQuery(className: "posts")
-                    query.whereKey("username", equalTo: PFUser.current()!.username!)
-                     query.addDescendingOrder("createdAt")
-                    
-                    // load only the next page size posts
-                    query.skip = self.page
-                    query.limit = self.pageLimit
-                    
-                    // increase page size
-                    self.page = self.page + self.pageLimit
-                    
-                    print("homeVC loadmore")
-                    self.processQuery(query: query)
-                    
-                }
-            })
-        }
+        // load only the next page size posts
+        query.skip = self.page
+        query.limit = self.pageLimit
+        
+        // increase page size
+        self.page = self.page + self.pageLimit
+        
+        print("homeVC loadmore")
+        self.processQuery(query: query)
     }
     
     
@@ -180,6 +161,10 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             
             if error == nil {
                 
+                // if no more object is found, and loadmore process
+                if objects?.count == 0 {
+                    return
+                }
                 
                 // find objects related to our request
                 for object in objects! {

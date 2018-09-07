@@ -150,60 +150,36 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // set loading status to processing
         isLoading = true
+                
+        let query = PFQuery(className: "posts")
         
-        // count total comments to enable or disable refresher
-        let countQuery = PFQuery(className: "posts")
+        // load only the next page size posts
+        query.skip = self.page
+        query.limit = self.pageLimit
+        
+        // increase page size
+        self.page = self.page + self.pageLimit
+        
+        // sort by likes or time
+        if !self.sortBy.isEmpty {
+            query.addDescendingOrder(self.sortBy)
+        }
         
         // filter
         if !self.filterByAdj.isEmpty {
-            countQuery.whereKey("adjective", equalTo: self.filterByAdj)
+            query.whereKey("adjective", equalTo: self.filterByAdj)
         }
         if !self.filterByNoun.isEmpty {
-            countQuery.whereKey("noun", equalTo: self.filterByNoun)
+            query.whereKey("noun", equalTo: self.filterByNoun)
         }
         if !self.filterByCategory.isEmpty {
-            countQuery.whereKey("category", equalTo: self.filterByCategory)
+            query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        print("ranking loadmore count")
-        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
-            
-            // self refresher
-            self.refresher.endRefreshing()
-            
-            // if posts on server are more than shown
-            if self.uuidArray.count < count {
+        print("ranking loadmore")
+        self.processQuery(query: query)
                 
-                let query = PFQuery(className: "posts")
-                
-                // load only the next page size posts
-                query.skip = self.page
-                query.limit = self.pageLimit
-                
-                // increase page size
-                self.page = self.page + self.pageLimit
-                
-                // sort by likes or time
-                if !self.sortBy.isEmpty {
-                    query.addDescendingOrder(self.sortBy)
-                }
-                
-                // filter
-                if !self.filterByAdj.isEmpty {
-                    query.whereKey("adjective", equalTo: self.filterByAdj)
-                }
-                if !self.filterByNoun.isEmpty {
-                    query.whereKey("noun", equalTo: self.filterByNoun)
-                }
-                if !self.filterByCategory.isEmpty {
-                    query.whereKey("category", equalTo: self.filterByCategory)
-                }
-                
-                print("ranking loadmore")
-                self.processQuery(query: query)
-                
-            }
-        })
+
     }
     
     
@@ -212,6 +188,11 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
 
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
+                
+                // if no more object is found, end loadmore process
+                if objects?.count == 0 {
+                    return
+                }
                 
                 // find related objects
                 for object in objects! {

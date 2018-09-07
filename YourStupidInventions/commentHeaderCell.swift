@@ -166,7 +166,6 @@ class commentHeaderCell: UITableViewCell{
         // clear like button text color
         likeBtn.setTitleColor(UIColor.clear, for: UIControlState.normal)
         
-        
     }
 
 }

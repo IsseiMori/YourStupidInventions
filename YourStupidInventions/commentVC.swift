@@ -303,32 +303,19 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // set loading status to processing
         isLoading = true
         
-        // count total comments to enable or disable refresher
-        let countQuery = PFQuery(className: "comments")
-        countQuery.whereKey("to", equalTo: commentuuid.last!)
-        print("commentVC loadmore count")
-        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
-            
-            // self refresher
-            self.refresher.endRefreshing()
-            
-            
-            // Load more comments
-            if self.page < count {
-                
-                // get comments to this post
-                let query = PFQuery(className: "comments")
-                query.whereKey("to", equalTo: commentuuid.last!)
-                query.skip = self.page
-                query.limit = self.pageLimit
-                
-                self.page = self.page + self.pageLimit
-                
-                query.addAscendingOrder("createdAt")
-                print("commentVC loadmore")
-                self.processQuery(query: query)
-            }
-        })
+       
+        // get comments to this post
+        let query = PFQuery(className: "comments")
+        query.whereKey("to", equalTo: commentuuid.last!)
+        query.skip = self.page
+        query.limit = self.pageLimit
+        
+        self.page = self.page + self.pageLimit
+        
+        query.addAscendingOrder("createdAt")
+        print("commentVC loadmore")
+        self.processQuery(query: query)
+
     }
     
     
@@ -337,6 +324,11 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
  
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
+                
+                // if no more object is found, end loadmore process
+                if objects?.count == 0 {
+                    return
+                }
                 
                 // store comments in arrays
                 for object in objects! {

@@ -132,64 +132,44 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         
         // set loading status to processing
         isLoading = true
+                
+        let query = PFQuery(className: "themes")
         
-        // count total comments to enable or disable refresher
-        print("themesVC loadmore count")
-        let countQuery = PFQuery(className: "themes")
+        // load only the next page size posts
+        query.skip = self.page
+        query.limit = self.pageLimit
+        query.addDescendingOrder("createdAt")
         
         // filter
         if !self.filterByAdj.isEmpty {
-            countQuery.whereKey("adjective", equalTo: self.filterByAdj)
+            query.whereKey("adjective", equalTo: self.filterByAdj)
         }
         if !self.filterByNoun.isEmpty {
-            countQuery.whereKey("noun", equalTo: self.filterByNoun)
+            query.whereKey("noun", equalTo: self.filterByNoun)
         }
         if !self.filterByCategory.isEmpty {
-            countQuery.whereKey("category", equalTo: self.filterByCategory)
+            query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
-            
-            // self refresher
-            self.refresher.endRefreshing()
-            
-            // if posts on server are more than shown
-            if self.themeuuidArray.count < count {
-                
-                let query = PFQuery(className: "themes")
-                
-                // load only the next page size posts
-                query.skip = self.page
-                query.limit = self.pageLimit
-                query.addDescendingOrder("createdAt")
-                
-                // filter
-                if !self.filterByAdj.isEmpty {
-                    query.whereKey("adjective", equalTo: self.filterByAdj)
-                }
-                if !self.filterByNoun.isEmpty {
-                    query.whereKey("noun", equalTo: self.filterByNoun)
-                }
-                if !self.filterByCategory.isEmpty {
-                    query.whereKey("category", equalTo: self.filterByCategory)
-                }
-                
-                // increase page size
-                self.page = self.page + self.pageLimit
-                
-                self.isLoading = false
-                
-                print("themesVC loadmore")
-                self.processQuery(query: query)
-                
-            }
-        })
+        // increase page size
+        self.page = self.page + self.pageLimit
+        
+        self.isLoading = false
+        
+        print("themesVC loadmore")
+        self.processQuery(query: query)
+        
     }
 
     // process query and store data in array
     func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
+                
+                // if no more object is found, end loadmore process
+                if objects?.count == 0 {
+                    return
+                }
                 
                 // store objects data into arrays
                 for object in objects! {

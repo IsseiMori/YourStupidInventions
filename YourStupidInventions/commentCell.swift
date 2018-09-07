@@ -47,7 +47,6 @@ class commentCell: UITableViewCell {
             withVisualFormat: "H:|-10-[comment]-10-|",
             options: [], metrics: nil, views: ["comment": commentLbl]))
         
-        
     }
 
 }

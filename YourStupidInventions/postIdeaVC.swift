@@ -193,35 +193,21 @@ class postIdeaVC: UITableViewController {
         
         // set loading status to processing
         isLoading = true
+                
+        let query = PFQuery(className: "posts")
         
-        // count total comments to enable or disable refresher
-        print("postIdeaVC loadmore count")
-        let countQuery = PFQuery(className: "posts")
-        countQuery.whereKey("themeuuid", equalTo: themeuuid.last!)
-        countQuery.countObjectsInBackground (block: { (count, error) -> Void in
-            
-            // self refresher
-            self.refresher.endRefreshing()
-            
-            // if posts on server are more than shown
-            if self.uuidArray.count < count {
-                
-                let query = PFQuery(className: "posts")
-                
-                // load only the next page size posts
-                query.skip = self.page
-                query.whereKey("themeuuid", equalTo: themeuuid.last!)
-                query.addDescendingOrder("likes")
-                query.limit = self.pageLimit
-                
-                // increase page size
-                self.page = self.page + self.pageLimit
-                
-                print("postIdeaVC loadmore")
-                self.processQuery(query: query)
-                
-            }
-        })
+        // load only the next page size posts
+        query.skip = self.page
+        query.whereKey("themeuuid", equalTo: themeuuid.last!)
+        query.addDescendingOrder("likes")
+        query.limit = self.pageLimit
+        
+        // increase page size
+        self.page = self.page + self.pageLimit
+        
+        print("postIdeaVC loadmore")
+        self.processQuery(query: query)
+        
     }
     
     // process query and
@@ -230,6 +216,10 @@ class postIdeaVC: UITableViewController {
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
+                // if no more object is found, end loadmore process
+                if objects?.count == 0 {
+                    return
+                }
                 
                 // find related objects
                 for object in objects! {
