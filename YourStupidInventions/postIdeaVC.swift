@@ -39,6 +39,8 @@ class postIdeaVC: UITableViewController {
     // loading status to avoid keep loading
     var isLoading = false
     
+    // send status to avoid sending twice
+    var didSend = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -371,6 +373,68 @@ class postIdeaVC: UITableViewController {
                         })
                     }
                 }
+            }
+        }
+    }
+    
+    @IBAction func sendBtn_clicked(_ sender: Any) {
+
+        // if status is already sent, return
+        if didSend {
+            return
+        }
+        
+        // change send status to yes
+        didSend = true
+        
+        let object = PFObject(className: "posts")
+        
+        // generate uuid for the new post
+        let uuid = UUID().uuidString
+        object["uuid"] = "\(PFUser.current()!.username!) \(uuid)"
+        
+        object["theme"] = header.themeImgPFFile
+        object["idea"] = header.ideaTxt.text
+        object["username"] = PFUser.current()?.username
+        object["fullname"] = PFUser.current()?.object(forKey: "fullname")
+        object["likes"] = 0
+        object["title"] = header.titleLbl.text!
+        object["adjective"] = header.adjLbl.text!
+        object["noun"] = header.nounLbl.text!
+        object["category"] = header.categoryLbl.text!
+        object["hashtags"] = header.hashtagsLbl.text!
+        
+        // copy the themeuuid
+        object["themeuuid"] = header.themeuuidLbl.text
+        
+        print("postIdea save")
+        object.saveInBackground { (success, error) in
+            if success {
+                // send notification with name "uploaded" to postIdeaVC to show newVC
+                NotificationCenter.default.post(name: NSNotification.Name.init("postUploaded"), object: nil)
+                
+                //increment theme totalPosts
+                print("postIdeaVC increment totalPosts")
+                let countQuery = PFQuery(className: "themes")
+                countQuery.whereKey("themeuuid", equalTo: self.header.themeuuidLbl.text!)
+                countQuery.getFirstObjectInBackground(block: { (object, error) in
+                    if error == nil {
+                        object?.incrementKey("totalPosts", byAmount: 1)
+                        object?.saveEventually()
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                })
+                
+                // reset text field
+                self.header.ideaTxt.text = ""
+                
+            } else {
+                print(error!.localizedDescription)
+                
+                // enable next sending
+                self.didSend = false
+                self.alert(title: "Connection failed", message: "Plese try sending again.")
             }
         }
     }

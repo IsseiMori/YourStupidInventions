@@ -21,6 +21,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBOutlet weak var sendBtn: UIButton!
     
+    // send status to avoid sending twice
+    var didSend = false
+    
     // pickerView and pickerData
     var adjPicker: UIPickerView!
     var adjs = ["Innovative", "Unexpected", "Future"]
@@ -257,6 +260,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
+        
+        // if status is already sent, return
+        if didSend {
+            return
+        }
+        
+        // change send status to yes
+        didSend = true
         
         let object = PFObject(className: "themes")
         
