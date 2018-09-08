@@ -116,7 +116,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        print(itemInfo.title!)
         print("ranking loadPosts")
         self.processQuery(query: query)
     }

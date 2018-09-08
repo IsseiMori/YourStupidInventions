@@ -7,14 +7,23 @@
 //
 
 import UIKit
+import Parse
 import XLPagerTabStrip
 
-class newMenuViewController: ButtonBarPagerTabStripViewController {
+class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    // declare search bar
+    var searchBar = UISearchBar()
+    
+    // tableView UI
+    var tableView: UITableView = UITableView()
+    
+    var nounsIni = [String]()
+    var nouns = [String]()
+    
+    var lastSearchTime: CFAbsoluteTime!
+    
     override func viewDidLoad() {
-
-        // top title
-        self.navigationItem.title = "New Ideas"
         
         // Bar font size
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)
@@ -30,9 +39,206 @@ class newMenuViewController: ButtonBarPagerTabStripViewController {
         // selected bar height
         settings.style.selectedBarHeight = 5
         
+        
+        // implement search bar
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "Search"
+        searchBar.tintColor = UIColor.groupTableViewBackground
+        searchBar.frame.size.width = self.view.frame.size.width - 30
+        let searchItem = UIBarButtonItem(customView: searchBar)
+        self.navigationItem.leftBarButtonItem = searchItem
+        
+        // define tableView to list nouns
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 100)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(tableView)
+        
+        // hide tableView
+        tableView.isHidden = true
+        
+        // hide cancel button
+        searchBar.showsCancelButton = false
+        
         super.viewDidLoad()
     }
-
+    
+    
+    // load nouns func
+    func loadIniNoun() {
+        
+        nounsIni.removeAll(keepingCapacity: false)
+        
+        // update last search time
+        lastSearchTime = CFAbsoluteTimeGetCurrent()
+        
+        print("newMenu initial search")
+        let query = PFQuery(className: "themes")
+        query.limit = 30
+        query.addDescendingOrder("totalPosts")
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                for object in objects! {
+                    // append noun if not found in array
+                    if !self.nounsIni.contains(object.object(forKey: "noun") as! String) {
+                        self.nounsIni.append(object.object(forKey: "noun") as! String)
+                    }
+                }
+                
+                // reload tableView and end refresh animation
+                self.tableView.reloadData()
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    
+    // search updated
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        // allow new search every 2 seconds
+        let timeNow = CFAbsoluteTimeGetCurrent()
+        if timeNow - lastSearchTime < 2 {
+            return true
+        }
+        lastSearchTime = CFAbsoluteTimeGetCurrent()
+        
+        
+        nouns.removeAll(keepingCapacity: false)
+        
+        print("newMenu search")
+        let query = PFQuery(className: "themes")
+        query.limit = 30
+        query.addDescendingOrder("totalPosts")
+        query.whereKey("noun", matchesRegex: "(?i)" + self.searchBar.text!)
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                for object in objects! {
+                    // append noun if not found in array
+                    if !self.nouns.contains(object.object(forKey: "noun") as! String) {
+                        self.nouns.append(object.object(forKey: "noun") as! String)
+                    }
+                }
+                
+                // reload tableView and end refresh animation
+                self.tableView.reloadData()
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+        
+        return true
+    }
+    
+    // typed in the search bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        // hide tableView when started typing
+        tableView.isHidden = false
+        
+        // show cancel button
+        searchBar.showsCancelButton = true
+        
+        // load initial nouns only first time
+        if nounsIni.isEmpty {
+            loadIniNoun()
+        } else {
+           self.tableView.reloadData()
+        }
+    }
+    
+    
+    // cicked cancel button
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        // hide tableView when canceled
+        tableView.isHidden = true
+        
+        // dismiss keyboard
+        searchBar.resignFirstResponder()
+        
+        // hide cancel button
+        searchBar.showsCancelButton = false
+        
+        // reset nouns array
+        nouns.removeAll(keepingCapacity: false)
+        
+        // reset text
+        searchBar.text = ""
+    }
+    
+    
+    // cell height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
+    // cell number
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if nouns.isEmpty {
+            return nounsIni.count
+        } else {
+            return nouns.count
+        }
+    }
+    
+    // cell config
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // define cell
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        // creates label only first time to avoid overlapping labels
+        if let label = cell.viewWithTag(100) as? UILabel {
+            if nouns.isEmpty {
+                label.text = nounsIni[indexPath.row]
+            } else {
+                label.text = nouns[indexPath.row]
+            }
+        } else {
+            // define label
+            let label = UILabel(frame: CGRect(x: 20, y: 0, width: self.view.frame.size.width - 40, height: 40))
+            label.tag = 100
+            label.font = UIFont.systemFont(ofSize: 15)
+            
+            if nouns.isEmpty {
+                label.text = nounsIni[indexPath.row]
+            } else {
+                label.text = nouns[indexPath.row]
+            }
+            
+            cell.addSubview(label)
+        }
+        
+        return cell
+    }
+    
+    
+    // selected tableView cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
+        
+        result.sortBy = "createdAt"
+        
+        if nouns.isEmpty {
+            result.filterByNoun = nounsIni[indexPath.row]
+            result.navigationItem.title = nounsIni[indexPath.row]
+        } else {
+            result.filterByNoun = nouns[indexPath.row]
+            result.navigationItem.title = nouns[indexPath.row]
+        }
+        
+        self.navigationController?.pushViewController(result, animated: true)
+    }
+    
     
     // after view appears
     override func viewDidAppear(_ animated: Bool) {
@@ -40,7 +246,6 @@ class newMenuViewController: ButtonBarPagerTabStripViewController {
         // move to All tab
         moveToViewController(at: 3, animated: false)
     }
-    
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
