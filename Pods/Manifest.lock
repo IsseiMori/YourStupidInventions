@@ -1,20 +1,24 @@
 PODS:
+  - Eureka (4.2.0)
   - RSKImageCropper (2.1.0)
   - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
+  - Eureka
   - RSKImageCropper
   - XLPagerTabStrip
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Eureka
     - RSKImageCropper
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
+  Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
   RSKImageCropper: 0d0c6d8525a2381f03fde32a47c6703817a2feed
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: e09736d04064ad72b773706fdcae0ab272abae73
+PODFILE CHECKSUM: b61737409a29781ed207779b77c10c89a7c7b81f
 
 COCOAPODS: 1.5.3

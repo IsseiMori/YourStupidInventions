@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		251CC09772C2FEBE5353F648 /* Pods_YourStupidInventions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17110D20E6DDDB48CAB574F9 /* Pods_YourStupidInventions.framework */; };
+		8507F2F42145A67800269446 /* settingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F2F32145A67700269446 /* settingVC.swift */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -74,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		17110D20E6DDDB48CAB574F9 /* Pods_YourStupidInventions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourStupidInventions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8507F2F32145A67700269446 /* settingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingVC.swift; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */,
 				850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */,
 				850C2C30213DDABA0095A3D7 /* postThemeVC.swift */,
+				8507F2F32145A67700269446 /* settingVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -409,11 +412,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKImageCropper/RSKImageCropper.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKImageCropper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
@@ -438,6 +443,7 @@
 				850C2C2F213DC6740095A3D7 /* themesHeaderCell.swift in Sources */,
 				850C2BDD2135C2FA0095A3D7 /* postIdeaVC.swift in Sources */,
 				850C2BD7213538710095A3D7 /* themesVC.swift in Sources */,
+				8507F2F42145A67800269446 /* settingVC.swift in Sources */,
 				850C2BB0213359850095A3D7 /* postCell.swift in Sources */,
 				850C2C31213DDABA0095A3D7 /* postThemeVC.swift in Sources */,
 				850C2BE32137063F0095A3D7 /* notificationsCell.swift in Sources */,

@@ -9,5 +9,6 @@ target 'YourStupidInventions' do
 
   pod 'XLPagerTabStrip'
   pod 'RSKImageCropper'
+  pod 'Eureka'
 
 end

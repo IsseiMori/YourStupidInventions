@@ -189,7 +189,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     // clicked cancel button
     @IBAction func cancel_clicked(_ sender: Any) {
         self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -205,7 +205,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 isLoggedIn = false
                 
                 self.view.endEditing(true)
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

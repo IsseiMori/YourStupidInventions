@@ -371,7 +371,7 @@
         <!--EditVC-->
         <scene sceneID="Vtb-kx-m4t">
             <objects>
-                <viewController id="VGs-Hx-J4e" customClass="editVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editVC" id="VGs-Hx-J4e" customClass="editVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dYb-MH-nLp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,6 +437,22 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czR-XG-ErM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4786" y="1845"/>
+        </scene>
+        <!--SettingVC-->
+        <scene sceneID="w92-0M-evM">
+            <objects>
+                <viewController storyboardIdentifier="settingVC" id="thX-fQ-PY2" customClass="settingVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dgc-GG-KTg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9aJ-H1-fPF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tGx-Vs-Lpj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bZW-CR-i3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3961" y="1845"/>
         </scene>
@@ -590,7 +606,7 @@
                     <navigationItem key="navigationItem" id="fS0-RT-Io6">
                         <barButtonItem key="rightBarButtonItem" image="setting.png" id="hJ3-yI-gvN">
                             <connections>
-                                <segue destination="VB3-8e-P74" kind="show" id="EHS-qR-oh2"/>
+                                <action selector="settingBtn_clicked:" destination="N1Q-zE-5dd" id="pQC-B0-F0C"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1467,28 +1483,9 @@
             </objects>
             <point key="canvasLocation" x="1668" y="1483"/>
         </scene>
-        <!--NavVC-->
-        <scene sceneID="bPb-zT-3L7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VB3-8e-P74" customClass="navVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="viU-IO-OWX">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="VGs-Hx-J4e" kind="relationship" relationship="rootViewController" id="uWt-lf-nLR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gxB-ta-c6D" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3166" y="1846"/>
-        </scene>
         <!--Top Menu View Controller-->
         <scene sceneID="Vaf-23-WQD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YHb-oS-xMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="v9O-r0-t8y" customClass="topMenuViewController" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8oW-GC-RjV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1520,6 +1517,7 @@
                         <outlet property="containerView" destination="0ky-iz-FcY" id="ZPK-49-TAb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHb-oS-xMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="909.60000000000002" y="62.518740629685162"/>
         </scene>

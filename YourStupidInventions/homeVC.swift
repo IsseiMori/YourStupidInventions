@@ -192,6 +192,12 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     
+    // clicked setting button
+    @IBAction func settingBtn_clicked(_ sender: Any) {
+        let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingVC") as! settingVC
+        self.navigationController?.pushViewController(settingVC, animated: true)
+    }
+    
     // preload func
     override func viewWillAppear(_ animated: Bool) {
         
