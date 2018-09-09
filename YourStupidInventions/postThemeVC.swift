@@ -24,6 +24,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // send status to avoid sending twice
     var didSend = false
     
+    // image picker status
+    var isImgPicked = false
+    
     // pickerView and pickerData
     var adjPicker: UIPickerView!
     var adjs = ["Innovative", "Unexpected", "Future"]
@@ -192,6 +195,8 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
         dismiss(animated: true)
         themeImg.image = croppedImage
+        
+        isImgPicked = true
     }
     
     /* RSKImageCropViewControllerDelegate END */
@@ -280,6 +285,12 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         // if status is already sent, return
         if didSend {
+            return
+        }
+        
+        // if image is not uploaded
+        if !isImgPicked {
+            alert(title: "Error", message: "Upload an image for your theme.")
             return
         }
         
