@@ -693,6 +693,19 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     }
     
     
+    // clicked post idea button
+    // go to postIdeaVC for the theme
+    @IBAction func postIdeaBtn_clicked(_ sender: Any) {
+        
+        themeuuid.append(header.themeuuid.text!)
+        themetitle.append(header.titleLbl.text!)
+        
+        // present postIdeaVC
+        let postIdea = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
+        self.navigationController?.pushViewController(postIdea, animated: true)
+    }
+    
+    
     // alert func
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)

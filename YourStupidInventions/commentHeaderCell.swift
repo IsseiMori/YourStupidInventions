@@ -25,6 +25,7 @@ class commentHeaderCell: UITableViewCell{
     // buttons
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var usernameBtn: UIButton!
+    @IBOutlet weak var postIdeaBtn: UIButton!
     
     @IBOutlet weak var bgView: UIView!
     
@@ -102,14 +103,15 @@ class commentHeaderCell: UITableViewCell{
         likeBtn.translatesAutoresizingMaskIntoConstraints = false
         usernameBtn.translatesAutoresizingMaskIntoConstraints = false
         bgView.translatesAutoresizingMaskIntoConstraints = false
+        postIdeaBtn.translatesAutoresizingMaskIntoConstraints = false
         
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-15-|",
-            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-5-[like(30)]-5-[post(30)]-20-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn, "post": postIdeaBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "V:[idea]-10-[likes]",
@@ -148,7 +150,11 @@ class commentHeaderCell: UITableViewCell{
             options: [], metrics: nil, views: ["username": usernameBtn, "date":dateLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[bg]-5-|",
+            withVisualFormat: "H:|-25-[post]-25-|",
+            options: [], metrics: nil, views: ["post": postIdeaBtn]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-10-[bg]-10-|",
             options: [], metrics: nil, views: ["bg": bgView]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -165,6 +171,10 @@ class commentHeaderCell: UITableViewCell{
         
         // clear like button text color
         likeBtn.setTitleColor(UIColor.clear, for: UIControlState.normal)
+        
+        postIdeaBtn.backgroundColor = customColorYellow
+        postIdeaBtn.layer.cornerRadius = 5
+        
         
     }
 
