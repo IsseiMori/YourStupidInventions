@@ -165,6 +165,34 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
+        // if username too short
+        if (usernameTxt.text?.count)! < 6 {
+            
+            // alert message
+            alert(title: "Error", message: "username has to be at least 6 letters.")
+            
+            return
+        }
+        
+        // if username too short
+        if (passwordTxt.text?.count)! < 6 {
+            
+            // alert message
+            alert(title: "Error", message: "password has to be at least 6 letters.")
+            
+            return
+        }
+        
+        
+        // email does not follow the format
+        if !validateEmail(email: emailTxt.text!){
+            
+            // alert message
+            alert(title: "Error", message: "Invalid email.")
+            
+            return
+        }
+        
         // if username is taken by another user
         let query = PFQuery(className: "_User")
         query.whereKey("username", contains: usernameTxt.text?.lowercased())
@@ -210,6 +238,14 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         }
         
         
+    }
+    
+    // restrictions for email field
+    func validateEmail(email: String) -> Bool {
+        let regex = "[A-Z0-9a-z.%+-]{4}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2}"
+        let range = email.range(of: regex, options: .regularExpression)
+        let result = range != nil ? true : false
+        return result
     }
     
     

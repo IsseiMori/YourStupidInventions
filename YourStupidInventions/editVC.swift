@@ -138,6 +138,25 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
+        // if fields are empty
+        if usernameTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
+            
+            // alert message
+            alert(title: "Please", message: "fill all fields")
+            
+            return
+        }
+        
+        // email does not follow the format
+        if !validateEmail(email: emailTxt.text!){
+            
+            // alert message
+            alert(title: "Error", message: "Invalid email.")
+            
+            return
+        }
+        
+        
         // save filled in infromation
         let user = PFUser.current()!
         user.email = emailTxt.text?.lowercased()
@@ -189,5 +208,22 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+    
+    // restrictions for email field
+    func validateEmail(email: String) -> Bool {
+        let regex = "[A-Z0-9a-z.%+-]{4}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2}"
+        let range = email.range(of: regex, options: .regularExpression)
+        let result = range != nil ? true : false
+        return result
+    }
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
 }
