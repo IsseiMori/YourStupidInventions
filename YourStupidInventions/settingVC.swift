@@ -19,11 +19,14 @@ class settingVC: FormViewController {
         let editVC = storyboard.instantiateViewController(withIdentifier: "editVC") as! editVC
 
         form +++ Section("Profile")
-            <<< ButtonRow("edit profile") {
+            <<< LabelRow() {
                 $0.title = "Edit profile"
-                }.onCellSelection({ (str, row) in
+                }.onCellSelection { (str, row) in
                     self.navigationController?.pushViewController(editVC, animated: true)
-                })
+                }.cellUpdate { (cell, row) in
+                    cell.accessoryType = .disclosureIndicator
+                }
+        
     }
 
 }
