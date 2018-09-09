@@ -69,9 +69,12 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
         
-        sendBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         sendBtn.layer.cornerRadius = self.frame.size.width / 100
         sendBtn.clipsToBounds = true
+        
+        // disable send button untill everything is filled
+        sendBtn.backgroundColor = UIColor.lightGray
+        sendBtn.isEnabled = false
     }
 
     // ideaTxt content changed
@@ -84,5 +87,21 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         }
         
         return true
+    }
+    
+    // finished editing
+    func textViewDidEndEditing(_ textView: UITextView) {
+        // disable send button if not everything is filled, enable otherwise
+        if ideaTxt.text.isEmpty {
+            
+            // disable
+            sendBtn.backgroundColor = UIColor.lightGray
+            sendBtn.isEnabled = false
+        } else {
+            
+            // enable
+            sendBtn.backgroundColor = customColorYellow
+            sendBtn.isEnabled = true
+        }
     }
 }

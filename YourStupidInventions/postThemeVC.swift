@@ -244,8 +244,23 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     func textFieldDidEndEditing(_ textField: UITextField) {
         // update title label
         titleLbl.text = "\(adjTxt.text!) \(nounTxt.text!)"
+        
+        // disable send button if not everything is filled, enable otherwise
+        if (adjTxt.text?.isEmpty)! || (categoryTxt.text?.isEmpty)! || (nounTxt.text?.isEmpty)! {
+            
+            // disable
+            sendBtn.backgroundColor = UIColor.lightGray
+            sendBtn.isEnabled = false
+        } else {
+            
+            // enable
+            sendBtn.backgroundColor = customColorYellow
+            sendBtn.isEnabled = true
+        }
     }
     
+    
+    // typed a character
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         // if entered return, dismiss keyboard
@@ -255,19 +270,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
         
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        
-        if (adjTxt.text?.isEmpty)! || (categoryTxt.text?.isEmpty)! || (nounTxt.text?.isEmpty)! {
-            // disable send button if not everything is filled
-            sendBtn.backgroundColor = UIColor.lightGray
-            sendBtn.isEnabled = false
-        } else {
-            // enable send button if everything is filled
-            sendBtn.backgroundColor = customColorYellow
-            sendBtn.isEnabled = true
-        }
     }
     
     /* UITextFieldDelegate END*/
