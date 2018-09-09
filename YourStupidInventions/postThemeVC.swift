@@ -110,9 +110,12 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         nounTxt.frame = CGRect(x: 10, y: adjTxt.frame.origin.y + adjTxt.frame.size.height + 10, width: width - 20, height: 30)
         sendBtn.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width - 20, height: 30)
         
-        sendBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
+        
+        // disable send button untill everything is filled
+        sendBtn.backgroundColor = UIColor.lightGray
+        sendBtn.isEnabled = false
         
         //adjTxt.edi
     }
@@ -244,7 +247,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(string)
         
         // if entered return, dismiss keyboard
         if string == "\n" {
@@ -253,6 +255,19 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
         
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        
+        if (adjTxt.text?.isEmpty)! || (categoryTxt.text?.isEmpty)! || (nounTxt.text?.isEmpty)! {
+            // disable send button if not everything is filled
+            sendBtn.backgroundColor = UIColor.lightGray
+            sendBtn.isEnabled = false
+        } else {
+            // enable send button if everything is filled
+            sendBtn.backgroundColor = customColorYellow
+            sendBtn.isEnabled = true
+        }
     }
     
     /* UITextFieldDelegate END*/
