@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 import Eureka
 
 class settingVC: FormViewController {
@@ -26,6 +27,25 @@ class settingVC: FormViewController {
                 }.cellUpdate { (cell, row) in
                     cell.accessoryType = .disclosureIndicator
                 }
+        
+        form +++ Section()
+            <<< ButtonRow() {
+                $0.title = "Log out"
+                }.onCellSelection({ (cell, row) in
+                    
+                    PFUser.logOutInBackground { (error) in
+                        if error == nil {
+                            
+                            // remove logged in username from app memory
+                            UserDefaults.standard.removeObject(forKey: "username")
+                            UserDefaults.standard.synchronize()
+                            
+                            isLoggedIn = false
+                            
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                })
         
     }
 

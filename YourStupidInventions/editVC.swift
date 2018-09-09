@@ -18,8 +18,6 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
     
-    @IBOutlet weak var logoutBtn: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +74,6 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         usernameTxt.frame = CGRect(x: 10, y: avaImg.frame.origin.y + 100, width: width - 20, height: 30)
         fullnameTxt.frame = CGRect(x: 10, y: usernameTxt.frame.origin.y + 40, width: width - 20, height: 30)
         emailTxt.frame = CGRect(x: 10, y: fullnameTxt.frame.origin.y + 40, width: width - 20, height: 30)
-        logoutBtn.frame = CGRect(x: 10, y: emailTxt.frame.origin.y + 40, width: width - 20, height: 30)
         
         // disable username editing
         usernameTxt.isEnabled = false
@@ -190,24 +187,6 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     @IBAction func cancel_clicked(_ sender: Any) {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    
-    // clicked logout button
-    @IBAction func logoutBtn_clicked(_ sender: Any) {
-        PFUser.logOutInBackground { (error) in
-            if error == nil {
-                
-                // remove logged in username from app memory
-                UserDefaults.standard.removeObject(forKey: "username")
-                UserDefaults.standard.synchronize()
-                
-                isLoggedIn = false
-                
-                self.view.endEditing(true)
-                self.navigationController?.popViewController(animated: true)
-            }
-        }
     }
     
     
