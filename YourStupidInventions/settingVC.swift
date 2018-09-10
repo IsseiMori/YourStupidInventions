@@ -18,6 +18,7 @@ class settingVC: FormViewController {
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let editVC = storyboard.instantiateViewController(withIdentifier: "editVC") as! editVC
+        let reportProblemVC = storyboard.instantiateViewController(withIdentifier: "reportProblemVC") as! reportProblemVC
 
         form +++ Section("Profile")
             <<< LabelRow() {
@@ -28,10 +29,19 @@ class settingVC: FormViewController {
                     cell.accessoryType = .disclosureIndicator
                 }
         
+        form +++ Section("App information")
+            <<< LabelRow() {
+                $0.title = "Report a problem"
+                }.onCellSelection { (str, row) in
+                    self.navigationController?.pushViewController(reportProblemVC, animated: true)
+                }.cellUpdate { (cell, row) in
+                    cell.accessoryType = .disclosureIndicator
+        }
+        
         form +++ Section()
             <<< ButtonRow() {
                 $0.title = "Log out"
-                }.onCellSelection({ (cell, row) in
+                }.onCellSelection { (cell, row) in
                     
                     PFUser.logOutInBackground { (error) in
                         if error == nil {
@@ -45,7 +55,9 @@ class settingVC: FormViewController {
                             self.navigationController?.popViewController(animated: true)
                         }
                     }
-                })
+                }.cellUpdate { (cell, row) in
+                    cell.textLabel?.textColor = .black
+                }
         
     }
 

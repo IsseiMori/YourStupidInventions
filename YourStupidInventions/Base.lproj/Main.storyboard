@@ -401,17 +401,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esA-fH-5zw">
-                                <rect key="frame" x="8" y="301" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Log out">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutBtn_clicked:" destination="VGs-Hx-J4e" eventType="touchUpInside" id="FVL-4w-WNn"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="IN3-Ms-IOL"/>
@@ -432,13 +421,12 @@
                         <outlet property="avaImg" destination="duh-V8-xct" id="VHK-Oi-P6V"/>
                         <outlet property="emailTxt" destination="4nr-HW-4gC" id="Kal-gT-fld"/>
                         <outlet property="fullnameTxt" destination="S9J-g6-y7p" id="XS6-3e-yWD"/>
-                        <outlet property="logoutBtn" destination="esA-fH-5zw" id="Qdg-je-llA"/>
                         <outlet property="usernameTxt" destination="00G-fr-VzP" id="BqK-1f-koO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czR-XG-ErM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4786" y="1845"/>
+            <point key="canvasLocation" x="4772" y="1611"/>
         </scene>
         <!--SettingVC-->
         <scene sceneID="w92-0M-evM">
@@ -455,6 +443,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZW-CR-i3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3961" y="1845"/>
+        </scene>
+        <!--Report ProblemVC-->
+        <scene sceneID="f58-Hw-jfP">
+            <objects>
+                <viewController storyboardIdentifier="reportProblemVC" id="YTn-pz-qgm" customClass="reportProblemVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8pd-IK-O9d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7Vz-pA-5rq">
+                                <rect key="frame" x="16" y="116" width="343" height="193"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-PP-IhA">
+                                <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendBtn_clicked:" destination="YTn-pz-qgm" eventType="touchUpInside" id="tAQ-W2-bvU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Describe the problem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13a-4z-XLb">
+                                <rect key="frame" x="16" y="87" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="7CQ-BA-jGN"/>
+                    </view>
+                    <connections>
+                        <outlet property="problemTxt" destination="7Vz-pA-5rq" id="bJ2-vM-l6Y"/>
+                        <outlet property="sendBtn" destination="rrd-PP-IhA" id="ZCc-n9-iwW"/>
+                        <outlet property="titleLbl" destination="13a-4z-XLb" id="y5r-Fn-anF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q5P-jl-TaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4772" y="2310.4947526236883"/>
         </scene>
         <!--Top-->
         <scene sceneID="7cJ-ru-ZQk">
