@@ -62,4 +62,11 @@
 // editVC
 "Save" = "保存";
 
+// signInVC
+"Sign In" = "ログイン";
+"Your-Stupid-Inventions" = "Your-Stupid-Inventions";
+"username" = "ユーザーネーム";
+"password" = "パスワード";
+"forgot password?" = "パスワードを忘れたら";
+"Sign Up" = "会員登録";
 

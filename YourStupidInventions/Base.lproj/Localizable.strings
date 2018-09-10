@@ -61,3 +61,13 @@
 
 // editVC
 "Save" = "Save";
+
+// signInVC
+"Sign In" = "Sign In";
+"Your-Stupid-Inventions" = "Your-Stupid-Inventions";
+"username" = "username";
+"password" = "password";
+"forgot password?" = "forgot password?";
+"Sign Up" = "Sign Up";
+
+

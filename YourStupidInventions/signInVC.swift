@@ -27,7 +27,7 @@ class signInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Sign In"
+        self.navigationItem.title = NSLocalizedString("Sign In", comment: "")
         self.navigationItem.hidesBackButton = true
         
         // tap to hide keyboard
@@ -75,6 +75,14 @@ class signInVC: UIViewController {
         
         signInBtn.backgroundColor = customColorYellow
         signUpBtn.backgroundColor = customColorYellow
+        
+        // set labels
+        label.text = NSLocalizedString("Your-Stupid-Inventions", comment: "")
+        usernameTxt.placeholder = NSLocalizedString("username", comment: "")
+        passwordTxt.placeholder = NSLocalizedString("password", comment: "")
+        forgotBtn.setTitle(NSLocalizedString("forgot password?", comment: ""), for: UIControlState.normal)
+        signInBtn.setTitle(NSLocalizedString("Sign In", comment: ""), for: UIControlState.normal)
+        signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
     }
 
     
