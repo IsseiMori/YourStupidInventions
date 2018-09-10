@@ -75,3 +75,24 @@
 "email" = "メールアドレス";
 "fullname" = "名前";
 
+// postIdeaHeader
+"Publish" = "投稿";
+
+// postIdeaVC
+"enter your idea" = "アイデアを入力してください";
+
+// postThemeVC
+"Post Theme" = "お題投稿";
+"Select adjective" = "--形容詞を選択--";
+"Select category" = "--カテゴリーを選択--";
+"Type noun" = "お題の単語を入力";
+
+// Alert
+"Error" = "Error";
+"fill in all fields" = "空欄があります";
+"invalid username/password" = "ユーザーネームまたはパスワードが違います";
+"password do not match" = "パスワードが一致しません";
+"username too short" = "ユーザーネームを6文字以上に設定してください";
+"password too short" = "パスワードを6文字以上に設定してください";
+"invalid email" = "無効なメールアドレス";
+"username taken" = "このユーザーネームは他のユーザーに使用されています";

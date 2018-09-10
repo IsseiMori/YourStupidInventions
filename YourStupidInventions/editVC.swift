@@ -143,7 +143,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         if usernameTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
             
             // alert message
-            alert(title: "Please", message: "fill all fields")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("fill in all fields", comment: ""))
             
             return
         }
@@ -152,7 +152,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         if !validateEmail(email: emailTxt.text!){
             
             // alert message
-            alert(title: "Error", message: "Invalid email.")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("invalid email", comment: ""))
             
             return
         }

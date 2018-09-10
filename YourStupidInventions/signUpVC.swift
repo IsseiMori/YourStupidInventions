@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // profile image
     @IBOutlet weak var avaImg: UIImageView!
@@ -23,7 +23,6 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     // buttons
     @IBOutlet weak var signUpBtn: UIButton!
-    @IBOutlet weak var cancelBtn: UIButton!
     
     // scroll view
     @IBOutlet weak var scrollView: UIScrollView!
@@ -78,11 +77,8 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         emailTxt.frame = CGRect(x: 10, y: repeatPasswordTxt.frame.origin.y + 60, width: self.view.frame.width - 20, height: 30)
         fullnameTxt.frame = CGRect(x: 10, y: emailTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
         
-        signUpBtn.frame = CGRect(x: 20, y: fullnameTxt.frame.origin.y + 50, width: self.view.frame.size.width / 4, height: 30)
-        signUpBtn.layer.cornerRadius = signUpBtn.frame.size.width / 20
-        
-        cancelBtn.frame = CGRect(x: self.view.frame.size.width - self.view.frame.size.width / 4 - 20, y: signUpBtn.frame.origin.y, width: self.view.frame.size.width / 4, height: 30)
-        cancelBtn.layer.cornerRadius = cancelBtn.frame.size.width / 20
+        signUpBtn.frame = CGRect(x: 10, y: fullnameTxt.frame.origin.y + 50, width: self.view.frame.size.width - 20, height: 30)
+        signUpBtn.layer.cornerRadius = 5
         
         // background
         /*let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
@@ -90,7 +86,9 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         bg.layer.zPosition = -1
         self.view.addSubview(bg)*/
         
-        signUpBtn.backgroundColor = customColorYellow
+        // disable signUp button untill every field is filled
+        signUpBtn.backgroundColor = UIColor.lightGray
+        signUpBtn.isEnabled = false
         
         usernameTxt.placeholder = NSLocalizedString("username", comment: "")
         passwordTxt.placeholder = NSLocalizedString("password", comment: "")
@@ -98,8 +96,13 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         emailTxt.placeholder = NSLocalizedString("email", comment: "")
         fullnameTxt.placeholder = NSLocalizedString("fullname", comment: "")
         signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
-        cancelBtn.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControlState.normal)
         
+        // set UITextField delegate
+        usernameTxt.delegate = self
+        passwordTxt.delegate = self
+        repeatPasswordTxt.delegate = self
+        emailTxt.delegate = self
+        fullnameTxt.delegate = self
     }
     
     
@@ -143,6 +146,22 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     
+    // finished editing
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if usernameTxt.text!.isEmpty || passwordTxt.text!.isEmpty || repeatPasswordTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
+            
+            // disable signUp button untill every field is filled
+            signUpBtn.backgroundColor = UIColor.lightGray
+            signUpBtn.isEnabled = false
+        } else {
+            
+            // enable signUp button if every field is filled
+            signUpBtn.backgroundColor = customColorYellow
+            signUpBtn.isEnabled = true
+        }
+    }
+    
+    
     // hide keyboard func
     @objc func hideKeyboard(notification: NSNotification) {
         // move down UI
@@ -167,7 +186,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if usernameTxt.text!.isEmpty || passwordTxt.text!.isEmpty || repeatPasswordTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
             
             // alert message
-            alert(title: "Please", message: "fill all fields")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("fill in all fields", comment: ""))
             
             return
         }
@@ -176,7 +195,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if passwordTxt.text != repeatPasswordTxt.text {
             
             // alert message
-            alert(title: "Error", message: "passwords do not match")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("password do not match", comment: ""))
             
             return
         }
@@ -185,7 +204,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if (usernameTxt.text?.count)! < 6 {
             
             // alert message
-            alert(title: "Error", message: "username has to be at least 6 letters.")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username too short", comment: ""))
             
             return
         }
@@ -194,7 +213,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if (passwordTxt.text?.count)! < 6 {
             
             // alert message
-            alert(title: "Error", message: "password has to be at least 6 letters.")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("password too short", comment: ""))
             
             return
         }
@@ -204,7 +223,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if !validateEmail(email: emailTxt.text!){
             
             // alert message
-            alert(title: "Error", message: "Invalid email.")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("invalid email", comment: ""))
             
             return
         }
@@ -216,7 +235,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             if error == nil {
                 if count != 0 {
                     // alert message
-                    self.alert(title: "Error", message: "This username is taken by another user.")
+                    self.alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username taken", comment: ""))
                 }
             } else {
                 print(error!.localizedDescription)
@@ -252,7 +271,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 
             } else {
                 // alert message
-                self.alert(title: "Error", message: error!.localizedDescription)
+                self.alert(title: NSLocalizedString("Error", comment: ""), message: error!.localizedDescription)
             }
         }
         
@@ -274,17 +293,6 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
-    }
-    
-    
-    // clicked cancel
-    @IBAction func cancelBtn_clicked(_ sender: Any) {
-        
-        // hide keyboard
-        self.view.endEditing(true)
-        
-        // push back
-        self.navigationController?.popViewController(animated: true)
     }
 
 }

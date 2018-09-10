@@ -75,3 +75,26 @@
 "email" = "email";
 "fullname" = "name";
 
+// postIdeaHeader
+"Publish" = "Publish";
+
+// postIdeaVC
+"enter your idea" = "Please Enter your idea.";
+
+// postThemeVC
+"Post Theme" = "Post Theme";
+"Select adjective" = "--Select a adjective--";
+"Select category" = "--Select a category--";
+"Type noun" = "Type a theme object";
+
+// Alert
+"Error" = "Error";
+"fill in all fields" = "Please fill in all fields.";
+"invalid username/password" = "Invalid username/password.";
+"password do not match" = "Password do not match.";
+"username too short" = "Username has to be at least 6 letters.";
+"password too short" = "Password has to be at least 6 letters.";
+"invalid email" = "Invalid email.";
+"username taken" = "This username is taken by another user.";
+"image not uploaded" = "Upload an image for your theme.";
+

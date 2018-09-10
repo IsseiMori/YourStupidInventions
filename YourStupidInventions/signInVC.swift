@@ -96,7 +96,7 @@ class signInVC: UIViewController {
         if usernameTxt.text!.isEmpty || passwordTxt.text!.isEmpty {
             
             // alert message
-            alert(title: "Error", message: "fill in fields")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("fill in all fields", comment: ""))
         }
         
         // login functions
@@ -113,7 +113,7 @@ class signInVC: UIViewController {
                 
             } else {
                 // alert message
-                self.alert(title: "Error", message: error!.localizedDescription)
+                self.alert(title: "Error", message: NSLocalizedString("invalid username/password", comment: ""))
             }
         }
     }

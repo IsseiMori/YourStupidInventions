@@ -29,14 +29,23 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // pickerView and pickerData
     var adjPicker: UIPickerView!
-    var adjs = ["Innovative", "Unexpected", "Future"]
+    var adjs = [NSLocalizedString("Select adjective", comment: ""),
+                NSLocalizedString("Innovative", comment: ""),
+                NSLocalizedString("Unexpected", comment: ""),
+                NSLocalizedString("Future", comment: "")]
     var categoryPicker: UIPickerView!
-    var categories = ["Appliance", "Software", "Food", "Entertainment", "Sports", "Others"]
+    var categories = [NSLocalizedString("Select category", comment: ""),
+                      NSLocalizedString("Appliance", comment: ""),
+                      NSLocalizedString("Software", comment: ""),
+                      NSLocalizedString("Food", comment: ""),
+                      NSLocalizedString("Entertainment", comment: ""),
+                      NSLocalizedString("Sports", comment: ""),
+                      NSLocalizedString("Others", comment: "")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Post Theme"
+        self.navigationItem.title = NSLocalizedString("Post Theme", comment: "")
         
         // create adjective picker
         adjPicker = UIPickerView()
@@ -79,6 +88,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // enable UITextView functions
         nounTxt.delegate = self
         
+        // PickerView default value
+        adjPicker.selectRow(0, inComponent: 0, animated: false)
+        categoryPicker.selectRow(0, inComponent: 0, animated: false)
+        
         // call alignment fun
         alignment()
     }
@@ -119,6 +132,11 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // disable send button untill everything is filled
         sendBtn.backgroundColor = UIColor.lightGray
         sendBtn.isEnabled = false
+        
+        adjTxt.placeholder = NSLocalizedString("Select adjective", comment: "")
+        categoryTxt.placeholder = NSLocalizedString("Select category", comment: "")
+        nounTxt.placeholder = NSLocalizedString("Type noun", comment: "")
+        sendBtn.setTitle(NSLocalizedString("Publish", comment: ""), for: UIControlState.normal)
         
         //adjTxt.edi
     }
@@ -212,9 +230,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // picker text number
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == adjPicker {
-            return 3
+            return adjs.count
         } else {
-            return 6
+            return categories.count
         }
     }
     
@@ -251,7 +269,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         titleLbl.text = "\(adjTxt.text!) \(nounTxt.text!)"
         
         // disable send button if not everything is filled, enable otherwise
-        if (adjTxt.text?.isEmpty)! || (categoryTxt.text?.isEmpty)! || (nounTxt.text?.isEmpty)! {
+        if adjPicker.selectedRow(inComponent: 0) == 0 || categoryPicker.selectedRow(inComponent: 0) == 0 || nounTxt.text!.isEmpty {
             
             // disable
             sendBtn.backgroundColor = UIColor.lightGray
@@ -288,9 +306,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             return
         }
         
+        if adjPicker.selectedRow(inComponent: 0) == 0 || categoryPicker.selectedRow(inComponent: 0) == 0 || nounTxt.text!.isEmpty {
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("fill in all fields", comment: ""))
+            return
+        }
+        
         // if image is not uploaded
         if !isImgPicked {
-            alert(title: "Error", message: "Upload an image for your theme.")
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("image not uploaded", comment: ""))
             return
         }
         

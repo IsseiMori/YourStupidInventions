@@ -75,6 +75,7 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         // disable send button untill everything is filled
         sendBtn.backgroundColor = UIColor.lightGray
         sendBtn.isEnabled = false
+        sendBtn.setTitle(NSLocalizedString("Publish", comment: ""), for: UIControlState.normal)
     }
 
     // ideaTxt content changed

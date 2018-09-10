@@ -384,6 +384,12 @@ class postIdeaVC: UITableViewController {
             return
         }
         
+        // if idea is not entered
+        if header.ideaTxt.text!.isEmpty {
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("enter your idea", comment: ""))
+            return
+        }
+        
         // change send status to yes
         didSend = true
         
