@@ -79,6 +79,10 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         usernameTxt.isEnabled = false
         usernameTxt.textColor = UIColor.lightGray
         
+        // button title
+        self.navigationItem.leftBarButtonItems![0].title = NSLocalizedString("Cancel", comment: "")
+        self.navigationItem.rightBarButtonItems![0].title = NSLocalizedString("Save", comment: "")
+        
         // background
         /*
         let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))

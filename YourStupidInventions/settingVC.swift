@@ -16,24 +16,24 @@ class settingVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Setting"
+        self.navigationItem.title = NSLocalizedString("Setting", comment: "")
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let editVC = storyboard.instantiateViewController(withIdentifier: "editVC") as! editVC
         let reportProblemVC = storyboard.instantiateViewController(withIdentifier: "reportProblemVC") as! reportProblemVC
 
-        form +++ Section("Profile")
+        form +++ Section(NSLocalizedString("Profile", comment: ""))
             <<< LabelRow() {
-                $0.title = "Edit profile"
+                $0.title = NSLocalizedString("Edit profile", comment: "")
                 }.onCellSelection { (str, row) in
                     self.navigationController?.pushViewController(editVC, animated: true)
                 }.cellUpdate { (cell, row) in
                     cell.accessoryType = .disclosureIndicator
                 }
         
-        form +++ Section("App information")
+        form +++ Section(NSLocalizedString("App information", comment: ""))
             <<< LabelRow() {
-                $0.title = "Report a problem"
+                $0.title = NSLocalizedString("Report a problem", comment: "")
                 }.onCellSelection { (str, row) in
                     self.navigationController?.pushViewController(reportProblemVC, animated: true)
                 }.cellUpdate { (cell, row) in
@@ -42,7 +42,7 @@ class settingVC: FormViewController {
         
         form +++ Section()
             <<< ButtonRow() {
-                $0.title = "Log out"
+                $0.title = NSLocalizedString("Log out", comment: "")
                 }.onCellSelection { (cell, row) in
                     
                     PFUser.logOutInBackground { (error) in

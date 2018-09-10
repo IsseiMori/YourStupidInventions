@@ -590,7 +590,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     @objc func more(sender: UIBarButtonItem) {
         
         // delete action
-        let delete = UIAlertAction(title: "Delete", style: UIAlertActionStyle.default) { (UIAlertAction) in
+        let delete = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.default) { (UIAlertAction) in
             
             // delete posts on server
             print("commentVC delete post")
@@ -658,7 +658,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         
         
         // complain action
-        let complain = UIAlertAction(title: "Complain", style: UIAlertActionStyle.default) { (UIAlertAction) in
+        let complain = UIAlertAction(title: NSLocalizedString("Complain", comment: ""), style: UIAlertActionStyle.default) { (UIAlertAction) in
             // send complain to server
             print("commentVC send complain")
             let complainObj = PFObject(className: "complain")
@@ -675,7 +675,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         }
         
         // CANCEL ACTION
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
         
         // create menu controller
         let menu = UIAlertController(title: "Menu", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -683,9 +683,15 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         
         // if post belongs to user, they can delete, else they can only complain
         if commentowner.last! == PFUser.current()?.username {
+
+            menu.title = NSLocalizedString("Delete menu", comment: "")
+            
             menu.addAction(delete)
             menu.addAction(cancel)
         } else {
+            
+            menu.title = NSLocalizedString("Complain menu", comment: "")
+            
             menu.addAction(complain)
             menu.addAction(cancel)
         }

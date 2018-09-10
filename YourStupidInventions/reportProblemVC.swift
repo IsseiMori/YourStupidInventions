@@ -21,7 +21,7 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Report a Problem"
+        self.navigationItem.title = NSLocalizedString("Report a problem", comment: "")
         
         // tap to hide keyboard
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
@@ -38,9 +38,13 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
         sendBtn.frame = CGRect(x: 10, y: problemTxt.frame.origin.y + problemTxt.frame.size.height + 10, width: width - 20, height: 30)
         
         problemTxt.layer.cornerRadius = 5
+        
+        sendBtn.setTitle(NSLocalizedString("Send", comment: ""), for: UIControlState.normal)
         sendBtn.layer.cornerRadius = 5
         sendBtn.backgroundColor = UIColor.lightGray
         sendBtn.isEnabled = false
+        
+        titleLbl.text = NSLocalizedString("Explain the problem", comment: "")
         
     }
     

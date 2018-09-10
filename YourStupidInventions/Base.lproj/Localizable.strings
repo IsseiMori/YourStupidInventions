@@ -39,6 +39,25 @@
 "Comments" = "Comments";
 "Enter text" = "Enter text...";
 "Send" = "send";
+"Delete" = "Delete";
+"Delete menu" = "Would you like to delete this post? This action can not be canceled later.";
+"Complain" = "Complain";
+"Complain menu" = "Please send us complain if you find this idea inappropriate.";
+"Cancel" = "Cancel";
 
 // commentHeaderCell
 "Post your idea to this theme" = "Post your idea to this theme";
+
+// settingVC
+"Setting" = "Setting";
+"Profile" = "Profile";
+"Edit profile" = "Edit profile";
+"App information" = "App information";
+"Report a problem" = "Report a Problem";
+"Log out" = "Log out";
+
+// reportProblemVC
+"Explain the problem" = "Briefly explain the problem.";
+
+// editVC
+"Save" = "Save";

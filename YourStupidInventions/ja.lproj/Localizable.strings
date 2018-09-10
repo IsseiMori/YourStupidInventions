@@ -39,6 +39,27 @@
 "Comments" = "コメント";
 "Enter text" = "コメントを入力...";
 "Send" = "送信";
+"Delete" = "削除";
+"Delete menu" = "この投稿を削除しますか？一度削除した投稿は元に戻りません";
+"Complain" = "通報";
+"Complain menu" = "この投稿が適切でない場合は通報してください";
+"Cancel" = "キャンセル";
 
 // commentHeaderCell
 "Post your idea to this theme" = "このお題にアイデアを投稿";
+
+// settingVC
+"Setting" = "設定";
+"Profile" = "プロフィール";
+"Edit profile" = "プロフィールを編集";
+"App information" = "アプリ情報";
+"Report a problem" = "問題を報告";
+"Log out" = "ログアウト";
+
+// reportProblemVC
+"Explain the problem" = "不具合の詳細";
+
+// editVC
+"Save" = "保存";
+
+
