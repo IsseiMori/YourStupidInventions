@@ -6,4 +6,39 @@
   Copyright © 2018 IsseiMori. All rights reserved.
 */
 
-"Top Ideas Title" = "Top Ideas";
+// navBar title
+"Top Ideas" = "Top Ideas";
+"New Themes" = "New Themes";
+
+// menu tabBar items
+"All" = "All";
+"Appliance" = "Appliance";
+"Software" = "Software";
+"Food" = "Food";
+"Entertainment" = "Entertainment";
+"Sports" = "Sports";
+"Others" = "Others";
+"Innovative" = "Innovative";
+"Unexpected" = "Unexpected";
+"Future" = "Future";
+
+// tabBar items
+"Top" = "Top";
+"New" = "New";
+"Idea" = "Idea";
+"Notifications" = "Notifications";
+"Home" = "Home";
+
+// themesHeaderCell
+"Post your own theme" = "Post your own theme";
+
+// themesCell
+"Post your idea" = "Post your idea";
+
+// commentVC
+"Comments" = "Comments";
+"Enter text" = "Enter text...";
+"Send" = "send";
+
+// commentHeaderCell
+"Post your idea to this theme" = "Post your idea to this theme";

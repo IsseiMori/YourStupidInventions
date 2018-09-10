@@ -29,7 +29,7 @@ class notificationsVC: UITableViewController {
         tableView.estimatedRowHeight = 60
         
         // title on the top
-        navigationItem.title = "Notifications"
+        navigationItem.title = NSLocalizedString("Notifications", comment: "")
         
         // load posts if user has logged in
         if isLoggedIn {

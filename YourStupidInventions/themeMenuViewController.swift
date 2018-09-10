@@ -14,7 +14,7 @@ class themeMenuViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
 
         // top title
-        self.navigationItem.title = "New Themes"
+        self.navigationItem.title = NSLocalizedString("New Themes", comment: "")
         
         // Bar font size
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)
@@ -46,42 +46,42 @@ class themeMenuViewController: ButtonBarPagerTabStripViewController {
         
         // Return added viewControllers
         let allVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        allVC.itemInfo = "All"
+        allVC.itemInfo = NSLocalizedString("All", comment: "")
         
         let cat1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat1VC.itemInfo = "Appliance"
+        cat1VC.itemInfo = NSLocalizedString("Appliance", comment: "")
         cat1VC.filterByCategory = "Appliance"
         
         let cat2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat2VC.itemInfo = "Software"
+        cat2VC.itemInfo = NSLocalizedString("Software", comment: "")
         cat2VC.filterByCategory = "Software"
         
         let cat3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat3VC.itemInfo = "Food"
+        cat3VC.itemInfo = NSLocalizedString("Food", comment: "")
         cat3VC.filterByCategory = "Food"
         
         let cat4VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat4VC.itemInfo = "Entertainment"
+        cat4VC.itemInfo = NSLocalizedString("Entertainment", comment: "")
         cat4VC.filterByCategory = "Entertainment"
         
         let cat5VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat5VC.itemInfo = "Sports"
+        cat5VC.itemInfo = NSLocalizedString("Sports", comment: "")
         cat5VC.filterByCategory = "Sports"
         
         let cat6VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        cat6VC.itemInfo = "Others"
+        cat6VC.itemInfo = NSLocalizedString("Others", comment: "")
         cat6VC.filterByCategory = "Others"
         
         let adj1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        adj1VC.itemInfo = "Innovative"
+        adj1VC.itemInfo = NSLocalizedString("Innovative", comment: "")
         adj1VC.filterByAdj = "Innovative"
         
         let adj2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        adj2VC.itemInfo = "Unexpected"
+        adj2VC.itemInfo = NSLocalizedString("Unexpected", comment: "")
         adj2VC.filterByAdj = "Unexpected"
         
         let adj3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "themesVC") as! themesVC
-        adj3VC.itemInfo = "Future"
+        adj3VC.itemInfo = NSLocalizedString("Future", comment: "")
         adj3VC.filterByAdj = "Future"
         
         let childViewControllers:[UIViewController] = [adj1VC, adj2VC, adj3VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC, cat6VC]

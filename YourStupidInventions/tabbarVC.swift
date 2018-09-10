@@ -22,9 +22,13 @@ class tabbarVC: UITabBarController {
         // disable translucent
         self.tabBar.isTranslucent = false
         
-        
+        // tabBar labels
+        tabBar.items![0].title = NSLocalizedString("Top", comment: "")
+        tabBar.items![1].title = NSLocalizedString("New", comment: "")
+        tabBar.items![2].title = NSLocalizedString("Idea", comment: "")
+        tabBar.items![3].title = NSLocalizedString("Notifications", comment: "")
+        tabBar.items![4].title = NSLocalizedString("Home", comment: "")
 
-        // Do any additional setup after loading the view.
     }
     
 

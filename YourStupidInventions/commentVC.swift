@@ -57,7 +57,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         super.viewDidLoad()
         
         // title at the top
-        self.navigationItem.title = "Comments"
+        self.navigationItem.title = NSLocalizedString("Comments", comment: "")
         
         // new back button
         self.navigationItem.hidesBackButton = true
@@ -117,11 +117,13 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let placeholderFontSize = self.view.frame.size.width / 25
         
         placeholderLbl.frame = CGRect(x: placeholderX, y: placeholderY, width: placeholderWidth, height: placeholderHeight)
-        placeholderLbl.text = "Enter text..."
+        placeholderLbl.text = NSLocalizedString("Enter text", comment: "")
         placeholderLbl.font = UIFont(name: "HelveticaNeue", size: placeholderFontSize)
         placeholderLbl.textColor = UIColor.lightGray
         placeholderLbl.textAlignment = NSTextAlignment.left
         commentTxt.addSubview(placeholderLbl)
+        
+        sendBtn.setTitle(NSLocalizedString("Send", comment: ""), for: UIControlState.normal)
         
         // call alignment func
         alignment()

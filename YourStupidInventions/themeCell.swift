@@ -81,6 +81,7 @@ class themeCell: UITableViewCell {
         postIdeaBtn.backgroundColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1)
         postIdeaBtn.layer.cornerRadius = 5
         postIdeaBtn.clipsToBounds = true
+        postIdeaBtn.setTitle(NSLocalizedString("Post your idea", comment: ""), for: UIControlState.normal)
     }
 
 

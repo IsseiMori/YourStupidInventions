@@ -175,6 +175,8 @@ class commentHeaderCell: UITableViewCell{
         postIdeaBtn.backgroundColor = customColorYellow
         postIdeaBtn.layer.cornerRadius = 5
         
+        postIdeaBtn.setTitle(NSLocalizedString("Post your idea to this theme", comment: ""), for: UIControlState.normal)
+        
         
     }
 

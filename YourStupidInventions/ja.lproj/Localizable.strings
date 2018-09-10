@@ -6,4 +6,39 @@
   Copyright © 2018 IsseiMori. All rights reserved.
 */
 
-"Top Ideas Title" = "トップアイデア";
+// navBar title
+"Top Ideas" = "トップアイデア";
+"New Themes" = "新着テーマ";
+
+// menu tabBar items
+"All" = "全て";
+"Appliance" = "電化製品";
+"Software" = "ソフトウェア";
+"Food" = "食べ物";
+"Entertainment" = "エンタメ";
+"Sports" = "スポーツ";
+"Others" = "他";
+"Innovative" = "革新的な";
+"Unexpected" = "意外な";
+"Future" = "未来の";
+
+// tabBar items
+"Top" = "トップ";
+"New" = "新着";
+"Idea" = "アイデア";
+"Notifications" = "通知";
+"Home" = "マイページ";
+
+// themesHeaderCell
+"Post your own theme" = "お題を投稿";
+
+// themesCell
+"Post your idea" = "アイデアを投稿";
+
+// commentVC
+"Comments" = "コメント";
+"Enter text" = "コメントを入力...";
+"Send" = "送信";
+
+// commentHeaderCell
+"Post your idea to this theme" = "このお題にアイデアを投稿";
