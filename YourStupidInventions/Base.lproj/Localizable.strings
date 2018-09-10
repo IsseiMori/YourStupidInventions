@@ -70,4 +70,8 @@
 "forgot password?" = "forgot password?";
 "Sign Up" = "Sign Up";
 
+// signUpVC
+"repeat password" = "repeat password";
+"email" = "email";
+"fullname" = "name";
 

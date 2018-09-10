@@ -41,7 +41,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Sign Up"
+        self.navigationItem.title = NSLocalizedString("Sign Up", comment: "")
 
         // scrollView frame size
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -91,6 +91,14 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.view.addSubview(bg)*/
         
         signUpBtn.backgroundColor = customColorYellow
+        
+        usernameTxt.placeholder = NSLocalizedString("username", comment: "")
+        passwordTxt.placeholder = NSLocalizedString("password", comment: "")
+        repeatPasswordTxt.placeholder = NSLocalizedString("repeat password", comment: "")
+        emailTxt.placeholder = NSLocalizedString("email", comment: "")
+        fullnameTxt.placeholder = NSLocalizedString("fullname", comment: "")
+        signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
+        cancelBtn.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControlState.normal)
         
     }
     

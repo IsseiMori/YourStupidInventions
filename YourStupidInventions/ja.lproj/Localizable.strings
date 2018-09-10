@@ -70,3 +70,8 @@
 "forgot password?" = "パスワードを忘れたら";
 "Sign Up" = "会員登録";
 
+// signUpVC
+"repeat password" = "パスワード確認";
+"email" = "メールアドレス";
+"fullname" = "名前";
+
