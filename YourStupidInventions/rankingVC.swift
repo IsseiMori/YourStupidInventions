@@ -39,7 +39,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var isLoading = false
     
     // Title for XLPagerTabStrip
-    var itemInfo: IndicatorInfo = "-"
+    var itemInfo: String = "-"
     
     // set up in menuVC
     var sortBy: String = ""
@@ -402,7 +402,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // required for XLPagerTabStrip
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return itemInfo
+        return IndicatorInfo(title: itemInfo)
     }
     
 }

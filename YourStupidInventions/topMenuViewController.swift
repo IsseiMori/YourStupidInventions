@@ -46,52 +46,52 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         
         // Return added viewControllers
         let allVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        allVC.itemInfo = "All"
+        allVC.itemInfo = NSLocalizedString("All", comment: "")
         allVC.sortBy = "likes"
         
         let cat1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat1VC.itemInfo = "Appliance"
+        cat1VC.itemInfo = NSLocalizedString("Appliance", comment: "")
         cat1VC.sortBy = "likes"
         cat1VC.filterByCategory = "Appliance"
         
         let cat2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat2VC.itemInfo = "Software"
+        cat2VC.itemInfo = NSLocalizedString("Software", comment: "")
         cat2VC.sortBy = "likes"
         cat2VC.filterByCategory = "Software"
         
         let cat3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat3VC.itemInfo = "Food"
+        cat3VC.itemInfo = NSLocalizedString("Food", comment: "")
         cat3VC.sortBy = "likes"
         cat3VC.filterByCategory = "Food"
         
         let cat4VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat4VC.itemInfo = "Entertainment"
+        cat4VC.itemInfo = NSLocalizedString("Entertainment", comment: "")
         cat4VC.sortBy = "likes"
         cat4VC.filterByCategory = "Entertainment"
         
         let cat5VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat5VC.itemInfo = "Sports"
+        cat5VC.itemInfo = NSLocalizedString("Sports", comment: "")
         cat5VC.sortBy = "likes"
         cat5VC.filterByCategory = "Sports"
         
         let cat6VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        cat6VC.itemInfo = "Others"
+        cat6VC.itemInfo = NSLocalizedString("Others", comment: "")
         cat6VC.sortBy = "likes"
         cat6VC.filterByCategory = "Others"
         
         let adj1VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        adj1VC.itemInfo = "Innovative"
+        adj1VC.itemInfo = NSLocalizedString("Innovative", comment: "")
         adj1VC.filterByAdj = "Innovative"
         adj1VC.sortBy = "likes"
         adj1VC.filterByAdj = "Innovative"
         
         let adj2VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        adj2VC.itemInfo = "Unexpected"
+        adj2VC.itemInfo = NSLocalizedString("Unexpected", comment: "")
         adj2VC.sortBy = "likes"
         adj2VC.filterByAdj = "Unexpected"
         
         let adj3VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
-        adj3VC.itemInfo = "Future"
+        adj3VC.itemInfo = NSLocalizedString("Future", comment: "")
         adj3VC.sortBy = "likes"
         adj3VC.filterByAdj = "Future"
         
