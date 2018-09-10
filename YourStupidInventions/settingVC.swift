@@ -16,6 +16,8 @@ class settingVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Setting"
+        
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let editVC = storyboard.instantiateViewController(withIdentifier: "editVC") as! editVC
         let reportProblemVC = storyboard.instantiateViewController(withIdentifier: "reportProblemVC") as! reportProblemVC

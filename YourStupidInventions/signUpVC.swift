@@ -35,6 +35,9 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     // keyboard frame size
     var keyboard = CGRect()
     
+    // send status
+    var didSend = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,6 +147,11 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     // clicked sing up
     @IBAction func singUpBtn_clicked(_ sender: Any) {
         
+        // if status is already sent, return
+        if didSend {
+            return
+        }
+        
         // dismiss keyboard
         self.view.endEditing(true)
         
@@ -206,6 +214,9 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 print(error!.localizedDescription)
             }
         }
+        
+        // change send status to yes
+        didSend = true
         
         // send data to server to related columns
         let user = PFUser()
