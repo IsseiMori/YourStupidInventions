@@ -14,7 +14,7 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         
         // top title
-        self.navigationItem.title = "Top Ideas"
+        self.navigationItem.title = NSLocalizedString("Top Ideas Title", comment: "")
         
         // Bar font size
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 15)

@@ -1,0 +1,267 @@
+
+/* Class = "UITextField"; placeholder = "username"; ObjectID = "00G-fr-VzP"; */
+"00G-fr-VzP.placeholder" = "username";
+
+/* Class = "UILabel"; text = "Describe the problem"; ObjectID = "13a-4z-XLb"; */
+"13a-4z-XLb.text" = "Describe the problem";
+
+/* Class = "UILabel"; text = "Innovative Microwave"; ObjectID = "1NL-re-xuY"; */
+"1NL-re-xuY.text" = "Innovative Microwave";
+
+/* Class = "UILabel"; text = "2h"; ObjectID = "1gU-Cy-MjG"; */
+"1gU-Cy-MjG.text" = "2h";
+
+/* Class = "UITextField"; placeholder = "name"; ObjectID = "1j9-Sd-PIe"; */
+"1j9-Sd-PIe.placeholder" = "name";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "2JK-YJ-ube"; */
+"2JK-YJ-ube.text" = "5";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "3tb-oZ-G1O"; */
+"3tb-oZ-G1O.title" = "Cancel";
+
+/* Class = "UILabel"; text = "comment"; ObjectID = "4L9-3k-1nz"; */
+"4L9-3k-1nz.text" = "comment";
+
+/* Class = "UITextField"; placeholder = "email"; ObjectID = "4nr-HW-4gC"; */
+"4nr-HW-4gC.placeholder" = "email";
+
+/* Class = "UITextField"; placeholder = "repeat password"; ObjectID = "5nr-BW-1u7"; */
+"5nr-BW-1u7.placeholder" = "repeat password";
+
+/* Class = "UILabel"; text = "2h"; ObjectID = "6C5-9y-M82"; */
+"6C5-9y-M82.text" = "2h";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "7Yh-4A-XCN"; */
+"7Yh-4A-XCN.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Innovative Microwave"; ObjectID = "7mc-f9-T3q"; */
+"7mc-f9-T3q.text" = "Innovative Microwave";
+
+/* Class = "UITextField"; placeholder = "Type your theme object"; ObjectID = "A1d-qq-TW0"; */
+"A1d-qq-TW0.placeholder" = "Type your theme object";
+
+/* Class = "UITabBarItem"; title = "Top"; ObjectID = "AIq-V3-ZE6"; */
+"AIq-V3-ZE6.title" = "Top";
+
+/* Class = "UILabel"; text = "ideas"; ObjectID = "BE7-C5-bOh"; */
+"BE7-C5-bOh.text" = "ideas";
+
+/* Class = "UILabel"; text = "Explain your idea"; ObjectID = "BFc-A5-fjm"; */
+"BFc-A5-fjm.text" = "Explain your idea";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "BNw-XK-8gJ"; */
+"BNw-XK-8gJ.text" = "0";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Bcx-aa-ADL"; */
+"Bcx-aa-ADL.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "username"; ObjectID = "Cg1-Vj-6SY"; */
+"Cg1-Vj-6SY.placeholder" = "username";
+
+/* Class = "UITextField"; placeholder = "email"; ObjectID = "Cs1-tS-xWc"; */
+"Cs1-tS-xWc.placeholder" = "email";
+
+/* Class = "UILabel"; text = "username"; ObjectID = "Cu9-b9-PYN"; */
+"Cu9-b9-PYN.text" = "username";
+
+/* Class = "UILabel"; text = "Innovative Microwave"; ObjectID = "Eed-mq-3gt"; */
+"Eed-mq-3gt.text" = "Innovative Microwave";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "H8K-t8-LHB"; */
+"H8K-t8-LHB.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "HW1-6e-5T3"; */
+"HW1-6e-5T3.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "adjective"; ObjectID = "IAR-TP-Ank"; */
+"IAR-TP-Ank.text" = "adjective";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "JGI-XS-ge7"; */
+"JGI-XS-ge7.text" = "5";
+
+/* Class = "UILabel"; text = "themeuuid"; ObjectID = "JXb-jX-VaL"; */
+"JXb-jX-VaL.text" = "themeuuid";
+
+/* Class = "UIButton"; normalTitle = "Post your idea"; ObjectID = "JXg-HX-mLf"; */
+"JXg-HX-mLf.normalTitle" = "Post your idea";
+
+/* Class = "UILabel"; text = "likes"; ObjectID = "KnF-QV-5Uz"; */
+"KnF-QV-5Uz.text" = "likes";
+
+/* Class = "UIButton"; normalTitle = "username"; ObjectID = "MQE-Mi-IIi"; */
+"MQE-Mi-IIi.normalTitle" = "username";
+
+/* Class = "UIButton"; normalTitle = "username"; ObjectID = "MXj-4j-nHi"; */
+"MXj-4j-nHi.normalTitle" = "username";
+
+/* Class = "UILabel"; text = "Innovative Microwave"; ObjectID = "NhH-wz-Y7S"; */
+"NhH-wz-Y7S.text" = "Innovative Microwave";
+
+/* Class = "UILabel"; text = "themeuuid"; ObjectID = "Nmp-Wm-zvq"; */
+"Nmp-Wm-zvq.text" = "themeuuid";
+
+/* Class = "UITextField"; placeholder = "Select category"; ObjectID = "OXq-qK-PhF"; */
+"OXq-qK-PhF.placeholder" = "Select category";
+
+/* Class = "UIButton"; normalTitle = "username"; ObjectID = "P04-KZ-YCV"; */
+"P04-KZ-YCV.normalTitle" = "username";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "PJT-Dv-IEY"; */
+"PJT-Dv-IEY.normalTitle" = "Reset";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "RY2-M7-XY1"; */
+"RY2-M7-XY1.text" = "0";
+
+/* Class = "UITabBarItem"; title = "New"; ObjectID = "RgT-IS-YYT"; */
+"RgT-IS-YYT.title" = "New";
+
+/* Class = "UILabel"; text = "uuid"; ObjectID = "RqA-gr-9rZ"; */
+"RqA-gr-9rZ.text" = "uuid";
+
+/* Class = "UITabBarItem"; title = "Idea"; ObjectID = "S7f-iW-e5c"; */
+"S7f-iW-e5c.title" = "Idea";
+
+/* Class = "UITextField"; placeholder = "name"; ObjectID = "S9J-g6-y7p"; */
+"S9J-g6-y7p.placeholder" = "name";
+
+/* Class = "UIButton"; normalTitle = "send"; ObjectID = "T9O-Ml-StV"; */
+"T9O-Ml-StV.normalTitle" = "send";
+
+/* Class = "UITextField"; placeholder = "email"; ObjectID = "UIO-4Q-fWd"; */
+"UIO-4Q-fWd.placeholder" = "email";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Uhd-6e-05L"; */
+"Uhd-6e-05L.text" = "0";
+
+/* Class = "UILabel"; text = "2h"; ObjectID = "VG3-uh-SJH"; */
+"VG3-uh-SJH.text" = "2h";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "Vqa-Pf-RMn"; */
+"Vqa-Pf-RMn.title" = "Save";
+
+/* Class = "UIButton"; normalTitle = "Publish"; ObjectID = "ZOn-aG-jYy"; */
+"ZOn-aG-jYy.normalTitle" = "Publish";
+
+/* Class = "UILabel"; text = "ideas"; ObjectID = "a1q-rG-wbW"; */
+"a1q-rG-wbW.text" = "ideas";
+
+/* Class = "UIButton"; normalTitle = "Post your idea to this theme"; ObjectID = "aHg-JZ-uLj"; */
+"aHg-JZ-uLj.normalTitle" = "Post your idea to this theme";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "afc-FC-07i"; */
+"afc-FC-07i.placeholder" = "password";
+
+/* Class = "UITextField"; placeholder = "username"; ObjectID = "agv-y0-UUd"; */
+"agv-y0-UUd.placeholder" = "username";
+
+/* Class = "UILabel"; text = "themeuuid"; ObjectID = "anA-es-PQw"; */
+"anA-es-PQw.text" = "themeuuid";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "bBI-fZ-Q2c"; */
+"bBI-fZ-Q2c.text" = "Name";
+
+/* Class = "UITabBarItem"; title = "Notifications"; ObjectID = "bEb-KT-udN"; */
+"bEb-KT-udN.title" = "Notifications";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "boe-Vs-BIC"; */
+"boe-Vs-BIC.text" = "10";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "c7a-MH-6yf"; */
+"c7a-MH-6yf.text" = "Name";
+
+/* Class = "UILabel"; text = "2h"; ObjectID = "cA4-Qx-Z79"; */
+"cA4-Qx-Z79.text" = "2h";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "eUo-Du-4ti"; */
+"eUo-Du-4ti.title" = "Home";
+
+/* Class = "UIButton"; normalTitle = "username"; ObjectID = "fer-Jh-SsP"; */
+"fer-Jh-SsP.normalTitle" = "username";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "frN-lg-hrS"; */
+"frN-lg-hrS.text" = "0";
+
+/* Class = "UILabel"; text = "likes"; ObjectID = "gaS-t2-r2M"; */
+"gaS-t2-r2M.text" = "likes";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "gog-Xq-Wqu"; */
+"gog-Xq-Wqu.text" = "10";
+
+/* Class = "UIButton"; normalTitle = "Post your own theme"; ObjectID = "hhI-Cl-rMH"; */
+"hhI-Cl-rMH.normalTitle" = "Post your own theme";
+
+/* Class = "UILabel"; text = "username"; ObjectID = "i2g-ET-xb3"; */
+"i2g-ET-xb3.text" = "username";
+
+/* Class = "UILabel"; text = "uuid"; ObjectID = "iE6-j7-ISk"; */
+"iE6-j7-ISk.text" = "uuid";
+
+/* Class = "UILabel"; text = "now"; ObjectID = "jxd-a9-0eR"; */
+"jxd-a9-0eR.text" = "now";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "kDV-gU-HXO"; */
+"kDV-gU-HXO.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "forgot password?"; ObjectID = "kUy-bh-KHc"; */
+"kUy-bh-KHc.normalTitle" = "forgot password?";
+
+/* Class = "UIButton"; normalTitle = "usernameBtn"; ObjectID = "mah-Wq-9rI"; */
+"mah-Wq-9rI.normalTitle" = "usernameBtn";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "nmo-5a-FZt"; */
+"nmo-5a-FZt.placeholder" = "password";
+
+/* Class = "UITextField"; placeholder = "Selet adjective"; ObjectID = "o23-6V-hde"; */
+"o23-6V-hde.placeholder" = "Selet adjective";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "rrd-PP-IhA"; */
+"rrd-PP-IhA.normalTitle" = "Send";
+
+/* Class = "UILabel"; text = "noun"; ObjectID = "sO8-fF-30d"; */
+"sO8-fF-30d.text" = "noun";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sQq-Qz-IjY"; */
+"sQq-Qz-IjY.text" = "Label";
+
+/* Class = "UILabel"; text = "Explain your idea"; ObjectID = "sjG-RJ-yIl"; */
+"sjG-RJ-yIl.text" = "Explain your idea";
+
+/* Class = "UILabel"; text = "Your-Stupid-Inventions"; ObjectID = "ttx-KR-ZFM"; */
+"ttx-KR-ZFM.text" = "Your-Stupid-Inventions";
+
+/* Class = "UIButton"; normalTitle = "Publish"; ObjectID = "txt-Ny-sh9"; */
+"txt-Ny-sh9.normalTitle" = "Publish";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "u1b-ub-FSg"; */
+"u1b-ub-FSg.text" = "10";
+
+/* Class = "UILabel"; text = "Explain your idea"; ObjectID = "uJa-wr-9lN"; */
+"uJa-wr-9lN.text" = "Explain your idea";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "uV5-OZ-UfT"; */
+"uV5-OZ-UfT.normalTitle" = "Sign In";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "uba-xJ-uGC"; */
+"uba-xJ-uGC.text" = "Label";
+
+/* Class = "UILabel"; text = "Innovative Microwave"; ObjectID = "v0Y-sW-DT9"; */
+"v0Y-sW-DT9.text" = "Innovative Microwave";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "w9c-b1-YCH"; */
+"w9c-b1-YCH.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "x09-9F-IhT"; */
+"x09-9F-IhT.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "category"; ObjectID = "xjy-mv-0Fh"; */
+"xjy-mv-0Fh.text" = "category";
+
+/* Class = "UILabel"; text = "liked your idea"; ObjectID = "yKt-gf-YjY"; */
+"yKt-gf-YjY.text" = "liked your idea";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "zDX-Lz-qav"; */
+"zDX-Lz-qav.text" = "10";
+
+/* Class = "UILabel"; text = "hashtags"; ObjectID = "zsU-Ea-ga9"; */
+"zsU-Ea-ga9.text" = "hashtags";
