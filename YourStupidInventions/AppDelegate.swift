@@ -12,6 +12,9 @@ import Parse
 // global variable for maintain login status
 var isLoggedIn = false
 
+// languages of posts to show
+var selectedLanguages: [String] = []
+
 // custom UIColors for this app
 let customColorYellow: UIColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1) // #ffbd00
 let customColorBrown: UIColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1) // #49483e
@@ -44,6 +47,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // color of window
         window?.backgroundColor = .white
+        
+        // language setting
+        // get device saved langs
+        let langSet = UserDefaults.standard.stringArray(forKey: "selectedLanguages")
+        // if this is the first time using app, set device default language as selected languages
+        if langSet == nil {
+            if Locale.current.languageCode!.hasPrefix("jp") {
+                selectedLanguages.append("jp")
+            } else {
+                selectedLanguages.append("en")
+            }
+            // save
+            UserDefaults.standard.set(selectedLanguages, forKey: "selectedLanguages")
+            UserDefaults.standard.synchronize()
+        } else {
+            // after 2nd time, move langs to selectedLanguages
+            selectedLanguages = langSet!
+        }
         
         return true
     }

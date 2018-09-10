@@ -51,10 +51,18 @@
 // settingVC
 "Setting" = "設定";
 "Profile" = "プロフィール";
+"User" = "ユーザー";
 "Edit profile" = "プロフィールを編集";
 "App information" = "アプリ情報";
 "Report a problem" = "問題を報告";
 "Log out" = "ログアウト";
+"Language of shown posts" = "選択中の言語";
+"English" = "英語";
+"Japanese" = "日本語";
+"Chinese" = "中国語";
+"en" = "英語";
+"jp" = "日本語";
+"ch" = "中国語";
 
 // reportProblemVC
 "Explain the problem" = "不具合の詳細";

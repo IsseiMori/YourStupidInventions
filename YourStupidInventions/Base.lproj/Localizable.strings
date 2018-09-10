@@ -51,10 +51,18 @@
 // settingVC
 "Setting" = "Setting";
 "Profile" = "Profile";
+"User" = "User";
 "Edit profile" = "Edit profile";
 "App information" = "App information";
 "Report a problem" = "Report a Problem";
 "Log out" = "Log out";
+"Language of shown posts" = "Language of shown posts";
+"English" = "English";
+"Japanese" = "Japanese";
+"Chinese" = "Chinese";
+"en" = "English";
+"jp" = "Japanese";
+"ch" = "Chinese";
 
 // reportProblemVC
 "Explain the problem" = "Briefly explain the problem.";
