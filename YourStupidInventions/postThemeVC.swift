@@ -118,9 +118,11 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         categoryBtn.frame = CGRect(x: width - 10 - width * 0.45, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
         categoryBtnTri.frame = CGRect(x: width - 10 - width * 0.45 + 5, y: themeImg.frame.origin.y + themeImgHeight + 18, width: 16, height: 14)
         
-        nounTxt.frame = CGRect(x: 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.7, height: 30)
-        langBtn.frame = CGRect(x: width - width * 0.2 - 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.2, height: 30)
-        langBtnTri.frame = CGRect(x: width - width * 0.2 - 10 + 5, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 18, width: 16, height: 14)
+        nounTxt.frame = CGRect(x: 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.6, height: 30)
+        
+        langBtn.frame = CGRect(x: width - width * 0.3 - 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.3, height: 30)
+        langBtnTri.frame = CGRect(x: width - width * 0.3 - 10 + 5, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 18, width: 16, height: 14)
+        
         sendBtn.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width - 20, height: 30)
         
         sendBtn.layer.cornerRadius = 5
@@ -327,10 +329,18 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         object["username"] = PFUser.current()?.username
         
-        object["adjective"] = adjBtn.titleLabel?.text
+        object["adjective"] = adjBtn.titleLabel!.text!
         object["noun"] = nounTxt.text!
-        object["category"] = categoryBtn.titleLabel?.text
+        object["category"] = categoryBtn.titleLabel!.text!
         object["title"] = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
+        
+        if langBtn.titleLabel!.text! == NSLocalizedString("en", comment: "") {
+            object["language"] = "en"
+        } else if langBtn.titleLabel!.text! == NSLocalizedString("jp", comment: "") {
+            object["language"] = "jp"
+        } else {
+            object["language"] = "ch"
+        }
         
         object["totalPosts"] = 0
         

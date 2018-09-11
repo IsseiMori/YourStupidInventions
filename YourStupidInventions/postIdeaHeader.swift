@@ -19,6 +19,8 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var ideaTxt: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var langBtn: PickerViewKeyboard!
+    @IBOutlet weak var langBtnTri: UIButton!
     
     // hidden label to save theme data temporary
     @IBOutlet weak var themeuuidLbl: UILabel!
@@ -28,6 +30,10 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var hashtagsLbl: UILabel!
     
     var themeImgPFFile: PFFile!
+    
+    var langs = [NSLocalizedString("English", comment: ""),
+                 NSLocalizedString("Japanese", comment: ""),
+                 NSLocalizedString("Chinese", comment: "")]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +45,9 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         
         // set delegate to detect Enter
         ideaTxt.delegate = self
+        
+        // enable picker
+        langBtn.delegate = self
         
         // call alignment func
         alignment()
@@ -57,7 +66,9 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         titleLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: 30)
         themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 5, width: themeWidth, height: themeHeight)
         ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 80)
-        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 30)
+        langBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width * 0.3 - 10, height: 30)
+        langBtnTri.frame = CGRect(x: bgView.frame.origin.x + 15, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 13, width: 16, height: 14)
+        sendBtn.frame = CGRect(x: bgView.frame.origin.x + bgView.frame.size.width - bgView.frame.size.width * 0.65, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width * 0.65 - 10, height: 30)
         
         ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         
@@ -68,6 +79,20 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         bgView.layer.cornerRadius = self.frame.size.width / 30
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
+        
+        langBtn.backgroundColor = .clear
+        langBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        langBtn.layer.cornerRadius = 5
+        langBtn.layer.borderWidth = 1
+        langBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        langBtnTri.isUserInteractionEnabled = false
+        
+        // set post language as default language
+        if selectedLanguages.count == 0 {
+            langBtn.setTitle(NSLocalizedString("English", comment: ""), for: UIControlState.normal)
+        } else {
+            langBtn.setTitle(NSLocalizedString(selectedLanguages[0], comment: ""), for: UIControlState.normal)
+        }
         
         sendBtn.layer.cornerRadius = self.frame.size.width / 100
         sendBtn.clipsToBounds = true
@@ -104,5 +129,21 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
             sendBtn.backgroundColor = customColorYellow
             sendBtn.isEnabled = true
         }
+    }
+}
+
+extension postIdeaHeader: PickerViewKeyboardDelegate {
+    func titlesOfPickerViewKeyboard(sender: PickerViewKeyboard) -> Array<String> {
+        return langs
+    }
+    func initSelectedRow(sender: PickerViewKeyboard) -> Int {
+        return langs.count
+    }
+    func didDone(sender: PickerViewKeyboard, selectedData: String) {
+        langBtn.setTitle(selectedData, for: UIControlState.normal)
+        langBtn.resignFirstResponder()
+    }
+    func didCancel(sender: PickerViewKeyboard) {
+        langBtn.resignFirstResponder()
     }
 }

@@ -41,7 +41,7 @@ class postIdeaVC: UITableViewController {
     
     // send status to avoid sending twice
     var didSend = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -409,6 +409,14 @@ class postIdeaVC: UITableViewController {
         object["noun"] = header.nounLbl.text!
         object["category"] = header.categoryLbl.text!
         object["hashtags"] = header.hashtagsLbl.text!
+        
+        if header.langBtn.titleLabel!.text! == NSLocalizedString("en", comment: "") {
+            object["language"] = "en"
+        } else if header.langBtn.titleLabel!.text! == NSLocalizedString("jp", comment: "") {
+            object["language"] = "jp"
+        } else {
+            object["language"] = "ch"
+        }
         
         // copy the themeuuid
         object["themeuuid"] = header.themeuuidLbl.text
