@@ -310,12 +310,16 @@ class postIdeaVC: UITableViewController {
             cell.dateLbl.text = "\(String(describing: difference.weekOfMonth!))w."
         }
         
+        // set likeBtn to unlike
+        if cell.likeBtn.titleLabel?.text != "like" {
+            cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
+            cell.likeBtn.setBackgroundImage(UIImage(named: "money_unlike.png"), for: UIControlState.normal)
+        }
         
         // assign index
         cell.usernameBtn.layer.setValue(indexPath, forKey: "index")
         cell.likeBtn.layer.setValue(indexPath, forKey: "index")
-        
-        
+        cell.likeLbl.layer.setValue(cell.likeLbl.text!, forKey: "likes")
         
         return cell
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Spring
 
 class postCell: UITableViewCell {
     
@@ -23,7 +24,7 @@ class postCell: UITableViewCell {
     @IBOutlet weak var ptLbl: UILabel!
     
     // buttons
-    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var likeBtn: SpringButton!
     @IBOutlet weak var usernameBtn: UIButton!
     
     @IBOutlet weak var bgView: UIView!
@@ -119,6 +120,10 @@ class postCell: UITableViewCell {
     @IBAction func likeBtn_clicked(_ sender: Any) {
         
         if isLoggedIn {
+            
+            likeBtn.animation = "pop"
+            likeBtn.duration = 1
+            likeBtn.animate()
             
             // change background image
             if likeBtn.titleLabel?.text != "like" {

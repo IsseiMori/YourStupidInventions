@@ -84,15 +84,15 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sp2-Fv-jRm">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sp2-Fv-jRm" customClass="SpringButton" customModule="Spring">
                                             <rect key="frame" x="16" y="298" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" backgroundImage="money_unlike.png">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <action selector="likeBtn_clicked:" destination="ogW-92-BN7" eventType="touchUpInside" id="Nrz-xw-dtc"/>
-                                                <action selector="likeBtn_clicked:" destination="I3Y-WK-BAc" eventType="touchUpInside" id="Zbb-ml-et2"/>
+                                                <action selector="likeBtn_clicked:" destination="I3Y-WK-BAc" eventType="touchUpInside" id="caL-FK-q81"/>
+                                                <action selector="likeBtn_clicked:" destination="ogW-92-BN7" eventType="touchUpInside" id="kSB-zA-cEl"/>
                                             </connections>
                                         </button>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fer-Jh-SsP">
@@ -124,7 +124,7 @@
                                     <outlet property="bgView" destination="NkW-W4-gmc" id="oRK-Bh-OjB"/>
                                     <outlet property="dateLbl" destination="VG3-uh-SJH" id="0S0-sF-CGH"/>
                                     <outlet property="ideaLbl" destination="sjG-RJ-yIl" id="wnl-kM-y66"/>
-                                    <outlet property="likeBtn" destination="sp2-Fv-jRm" id="MBv-fp-r3c"/>
+                                    <outlet property="likeBtn" destination="sp2-Fv-jRm" id="IMy-Zc-8oB"/>
                                     <outlet property="likeLbl" destination="RY2-M7-XY1" id="Q5M-c1-hdV"/>
                                     <outlet property="ptLbl" destination="HtN-pA-wll" id="ozU-xS-usF"/>
                                     <outlet property="themeImg" destination="GnI-qm-lx3" id="iWi-RG-ZgJ"/>
@@ -1341,7 +1341,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcb-hQ-d7f">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcb-hQ-d7f" customClass="SpringButton" customModule="Spring">
                                             <rect key="frame" x="17" y="212" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" backgroundImage="unlike.png"/>
