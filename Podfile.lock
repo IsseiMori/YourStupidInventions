@@ -1,11 +1,13 @@
 PODS:
   - Eureka (4.2.0)
   - RSKImageCropper (2.1.0)
+  - Spring (1.0.5)
   - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
   - Eureka
   - RSKImageCropper
+  - Spring (from `https://github.com/MengTo/Spring.git`)
   - XLPagerTabStrip
 
 SPEC REPOS:
@@ -14,11 +16,21 @@ SPEC REPOS:
     - RSKImageCropper
     - XLPagerTabStrip
 
+EXTERNAL SOURCES:
+  Spring:
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: c540239f3590bbaf4a35c3959c329dd5ed4e3eee
+    :git: https://github.com/MengTo/Spring.git
+
 SPEC CHECKSUMS:
   Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
   RSKImageCropper: 0d0c6d8525a2381f03fde32a47c6703817a2feed
+  Spring: 3c7666eccefdeb87140008dc81043f89f8dbb787
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: b61737409a29781ed207779b77c10c89a7c7b81f
+PODFILE CHECKSUM: 8cbb1a53497de310578875e19aa2c3fad9704a4f
 
 COCOAPODS: 1.5.3

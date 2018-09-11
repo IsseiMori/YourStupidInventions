@@ -10,5 +10,6 @@ target 'YourStupidInventions' do
   pod 'XLPagerTabStrip'
   pod 'RSKImageCropper'
   pod 'Eureka'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
 
 end
