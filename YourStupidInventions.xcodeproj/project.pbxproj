@@ -11,6 +11,8 @@
 		8507F2F42145A67800269446 /* settingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F2F32145A67700269446 /* settingVC.swift */; };
 		8507F2F62145F95F00269446 /* reportProblemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F2F52145F95F00269446 /* reportProblemVC.swift */; };
 		8507F2FB21462B1B00269446 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8507F2FD21462B1B00269446 /* Localizable.strings */; };
+		8507F3002147AEFC00269446 /* PickerViewKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */; };
+		8507F3022147BA3B00269446 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F3012147BA3A00269446 /* triangle.png */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -83,6 +85,8 @@
 		8507F2F821462A1400269446 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8507F2FC21462B1B00269446 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8507F2FE21462B4500269446 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewKeyboard.swift; sourceTree = "<group>"; };
+		8507F3012147BA3A00269446 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 		850C2BA921334A9F0095A3D7 /* button items */ = {
 			isa = PBXGroup;
 			children = (
+				8507F3012147BA3A00269446 /* triangle.png */,
 				850C2C33213EF7DB0095A3D7 /* moreNav@3x.png */,
 				850C2C17213883FE0095A3D7 /* setting@3x.png */,
 				850C2BD2213514190095A3D7 /* back.png */,
@@ -274,6 +279,7 @@
 				8507F2F32145A67700269446 /* settingVC.swift */,
 				8507F2F52145F95F00269446 /* reportProblemVC.swift */,
 				8507F2FD21462B1B00269446 /* Localizable.strings */,
+				8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
 				850C2BA621334A7F0095A3D7 /* comment.png in Resources */,
 				850C2BA721334A7F0095A3D7 /* like.png in Resources */,
+				8507F3022147BA3B00269446 /* triangle.png in Resources */,
 				850C2BD3213514190095A3D7 /* back@3x.png in Resources */,
 				850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */,
 				850C2BD4213514190095A3D7 /* back@2x.png in Resources */,
@@ -465,6 +472,7 @@
 				850C2BBC2133D3660095A3D7 /* commentCell.swift in Sources */,
 				850C2B98213322410095A3D7 /* signUpVC.swift in Sources */,
 				850C2BCA2135008A0095A3D7 /* homeHeaderView.swift in Sources */,
+				8507F3002147AEFC00269446 /* PickerViewKeyboard.swift in Sources */,
 				850C2BE92137D74E0095A3D7 /* editVC.swift in Sources */,
 				850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */,
 				850C2BBA2133D3530095A3D7 /* commentVC.swift in Sources */,

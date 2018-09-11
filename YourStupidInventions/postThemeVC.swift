@@ -10,16 +10,23 @@ import UIKit
 import Parse
 import RSKImageCropper
 
-class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UITextFieldDelegate {
     
     // UI objects
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
-    @IBOutlet weak var adjTxt: UITextField!
-    @IBOutlet weak var categoryTxt: UITextField!
     @IBOutlet weak var nounTxt: UITextField!
     
+    @IBOutlet weak var adjBtn: PickerViewKeyboard!
+    @IBOutlet weak var categoryBtn: PickerViewKeyboard!
+    @IBOutlet weak var langBtn: PickerViewKeyboard!
+    
+    @IBOutlet weak var adjBtnTri: UIButton!
+    @IBOutlet weak var categoryBtnTri: UIButton!
+    @IBOutlet weak var langBtnTri: UIButton!
+    
     @IBOutlet weak var sendBtn: UIButton!
+    
     
     // send status to avoid sending twice
     var didSend = false
@@ -28,40 +35,24 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     var isImgPicked = false
     
     // pickerView and pickerData
-    var adjPicker: UIPickerView!
-    var adjs = [NSLocalizedString("Select adjective", comment: ""),
-                NSLocalizedString("Innovative", comment: ""),
+    var adjs = [NSLocalizedString("Innovative", comment: ""),
                 NSLocalizedString("Unexpected", comment: ""),
                 NSLocalizedString("Future", comment: "")]
-    var categoryPicker: UIPickerView!
-    var categories = [NSLocalizedString("Select category", comment: ""),
-                      NSLocalizedString("Appliance", comment: ""),
+    var categories = [NSLocalizedString("Appliance", comment: ""),
                       NSLocalizedString("Software", comment: ""),
                       NSLocalizedString("Food", comment: ""),
                       NSLocalizedString("Entertainment", comment: ""),
                       NSLocalizedString("Sports", comment: ""),
                       NSLocalizedString("Others", comment: "")]
+    var langs = [NSLocalizedString("English", comment: ""),
+                 NSLocalizedString("Japanese", comment: ""),
+                 NSLocalizedString("Chinese", comment: "")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = NSLocalizedString("Post Theme", comment: "")
         
-        // create adjective picker
-        adjPicker = UIPickerView()
-        adjPicker.dataSource = self
-        adjPicker.delegate = self
-        adjPicker.backgroundColor = UIColor.groupTableViewBackground
-        adjPicker.showsSelectionIndicator = true
-        adjTxt.inputView = adjPicker
-        
-        // create category picker
-        categoryPicker = UIPickerView()
-        categoryPicker.dataSource = self
-        categoryPicker.delegate = self
-        categoryPicker.backgroundColor = UIColor.groupTableViewBackground
-        categoryPicker.showsSelectionIndicator = true
-        categoryTxt.inputView = categoryPicker
 
         // tap to choose image
         let themeTap = UITapGestureRecognizer(target: self, action: #selector(self.loadImg))
@@ -88,9 +79,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // enable UITextView functions
         nounTxt.delegate = self
         
-        // PickerView default value
-        adjPicker.selectRow(0, inComponent: 0, animated: false)
-        categoryPicker.selectRow(0, inComponent: 0, animated: false)
+        adjBtn.delegate = self
+        categoryBtn.delegate = self
+        langBtn.delegate = self
+        
         
         // call alignment fun
         alignment()
@@ -120,10 +112,15 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let themeImgHeight = themeImgWidth / 16 * 9
         themeImg.frame = CGRect(x: 10, y: titleLbl.frame.origin.y + 30, width: themeImgWidth, height: themeImgHeight)
         
-        adjTxt.frame = CGRect(x: 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
-        categoryTxt.frame = CGRect(x: width - 10 - width * 0.45, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
+        adjBtn.frame = CGRect(x: 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
+        adjBtnTri.frame = CGRect(x: 15, y: themeImg.frame.origin.y + themeImgHeight + 18, width: 16, height: 14)
         
-        nounTxt.frame = CGRect(x: 10, y: adjTxt.frame.origin.y + adjTxt.frame.size.height + 10, width: width - 20, height: 30)
+        categoryBtn.frame = CGRect(x: width - 10 - width * 0.45, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
+        categoryBtnTri.frame = CGRect(x: width - 10 - width * 0.45 + 5, y: themeImg.frame.origin.y + themeImgHeight + 18, width: 16, height: 14)
+        
+        nounTxt.frame = CGRect(x: 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.7, height: 30)
+        langBtn.frame = CGRect(x: width - width * 0.2 - 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.2, height: 30)
+        langBtnTri.frame = CGRect(x: width - width * 0.2 - 10 + 5, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 18, width: 16, height: 14)
         sendBtn.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width - 20, height: 30)
         
         sendBtn.layer.cornerRadius = 5
@@ -133,12 +130,44 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         sendBtn.backgroundColor = UIColor.lightGray
         sendBtn.isEnabled = false
         
-        adjTxt.placeholder = NSLocalizedString("Select adjective", comment: "")
-        categoryTxt.placeholder = NSLocalizedString("Select category", comment: "")
+        adjBtn.backgroundColor = .clear
+        adjBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        adjBtn.layer.cornerRadius = 5
+        adjBtn.layer.borderWidth = 1
+        adjBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        adjBtnTri.isUserInteractionEnabled = false
+        
+        categoryBtn.backgroundColor = .clear
+        categoryBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        categoryBtn.layer.cornerRadius = 5
+        categoryBtn.layer.borderWidth = 1
+        categoryBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        adjBtnTri.isUserInteractionEnabled = false
+        
+        langBtn.backgroundColor = .clear
+        langBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        langBtn.layer.cornerRadius = 5
+        langBtn.layer.borderWidth = 1
+        langBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        langBtnTri.isUserInteractionEnabled = false
+        
         nounTxt.placeholder = NSLocalizedString("Type noun", comment: "")
         sendBtn.setTitle(NSLocalizedString("Publish", comment: ""), for: UIControlState.normal)
         
-        //adjTxt.edi
+        // set post language as default language
+        if selectedLanguages.count == 0 {
+            langBtn.setTitle(NSLocalizedString("English", comment: ""), for: UIControlState.normal)
+        } else {
+            langBtn.setTitle(NSLocalizedString(selectedLanguages[0], comment: ""), for: UIControlState.normal)
+        }
+        
+        // set the first row as default
+        adjBtn.setTitle(NSLocalizedString(adjs[0], comment: ""), for: UIControlState.normal)
+        categoryBtn.setTitle(NSLocalizedString(categories[0], comment: ""), for: UIControlState.normal)
+        
+        // set title label
+        titleLbl.text = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
+    
     }
 
     /* UIImagePickerControllerDelegate */
@@ -225,51 +254,16 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         return 1
     }
     
-    /* UIPickerViewDataSource */
-    
-    // picker text number
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == adjPicker {
-            return adjs.count
-        } else {
-            return categories.count
-        }
-    }
-    
-    // picker text config
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == adjPicker {
-            return adjs[row]
-        } else {
-            return categories[row]
-        }
-    }
-    
-    // picker selected a row
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        if pickerView == adjPicker {
-            adjTxt.text = adjs[row]
-        } else {
-            categoryTxt.text = categories[row]
-        }
-        
-        titleLbl.text = "\(adjTxt.text!) \(nounTxt.text!)"
-        
-        self.view.endEditing(true)
-    }
-    
-    /* UIPickerViewDataSource END */
     
     /* UITextFieldDelegate */
     
     // finished editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         // update title label
-        titleLbl.text = "\(adjTxt.text!) \(nounTxt.text!)"
+        titleLbl.text = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
         
         // disable send button if not everything is filled, enable otherwise
-        if adjPicker.selectedRow(inComponent: 0) == 0 || categoryPicker.selectedRow(inComponent: 0) == 0 || nounTxt.text!.isEmpty {
+        if nounTxt.text!.isEmpty {
             
             // disable
             sendBtn.backgroundColor = UIColor.lightGray
@@ -306,7 +300,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             return
         }
         
-        if adjPicker.selectedRow(inComponent: 0) == 0 || categoryPicker.selectedRow(inComponent: 0) == 0 || nounTxt.text!.isEmpty {
+        if nounTxt.text!.isEmpty {
             alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("fill in all fields", comment: ""))
             return
         }
@@ -333,14 +327,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         object["username"] = PFUser.current()?.username
         
-        object["adjective"] = adjTxt.text!
+        object["adjective"] = adjBtn.titleLabel?.text
         object["noun"] = nounTxt.text!
-        object["category"] = categoryTxt.text!
-        object["title"] = "\(adjTxt.text!) \(nounTxt.text!)"
+        object["category"] = categoryBtn.titleLabel?.text
+        object["title"] = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
         
         object["totalPosts"] = 0
         
-        object["hashtags"] = "#\(adjTxt.text!) #\(categoryTxt.text!) #\(nounTxt.text!)"
+        object["hashtags"] = "#\(adjBtn.titleLabel!.text!) #\(categoryBtn.titleLabel!.text!) #\(nounTxt.text!)"
         
         object.saveInBackground { (success, error) in
             if success {
@@ -348,8 +342,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 NotificationCenter.default.post(name: NSNotification.Name.init("themeUploaded"), object: nil)
                 
                 // reset text field
-                self.adjTxt.text = ""
-                self.categoryTxt.text = ""
                 self.nounTxt.text = ""
                 
                 // dismiss
@@ -369,4 +361,61 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         present(alert, animated: true, completion: nil)
     }
 
+}
+
+extension postThemeVC: PickerViewKeyboardDelegate {
+    func titlesOfPickerViewKeyboard(sender: PickerViewKeyboard) -> Array<String> {
+        if sender == adjBtn {
+            return adjs
+        } else if sender == categoryBtn {
+            return categories
+        } else {
+            return langs
+        }
+    }
+    func initSelectedRow(sender: PickerViewKeyboard) -> Int {
+        if sender == adjBtn {
+            return adjs.count
+        } else if sender == categoryBtn {
+            return categories.count
+        } else {
+            return langs.count
+        }
+    }
+    func didDone(sender: PickerViewKeyboard, selectedData: String) {
+        if sender == adjBtn {
+            adjBtn.setTitle(selectedData, for: UIControlState.normal)
+            // update title label
+            titleLbl.text = "\(selectedData) \(nounTxt.text!)"
+            adjBtn.resignFirstResponder()
+        } else if sender == categoryBtn {
+            categoryBtn.setTitle(selectedData, for: UIControlState.normal)
+            categoryBtn.resignFirstResponder()
+        } else {
+            langBtn.setTitle(selectedData, for: UIControlState.normal)
+            langBtn.resignFirstResponder()
+        }
+        
+        // disable send button if not everything is filled, enable otherwise
+        if nounTxt.text!.isEmpty {
+            
+            // disable
+            sendBtn.backgroundColor = UIColor.lightGray
+            sendBtn.isEnabled = false
+        } else {
+            
+            // enable
+            sendBtn.backgroundColor = customColorYellow
+            sendBtn.isEnabled = true
+        }
+    }
+    func didCancel(sender: PickerViewKeyboard) {
+        if sender == adjBtn {
+            adjBtn.resignFirstResponder()
+        } else if sender == categoryBtn {
+            categoryBtn.resignFirstResponder()
+        } else {
+            langBtn.resignFirstResponder()
+        }
+    }
 }
