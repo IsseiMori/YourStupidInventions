@@ -20,6 +20,7 @@ class postCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var uuidLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var ptLbl: UILabel!
     
     // buttons
     @IBOutlet weak var likeBtn: UIButton!
@@ -41,6 +42,7 @@ class postCell: UITableViewCell {
         themeImg.translatesAutoresizingMaskIntoConstraints = false
         ideaLbl.translatesAutoresizingMaskIntoConstraints = false
         likeLbl.translatesAutoresizingMaskIntoConstraints = false
+        ptLbl.translatesAutoresizingMaskIntoConstraints = false
         dateLbl.translatesAutoresizingMaskIntoConstraints = false
         uuidLbl.translatesAutoresizingMaskIntoConstraints = false
         likeBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -51,19 +53,23 @@ class postCell: UITableViewCell {
         let themeHeight = themeWidth / 16 * 9
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-(-5)-[like(50)]-5-|",
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea]-(-10)-[like(70)]-0-|",
             options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaLbl, "like": likeBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[idea]-10-[likes]",
+            withVisualFormat: "V:[idea]-20-[likes]",
             options: [], metrics: nil, views: ["idea": ideaLbl, "likes": likeLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:[idea]-20-[pt]",
+            options: [], metrics: nil, views: ["idea": ideaLbl, "pt": ptLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "V:[idea]-5-[username]",
             options: [], metrics: nil, views: ["idea": ideaLbl, "username": usernameBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:[idea]-12-[date]",
+            withVisualFormat: "V:[idea]-22-[date]",
             options: [], metrics: nil, views: ["idea": ideaLbl, "date": dateLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -83,15 +89,15 @@ class postCell: UITableViewCell {
             options: [], metrics: nil, views: ["idea": ideaLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[like(50)]-0-[likes]",
-            options: [], metrics: nil, views: ["like": likeBtn, "likes": likeLbl]))
+            withVisualFormat: "H:|-0-[like(70)]-10-[likes]-[pt]",
+            options: [], metrics: nil, views: ["like": likeBtn, "likes": likeLbl, "pt": ptLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:[username]-10-[date]-25-|",
             options: [], metrics: nil, views: ["username": usernameBtn, "date":dateLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-10-[bg]-5-|",
+            withVisualFormat: "V:|-10-[bg]-10-|",
             options: [], metrics: nil, views: ["bg": bgView]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
@@ -104,6 +110,9 @@ class postCell: UITableViewCell {
         bgView.clipsToBounds = true
         bgView.backgroundColor = .white
         
+        likeLbl.sizeToFit()
+        ptLbl.text = "pt"
+        
     }
     
     
@@ -114,7 +123,7 @@ class postCell: UITableViewCell {
             // change background image
             if likeBtn.titleLabel?.text != "like" {
                 likeBtn.setTitle("like", for: UIControlState.normal)
-                likeBtn.setBackgroundImage(UIImage(named: "dollar_like.png"), for: UIControlState.normal)
+                likeBtn.setBackgroundImage(UIImage(named: "money_like.png"), for: UIControlState.normal)
             }
             
             // increment likeLbl

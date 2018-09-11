@@ -106,3 +106,5 @@
 "username taken" = "このユーザーネームは他のユーザーに使用されています";
 "please sign in" = "ログインが必要です";
 "sign in from profile page" = "マイページからログインしてください";
+"select a language" = "言語を選択してください";
+"select at least one language" = "少なくとも一つ";

@@ -116,7 +116,10 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        query.whereKey("language", containedIn: selectedLanguages)
+        if !selectedLanguages.isEmpty {
+            query.whereKey("language", containedIn: selectedLanguages)
+        }
+        
         
         print("ranking loadPosts")
         self.processQuery(query: query)
@@ -178,7 +181,9 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
-        query.whereKey("language", containedIn: selectedLanguages)
+        if !selectedLanguages.isEmpty {
+            query.whereKey("language", containedIn: selectedLanguages)
+        }
         
         print("ranking loadmore")
         self.processQuery(query: query)
@@ -289,7 +294,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         // set likeBtn to unlike
         if cell.likeBtn.titleLabel?.text != "like" {
             cell.likeBtn.setTitle("unlike", for: UIControlState.normal)
-            cell.likeBtn.setBackgroundImage(UIImage(named: "dollar_unlike.png"), for: UIControlState.normal)
+            cell.likeBtn.setBackgroundImage(UIImage(named: "money_unlike.png"), for: UIControlState.normal)
         }
         
         // assign index

@@ -77,10 +77,17 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtN-pA-wll">
+                                            <rect key="frame" x="65" y="303" width="16" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sp2-Fv-jRm">
                                             <rect key="frame" x="16" y="298" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" backgroundImage="dollar_unlike.png">
+                                            <state key="normal" backgroundImage="money_unlike.png">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
@@ -119,6 +126,7 @@
                                     <outlet property="ideaLbl" destination="sjG-RJ-yIl" id="wnl-kM-y66"/>
                                     <outlet property="likeBtn" destination="sp2-Fv-jRm" id="MBv-fp-r3c"/>
                                     <outlet property="likeLbl" destination="RY2-M7-XY1" id="Q5M-c1-hdV"/>
+                                    <outlet property="ptLbl" destination="HtN-pA-wll" id="ozU-xS-usF"/>
                                     <outlet property="themeImg" destination="GnI-qm-lx3" id="iWi-RG-ZgJ"/>
                                     <outlet property="titleLbl" destination="7mc-f9-T3q" id="F2m-eu-buF"/>
                                     <outlet property="usernameBtn" destination="fer-Jh-SsP" id="yQb-PT-xLb"/>
@@ -1326,6 +1334,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOx-jo-vY6">
+                                            <rect key="frame" x="76" y="217.5" width="16" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcb-hQ-d7f">
                                             <rect key="frame" x="17" y="212" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1378,6 +1393,7 @@
                                     <outlet property="ideaLbl" destination="BFc-A5-fjm" id="nhJ-20-9MK"/>
                                     <outlet property="likeBtn" destination="Jcb-hQ-d7f" id="N0u-OE-SAQ"/>
                                     <outlet property="likeLbl" destination="frN-lg-hrS" id="cQG-0x-12S"/>
+                                    <outlet property="ptLbl" destination="wOx-jo-vY6" id="oBC-Nz-0wo"/>
                                     <outlet property="themeImg" destination="Ery-Ov-eUS" id="R1C-cP-C1C"/>
                                     <outlet property="titleLbl" destination="Eed-mq-3gt" id="eds-kT-o71"/>
                                     <outlet property="usernameBtn" destination="MQE-Mi-IIi" id="JEo-Qy-iYh"/>
@@ -1627,11 +1643,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dollar_unlike.png" width="100" height="100"/>
         <image name="home.png" width="30" height="30"/>
         <image name="idea.png" width="30" height="30"/>
         <image name="leaf.png" width="30" height="30"/>
         <image name="like.png" width="270" height="270"/>
+        <image name="money_unlike.png" width="142" height="142"/>
         <image name="notification.png" width="30" height="30"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>

@@ -13,6 +13,8 @@
 		8507F2FB21462B1B00269446 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8507F2FD21462B1B00269446 /* Localizable.strings */; };
 		8507F3002147AEFC00269446 /* PickerViewKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */; };
 		8507F3022147BA3B00269446 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F3012147BA3A00269446 /* triangle.png */; };
+		8507F31521487D2500269446 /* money_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F31321487D2400269446 /* money_like.png */; };
+		8507F31621487D2500269446 /* money_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F31421487D2400269446 /* money_unlike.png */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -87,6 +89,8 @@
 		8507F2FE21462B4500269446 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewKeyboard.swift; sourceTree = "<group>"; };
 		8507F3012147BA3A00269446 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
+		8507F31321487D2400269446 /* money_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money_like.png; sourceTree = "<group>"; };
+		8507F31421487D2400269446 /* money_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money_unlike.png; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 		850C2BA921334A9F0095A3D7 /* button items */ = {
 			isa = PBXGroup;
 			children = (
+				8507F31321487D2400269446 /* money_like.png */,
+				8507F31421487D2400269446 /* money_unlike.png */,
 				8507F3012147BA3A00269446 /* triangle.png */,
 				850C2C33213EF7DB0095A3D7 /* moreNav@3x.png */,
 				850C2C17213883FE0095A3D7 /* setting@3x.png */,
@@ -382,6 +388,7 @@
 				850C2BD3213514190095A3D7 /* back@3x.png in Resources */,
 				850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */,
 				850C2BD4213514190095A3D7 /* back@2x.png in Resources */,
+				8507F31521487D2500269446 /* money_like.png in Resources */,
 				850C2C14213882620095A3D7 /* notification@3x.png in Resources */,
 				850C2C10213881CC0095A3D7 /* leaf@3x.png in Resources */,
 				850C2C0E2138818E0095A3D7 /* ranking@3x.png in Resources */,
@@ -395,6 +402,7 @@
 				850C2BA821334A7F0095A3D7 /* more@3x.png in Resources */,
 				85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */,
 				85C957A8213206D000AEFD2E /* Main.storyboard in Resources */,
+				8507F31621487D2500269446 /* money_unlike.png in Resources */,
 				850C2C36213F30EE0095A3D7 /* dollar_like.png in Resources */,
 				850C2B9321330DF90095A3D7 /* bg.jpg in Resources */,
 				850C2C122138820E0095A3D7 /* idea@3x.png in Resources */,

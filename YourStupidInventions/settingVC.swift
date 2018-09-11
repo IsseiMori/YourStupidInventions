@@ -55,6 +55,7 @@ class settingVC: FormViewController {
                             break
                         }
                     }
+                    
                     // save
                     UserDefaults.standard.set(selectedLanguages, forKey: "selectedLanguages")
                     UserDefaults.standard.synchronize()
@@ -90,6 +91,14 @@ class settingVC: FormViewController {
                     cell.textLabel?.textColor = .black
                 }
         
+    }
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
 
 }

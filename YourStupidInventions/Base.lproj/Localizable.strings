@@ -107,4 +107,6 @@
 "image not uploaded" = "Upload an image for your theme.";
 "please sign in" = "Please sign in";
 "sign in from profile page" = "Sign in from Home page.";
+"select a language" = "Select a language";
+"select at least one language" = "Please select at least one language to show.";
 
