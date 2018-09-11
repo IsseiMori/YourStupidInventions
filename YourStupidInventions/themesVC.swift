@@ -99,6 +99,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
+        query.whereKey("language", containedIn: selectedLanguages)
+        
         print("themesVC loadPosts")
         processQuery(query: query)
 
@@ -150,6 +152,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         if !self.filterByCategory.isEmpty {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
+        
+        query.whereKey("language", containedIn: selectedLanguages)
         
         // increase page size
         self.page = self.page + self.pageLimit

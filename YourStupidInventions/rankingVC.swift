@@ -116,6 +116,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
         
+        query.whereKey("language", containedIn: selectedLanguages)
+        
         print("ranking loadPosts")
         self.processQuery(query: query)
     }
@@ -156,6 +158,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         query.skip = self.page
         query.limit = self.pageLimit
         
+        
         // increase page size
         self.page = self.page + self.pageLimit
         
@@ -174,6 +177,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         if !self.filterByCategory.isEmpty {
             query.whereKey("category", equalTo: self.filterByCategory)
         }
+        
+        query.whereKey("language", containedIn: selectedLanguages)
         
         print("ranking loadmore")
         self.processQuery(query: query)
