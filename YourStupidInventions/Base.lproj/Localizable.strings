@@ -105,4 +105,6 @@
 "invalid email" = "Invalid email.";
 "username taken" = "This username is taken by another user.";
 "image not uploaded" = "Upload an image for your theme.";
+"please sign in" = "Please sign in";
+"sign in from profile page" = "Sign in from Home page.";
 

@@ -16,7 +16,7 @@ class postIdeaVC: UITableViewController {
     
     // UI objects
     var refresher = UIRefreshControl()
-    
+
     var header: postIdeaHeader!
     
     // arrays to hold data from server
@@ -106,6 +106,8 @@ class postIdeaVC: UITableViewController {
     // call this only in viewDidLoad once
     func iniHeaderConfig() {
         header = tableView.dequeueReusableCell(withIdentifier: "postIdeaHeader") as! postIdeaHeader
+        
+        header.delegate = self
         
         print("postIdeaVC header config")
         let query = PFQuery(className: "themes")

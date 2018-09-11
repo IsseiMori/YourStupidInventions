@@ -35,6 +35,8 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
                  NSLocalizedString("Japanese", comment: ""),
                  NSLocalizedString("Chinese", comment: "")]
     
+    var delegate: UIViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -115,6 +117,15 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         return true
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if isLoggedIn {
+            return true
+        } else {
+            alert(title: NSLocalizedString("please sign in", comment: ""), message: NSLocalizedString("sign in from profile page", comment: ""))
+            return false
+        }
+    }
+    
     // finished editing
     func textViewDidEndEditing(_ textView: UITextView) {
         // disable send button if not everything is filled, enable otherwise
@@ -129,6 +140,14 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
             sendBtn.backgroundColor = customColorYellow
             sendBtn.isEnabled = true
         }
+    }
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        delegate!.present(alert, animated: true, completion: nil)
     }
 }
 

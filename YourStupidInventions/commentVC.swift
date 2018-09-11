@@ -142,7 +142,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             commentTxt.becomeFirstResponder()
         } else {
             
-            alert(title: "Please sign in", message: "Sign in from Home page to comment")
+            alert(title: NSLocalizedString("please sign in", comment: ""), message: NSLocalizedString("sign in from profile page", comment: ""))
         }
         
     }
@@ -659,6 +659,13 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         
         // complain action
         let complain = UIAlertAction(title: NSLocalizedString("Complain", comment: ""), style: UIAlertActionStyle.default) { (UIAlertAction) in
+            
+            // alert if not logged in
+            if !isLoggedIn {
+                self.alert(title: NSLocalizedString("please sign in", comment: ""), message: NSLocalizedString("sign in from profile page", comment: ""))
+                return
+            }
+            
             // send complain to server
             print("commentVC send complain")
             let complainObj = PFObject(className: "complain")

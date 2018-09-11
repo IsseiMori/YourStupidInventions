@@ -273,10 +273,27 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         
     }
     
+    // clicked post theme button
+    @IBAction func postThemeBtn_clicked(_ sender: Any) {
+        // if logged in go to postThemeVC, otherwise alert
+        if isLoggedIn {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "postThemeVC") as! postThemeVC
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            alert(title: NSLocalizedString("please sign in", comment: ""), message: NSLocalizedString("sign in from profile page", comment: ""))
+        }
+    }
     
     // required for XLPagerTabStrip
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: itemInfo)
     }
     
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
 }

@@ -29,7 +29,8 @@ class themesHeaderCell: UITableViewCell {
         postThemeBtn.clipsToBounds = true
         postThemeBtn.setTitle(NSLocalizedString("Post your own theme", comment: ""), for: UIControlState.normal)
     }
-
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

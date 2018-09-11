@@ -104,3 +104,5 @@
 "password too short" = "パスワードを6文字以上に設定してください";
 "invalid email" = "無効なメールアドレス";
 "username taken" = "このユーザーネームは他のユーザーに使用されています";
+"please sign in" = "ログインが必要です";
+"sign in from profile page" = "マイページからログインしてください";

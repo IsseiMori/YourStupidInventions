@@ -662,7 +662,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <segue destination="9OQ-RS-xAD" kind="show" id="IrQ-sG-f0s"/>
+                                                <action selector="postThemeBtn_clicked:" destination="NGh-9N-GCt" eventType="touchUpInside" id="mRI-5p-Q1R"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1093,7 +1093,7 @@
         <!--Post ThemeVC-->
         <scene sceneID="oPP-sg-lqN">
             <objects>
-                <viewController id="9OQ-RS-xAD" customClass="postThemeVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postThemeVC" id="9OQ-RS-xAD" customClass="postThemeVC" customModule="YourStupidInventions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zfu-qg-rOA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
