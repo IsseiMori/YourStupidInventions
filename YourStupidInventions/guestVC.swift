@@ -217,7 +217,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let height = self.view.frame.size.width / 2 * 0.5625 + 50 + 15
+        let height = self.view.frame.size.width / 2 * 0.5625 + 75
         let size = CGSize(width: self.view.frame.size.width / 2, height: height)
         return size
     }

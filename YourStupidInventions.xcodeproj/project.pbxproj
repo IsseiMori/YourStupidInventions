@@ -15,6 +15,8 @@
 		8507F3022147BA3B00269446 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F3012147BA3A00269446 /* triangle.png */; };
 		8507F31521487D2500269446 /* money_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F31321487D2400269446 /* money_like.png */; };
 		8507F31621487D2500269446 /* money_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F31421487D2400269446 /* money_unlike.png */; };
+		8507F31A214906C400269446 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8507F319214906C300269446 /* Accounts.framework */; };
+		8507F31C214906CB00269446 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8507F31B214906CB00269446 /* Social.framework */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -91,6 +93,9 @@
 		8507F3012147BA3A00269446 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
 		8507F31321487D2400269446 /* money_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money_like.png; sourceTree = "<group>"; };
 		8507F31421487D2400269446 /* money_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money_unlike.png; sourceTree = "<group>"; };
+		8507F319214906C300269446 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		8507F31B214906CB00269446 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourStupidInventions-Bridging-Header.h"; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -164,6 +169,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8507F31C214906CB00269446 /* Social.framework in Frameworks */,
+				8507F31A214906C400269446 /* Accounts.framework in Frameworks */,
 				85C957C821320C3700AEFD2E /* AudioToolbox.framework in Frameworks */,
 				85C957C621320C2900AEFD2E /* CFNetwork.framework in Frameworks */,
 				85C957C421320C2100AEFD2E /* CoreGraphics.framework in Frameworks */,
@@ -286,6 +293,7 @@
 				8507F2F52145F95F00269446 /* reportProblemVC.swift */,
 				8507F2FD21462B1B00269446 /* Localizable.strings */,
 				8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */,
+				8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -293,6 +301,8 @@
 		85C957B421320B4500AEFD2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8507F31B214906CB00269446 /* Social.framework */,
+				8507F319214906C300269446 /* Accounts.framework */,
 				85F7443721321C540097638F /* Bolts.framework */,
 				85F7443821321C550097638F /* Parse.framework */,
 				85C957C721320C3700AEFD2E /* AudioToolbox.framework */,
@@ -331,6 +341,7 @@
 				85C9579C213206D000AEFD2E /* Frameworks */,
 				85C9579D213206D000AEFD2E /* Resources */,
 				F1F595C311B21CF3439506E6 /* [CP] Embed Pods Frameworks */,
+				F3B6EB52E4D3DE25AAE3B8D3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -353,6 +364,7 @@
 				TargetAttributes = {
 					85C9579E213206D000AEFD2E = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -437,21 +449,47 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKImageCropper/RSKImageCropper.framework",
 				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKImageCropper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3B6EB52E4D3DE25AAE3B8D3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-resources.sh",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YourStupidInventions/Pods-YourStupidInventions-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -648,6 +686,7 @@
 			baseConfigurationReference = F1BF93EDFF89707C64EA1A9F /* Pods-YourStupidInventions.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 277D2PK394;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -661,7 +700,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions/YourStupidInventions-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
@@ -673,6 +713,7 @@
 			baseConfigurationReference = B9975DACAF43956E9A34CD83 /* Pods-YourStupidInventions.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 277D2PK394;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -686,7 +727,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions/YourStupidInventions-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Pods/**";

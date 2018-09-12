@@ -697,6 +697,18 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             })
         }
         
+        // share button
+        let shareTwitter = UIAlertAction(title: NSLocalizedString("Share on Twitter", comment: ""), style: UIAlertActionStyle.default) { (UIAlertAction) in
+            
+            // show tweet view
+            let composer = TWTRComposer()
+            composer.setText("[\(self.header.titleLbl.text!)]  \(self.header.ideaLbl.text!) #YourStupidInventions ")
+            composer.setImage(self.header.themeImg.image)
+            composer.show(from: self) { (result) in
+            }
+            
+        }
+        
         // CANCEL ACTION
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
         
@@ -707,14 +719,16 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // if post belongs to user, they can delete, else they can only complain
         if commentowner.last! == PFUser.current()?.username {
 
-            menu.title = NSLocalizedString("Delete menu", comment: "")
+            // menu.title = NSLocalizedString("Delete menu", comment: "")
             
+            menu.addAction(shareTwitter)
             menu.addAction(delete)
             menu.addAction(cancel)
         } else {
             
-            menu.title = NSLocalizedString("Complain menu", comment: "")
+            // menu.title = NSLocalizedString("Complain menu", comment: "")
             
+            menu.addAction(shareTwitter)
             menu.addAction(complain)
             menu.addAction(cancel)
         }

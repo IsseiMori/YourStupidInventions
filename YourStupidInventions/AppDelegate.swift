@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // call login function
         login()
         
+        // Initialize Twitter API
+        TWTRTwitter.sharedInstance().start(withConsumerKey: "lsOSJqKf6BTRN9xCx7EpLsY8q", consumerSecret: "ThocaMSd5gzRcazI0bvN08LUKEja8sYRpXV5HtKMAOwE3Xe1BD")
+        
         // color of window
         window?.backgroundColor = .white
         
@@ -67,6 +70,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    // For Twitter API
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if TWTRTwitter.sharedInstance().application(app, open: url, options: options) {
+            return true
+        }
+        
+        return false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

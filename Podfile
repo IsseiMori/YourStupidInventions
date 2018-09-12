@@ -7,9 +7,11 @@ target 'YourStupidInventions' do
 
   # Pods for YourStupidInventions
 
+  pod 'Parse'
   pod 'XLPagerTabStrip'
   pod 'RSKImageCropper'
   pod 'Eureka'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
+  pod 'TwitterKit', '3.4.0'
 
 end
