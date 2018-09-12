@@ -37,6 +37,9 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     // send status
     var didSend = false
     
+    // Done button on keyboard
+    var kbToolBar: UIToolbar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +69,19 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         avaTap.numberOfTapsRequired = 1
         avaImg.isUserInteractionEnabled = true
         avaImg.addGestureRecognizer(avaTap)
+        
+        // done button on keyboard
+        kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
+        kbToolBar.items = [spacer, doneButton]
+        usernameTxt.inputAccessoryView = kbToolBar
+        passwordTxt.inputAccessoryView = kbToolBar
+        repeatPasswordTxt.inputAccessoryView = kbToolBar
+        emailTxt.inputAccessoryView = kbToolBar
+        fullnameTxt.inputAccessoryView = kbToolBar
         
         
         // alignment
@@ -103,6 +119,11 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         repeatPasswordTxt.delegate = self
         emailTxt.delegate = self
         fullnameTxt.delegate = self
+    }
+    
+    // tapped done button on keyboard
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
     }
     
     

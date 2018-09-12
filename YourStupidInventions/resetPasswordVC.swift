@@ -18,6 +18,9 @@ class resetPasswordVC: UIViewController {
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     
+    // Done button on keyboard
+    var kbToolBar: UIToolbar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +39,15 @@ class resetPasswordVC: UIViewController {
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
+        // done button on keyboard
+        kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
+        kbToolBar.items = [spacer, doneButton]
+        emailTxt.inputAccessoryView = kbToolBar
+        
         // background
         /*let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named: "bg.jpg")
@@ -43,6 +55,11 @@ class resetPasswordVC: UIViewController {
         self.view.addSubview(bg)*/
         
         resetBtn.backgroundColor = customColorYellow
+    }
+    
+    // tapped done button on keyboard
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
     }
     
     // hide keyboard func

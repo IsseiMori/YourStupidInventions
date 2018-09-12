@@ -18,6 +18,9 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
     
+    // Done button on keyboard
+    var kbToolBar: UIToolbar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,10 +36,25 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         avaImg.isUserInteractionEnabled = true
         avaImg.addGestureRecognizer(avaTap)
         
+        // done button on keyboard
+        kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
+        kbToolBar.items = [spacer, doneButton]
+        fullnameTxt.inputAccessoryView = kbToolBar
+        emailTxt.inputAccessoryView = kbToolBar
+        
         // call alignment func
         alignment()
         
         information()
+    }
+    
+    // tapped done button on keyboard
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
     }
 
 

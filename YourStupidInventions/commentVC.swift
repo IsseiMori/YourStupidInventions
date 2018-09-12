@@ -38,6 +38,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
     var usernameArray = [String]()
     var dateArray = [Date?]()
     
+    // Done button on keyboard
+    var kbToolBar: UIToolbar!
+    
     // header cell
     var header: commentHeaderCell!
     
@@ -109,6 +112,15 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         self.refresher.addTarget(self, action: #selector(self.loadComments), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refresher)
         
+        // done button on keyboard
+        kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
+        kbToolBar.items = [spacer, doneButton]
+        commentTxt.inputAccessoryView = kbToolBar
+        
         // create placeholder label programmatically
         let placeholderX: CGFloat = self.view.frame.size.width / 75
         let placeholderY: CGFloat = 0
@@ -132,6 +144,10 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         loadComments()
     }
     
+    // tapped done button on keyboard
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
+    }
     
     // show keyboard if clicked commentTxt
     @objc func showKeyboardTap(recognizer: UITapGestureRecognizer) {
