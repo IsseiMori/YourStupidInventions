@@ -808,13 +808,20 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lux-UP-3FS">
                                                     <rect key="frame" x="15" y="319" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="unlike.png"/>
+                                                    <state key="normal" backgroundImage="money_unlike.png"/>
                                                     <connections>
                                                         <action selector="likeBtn_clicked:" destination="iTt-4Z-VQz" eventType="touchUpInside" id="fBa-JF-Eq2"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhd-6e-05L">
                                                     <rect key="frame" x="53" y="324" width="11" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQU-ju-EG9">
+                                                    <rect key="frame" x="63" y="324" width="16" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -883,6 +890,7 @@
                                             <outlet property="likeBtn" destination="lux-UP-3FS" id="RVV-yv-Ebd"/>
                                             <outlet property="likeLbl" destination="Uhd-6e-05L" id="YJy-PT-tpx"/>
                                             <outlet property="postIdeaBtn" destination="aHg-JZ-uLj" id="uoB-4q-ORx"/>
+                                            <outlet property="ptLbl" destination="LQU-ju-EG9" id="V6Z-lI-yNM"/>
                                             <outlet property="themeImg" destination="4YA-hf-5HF" id="8rR-g1-ugg"/>
                                             <outlet property="themeuuid" destination="anA-es-PQw" id="uY3-QI-beY"/>
                                             <outlet property="titleLbl" destination="1NL-re-xuY" id="ysb-10-1Tx"/>

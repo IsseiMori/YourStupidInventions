@@ -550,7 +550,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             
             // update total likes in each post
             let query = PFQuery(className: "posts")
-            query.whereKey("uuid", equalTo: commentuuid.last!)
+            query.whereKey("uuid", equalTo: header.uuidLbl.text!)
             print("commentVC send like count")
             query.getFirstObjectInBackground { (object, error) in
                 object?.incrementKey("likes", byAmount: self.didLike as NSNumber)
@@ -559,8 +559,8 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                         // add new like to likes table
                         let object = PFObject(className: "likes")
                         object["by"] = PFUser.current()?.username
-                        object["to"] = commentowner.last!
-                        object["uuid"] = commentuuid.last!
+                        object["to"] = self.header.usernameBtn.titleLabel!.text!
+                        object["uuid"] = self.header.uuidLbl.text!
                         object["count"] = self.didLike
                         object.saveInBackground()
                     } else {
