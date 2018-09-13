@@ -83,6 +83,9 @@
 "repeat password" = "パスワード確認";
 "email" = "メールアドレス";
 "fullname" = "名前";
+"username ph" = "4文字以上15文字以内";
+"password ph" = "4文字以上20文字以内";
+"fullname ph" = "この名前はいつでも変えれます";
 
 // postIdeaHeader
 "Publish" = "投稿";
@@ -101,11 +104,14 @@
 "fill in all fields" = "空欄があります";
 "invalid username/password" = "ユーザーネームまたはパスワードが違います";
 "password do not match" = "パスワードが一致しません";
-"username too short" = "ユーザーネームを6文字以上に設定してください";
-"password too short" = "パスワードを6文字以上に設定してください";
+"username too short" = "ユーザーネームを4文字以上15文字以下に設定してください";
+"password too short" = "パスワードを4文字以上20文字以下に設定してください";
 "invalid email" = "無効なメールアドレス";
 "username taken" = "このユーザーネームは他のユーザーに使用されています";
 "please sign in" = "ログインが必要です";
 "sign in from profile page" = "マイページからログインしてください";
 "select a language" = "言語を選択してください";
-"select at least one language" = "少なくとも一つ";
+"select at least one language" = "少なくとも一つの言語を選択してください";
+"sign up success" = "登録完了";
+"sign up success msg" = "送信されたメールからメールアドレスを認証してください";
+

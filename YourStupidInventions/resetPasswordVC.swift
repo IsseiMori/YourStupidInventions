@@ -34,7 +34,7 @@ class resetPasswordVC: UIViewController {
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.width / 20
         
         // tap to hide keyboard
-        let hideTap = UITapGestureRecognizer(target: self, action: Selector(("hideKeyboard")))
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
         hideTap.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
@@ -63,7 +63,7 @@ class resetPasswordVC: UIViewController {
     }
     
     // hide keyboard func
-    func hideKeyboard(recognizer: UITapGestureRecognizer) {
+    @objc func hideKeyboard(recognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     

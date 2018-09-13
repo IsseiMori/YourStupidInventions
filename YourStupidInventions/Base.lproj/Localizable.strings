@@ -74,15 +74,18 @@
 // signInVC
 "Sign In" = "Sign In";
 "Your-Stupid-Inventions" = "Your-Stupid-Inventions";
-"username" = "username";
-"password" = "password";
+"username" = "Username";
+"password" = "Password";
 "forgot password?" = "forgot password?";
 "Sign Up" = "Sign Up";
 
 // signUpVC
-"repeat password" = "repeat password";
-"email" = "email";
-"fullname" = "name";
+"repeat password" = "Repeat password";
+"email" = "Email";
+"fullname" = "Name";
+"username ph" = "Between 4 to 15 letters";
+"password ph" = "Between 4 to 20 letters";
+"fullname ph" = "You can change this name anytime";
 
 // postIdeaHeader
 "Publish" = "Publish";
@@ -101,8 +104,8 @@
 "fill in all fields" = "Please fill in all fields.";
 "invalid username/password" = "Invalid username/password.";
 "password do not match" = "Password do not match.";
-"username too short" = "Username has to be at least 6 letters.";
-"password too short" = "Password has to be at least 6 letters.";
+"username too short" = "Username has to be between 4 to 15 letters.";
+"password too short" = "Password has to be between 4 to 20 letters.";
 "invalid email" = "Invalid email.";
 "username taken" = "This username is taken by another user.";
 "image not uploaded" = "Upload an image for your theme.";
@@ -110,4 +113,6 @@
 "sign in from profile page" = "Sign in from Home page.";
 "select a language" = "Select a language";
 "select at least one language" = "Please select at least one language to show.";
+"sign up success" = "You've signed up!";
+"sign up success msg" = "Please verify your email anytime in order to reset password";
 

@@ -40,6 +40,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     var filterByNoun: String = ""
     var filterByCategory: String = ""
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,14 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // receive notification from postThemeVC
         NotificationCenter.default.addObserver(self, selector: #selector(self.uploaded), name: NSNotification.Name(rawValue: "themeUploaded"), object: nil)
         
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
+        
         // call load posts func
         loadPosts()
         
@@ -74,6 +84,9 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     
     // load posts
     @objc func loadPosts() {
+        
+        // start indicator animation
+        ActivityIndicator.startAnimating()
         
         // set loading status to processing
         isLoading = true
@@ -190,6 +203,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 // reload tableView and end refresh animation
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
+                
+                self.ActivityIndicator.stopAnimating()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

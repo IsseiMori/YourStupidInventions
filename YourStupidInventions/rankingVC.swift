@@ -47,6 +47,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     var filterByNoun: String = ""
     var filterByCategory: String = ""
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
     // default
     override func viewDidLoad() {
 
@@ -65,6 +67,14 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         refresher.addTarget(self, action: #selector(self.loadPosts), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
+        
         // receive post cell liked notification to update tableView
         // NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
         
@@ -82,6 +92,9 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // load posts
     @objc func loadPosts() {
+        
+        // start indicator animation
+        ActivityIndicator.startAnimating()
         
         // set loading status to processing
         isLoading = true
@@ -220,6 +233,9 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 // reload tableView and end refresh animation
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
+                
+                // stop indicator animation
+                self.ActivityIndicator.stopAnimating()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

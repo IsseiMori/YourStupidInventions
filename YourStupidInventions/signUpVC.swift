@@ -21,6 +21,13 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var fullnameTxt: UITextField!
     
+    // labels
+    @IBOutlet weak var usernameLbl: UILabel!
+    @IBOutlet weak var passwordLbl: UILabel!
+    @IBOutlet weak var repeatPasswordLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    
+    @IBOutlet weak var fullnameLbl: UILabel!
     // buttons
     @IBOutlet weak var signUpBtn: UIButton!
     
@@ -39,6 +46,8 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     // Done button on keyboard
     var kbToolBar: UIToolbar!
+    
+    var ActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +68,14 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         hideTap.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
+        
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
         
         // round ava
         avaImg.layer.cornerRadius = avaImg.frame.size.width / 2
@@ -85,13 +102,27 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         
         
         // alignment
-        avaImg.frame = CGRect(x: self.view.frame.size.width / 2 - 40, y: 40, width: 80, height: 80)
-        usernameTxt.frame = CGRect(x: 10, y: avaImg.frame.origin.y + 90, width: self.view.frame.width - 20, height: 30)
-        passwordTxt.frame = CGRect(x: 10, y: usernameTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
-        repeatPasswordTxt.frame = CGRect(x: 10, y: passwordTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
+        avaImg.frame = CGRect(x: self.view.frame.size.width / 2 - 40, y: 30, width: 80, height: 80)
         
-        emailTxt.frame = CGRect(x: 10, y: repeatPasswordTxt.frame.origin.y + 60, width: self.view.frame.width - 20, height: 30)
-        fullnameTxt.frame = CGRect(x: 10, y: emailTxt.frame.origin.y + 40, width: self.view.frame.width - 20, height: 30)
+        usernameLbl.frame = CGRect(x: 15, y: avaImg.frame.origin.y + 90, width: self.view.frame.width - 20, height: 10)
+        usernameLbl.sizeToFit()
+        usernameTxt.frame = CGRect(x: 10, y: usernameLbl.frame.origin.y + usernameLbl.frame.size.height, width: self.view.frame.width - 20, height: 30)
+        
+        passwordLbl.frame = CGRect(x: 15, y: usernameTxt.frame.origin.y + 35, width: self.view.frame.width - 20, height: 10)
+        passwordLbl.sizeToFit()
+        passwordTxt.frame = CGRect(x: 10, y: passwordLbl.frame.origin.y + passwordLbl.frame.size.height, width: self.view.frame.width - 20, height: 30)
+        
+        repeatPasswordLbl.frame = CGRect(x: 15, y: passwordTxt.frame.origin.y + 35, width: self.view.frame.width - 20, height: 10)
+        repeatPasswordLbl.sizeToFit()
+        repeatPasswordTxt.frame = CGRect(x: 10, y: repeatPasswordLbl.frame.origin.y + repeatPasswordLbl.frame.size.height, width: self.view.frame.width - 20, height: 30)
+        
+        emailLbl.frame = CGRect(x: 15, y: repeatPasswordTxt.frame.origin.y + 55, width: self.view.frame.width - 20, height: 10)
+        emailLbl.sizeToFit()
+        emailTxt.frame = CGRect(x: 10, y: emailLbl.frame.origin.y + emailLbl.frame.size.height, width: self.view.frame.width - 20, height: 30)
+        
+        fullnameLbl.frame = CGRect(x: 15, y: emailTxt.frame.origin.y + 35, width: self.view.frame.width - 20, height: 10)
+        fullnameLbl.sizeToFit()
+        fullnameTxt.frame = CGRect(x: 10, y: fullnameLbl.frame.origin.y + fullnameLbl.frame.size.height, width: self.view.frame.width - 20, height: 30)
         
         signUpBtn.frame = CGRect(x: 10, y: fullnameTxt.frame.origin.y + 50, width: self.view.frame.size.width - 20, height: 30)
         signUpBtn.layer.cornerRadius = 5
@@ -106,11 +137,16 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         signUpBtn.backgroundColor = UIColor.lightGray
         signUpBtn.isEnabled = false
         
-        usernameTxt.placeholder = NSLocalizedString("username", comment: "")
-        passwordTxt.placeholder = NSLocalizedString("password", comment: "")
-        repeatPasswordTxt.placeholder = NSLocalizedString("repeat password", comment: "")
-        emailTxt.placeholder = NSLocalizedString("email", comment: "")
-        fullnameTxt.placeholder = NSLocalizedString("fullname", comment: "")
+        usernameLbl.text = NSLocalizedString("username", comment: "")
+        passwordLbl.text = NSLocalizedString("password", comment: "")
+        repeatPasswordLbl.text = NSLocalizedString("repeat password", comment: "")
+        emailLbl.text = NSLocalizedString("email", comment: "")
+        fullnameLbl.text = NSLocalizedString("fullname", comment: "")
+        
+        usernameTxt.placeholder = NSLocalizedString("username ph", comment: "")
+        passwordTxt.placeholder = NSLocalizedString("password ph", comment: "")
+        fullnameTxt.placeholder = NSLocalizedString("fullname ph", comment: "")
+        
         signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
         
         // set UITextField delegate
@@ -222,7 +258,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         }
         
         // if username too short
-        if (usernameTxt.text?.count)! < 6 {
+        if (usernameTxt.text?.count)! < 4 || (usernameTxt.text?.count)! > 15 {
             
             // alert message
             alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username too short", comment: ""))
@@ -230,8 +266,8 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
-        // if username too short
-        if (passwordTxt.text?.count)! < 6 {
+        // if password too short
+        if (passwordTxt.text?.count)! < 4 || (passwordTxt.text?.count)! > 20 {
             
             // alert message
             alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("password too short", comment: ""))
@@ -259,7 +295,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                     self.alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username taken", comment: ""))
                 }
             } else {
-                print(error!.localizedDescription)
+                self.alert(title: NSLocalizedString("Error", comment: ""), message: error!.localizedDescription)
             }
         }
         
@@ -278,6 +314,9 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         let avaFile = PFFile(name: "ava.jpg", data: avaData!)
         user["ava"] = avaFile
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+        
         // save data in server
         user.signUpInBackground { (success, error) in
             if success {
@@ -285,6 +324,8 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 // remember logged in user
                 UserDefaults.standard.set(user.username, forKey: "username")
                 UserDefaults.standard.synchronize()
+                
+                // self.alert(title: NSLocalizedString("sign up success", comment: ""), message: NSLocalizedString("sign up success msg", comment: ""))
                 
                 // call login func from AppDeligate.swift  class
                 let appDeligate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -294,6 +335,8 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 // alert message
                 self.alert(title: NSLocalizedString("Error", comment: ""), message: error!.localizedDescription)
             }
+            // end indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
         
         
