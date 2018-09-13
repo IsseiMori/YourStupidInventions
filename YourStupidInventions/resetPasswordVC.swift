@@ -21,6 +21,8 @@ class resetPasswordVC: UIViewController {
     // Done button on keyboard
     var kbToolBar: UIToolbar!
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +50,14 @@ class resetPasswordVC: UIViewController {
         kbToolBar.items = [spacer, doneButton]
         emailTxt.inputAccessoryView = kbToolBar
         
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
+        
         // background
         /*let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named: "bg.jpg")
@@ -70,33 +80,30 @@ class resetPasswordVC: UIViewController {
     // clicked reset button
     @IBAction func resetBtn_click(_ sender: Any) {
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+        
         // hide keyboard
         self.view.endEditing(true)
         
         // if email textfield is empty
         if emailTxt.text!.isEmpty {
             // show alert message
-            let alert = UIAlertController(title: "Error", message: "email field is empty", preferredStyle: UIAlertControllerStyle.alert)
-            let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-            alert.addAction(ok)
-            present(alert, animated: true, completion: nil)
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("email empty", comment: ""))
         }
         
         // request for resetting password
         PFUser.requestPasswordResetForEmail(inBackground: emailTxt.text!) { (success, error) in
             if success {
                 // show alert message
-                let alert = UIAlertController(title: "Passward reset requested", message: "We have sent you an email", preferredStyle: UIAlertControllerStyle.alert)
-                
-                // if pressed OK, call self.dismiss function
-                let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: nil)
-                })
-                alert.addAction(ok)
-                self.present(alert, animated: true, completion: nil)
+                self.alert(title: NSLocalizedString("Password reset requested", comment: ""), message: NSLocalizedString("we sent you email", comment: ""))
+                self.navigationController?.popViewController(animated: true)
             } else {
-                print(error!.localizedDescription)
+                self.alert(title: NSLocalizedString("Error", comment: ""), message: error!.localizedDescription)
             }
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
     }
     
@@ -109,6 +116,13 @@ class resetPasswordVC: UIViewController {
         // push back
         self.navigationController?.popViewController(animated: true)
     }
-
+    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
     
 }

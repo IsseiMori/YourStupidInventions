@@ -26,6 +26,8 @@ class signInVC: UIViewController {
     // Done button on keyboard
     var kbToolBar: UIToolbar!
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,14 @@ class signInVC: UIViewController {
         kbToolBar.items = [spacer, doneButton]
         usernameTxt.inputAccessoryView = kbToolBar
         passwordTxt.inputAccessoryView = kbToolBar
+        
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
         
         // call alignment func
         alignment()
@@ -107,6 +117,9 @@ class signInVC: UIViewController {
     // clicked sign in button
     @IBAction func signInBtn_clicked(_ sender: Any) {
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+        
         // hide keyboard
         self.view.endEditing(true)
         
@@ -133,6 +146,9 @@ class signInVC: UIViewController {
                 // alert message
                 self.alert(title: "Error", message: NSLocalizedString("invalid username/password", comment: ""))
             }
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
     }
     

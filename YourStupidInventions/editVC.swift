@@ -20,6 +20,8 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     // Done button on keyboard
     var kbToolBar: UIToolbar!
+
+    var ActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,14 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         kbToolBar.items = [spacer, doneButton]
         fullnameTxt.inputAccessoryView = kbToolBar
         emailTxt.inputAccessoryView = kbToolBar
+        
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
         
         // call alignment func
         alignment()
@@ -157,6 +167,9 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+        
         // if fields are empty
         if usernameTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
             
@@ -202,6 +215,9 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             } else {
                 print(error!.localizedDescription)
             }
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
     }
     

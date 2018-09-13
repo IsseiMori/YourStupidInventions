@@ -115,4 +115,21 @@
 "select at least one language" = "Please select at least one language to show.";
 "sign up success" = "You've signed up!";
 "sign up success msg" = "Please verify your email anytime in order to reset password";
+"email empty" = "Please provide your registered email.";
+"Password reset requested" = "Password reset requested";
+"we sent you email" = "We have sent you an email. Please reset your password from the link provided in the email.";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -27,6 +27,8 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBOutlet weak var sendBtn: UIButton!
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
     
     // send status to avoid sending twice
     var didSend = false
@@ -87,6 +89,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
         kbToolBar.items = [spacer, doneButton]
         nounTxt.inputAccessoryView = kbToolBar
+        
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
         
         // enable UITextView functions
         nounTxt.delegate = self
@@ -315,6 +325,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+
         // if status is already sent, return
         if didSend {
             return
@@ -377,6 +390,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             } else {
                 print(error!.localizedDescription)
             }
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
     }
     

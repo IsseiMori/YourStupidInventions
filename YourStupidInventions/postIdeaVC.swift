@@ -45,6 +45,8 @@ class postIdeaVC: UITableViewController {
     // Done button on keyboard
     var kbToolBar: UIToolbar!
     
+    var ActivityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +75,14 @@ class postIdeaVC: UITableViewController {
         let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
+        
+        // Activity Indicator
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        ActivityIndicator.center = self.view.center
+        ActivityIndicator.hidesWhenStopped = true
+        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(ActivityIndicator)
         
         // initialize header
         iniHeaderConfig()
@@ -161,6 +171,9 @@ class postIdeaVC: UITableViewController {
     
     // load posts
     func loadPosts() {
+        
+        // start indicator animation
+        ActivityIndicator.startAnimating()
         
         // set loading status to processing
         isLoading = true
@@ -258,6 +271,8 @@ class postIdeaVC: UITableViewController {
                 // reload tableView and end refresh animation
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
+                
+                self.ActivityIndicator.stopAnimating()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {
@@ -401,6 +416,9 @@ class postIdeaVC: UITableViewController {
     }
     
     @IBAction func sendBtn_clicked(_ sender: Any) {
+        
+        // start indicator animation
+        ActivityIndicator.startAnimating()
 
         // if status is already sent, return
         if didSend {
@@ -473,6 +491,9 @@ class postIdeaVC: UITableViewController {
                 self.didSend = false
                 self.alert(title: "Connection failed", message: "Plese try sending again.")
             }
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
         }
     }
     

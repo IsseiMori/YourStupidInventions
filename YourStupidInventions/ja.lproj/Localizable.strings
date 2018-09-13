@@ -114,4 +114,24 @@
 "select at least one language" = "少なくとも一つの言語を選択してください";
 "sign up success" = "登録完了";
 "sign up success msg" = "送信されたメールからメールアドレスを認証してください";
+"email empty" = "登録されたメールアドレスを入力してください";
+"Password reset requested" = "メールを送りました";
+"we sent you email" = "送られたメールからパスワードをリセットしてください";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
