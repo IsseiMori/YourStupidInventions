@@ -185,6 +185,13 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     // process query and store data in array
     func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
+            
+            // end refresh animation
+            self.refresher.endRefreshing()
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
+            
             if error == nil {
                 
                 // if no more object is found, end loadmore process
@@ -200,11 +207,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                     self.totalPostsArray.append(object.value(forKey: "totalPosts") as! Int32)
                 }
                 
-                // reload tableView and end refresh animation
+                // reload tableView
                 self.tableView.reloadData()
-                self.refresher.endRefreshing()
-                
-                self.ActivityIndicator.stopAnimating()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

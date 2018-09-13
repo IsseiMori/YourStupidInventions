@@ -209,6 +209,13 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     func processQuery(query: PFQuery<PFObject>) {
 
         query.findObjectsInBackground { (objects, error) in
+            
+            // end refresh animation
+            self.refresher.endRefreshing()
+            
+            // stop indicator animation
+            self.ActivityIndicator.stopAnimating()
+            
             if error == nil {
                 
                 // if no more object is found, end loadmore process
@@ -230,12 +237,8 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                     
                 }
                 
-                // reload tableView and end refresh animation
+                // reload tableView
                 self.tableView.reloadData()
-                self.refresher.endRefreshing()
-                
-                // stop indicator animation
-                self.ActivityIndicator.stopAnimating()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {
