@@ -99,6 +99,10 @@
 "Select category" = "--カテゴリーを選択--";
 "Type noun" = "お題の単語を入力";
 
+// newMenuViewController
+"Search" = "検索";
+
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "空欄があります";

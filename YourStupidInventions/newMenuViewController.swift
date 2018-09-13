@@ -44,7 +44,8 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         searchBar.delegate = self
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "Search"
+        searchBar.setValue(NSLocalizedString("Cancel", comment: ""), forKey: "_cancelButtonText")
+        searchBar.placeholder = NSLocalizedString("Search", comment: "")
         searchBar.tintColor = UIColor.groupTableViewBackground
         searchBar.frame.size.width = self.view.frame.size.width - 30
         let searchItem = UIBarButtonItem(customView: searchBar)
@@ -65,7 +66,7 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         
         super.viewDidLoad()
     }
-    
+
     
     // load nouns func
     func loadIniNoun() {
@@ -79,6 +80,11 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         let query = PFQuery(className: "themes")
         query.limit = 30
         query.addDescendingOrder("totalPosts")
+        
+        if !selectedLanguages.isEmpty {
+            query.whereKey("language", containedIn: selectedLanguages)
+        }
+        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 for object in objects! {
@@ -102,12 +108,14 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         // allow new search every 2 seconds
+        /* search every time a character is typed?
         let timeNow = CFAbsoluteTimeGetCurrent()
         if timeNow - lastSearchTime < 2 {
             return true
         }
-        lastSearchTime = CFAbsoluteTimeGetCurrent()
         
+        lastSearchTime = CFAbsoluteTimeGetCurrent()
+        */
         
         nouns.removeAll(keepingCapacity: false)
         
@@ -116,6 +124,11 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         query.limit = 30
         query.addDescendingOrder("totalPosts")
         query.whereKey("noun", matchesRegex: "(?i)" + self.searchBar.text!)
+        
+        if !selectedLanguages.isEmpty {
+            query.whereKey("language", containedIn: selectedLanguages)
+        }
+        
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 for object in objects! {
@@ -145,12 +158,8 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         // show cancel button
         searchBar.showsCancelButton = true
         
-        // load initial nouns only first time
-        if nounsIni.isEmpty {
-            loadIniNoun()
-        } else {
-           self.tableView.reloadData()
-        }
+        // load initial nouns
+        loadIniNoun()
     }
     
     

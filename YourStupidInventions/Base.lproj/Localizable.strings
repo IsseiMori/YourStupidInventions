@@ -99,6 +99,9 @@
 "Select category" = "--Select a category--";
 "Type noun" = "Type a theme object";
 
+// newMenuViewController
+"Search" = "Search";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "Please fill in all fields.";
