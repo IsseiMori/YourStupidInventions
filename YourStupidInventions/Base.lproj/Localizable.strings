@@ -102,6 +102,10 @@
 // newMenuViewController
 "Search" = "Search";
 
+// homeHeaderViewCell
+"ideas" = "Ideas";
+"likes" = "Total points";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "Please fill in all fields.";
@@ -121,7 +125,7 @@
 "email empty" = "Please provide your registered email.";
 "Password reset requested" = "Password reset requested";
 "we sent you email" = "We have sent you an email. Please reset your password from the link provided in the email.";
-
+"does not exist" = "The user does not exist.";
 
 
 

@@ -236,7 +236,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         
         cell.ideaLbl.text = ideaArray[indexPath.row]
-        cell.likesLbl.text = String(likesArray[indexPath.row])
+        cell.likesLbl.text = "\(likesArray[indexPath.row]) pt"
     
         return cell
     }

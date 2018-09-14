@@ -33,17 +33,19 @@ class homeHeaderView: UICollectionReusableView {
         avaImg.frame = CGRect(x: width / 16, y: width / 16, width: width / 6, height: width / 6)
         
         ideas.frame = CGRect(x: width / 2.5, y: avaImg.frame.origin.y + 5, width: 50, height: 30)
-        likes.frame = CGRect(x: width / 1.7, y: avaImg.frame.origin.y + 5, width: 50, height: 30)
-        
-        
-        ideasTitle.center = CGPoint(x: ideas.center.x, y: ideas.center.y + 20)
-        likesTitle.center = CGPoint(x: likes.center.x, y: likes.center.y + 20)
-       
-        
+        likes.frame = CGRect(x: width / 1.6, y: avaImg.frame.origin.y + 5, width: 50, height: 30)
         
         fullnameLbl.frame = CGRect(x: avaImg.frame.origin.x + 5, y: avaImg.frame.origin.y + avaImg.frame.size.height, width: width - 30, height: 30)
         
         usernameLbl.frame = CGRect(x: avaImg.frame.origin.x + 5, y: fullnameLbl.frame.origin.y + fullnameLbl.frame.size.height - 10, width: width - 30, height: 20)
+        
+        ideasTitle.text = NSLocalizedString("ideas", comment: "")
+        ideasTitle.sizeToFit()
+        ideasTitle.center = CGPoint(x: ideas.center.x, y: ideas.center.y + 20)
+        
+        likesTitle.text = NSLocalizedString("likes", comment: "")
+        likesTitle.sizeToFit()
+        likesTitle.center = CGPoint(x: likes.center.x, y: likes.center.y + 20)
         
         // round profile picture
         avaImg.layer.cornerRadius = avaImg.frame.size.width / 2

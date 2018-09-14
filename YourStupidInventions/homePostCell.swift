@@ -37,6 +37,8 @@ class homePostCell: UICollectionViewCell {
         bgView.layer.borderWidth = 1
         bgView.layer.borderColor = UIColor.lightGray.cgColor
         
+        // no need like button
+        likeBtn.isHidden = true
         
     }
 }

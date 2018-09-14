@@ -102,6 +102,10 @@
 // newMenuViewController
 "Search" = "検索";
 
+// homeHeaderViewCell
+"ideas" = "アイデア";
+"likes" = "合計ポイント";
+
 
 // Alert
 "Error" = "Error";
@@ -121,7 +125,7 @@
 "email empty" = "登録されたメールアドレスを入力してください";
 "Password reset requested" = "メールを送りました";
 "we sent you email" = "送られたメールからパスワードをリセットしてください";
-
+"does not exist" = "ユーザーが存在しません";
 
 
 
