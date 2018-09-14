@@ -294,12 +294,8 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 // shown wrong user
                 if objects!.isEmpty {
                     // call alert
-                    let alert = UIAlertController(title: "\(guestname.last!)", message: "does not exist", preferredStyle: UIAlertControllerStyle.alert)
-                    let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { (UIAlertAction) in
-                        self.navigationController?.popViewController(animated: true)
-                    })
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
+                    self.alert(title: "\(guestname.last!)", message: NSLocalizedString("does not exist", comment: ""))
+                    self.navigationController?.popViewController(animated: true)
                 }
                 
                 for object in objects! {
@@ -341,7 +337,13 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.navigationController?.pushViewController(comment, animated: true)
     }
     
-    
+    // alert func
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
     
 }
 
