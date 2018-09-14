@@ -227,6 +227,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         imageCropVC.chooseButton.setTitle("Choose", for: .normal)
         imageCropVC.delegate = self
         imageCropVC.dataSource = self
+        imageCropVC.avoidEmptySpaceAroundImage = true
         present(imageCropVC, animated: true)
         
     }
@@ -241,14 +242,12 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let width = self.view.frame.size.width - 40
         let height = width / 16 * 9
-        
         return CGRect(x: 20, y: self.view.center.y - height / 2, width: width, height: height)
     }
     
     
     // define crop mask path
     func imageCropViewControllerCustomMaskPath(_ controller: RSKImageCropViewController) -> UIBezierPath {
-        
         return UIBezierPath(rect: controller.maskRect)
     }
     
@@ -275,6 +274,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         isImgPicked = true
     }
+
     
     /* RSKImageCropViewControllerDelegate END */
     

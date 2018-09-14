@@ -17,6 +17,7 @@
 		8507F31621487D2500269446 /* money_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F31421487D2400269446 /* money_unlike.png */; };
 		8507F31A214906C400269446 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8507F319214906C300269446 /* Accounts.framework */; };
 		8507F31C214906CB00269446 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8507F31B214906CB00269446 /* Social.framework */; };
+		8507F321214B2EBD00269446 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F320214B2EBD00269446 /* Extentions.swift */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -96,6 +97,7 @@
 		8507F319214906C300269446 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8507F31B214906CB00269446 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourStupidInventions-Bridging-Header.h"; sourceTree = "<group>"; };
+		8507F320214B2EBD00269446 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				8507F2FD21462B1B00269446 /* Localizable.strings */,
 				8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */,
 				8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */,
+				8507F320214B2EBD00269446 /* Extentions.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				850C2BE92137D74E0095A3D7 /* editVC.swift in Sources */,
 				850C2C1A213926380095A3D7 /* resetPasswordVC.swift in Sources */,
 				850C2BBA2133D3530095A3D7 /* commentVC.swift in Sources */,
+				8507F321214B2EBD00269446 /* Extentions.swift in Sources */,
 				850C2BB22133C0AB0095A3D7 /* tabbarVC.swift in Sources */,
 				850C2BDB21353A060095A3D7 /* themeCell.swift in Sources */,
 				850C2BC02133D3FE0095A3D7 /* commentHeaderCell.swift in Sources */,
