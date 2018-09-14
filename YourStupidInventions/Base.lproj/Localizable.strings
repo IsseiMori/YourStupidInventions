@@ -106,6 +106,9 @@
 "ideas" = "Ideas";
 "likes" = "Total points";
 
+// themeCell
+"posts" = "ideas";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "Please fill in all fields.";

@@ -37,7 +37,7 @@ class themeCell: UITableViewCell {
         
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[posts(30)]-15-|",
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-8-[posts(30)]-15-|",
             options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "posts": postsBtn]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(

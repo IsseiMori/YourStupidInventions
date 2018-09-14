@@ -106,6 +106,8 @@
 "ideas" = "アイデア";
 "likes" = "合計ポイント";
 
+// themeCell
+"posts" = "アイデア";
 
 // Alert
 "Error" = "Error";

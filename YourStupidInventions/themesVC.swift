@@ -245,7 +245,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         }
         
         // total posts of the theme
-        cell.postsLbl.text = String(totalPostsArray[indexPath.row])
+        cell.postsLbl.text = "\(totalPostsArray[indexPath.row]) \(NSLocalizedString("posts", comment: ""))"
         
         // assign index
         cell.postIdeaBtn.layer.setValue(indexPath, forKey: "index")
