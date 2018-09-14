@@ -1691,16 +1691,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home.png" width="30" height="30"/>
-        <image name="idea.png" width="30" height="30"/>
-        <image name="leaf.png" width="30" height="30"/>
+        <image name="home.png" width="25" height="25"/>
+        <image name="idea.png" width="25" height="25"/>
+        <image name="leaf.png" width="25" height="25"/>
         <image name="like.png" width="270" height="270"/>
         <image name="money_unlike.png" width="142" height="142"/>
-        <image name="notification.png" width="30" height="30"/>
+        <image name="notification.png" width="25" height="25"/>
         <image name="pbg.jpg" width="200" height="200"/>
         <image name="pp.jpg" width="96" height="96"/>
-        <image name="ranking.png" width="30" height="30"/>
-        <image name="setting.png" width="30" height="30"/>
+        <image name="ranking.png" width="25" height="25"/>
+        <image name="setting.png" width="24" height="24"/>
         <image name="triangle.png" width="24" height="24"/>
         <image name="unlike.png" width="270" height="270"/>
     </resources>
