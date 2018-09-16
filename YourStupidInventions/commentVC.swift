@@ -501,7 +501,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         commentTxt.text = ""
         commentTxt.frame.size.height = commentHeight
         commentTxt.frame.origin.y = sendBtn.frame.origin.y
-        tableView.frame.size.height = self.tableViewHeight - self.keyboard.height - self.commentTxt.frame.size.height + self.commentHeight
+        tableView.frame.size.height = self.tableViewHeight
     }
     
     
