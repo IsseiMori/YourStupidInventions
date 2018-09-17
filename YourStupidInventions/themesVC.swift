@@ -201,10 +201,19 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                 
                 // store objects data into arrays
                 for object in objects! {
-                    self.titleArray.append(object.object(forKey: "title") as! String)
-                    self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
-                    self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.totalPostsArray.append(object.value(forKey: "totalPosts") as! Int32)
+                    
+                    // check empty
+                    if (object.object(forKey: "title") != nil &&
+                        object.object(forKey: "themeuuid") != nil &&
+                        object.object(forKey: "theme") != nil &&
+                        object.object(forKey: "totalPosts") != nil
+                        ) {
+                    
+                        self.titleArray.append(object.object(forKey: "title") as! String)
+                        self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
+                        self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
+                        self.totalPostsArray.append(object.value(forKey: "totalPosts") as! Int32)
+                    }
                 }
                 
                 // reload tableView

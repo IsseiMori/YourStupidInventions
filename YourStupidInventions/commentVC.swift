@@ -81,6 +81,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
 
         // present commentHeaderCell as header
         self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
+        self.header.delegate = self
         //let headerView: UIView = headerCell.contentView
         tableView.tableHeaderView = header.contentView
         
@@ -350,9 +351,16 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 
                 // store comments in arrays
                 for object in objects! {
-                    self.commentArray.append(object.object(forKey: "comment") as! String)
-                    self.usernameArray.append(object.object(forKey: "username") as! String)
-                    self.dateArray.append(object.createdAt)
+                    
+                    // check empty
+                    if (object.object(forKey: "comment") != nil &&
+                        object.object(forKey: "username") != nil
+                        ) {
+                    
+                        self.commentArray.append(object.object(forKey: "comment") as! String)
+                        self.usernameArray.append(object.object(forKey: "username") as! String)
+                        self.dateArray.append(object.createdAt)
+                    }
                 }
                 
                 // reload tableView and end refresh animation
@@ -645,12 +653,15 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             
             // decrement totalPosts of the theme
             print("commentVC decrement totalPosts of the theme")
+            print(self.header.themeuuid.text!)
             let themeQuery = PFQuery(className: "themes")
             themeQuery.whereKey("themeuuid", equalTo: self.header.themeuuid.text!)
             themeQuery.findObjectsInBackground(block: { (objects, error) in
                 if error == nil {
+                    print("1")
                     for object in objects! {
                         object.incrementKey("totalPosts", byAmount: -1)
+                        object.saveEventually()
                     }
                 } else {
                     print(error!.localizedDescription)

@@ -30,6 +30,8 @@ class commentHeaderCell: UITableViewCell{
     
     @IBOutlet weak var bgView: UIView!
     
+    var delegate: UIViewController?
+    
     // default
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +41,10 @@ class commentHeaderCell: UITableViewCell{
         query.whereKey("uuid", equalTo: commentuuid.last!)
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
+                
+                if object?.object(forKey: "title") == nil {
+                    self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
+                }
                 
                 self.titleLbl.text = object?.object(forKey: "title") as? String
                 self.ideaLbl.text = object?.object(forKey: "idea") as? String
@@ -82,6 +88,8 @@ class commentHeaderCell: UITableViewCell{
                     self.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
                 }
                 
+            } else {
+                self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("error occured", comment: ""))
             }
         }
         
@@ -188,6 +196,16 @@ class commentHeaderCell: UITableViewCell{
         postIdeaBtn.layer.cornerRadius = 5
         
         postIdeaBtn.setTitle(NSLocalizedString("Post your idea to this theme", comment: ""), for: UIControlState.normal)
+    }
+    
+    // alert back func
+    func alertBack(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (UIAlertAction) in
+            self.delegate?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(ok)
+        delegate?.present(alert, animated: true, completion: nil)
     }
 
 }

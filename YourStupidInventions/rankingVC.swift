@@ -235,16 +235,27 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 
                 // find related objects
                 for object in objects! {
-                    self.titleArray.append(object.object(forKey: "title") as! String)
-                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                    self.themeArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.ideaArray.append(object.object(forKey: "idea") as! String)
-                    self.usernameArray.append(object.object(forKey: "username") as! String)
-                    self.fullnameArray.append(object.object(forKey: "fullname") as! String)
-                    self.dateArray.append(object.createdAt!)
-                    self.likesArray.append(object.value(forKey: "likes") as! Int)
-                    self.addLikeArray.append(0)
                     
+                    // check empty
+                    if (object.object(forKey: "title") != nil &&
+                        object.object(forKey: "uuid") != nil &&
+                        object.object(forKey: "theme") != nil &&
+                        object.object(forKey: "idea") != nil &&
+                        object.object(forKey: "username") != nil &&
+                        object.object(forKey: "fullname") != nil &&
+                        object.value(forKey: "likes") != nil
+                        ) {
+                        
+                        self.titleArray.append(object.object(forKey: "title") as! String)
+                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                        self.themeArray.append(object.object(forKey: "theme") as! PFFile)
+                        self.ideaArray.append(object.object(forKey: "idea") as! String)
+                        self.usernameArray.append(object.object(forKey: "username") as! String)
+                        self.fullnameArray.append(object.object(forKey: "fullname") as! String)
+                        self.dateArray.append(object.createdAt!)
+                        self.likesArray.append(object.value(forKey: "likes") as! Int)
+                        self.addLikeArray.append(0)
+                    }
                 }
                 
                 // reload tableView

@@ -147,6 +147,8 @@ class postIdeaVC: UITableViewController {
                 self.header.nounLbl.text = object?.object(forKey: "noun") as? String
                 self.header.categoryLbl.text = object?.object(forKey: "category") as? String
                 self.header.hashtagsLbl.text = object?.object(forKey: "hashtags") as? String
+                self.header.lang = object?.object(forKey: "language") as? String
+                self.header.title = object?.object(forKey: "title") as! String
                 
                 self.header.themeuuidLbl.text = themeuuid.last!
                 
@@ -257,15 +259,27 @@ class postIdeaVC: UITableViewController {
                 
                 // find related objects
                 for object in objects! {
-                    self.titleArray.append(object.object(forKey: "title") as! String)
-                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                    self.themeArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.ideaArray.append(object.object(forKey: "idea") as! String)
-                    self.usernameArray.append(object.object(forKey: "username") as! String)
-                    self.fullnameArray.append(object.object(forKey: "fullname") as! String)
-                    self.dateArray.append(object.createdAt!)
-                    self.likesArray.append(object.value(forKey: "likes") as! Int)
-                    self.addLikeArray.append(0)
+                    
+                    // check empty
+                    if (object.object(forKey: "title") != nil &&
+                        object.object(forKey: "uuid") != nil &&
+                        object.object(forKey: "theme") != nil &&
+                        object.object(forKey: "idea") != nil &&
+                        object.object(forKey: "username") != nil &&
+                        object.object(forKey: "fullname") != nil &&
+                        object.value(forKey: "likes") != nil
+                        ) {
+                    
+                        self.titleArray.append(object.object(forKey: "title") as! String)
+                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                        self.themeArray.append(object.object(forKey: "theme") as! PFFile)
+                        self.ideaArray.append(object.object(forKey: "idea") as! String)
+                        self.usernameArray.append(object.object(forKey: "username") as! String)
+                        self.fullnameArray.append(object.object(forKey: "fullname") as! String)
+                        self.dateArray.append(object.createdAt!)
+                        self.likesArray.append(object.value(forKey: "likes") as! Int)
+                        self.addLikeArray.append(0)
+                    }
                 }
                 
                 // reload tableView and end refresh animation
@@ -447,19 +461,12 @@ class postIdeaVC: UITableViewController {
         object["username"] = PFUser.current()?.username
         object["fullname"] = PFUser.current()?.object(forKey: "fullname")
         object["likes"] = 0
-        object["title"] = header.titleLbl.text!
+        object["title"] = header.title
         object["adjective"] = header.adjLbl.text!
         object["noun"] = header.nounLbl.text!
         object["category"] = header.categoryLbl.text!
         object["hashtags"] = header.hashtagsLbl.text!
-        
-        if header.langBtn.titleLabel!.text! == NSLocalizedString("en", comment: "") {
-            object["language"] = "en"
-        } else if header.langBtn.titleLabel!.text! == NSLocalizedString("jp", comment: "") {
-            object["language"] = "jp"
-        } else {
-            object["language"] = "ch"
-        }
+        object["language"] = header.lang
         
         // copy the themeuuid
         object["themeuuid"] = header.themeuuidLbl.text

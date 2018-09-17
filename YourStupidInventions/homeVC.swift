@@ -169,11 +169,19 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 // find objects related to our request
                 for object in objects! {
                     
-                    // add found data to arrays
-                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                    self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
-                    self.ideaArray.append(object.object(forKey: "idea") as! String)
-                    self.likesArray.append(object.value(forKey: "likes") as! Int)
+                    // check empty
+                    if (object.object(forKey: "uuid") != nil &&
+                        object.object(forKey: "theme") != nil &&
+                        object.object(forKey: "idea") != nil &&
+                        object.value(forKey: "likes") != nil
+                        ) {
+                    
+                        // add found data to arrays
+                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                        self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
+                        self.ideaArray.append(object.object(forKey: "idea") as! String)
+                        self.likesArray.append(object.value(forKey: "likes") as! Int)
+                    }
                 }
                 
                 // reload collectionView and end refresh animation

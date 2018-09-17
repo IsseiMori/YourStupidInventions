@@ -133,6 +133,8 @@
 "Password reset requested" = "メールを送りました";
 "we sent you email" = "送られたメールからパスワードをリセットしてください";
 "does not exist" = "ユーザーが存在しません";
+"this post doesn't exist" = "投稿が存在しません";
+"error occured" = "もう一度試してください";
 
 
 

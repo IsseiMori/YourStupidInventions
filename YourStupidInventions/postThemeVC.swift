@@ -331,14 +331,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // changed textField
     @objc func textFieldDidChange(_ textField: UITextField) {
-        // update title label
-        if langBtn.titleLabel!.text! == NSLocalizedString("English", comment: "") {
-            titleLbl.text = "\(NSLocalizedString("what is in en", comment: "")) \(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
-        } else if langBtn.titleLabel!.text! == NSLocalizedString("Japanese", comment: "") {
-            titleLbl.text = "\(NSLocalizedString("what is in jp", comment: "")) \(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
-        } else {
-            titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
-        }
         
         // disable send button if not everything is filled, enable otherwise
         if nounTxt.text!.isEmpty {
@@ -484,8 +476,6 @@ extension postThemeVC: PickerViewKeyboardDelegate {
         } else {
             langBtn.setTitle(selectedData, for: UIControlState.normal)
             langBtn.resignFirstResponder()
-            
-            print(selectedData)
             
             // update title label
             if selectedData == NSLocalizedString("English", comment: "") {
