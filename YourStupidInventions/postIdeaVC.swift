@@ -417,6 +417,8 @@ class postIdeaVC: UITableViewController {
     
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
+        self.view.endEditing(true)
+        
         // start indicator animation
         ActivityIndicator.startAnimating()
 

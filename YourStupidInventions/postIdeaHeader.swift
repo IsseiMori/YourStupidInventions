@@ -126,8 +126,8 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         }
     }
     
-    // finished editing
-    func textViewDidEndEditing(_ textView: UITextView) {
+    // changed textView
+    func textViewDidChange(_ textView: UITextView) {
         // disable send button if not everything is filled, enable otherwise
         if ideaTxt.text.isEmpty {
             

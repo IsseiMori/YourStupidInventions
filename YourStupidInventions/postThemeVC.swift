@@ -53,6 +53,15 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // Done button on keyboard
     var kbToolBar: UIToolbar!
     
+    // scroll view
+    @IBOutlet weak var scrollView: UIScrollView!
+
+    // reset default height
+    var scrollViewHeight: CGFloat = 0
+    
+    // keyboard frame size
+    var keyboard = CGRect()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,6 +107,19 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         self.view.addSubview(ActivityIndicator)
         
+        // scrollView frame size
+        scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        scrollView.contentSize.height = self.view.frame.size.height
+        scrollViewHeight = scrollView.frame.size.height
+        
+        // check notifications if keyboard is shown or not
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showKeyboard), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
+        // editingChanged notification to call textFieldDidChange func
+        nounTxt.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        
         // enable UITextView functions
         nounTxt.delegate = self
         
@@ -115,11 +137,36 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @objc func doneButtonTapped() {
         self.view.endEditing(true)
     }
+
+    
+    // show keyboard func
+    @objc func showKeyboard(notification: NSNotification) {
+        
+        // define keyboard size
+        keyboard = ((notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue)!
+        
+        // move up UI
+        UIView.animate(withDuration: 0.4) {
+            // shrink scrollView size
+            self.scrollView.frame.size.height = self.scrollViewHeight - self.keyboard.height
+            
+            // scroll to bottom
+            var offset = self.scrollView.contentOffset
+            offset.y =  self.scrollViewHeight - self.sendBtn.frame.origin.y - self.keyboard.height + 40
+            self.scrollView.setContentOffset(offset, animated: true)
+        }
+        
+        
+    }
     
     
-    // hide keyboard
-    @objc func hideKeyboard() {
+    // hide keyboard func
+    @objc func hideKeyboard(notification: NSNotification){
         self.view.endEditing(true)
+        // move down UI
+        UIView.animate(withDuration: 0.4) {
+            self.scrollView.frame.size.height = self.scrollViewHeight
+        }
     }
     
     
@@ -287,8 +334,8 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     /* UITextFieldDelegate */
     
-    // finished editing
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    // changed textField
+    @objc func textFieldDidChange(_ textField: UITextField) {
         // update title label
         titleLbl.text = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
         
@@ -305,7 +352,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             sendBtn.isEnabled = true
         }
     }
-    
     
     // typed a character
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

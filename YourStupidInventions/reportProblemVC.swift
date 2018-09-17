@@ -91,6 +91,8 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
         
+        self.view.endEditing(true)
+        
         // if status is already sent, return
         if didSend {
             return

@@ -203,6 +203,15 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     
+    // hide keyboard func
+    @objc func hideKeyboard(notification: NSNotification) {
+        // move down UI
+        UIView.animate(withDuration: 0.4) {
+            self.scrollView.frame.size.height = self.scrollViewHeight
+        }
+    }
+    
+    
     // finished editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         if usernameTxt.text!.isEmpty || passwordTxt.text!.isEmpty || repeatPasswordTxt.text!.isEmpty || emailTxt.text!.isEmpty || fullnameTxt.text!.isEmpty {
@@ -215,15 +224,6 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             // enable signUp button if every field is filled
             signUpBtn.backgroundColor = customColorYellow
             signUpBtn.isEnabled = true
-        }
-    }
-    
-    
-    // hide keyboard func
-    @objc func hideKeyboard(notification: NSNotification) {
-        // move down UI
-        UIView.animate(withDuration: 0.4) {
-            self.scrollView.frame.size.height = self.scrollViewHeight
         }
     }
     
