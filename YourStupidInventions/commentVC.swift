@@ -653,12 +653,10 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             
             // decrement totalPosts of the theme
             print("commentVC decrement totalPosts of the theme")
-            print(self.header.themeuuid.text!)
             let themeQuery = PFQuery(className: "themes")
             themeQuery.whereKey("themeuuid", equalTo: self.header.themeuuid.text!)
             themeQuery.findObjectsInBackground(block: { (objects, error) in
                 if error == nil {
-                    print("1")
                     for object in objects! {
                         object.incrementKey("totalPosts", byAmount: -1)
                         object.saveEventually()

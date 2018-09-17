@@ -42,7 +42,11 @@ class commentHeaderCell: UITableViewCell{
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
                 
-                if object?.object(forKey: "title") == nil {
+                if (object?.object(forKey: "title") == nil ||
+                    object?.object(forKey: "idea") == nil ||
+                    object?.value(forKey: "likes") == nil ||
+                    object?.object(forKey: "themeuuid") == nil
+                    ) {
                     self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
                 }
                 
@@ -89,7 +93,7 @@ class commentHeaderCell: UITableViewCell{
                 }
                 
             } else {
-                self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("error occured", comment: ""))
+                self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
             }
         }
         
