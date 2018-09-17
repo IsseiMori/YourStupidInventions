@@ -18,6 +18,9 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
     // send status
     var didSend = false
     
+    // Done button on keyboard
+    var kbToolBar: UIToolbar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +31,15 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
         hideTap.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
+        
+        // done button on keyboard
+        kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneButtonTapped))
+        kbToolBar.items = [spacer, doneButton]
+        problemTxt.inputAccessoryView = kbToolBar
         
         problemTxt.delegate = self
 
@@ -53,9 +65,14 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
         self.view.endEditing(true)
     }
     
-    // finished editing
-    func textViewDidEndEditing(_ textView: UITextView) {
-        
+    // tapped done button on keyboard
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
+    }
+    
+    
+    // changed textView
+    func textViewDidChange(_ textView: UITextView) {
         // disable send button if not everything is filled, enable otherwise
         if problemTxt.text.isEmpty {
             
