@@ -233,7 +233,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! themeCell
         
-        cell.titleLbl.text = titleArray[indexPath.row]
+        cell.titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(titleArray[indexPath.row])"
         cell.themeuuidLbl.text = themeuuidArray[indexPath.row]
         
         themeImgArray[indexPath.row].getDataInBackground { (data, error) in

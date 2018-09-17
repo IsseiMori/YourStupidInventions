@@ -142,7 +142,7 @@ class postIdeaVC: UITableViewController {
         query.getFirstObjectInBackground { (object, error) in
             if error == nil {
                 
-                self.header.titleLbl.text = object?.object(forKey: "title") as? String
+                self.header.titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(object?.object(forKey: "title") as! String)"
                 self.header.adjLbl.text = object?.object(forKey: "adjective") as? String
                 self.header.nounLbl.text = object?.object(forKey: "noun") as? String
                 self.header.categoryLbl.text = object?.object(forKey: "category") as? String
@@ -301,7 +301,7 @@ class postIdeaVC: UITableViewController {
         cell.backgroundColor = UIColor.clear
         
         // connect objects with data from arrays
-        cell.titleLbl.text = self.titleArray[indexPath.row]
+        cell.titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(self.titleArray[indexPath.row])"
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
         cell.likeLbl.text = String(self.likesArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)

@@ -75,6 +75,16 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         self.view.addSubview(ActivityIndicator)
         
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to go back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
+        
         // receive post cell liked notification to update tableView
         // NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name.init("liked"), object: nil)
         
@@ -418,6 +428,13 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                 }
             }
         }
+    }
+    
+    
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
+        self.navigationController?.popViewController(animated: true)
     }
     
     

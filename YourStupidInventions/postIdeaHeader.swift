@@ -19,6 +19,7 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var ideaTxt: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var langLbl: UILabel!
     @IBOutlet weak var langBtn: PickerViewKeyboard!
     @IBOutlet weak var langBtnTri: UIButton!
     
@@ -61,16 +62,17 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
-        postIdeaHeaderHeight = themeHeight + 155 + 15
+        postIdeaHeaderHeight = themeHeight + 185 + 15
         
         bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
         
         titleLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: 30)
         themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 5, width: themeWidth, height: themeHeight)
         ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 80)
-        langBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width * 0.3 - 10, height: 30)
-        langBtnTri.frame = CGRect(x: bgView.frame.origin.x + 15, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 13, width: 16, height: 14)
-        sendBtn.frame = CGRect(x: bgView.frame.origin.x + bgView.frame.size.width - bgView.frame.size.width * 0.65, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width * 0.65 - 10, height: 30)
+        langLbl.frame = CGRect(x: bgView.frame.origin.x + 15, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: width * 0.2, height: 30)
+        langBtn.frame = CGRect(x: width - 10 - width * 0.7, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: width * 0.7 - 10, height: 30)
+        langBtnTri.frame = CGRect(x: width - 10 - width * 0.7 + 5, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 13, width: 16, height: 14)
+        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: langBtn.frame.origin.y + langBtn.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 30)
         
         ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         
@@ -88,6 +90,7 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         langBtn.layer.borderWidth = 1
         langBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
         langBtnTri.isUserInteractionEnabled = false
+        langLbl.text = NSLocalizedString("language", comment: "")
         
         // set post language as default language
         if selectedLanguages.count == 0 {
