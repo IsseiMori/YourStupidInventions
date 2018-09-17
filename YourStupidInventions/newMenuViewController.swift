@@ -253,7 +253,7 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
     override func viewDidAppear(_ animated: Bool) {
         
         // move to All tab
-        moveToViewController(at: 3, animated: false)
+        // moveToViewController(at: 3, animated: false)
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -309,7 +309,7 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         adj3VC.sortBy = "createdAt"
         adj3VC.filterByAdj = "Future"
         
-        let childViewControllers:[UIViewController] = [adj1VC, adj2VC, adj3VC, allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC, cat6VC]
+        let childViewControllers:[UIViewController] = [allVC, cat1VC, cat2VC, cat3VC, cat4VC, cat5VC, cat6VC]
         
         return childViewControllers
     }

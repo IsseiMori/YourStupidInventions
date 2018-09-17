@@ -98,6 +98,11 @@
 "Select adjective" = "--形容詞を選択--";
 "Select category" = "--カテゴリーを選択--";
 "Type noun" = "お題の単語を入力";
+"noun" = "お題の単語";
+"category" = "カテゴリー";
+"language" = "言語";
+"what is" = "お題 :  ";
+
 
 // newMenuViewController
 "Search" = "検索";

@@ -98,6 +98,10 @@
 "Select adjective" = "--Select a adjective--";
 "Select category" = "--Select a category--";
 "Type noun" = "Type a theme object";
+"noun" = "Object";
+"category" = "Category";
+"language" = "Language";
+"what is" = "What is :  ";
 
 // newMenuViewController
 "Search" = "Search";

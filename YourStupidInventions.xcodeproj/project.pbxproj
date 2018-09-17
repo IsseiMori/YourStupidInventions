@@ -35,6 +35,7 @@
 		8507F343214B883F00269446 /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F336214B883E00269446 /* notification.png */; };
 		8507F348214B8DE600269446 /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F346214B8DE400269446 /* setting@3x.png */; };
 		8507F349214B8DE600269446 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8507F347214B8DE500269446 /* setting@2x.png */; };
+		8507F34B215029A900269446 /* postThemeWithAdjVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8507F34A215029A900269446 /* postThemeWithAdjVC.swift */; };
 		850C2B9321330DF90095A3D7 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B8E21330DF90095A3D7 /* bg.jpg */; };
 		850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C2B9421330FD10095A3D7 /* signInVC.swift */; };
 		850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 850C2B892132F18C0095A3D7 /* Pacifico.ttf */; };
@@ -126,6 +127,7 @@
 		8507F336214B883E00269446 /* notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification.png; sourceTree = "<group>"; };
 		8507F346214B8DE400269446 /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
 		8507F347214B8DE500269446 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		8507F34A215029A900269446 /* postThemeWithAdjVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postThemeWithAdjVC.swift; sourceTree = "<group>"; };
 		850C2B892132F18C0095A3D7 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		850C2B8E21330DF90095A3D7 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		850C2B9421330FD10095A3D7 /* signInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signInVC.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				850C2C1C213C4CEC0095A3D7 /* newMenuViewController.swift */,
 				850C2C2C213DBB010095A3D7 /* themeMenuViewController.swift */,
 				850C2C30213DDABA0095A3D7 /* postThemeVC.swift */,
+				8507F34A215029A900269446 /* postThemeWithAdjVC.swift */,
 				8507F2F32145A67700269446 /* settingVC.swift */,
 				8507F2F52145F95F00269446 /* reportProblemVC.swift */,
 				8507F2FD21462B1B00269446 /* Localizable.strings */,
@@ -562,6 +565,7 @@
 				8507F2F62145F95F00269446 /* reportProblemVC.swift in Sources */,
 				850C2BAB21334C840095A3D7 /* rankingVC.swift in Sources */,
 				850C2BB42133C0CA0095A3D7 /* navVC.swift in Sources */,
+				8507F34B215029A900269446 /* postThemeWithAdjVC.swift in Sources */,
 				850C2C1F213C6BAE0095A3D7 /* topMenuViewController.swift in Sources */,
 				850C2C2D213DBB010095A3D7 /* themeMenuViewController.swift in Sources */,
 				850C2BBC2133D3660095A3D7 /* commentCell.swift in Sources */,

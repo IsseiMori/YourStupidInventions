@@ -10,21 +10,18 @@ import UIKit
 import Parse
 import RSKImageCropper
 
-class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UITextFieldDelegate {
+class postThemeWithAdjVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource, UITextFieldDelegate {
     
     // UI objects
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
-    
-    @IBOutlet weak var nounLbl: UILabel!
     @IBOutlet weak var nounTxt: UITextField!
     
-    @IBOutlet weak var categoryLbl: UILabel!
+    @IBOutlet weak var adjBtn: PickerViewKeyboard!
     @IBOutlet weak var categoryBtn: PickerViewKeyboard!
-    
-    @IBOutlet weak var langLbl: UILabel!
     @IBOutlet weak var langBtn: PickerViewKeyboard!
     
+    @IBOutlet weak var adjBtnTri: UIButton!
     @IBOutlet weak var categoryBtnTri: UIButton!
     @IBOutlet weak var langBtnTri: UIButton!
     
@@ -40,6 +37,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     var isImgPicked = false
     
     // pickerView and pickerData
+    var adjs = [NSLocalizedString("Innovative", comment: ""),
+                NSLocalizedString("Unexpected", comment: ""),
+                NSLocalizedString("Future", comment: "")]
     var categories = [NSLocalizedString("Appliance", comment: ""),
                       NSLocalizedString("Software", comment: ""),
                       NSLocalizedString("Food", comment: ""),
@@ -123,6 +123,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // enable UITextView functions
         nounTxt.delegate = self
         
+        adjBtn.delegate = self
         categoryBtn.delegate = self
         langBtn.delegate = self
         
@@ -168,6 +169,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
     }
     
+    
     // go back to the previous view
     @objc func back(sender: UITabBarItem) {
         self.navigationController?.popViewController(animated: true)
@@ -185,19 +187,18 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let themeImgHeight = themeImgWidth / 16 * 9
         themeImg.frame = CGRect(x: 10, y: titleLbl.frame.origin.y + 30, width: themeImgWidth, height: themeImgHeight)
         
-        nounLbl.frame = CGRect(x: 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.2, height: 30)
-        nounTxt.frame = CGRect(x: width - width * 0.7 - 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.7, height: 30)
+        adjBtn.frame = CGRect(x: 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
+        adjBtnTri.frame = CGRect(x: 15, y: themeImg.frame.origin.y + themeImgHeight + 18, width: 16, height: 14)
         
-        categoryLbl.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width * 0.2, height: 30)
-        categoryBtn.frame = CGRect(x: width - 10 - width * 0.7, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width * 0.7, height: 30)
-        categoryBtnTri.frame = CGRect(x: width - 10 - width * 0.7 + 5, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 18, width: 16, height: 14)
-
+        categoryBtn.frame = CGRect(x: width - 10 - width * 0.45, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.45, height: 30)
+        categoryBtnTri.frame = CGRect(x: width - 10 - width * 0.45 + 5, y: themeImg.frame.origin.y + themeImgHeight + 18, width: 16, height: 14)
         
-        langLbl.frame = CGRect(x: 10, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 10, width: width * 0.2, height: 30)
-        langBtn.frame = CGRect(x: width - 10 - width * 0.7, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 10, width: width * 0.7, height: 30)
-        langBtnTri.frame = CGRect(x: width - 10 - width * 0.7 + 5, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 18, width: 16, height: 14)
+        nounTxt.frame = CGRect(x: 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.6, height: 30)
         
-        sendBtn.frame = CGRect(x: 10, y: langBtn.frame.origin.y + langBtn.frame.size.height + 10, width: width - 20, height: 30)
+        langBtn.frame = CGRect(x: width - width * 0.3 - 10, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 10, width: width * 0.3, height: 30)
+        langBtnTri.frame = CGRect(x: width - width * 0.3 - 10 + 5, y: adjBtn.frame.origin.y + adjBtn.frame.size.height + 18, width: 16, height: 14)
+        
+        sendBtn.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width - 20, height: 30)
         
         sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
@@ -206,10 +207,15 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         sendBtn.backgroundColor = UIColor.lightGray
         sendBtn.isEnabled = false
         
-        nounLbl.text = NSLocalizedString("noun", comment: "")
-        categoryLbl.text = NSLocalizedString("category", comment: "")
-        langLbl.text = NSLocalizedString("language", comment: "")
-
+        adjBtn.backgroundColor = .clear
+        adjBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
+        adjBtn.layer.cornerRadius = 5
+        adjBtn.layer.borderWidth = 1
+        adjBtn.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        adjBtnTri.isUserInteractionEnabled = false
+        adjBtn.isHidden = true
+        adjBtnTri.isHidden = true
+        
         categoryBtn.backgroundColor = .clear
         categoryBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
         categoryBtn.layer.cornerRadius = 5
@@ -235,10 +241,11 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
         
         // set the first row as default
+        adjBtn.setTitle(NSLocalizedString(adjs[0], comment: ""), for: UIControlState.normal)
         categoryBtn.setTitle(NSLocalizedString(categories[0], comment: ""), for: UIControlState.normal)
         
         // set title label
-        titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        titleLbl.text = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
     
     }
 
@@ -332,7 +339,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // changed textField
     @objc func textFieldDidChange(_ textField: UITextField) {
         // update title label
-        titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        titleLbl.text = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
         
         // disable send button if not everything is filled, enable otherwise
         if nounTxt.text!.isEmpty {
@@ -401,10 +408,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         object["username"] = PFUser.current()?.username
         
-        object["adjective"] = NSLocalizedString("Innovative", comment: "")
+        object["adjective"] = adjBtn.titleLabel!.text!
         object["noun"] = nounTxt.text!
         object["category"] = categoryBtn.titleLabel!.text!
-        object["title"] = "\(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        object["title"] = "\(adjBtn.titleLabel!.text!) \(nounTxt.text!)"
         
         if langBtn.titleLabel!.text! == NSLocalizedString("en", comment: "") {
             object["language"] = "en"
@@ -416,7 +423,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         object["totalPosts"] = 0
         
-        object["hashtags"] = "#\(NSLocalizedString("Innovative", comment: "")) #\(categoryBtn.titleLabel!.text!) #\(nounTxt.text!)"
+        object["hashtags"] = "#\(adjBtn.titleLabel!.text!) #\(categoryBtn.titleLabel!.text!) #\(nounTxt.text!)"
         
         object.saveInBackground { (success, error) in
             if success {
@@ -448,23 +455,32 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
 }
 
-extension postThemeVC: PickerViewKeyboardDelegate {
+extension postThemeWithAdjVC: PickerViewKeyboardDelegate {
     func titlesOfPickerViewKeyboard(sender: PickerViewKeyboard) -> Array<String> {
-        if sender == categoryBtn {
+        if sender == adjBtn {
+            return adjs
+        } else if sender == categoryBtn {
             return categories
         } else {
             return langs
         }
     }
     func initSelectedRow(sender: PickerViewKeyboard) -> Int {
-        if sender == categoryBtn {
+        if sender == adjBtn {
+            return adjs.count
+        } else if sender == categoryBtn {
             return categories.count
         } else {
             return langs.count
         }
     }
     func didDone(sender: PickerViewKeyboard, selectedData: String) {
-        if sender == categoryBtn {
+        if sender == adjBtn {
+            adjBtn.setTitle(selectedData, for: UIControlState.normal)
+            // update title label
+            titleLbl.text = "\(selectedData) \(nounTxt.text!)"
+            adjBtn.resignFirstResponder()
+        } else if sender == categoryBtn {
             categoryBtn.setTitle(selectedData, for: UIControlState.normal)
             categoryBtn.resignFirstResponder()
         } else {
@@ -486,7 +502,9 @@ extension postThemeVC: PickerViewKeyboardDelegate {
         }
     }
     func didCancel(sender: PickerViewKeyboard) {
-        if sender == categoryBtn {
+        if sender == adjBtn {
+            adjBtn.resignFirstResponder()
+        } else if sender == categoryBtn {
             categoryBtn.resignFirstResponder()
         } else {
             langBtn.resignFirstResponder()

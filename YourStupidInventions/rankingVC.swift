@@ -269,7 +269,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         cell.backgroundColor = UIColor.clear
         
         // connect objects with data from arrays
-        cell.titleLbl.text = self.titleArray[indexPath.row]
+        cell.titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(self.titleArray[indexPath.row])"
         cell.ideaLbl.text = self.ideaArray[indexPath.row]
         cell.likeLbl.text = String(self.likesArray[indexPath.row] + self.addLikeArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
