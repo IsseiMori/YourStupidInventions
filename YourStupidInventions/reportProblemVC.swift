@@ -93,7 +93,16 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
         issueObj["issue"] = problemTxt.text
         issueObj.saveInBackground(block: { (success, error) in
             if success {
-                self.alert(title: "Issue report has been made successfully", message: "Thank you for reporting the problem.")
+                
+                self.alertBack(title: "Issue report has been made successfully", message: "Thank you for reporting the problem.")
+                
+                // reset UI
+                self.problemTxt.text = ""
+                
+                // disable send button
+                self.sendBtn.backgroundColor = UIColor.lightGray
+                self.sendBtn.isEnabled = false
+                
             } else {
                 self.alert(title: "Error", message: error!.localizedDescription)
             }
@@ -105,6 +114,16 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // alert back func
+    func alertBack(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
