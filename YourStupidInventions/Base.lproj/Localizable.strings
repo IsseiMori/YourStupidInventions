@@ -102,6 +102,13 @@
 "category" = "Category";
 "language" = "Language";
 "what is" = "What is :  ";
+"innovative in en" = "Innovative";
+"innovative in jp" = "革新的な";
+"innovative in ch" = "Innovative";
+"what is in en" = "What is :  ";
+"what is in jp" = "お題 :  ";
+"what is in ch" = "What is :  ";
+
 
 // newMenuViewController
 "Search" = "Search";

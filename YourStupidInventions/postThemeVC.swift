@@ -332,7 +332,13 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     // changed textField
     @objc func textFieldDidChange(_ textField: UITextField) {
         // update title label
-        titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        if langBtn.titleLabel!.text! == NSLocalizedString("English", comment: "") {
+            titleLbl.text = "\(NSLocalizedString("what is in en", comment: "")) \(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
+        } else if langBtn.titleLabel!.text! == NSLocalizedString("Japanese", comment: "") {
+            titleLbl.text = "\(NSLocalizedString("what is in jp", comment: "")) \(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
+        } else {
+            titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
+        }
         
         // disable send button if not everything is filled, enable otherwise
         if nounTxt.text!.isEmpty {
@@ -404,7 +410,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         object["adjective"] = NSLocalizedString("Innovative", comment: "")
         object["noun"] = nounTxt.text!
         object["category"] = categoryBtn.titleLabel!.text!
-        object["title"] = "\(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        
+        if langBtn.titleLabel?.text == NSLocalizedString("English", comment: "") {
+            object["title"] = "\(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
+        } else if langBtn.titleLabel?.text == NSLocalizedString("Japanese", comment: "") {
+            object["title"] = "\(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
+        } else {
+            object["title"] = "\(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
+        }
         
         if langBtn.titleLabel!.text! == NSLocalizedString("en", comment: "") {
             object["language"] = "en"
@@ -464,12 +477,24 @@ extension postThemeVC: PickerViewKeyboardDelegate {
         }
     }
     func didDone(sender: PickerViewKeyboard, selectedData: String) {
+        
         if sender == categoryBtn {
             categoryBtn.setTitle(selectedData, for: UIControlState.normal)
             categoryBtn.resignFirstResponder()
         } else {
             langBtn.setTitle(selectedData, for: UIControlState.normal)
             langBtn.resignFirstResponder()
+            
+            print(selectedData)
+            
+            // update title label
+            if selectedData == NSLocalizedString("English", comment: "") {
+                titleLbl.text = "\(NSLocalizedString("what is in en", comment: "")) \(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
+            } else if selectedData == NSLocalizedString("Japanese", comment: "") {
+                titleLbl.text = "\(NSLocalizedString("what is in jp", comment: "")) \(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
+            } else {
+                titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
+            }
         }
         
         // disable send button if not everything is filled, enable otherwise
@@ -484,6 +509,7 @@ extension postThemeVC: PickerViewKeyboardDelegate {
             sendBtn.backgroundColor = customColorYellow
             sendBtn.isEnabled = true
         }
+        
     }
     func didCancel(sender: PickerViewKeyboard) {
         if sender == categoryBtn {
