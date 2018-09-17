@@ -16,6 +16,16 @@ class settingVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to go back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
+        
         self.navigationItem.title = NSLocalizedString("Setting", comment: "")
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -35,6 +45,7 @@ class settingVC: FormViewController {
                 $0.options = [NSLocalizedString("English", comment: ""),
                               NSLocalizedString("Japanese", comment: ""),
                               NSLocalizedString("Chinese", comment: "")]
+                $0.selectorTitle = NSLocalizedString("Language of shown posts", comment: "")
                 // check selected language by default
                 $0.value = []
                 for lang in selectedLanguages {
@@ -59,7 +70,18 @@ class settingVC: FormViewController {
                     // save
                     UserDefaults.standard.set(selectedLanguages, forKey: "selectedLanguages")
                     UserDefaults.standard.synchronize()
-                }
+                }.onPresent({ (from, to) in
+                    // new back button
+                    to.navigationItem.hidesBackButton = true
+                    let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+                    to.navigationItem.leftBarButtonItem = backBtn
+                    
+                    // swipe to go back
+                    let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+                    backSwipe.direction = UISwipeGestureRecognizerDirection.right
+                    to.view.addGestureRecognizer(backSwipe)
+                    
+                })
         
         form +++ Section(NSLocalizedString("App information", comment: ""))
             <<< LabelRow() {
@@ -91,6 +113,12 @@ class settingVC: FormViewController {
                     cell.textLabel?.textColor = .black
                 }
         
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
+        self.navigationController?.popViewController(animated: true)
     }
     
     // alert func

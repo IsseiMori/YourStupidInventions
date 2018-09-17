@@ -24,6 +24,16 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // new back button
+        self.navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
+        self.navigationItem.leftBarButtonItem = backBtn
+        
+        // swipe to go back
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(backSwipe)
+        
         self.navigationItem.title = NSLocalizedString("Report a problem", comment: "")
         
         // tap to hide keyboard
@@ -126,6 +136,12 @@ class reportProblemVC: UIViewController, UITextViewDelegate {
                 self.alert(title: "Error", message: error!.localizedDescription)
             }
         })
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        
+        // push back
+        self.navigationController?.popViewController(animated: true)
     }
     
     
