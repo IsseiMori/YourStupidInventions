@@ -30,6 +30,10 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         // selected bar height
         settings.style.selectedBarHeight = 5
         
+        // avoid bottom white space in iPhone X
+        // could be a better solution?
+        containerView.frame.size.height = self.view.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)! - (self.navigationController?.navigationBar.frame.size.height)!
+        
         super.viewDidLoad()
         
     }
@@ -40,7 +44,7 @@ class topMenuViewController: ButtonBarPagerTabStripViewController {
         // move to All tab
         // moveToViewController(at: 3, animated: false)
     }
-    
+
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         

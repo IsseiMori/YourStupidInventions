@@ -262,24 +262,29 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let width = self.view.frame.size.width
         let height = self.view.frame.size.height
         
-        tableView.frame = CGRect(x: 0, y: 0, width: width, height: height / 1.096 - self.navigationController!.navigationBar.frame.size.height - 40)
+        tableView.frame = CGRect(x: 0, y: 0, width: width, height: height / 1.096 - self.navigationController!.navigationBar.frame.size.height - 20)
+        print(tableView.frame.size.height)
         tableView.estimatedRowHeight = width / 5.333
         tableView.rowHeight = UITableViewAutomaticDimension
         
         commentTxt.frame = CGRect(x: 10, y: tableView.frame.size.height + height / 56.8, width: width / 1.306, height: 33)
         commentTxt.layer.cornerRadius = commentTxt.frame.size.width / 50
-        commentTxt.layer.zPosition = 1
         
         sendBtn.frame = CGRect(x: commentTxt.frame.origin.x + commentTxt.frame.size.width + width / 32, y: commentTxt.frame.origin.y, width: width - (commentTxt.frame.origin.x + commentTxt.frame.size.width) - (width / 32) * 2, height: commentTxt.frame.size.height)
-        sendBtn.layer.zPosition = 1
-        
         
         // assign resting values
         tableViewHeight = tableView.frame.size.height
         commentHeight = commentTxt.frame.size.height
         commentY = commentTxt.frame.origin.y
     }
+    
 
+    override func viewWillLayoutSubviews() {
+        // move up UI for iPhoneX
+        tableView.frame.size.height = tableView.frame.size.height - self.view.safeAreaInsets.bottom
+        commentTxt.frame.origin.y = commentTxt.frame.origin.y - self.view.safeAreaInsets.bottom
+        sendBtn.frame.origin.y = sendBtn.frame.origin.y - self.view.safeAreaInsets.bottom
+    }
     
     // load comments
     @objc func loadComments() {

@@ -93,7 +93,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
     }
     
-    
     // refreshing func after like to update tableView
     @objc func refresh() {
         self.tableView.reloadData()
