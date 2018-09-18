@@ -112,9 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // if logged in
         if username != nil {
-            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            /*let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-            window?.rootViewController = myTabBar
+            window?.rootViewController = myTabBar*/
             isLoggedIn = true
         }
     }

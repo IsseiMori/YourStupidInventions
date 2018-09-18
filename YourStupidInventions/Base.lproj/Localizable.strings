@@ -73,7 +73,7 @@
 
 // signInVC
 "Sign In" = "Sign In";
-"Your-Stupid-Inventions" = "Your-Stupid-Inventions";
+"Your-Weird-Inventions" = "Your-Weird-Inventions";
 "username" = "Username";
 "password" = "Password";
 "forgot password?" = "forgot password?";
@@ -143,6 +143,14 @@
 "this post doesn't exist" = "This post does not exist";
 "error occured" = "An error occured. Please try again";
 
+// tutorial
+"tutorial page 1" = "Welcome to YourWeirdInventions";
+"tutorial page 2" = "Recently, innovative ideas have been making much more money than old-fashion technologies";
+"tutorial page 3" = "Innovative ideas are the keys to success";
+"tutorial page 4" = "Even the weird ideas maybe aswsome ideas for others";
+"tutorial page 5" = "Let's share your innovative ideas and discover others' ideas to enhacne your imaginations";
+"done tutorial" = "Get Started";
+"skip tutorial" = "Skip Tutorial";
 
 
 

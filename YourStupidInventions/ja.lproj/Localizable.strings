@@ -73,7 +73,7 @@
 
 // signInVC
 "Sign In" = "ログイン";
-"Your-Stupid-Inventions" = "Your-Stupid-Inventions";
+"Your-Stupid-Inventions" = "革新的アイデア(笑)";
 "username" = "ユーザーネーム";
 "password" = "パスワード";
 "forgot password?" = "パスワードを忘れたら";
@@ -136,7 +136,14 @@
 "this post doesn't exist" = "投稿が存在しません";
 "error occured" = "もう一度試してください";
 
-
+// tutorial
+"tutorial page 1" = "革新的アイデア(笑)";
+"tutorial page 2" = "近年、革新的なアイデアが古くからの常識に変わって市場を動かしています";
+"tutorial page 3" = "革新的なアイデアが成功への鍵なのです";
+"tutorial page 4" = "例え、ふざけたアイデアでも他の人にとっては素晴らしいアイデアかもしれません";
+"tutorial page 5" = "皆で革新的なアイデアを共有し想像力を高めましょう";
+"done tutorial" = "開始";
+"skip tutorial" = "スキップ";
 
 
 

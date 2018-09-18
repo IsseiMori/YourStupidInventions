@@ -76,6 +76,11 @@
 		850C2C34213EF7DD0095A3D7 /* moreNav@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C33213EF7DB0095A3D7 /* moreNav@3x.png */; };
 		850C2C36213F30EE0095A3D7 /* dollar_like.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C35213F30EE0095A3D7 /* dollar_like.png */; };
 		850C2C38213F32990095A3D7 /* dollar_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 850C2C37213F32980095A3D7 /* dollar_unlike.png */; };
+		850FBC1A2150BD4000F922A5 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC192150BD4000F922A5 /* splash.png */; };
+		850FBC1C2150BF3C00F922A5 /* splashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FBC1B2150BF3C00F922A5 /* splashVC.swift */; };
+		850FBC1E2150C2AA00F922A5 /* Icon_1024pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC1D2150C2AA00F922A5 /* Icon_1024pt.png */; };
+		850FBC202150C33000F922A5 /* icon_flip_1024pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC1F2150C33000F922A5 /* icon_flip_1024pt.png */; };
+		850FBC222150C73100F922A5 /* tutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FBC212150C73100F922A5 /* tutorialVC.swift */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -168,6 +173,11 @@
 		850C2C33213EF7DB0095A3D7 /* moreNav@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moreNav@3x.png"; sourceTree = "<group>"; };
 		850C2C35213F30EE0095A3D7 /* dollar_like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_like.png; sourceTree = "<group>"; };
 		850C2C37213F32980095A3D7 /* dollar_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dollar_unlike.png; sourceTree = "<group>"; };
+		850FBC192150BD4000F922A5 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		850FBC1B2150BF3C00F922A5 /* splashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splashVC.swift; sourceTree = "<group>"; };
+		850FBC1D2150C2AA00F922A5 /* Icon_1024pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_1024pt.png; sourceTree = "<group>"; };
+		850FBC1F2150C33000F922A5 /* icon_flip_1024pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flip_1024pt.png; sourceTree = "<group>"; };
+		850FBC212150C73100F922A5 /* tutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tutorialVC.swift; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -269,6 +279,16 @@
 			path = "tabbar items";
 			sourceTree = "<group>";
 		};
+		850FBC162150BCBC00F922A5 /* splash images */ = {
+			isa = PBXGroup;
+			children = (
+				850FBC1F2150C33000F922A5 /* icon_flip_1024pt.png */,
+				850FBC1D2150C2AA00F922A5 /* Icon_1024pt.png */,
+				850FBC192150BD4000F922A5 /* splash.png */,
+			);
+			path = "splash images";
+			sourceTree = "<group>";
+		};
 		85C95796213206D000AEFD2E = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +310,7 @@
 		85C957A1213206D000AEFD2E /* YourStupidInventions */ = {
 			isa = PBXGroup;
 			children = (
+				850FBC162150BCBC00F922A5 /* splash images */,
 				850C2BEE213873B00095A3D7 /* tabbar items */,
 				850C2BA921334A9F0095A3D7 /* button items */,
 				850C2BA0213329210095A3D7 /* placeholder items */,
@@ -333,6 +354,8 @@
 				8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */,
 				8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */,
 				8507F320214B2EBD00269446 /* Extentions.swift */,
+				850FBC1B2150BF3C00F922A5 /* splashVC.swift */,
+				850FBC212150C73100F922A5 /* tutorialVC.swift */,
 			);
 			path = YourStupidInventions;
 			sourceTree = "<group>";
@@ -431,8 +454,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8507F340214B883F00269446 /* notification@3x.png in Resources */,
+				850FBC1A2150BD4000F922A5 /* splash.png in Resources */,
 				8507F348214B8DE600269446 /* setting@3x.png in Resources */,
 				8507F33E214B883F00269446 /* leaf@2x.png in Resources */,
+				850FBC202150C33000F922A5 /* icon_flip_1024pt.png in Resources */,
 				850C2C34213EF7DD0095A3D7 /* moreNav@3x.png in Resources */,
 				850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */,
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
@@ -466,6 +491,7 @@
 				85C957A8213206D000AEFD2E /* Main.storyboard in Resources */,
 				8507F341214B883F00269446 /* idea.png in Resources */,
 				8507F31621487D2500269446 /* money_unlike.png in Resources */,
+				850FBC1E2150C2AA00F922A5 /* Icon_1024pt.png in Resources */,
 				850C2C36213F30EE0095A3D7 /* dollar_like.png in Resources */,
 				850C2B9321330DF90095A3D7 /* bg.jpg in Resources */,
 			);
@@ -556,6 +582,7 @@
 				85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */,
 				850C2BC82134D47B0095A3D7 /* homeVC.swift in Sources */,
 				850C2C2F213DC6740095A3D7 /* themesHeaderCell.swift in Sources */,
+				850FBC1C2150BF3C00F922A5 /* splashVC.swift in Sources */,
 				850C2BDD2135C2FA0095A3D7 /* postIdeaVC.swift in Sources */,
 				850C2BD7213538710095A3D7 /* themesVC.swift in Sources */,
 				8507F2F42145A67800269446 /* settingVC.swift in Sources */,
@@ -578,6 +605,7 @@
 				8507F321214B2EBD00269446 /* Extentions.swift in Sources */,
 				850C2BB22133C0AB0095A3D7 /* tabbarVC.swift in Sources */,
 				850C2BDB21353A060095A3D7 /* themeCell.swift in Sources */,
+				850FBC222150C73100F922A5 /* tutorialVC.swift in Sources */,
 				850C2BC02133D3FE0095A3D7 /* commentHeaderCell.swift in Sources */,
 				850C2B9521330FD10095A3D7 /* signInVC.swift in Sources */,
 				850C2BE52137067F0095A3D7 /* notificationsVC.swift in Sources */,
