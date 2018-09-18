@@ -24,6 +24,9 @@ class tutorialVC: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // check as first time done
+        UserDefaults.standard.set(true, forKey: "C_NSUSERDEFAULT_FIRST_TIME")
+        
         self.scrollView = UIScrollView(frame: self.view.bounds)
         self.scrollView.contentSize = CGSize(width: self.view.bounds.width * CGFloat(pageNum), height: self.view.bounds.height)
         self.scrollView.isPagingEnabled = true
