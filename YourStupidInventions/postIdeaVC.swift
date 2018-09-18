@@ -161,7 +161,7 @@ class postIdeaVC: UITableViewController {
                     }
                 })
             } else {
-                print(error!.localizedDescription)
+                self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this theme doesn't exist", comment: ""))
             }
         }
     }
@@ -528,6 +528,16 @@ class postIdeaVC: UITableViewController {
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+    
+    // alert back func
+    func alertBack(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) { (UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
