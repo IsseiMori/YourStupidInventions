@@ -38,7 +38,13 @@ class splashVC: UIViewController {
                                     self.logoImg.alpha = 0
         }, completion: { (Bool) in
             self.logoImg.removeFromSuperview()
-            self.performSegue(withIdentifier: "toTutorial", sender: nil)
+            
+            // show tutorial only first time, show tabBar otherwise
+            if UserDefaults.standard.value(forKey: "C_NSUSERDEFAULT_FIRST_TIME") != nil {
+                self.performSegue(withIdentifier: "toMain", sender: nil)
+            } else {
+                self.performSegue(withIdentifier: "toTutorial", sender: nil)
+            }
         })
     }
 

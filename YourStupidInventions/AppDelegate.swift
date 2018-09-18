@@ -117,15 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = myTabBar*/
             isLoggedIn = true
         }
-        
-        // show tutorial only first time, show tabBar otherwise
-        if UserDefaults.standard.value(forKey: "C_NSUSERDEFAULT_FIRST_TIME") != nil {
-            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-            window?.rootViewController = myTabBar
-        } else {
-            // show tutorial
-        }
     }
 
 }
