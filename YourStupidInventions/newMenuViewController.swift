@@ -245,6 +245,21 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
             result.navigationItem.title = nouns[indexPath.row]
         }
         
+        // hide tableView when canceled
+        tableView.isHidden = true
+        
+        // dismiss keyboard
+        searchBar.resignFirstResponder()
+        
+        // hide cancel button
+        searchBar.showsCancelButton = false
+        
+        // reset nouns array
+        nouns.removeAll(keepingCapacity: false)
+        
+        // reset text
+        searchBar.text = ""
+        
         self.navigationController?.pushViewController(result, animated: true)
     }
     
