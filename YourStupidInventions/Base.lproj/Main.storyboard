@@ -19,8 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon_1024pt.png" translatesAutoresizingMaskIntoConstraints="NO" id="5dm-jV-F5s">
-                                <rect key="frame" x="0.0" y="270.58780890016737" width="375" height="128.00000000000026"/>
+                                <rect key="frame" x="0.0" y="271" width="375" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="ClO-fg-7kj"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1856,6 +1857,6 @@
         <image name="unlike.png" width="270" height="270"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hA9-sJ-A1k"/>
+        <segue reference="DJZ-yf-TYt"/>
     </inferredMetricsTieBreakers>
 </document>
