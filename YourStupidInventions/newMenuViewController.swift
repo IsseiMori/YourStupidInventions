@@ -20,6 +20,8 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
     
     var nounsIni = [String]()
     var nouns = [String]()
+    var themeuuidArray = [String]()
+    var titleArray = [String]()
     
     var lastSearchTime: CFAbsoluteTime!
     
@@ -89,8 +91,13 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
             if error == nil {
                 for object in objects! {
                     // append noun if not found in array
-                    if !self.nounsIni.contains(object.object(forKey: "noun") as! String) {
+                    if (!self.nounsIni.contains(object.object(forKey: "noun") as! String) ||
+                        object.object(forKey: "title") != nil ||
+                        object.object(forKey: "themeuuid") != nil
+                        ) {
                         self.nounsIni.append(object.object(forKey: "noun") as! String)
+                        self.titleArray.append(object.object(forKey: "title") as! String)
+                        self.themeuuidArray.append(object.object(forKey: "themeuuid") as! String)
                     }
                 }
                 
@@ -233,6 +240,9 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
     // selected tableView cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
+        /*
+        // Option 1. Show rankingVC with the selected noun
         let result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "rankingVC") as! rankingVC
         
         result.sortBy = "createdAt"
@@ -243,7 +253,14 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         } else {
             result.filterByNoun = nouns[indexPath.row]
             result.navigationItem.title = nouns[indexPath.row]
-        }
+        }*/
+        
+        // Option2. Show postIdeaVC with the selected noun
+        themeuuid.append(themeuuidArray[indexPath.row])
+        themetitle.append(titleArray[indexPath.row])
+        
+        // present postIdeaVC
+        let result = self.storyboard?.instantiateViewController(withIdentifier: "postIdeaVC") as! postIdeaVC
         
         // hide tableView when canceled
         tableView.isHidden = true
