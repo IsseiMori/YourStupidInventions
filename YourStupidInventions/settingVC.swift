@@ -43,8 +43,8 @@ class settingVC: FormViewController {
             <<< MultipleSelectorRow<String>() {
                 $0.title = NSLocalizedString("Language of shown posts", comment: "")
                 $0.options = [NSLocalizedString("English", comment: ""),
-                              NSLocalizedString("Japanese", comment: ""),
-                              NSLocalizedString("Chinese", comment: "")]
+                              NSLocalizedString("Japanese", comment: "")/*,
+                              NSLocalizedString("Chinese", comment: "")*/]
                 $0.selectorTitle = NSLocalizedString("Language of shown posts", comment: "")
                 // check selected language by default
                 $0.value = []

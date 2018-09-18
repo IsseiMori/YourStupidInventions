@@ -141,6 +141,7 @@
 "we sent you email" = "We have sent you an email. Please reset your password from the link provided in the email.";
 "does not exist" = "The user does not exist.";
 "this post doesn't exist" = "This post does not exist";
+"this theme doesn't exist" = "This theme does not exist";
 "error occured" = "An error occured. Please try again";
 
 // tutorial
