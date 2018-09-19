@@ -474,7 +474,7 @@ extension postThemeWithAdjVC: PickerViewKeyboardDelegate {
             return langs.count
         }
     }
-    func didDone(sender: PickerViewKeyboard, selectedData: String) {
+    func didDone(sender: PickerViewKeyboard, selectedData: String, selectedIndex: Int) {
         if sender == adjBtn {
             adjBtn.setTitle(selectedData, for: UIControlState.normal)
             // update title label

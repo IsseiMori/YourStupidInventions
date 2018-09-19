@@ -35,74 +35,7 @@ class commentHeaderCell: UITableViewCell{
     // default
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        print("commentHeaderCell load header")
-        let query = PFQuery(className: "posts")
-        query.whereKey("uuid", equalTo: commentuuid.last!)
-        query.getFirstObjectInBackground { (object, error) in
-            if error == nil {
-                
-                if (object?.object(forKey: "title") == nil ||
-                    object?.object(forKey: "idea") == nil ||
-                    object?.value(forKey: "likes") == nil ||
-                    object?.object(forKey: "themeuuid") == nil
-                    ) {
-                    self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
-                }
-                
-                self.titleLbl.text = object?.object(forKey: "title") as? String
-                self.ideaLbl.text = object?.object(forKey: "idea") as? String
-                self.likeLbl.text = String(object?.value(forKey: "likes") as! Int)
-                self.uuidLbl.text = commentuuid.last!
-                self.usernameBtn.setTitle(commentowner.last!, for: UIControlState.normal)
-                self.themeuuid.text = object?.object(forKey: "themeuuid") as? String
-                
-                // place theme image
-                (object?.object(forKey: "theme") as! PFFile).getDataInBackground { (data, error) in
-                    
-                    if error == nil {
-                        self.themeImg.image = UIImage(data: data!)
-                    } else {
-                        print(error!.localizedDescription)
-                    }
-                }
-                
-                // calculate date
-                let from = object?.createdAt
-                let now = Date()
-                let components: NSCalendar.Unit = [.second, .minute, .hour, .day, .weekOfMonth]
-                let difference = (Calendar.current as NSCalendar).components(components, from: from!, to: now, options: [])
-                
-                if difference.second! <= 0 {
-                    self.dateLbl.text = "now"
-                }
-                if difference.second! > 0 && difference.minute! == 0 {
-                    self.dateLbl.text = "\(difference.second!)s. ago"
-                }
-                if difference.minute! > 0 && difference.hour! == 0 {
-                    self.dateLbl.text = "\(difference.minute!)m. ago"
-                }
-                if difference.hour! > 0 && difference.day! == 0 {
-                    self.dateLbl.text = "\(difference.hour!)h. ago"
-                }
-                if difference.day! > 0 && difference.weekOfMonth! == 0 {
-                    self.dateLbl.text = "\(difference.day!)d. ago"
-                }
-                if difference.weekOfMonth! > 0 {
-                    self.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
-                }
-                
-            } else {
-                self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
-            }
-        }
-        
-        // set likeBtn to unlike
-        if likeBtn.titleLabel?.text != "like" {
-            likeBtn.setTitle("unlike", for: UIControlState.normal)
-            likeBtn.setBackgroundImage(UIImage(named: "money_unlike.png"), for: UIControlState.normal)
-        }
-        
+
         // call align func
         alignment()
     }

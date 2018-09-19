@@ -61,7 +61,8 @@ class PickerViewKeyboard: UIButton {
     }
     
     @objc func donePicker() {
-        delegate.didDone(sender: self, selectedData: data[pickerView.selectedRow(inComponent: 0)])
+        // added selectedIndex
+        delegate.didDone(sender: self, selectedData: data[pickerView.selectedRow(inComponent: 0)], selectedIndex: pickerView.selectedRow(inComponent: 0))
     }
 
 }
@@ -82,5 +83,5 @@ protocol PickerViewKeyboardDelegate {
     func titlesOfPickerViewKeyboard(sender: PickerViewKeyboard) -> Array<String>
     func initSelectedRow(sender: PickerViewKeyboard) -> Int
     func didCancel(sender: PickerViewKeyboard)
-    func didDone(sender: PickerViewKeyboard, selectedData: String)
+    func didDone(sender: PickerViewKeyboard, selectedData: String, selectedIndex: Int)
 }

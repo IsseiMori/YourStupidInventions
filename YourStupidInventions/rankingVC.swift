@@ -300,6 +300,12 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
         cell.uuidLbl.text = self.uuidArray[indexPath.row]
         
+        // allow title up to 3 lines
+        cell.titleLbl.numberOfLines = 3
+        cell.titleLbl.sizeToFit()
+        cell.ideaLbl.numberOfLines = 3
+        cell.ideaLbl.sizeToFit()
+        
         // place theme image
         self.themeArray[indexPath.row].getDataInBackground { (data, error) in
             if error == nil {

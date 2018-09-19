@@ -54,12 +54,13 @@ class postIdeaVC: UITableViewController {
         self.navigationItem.title = themetitle.last!
         
         // automatic row height - dynamic cell
-        //tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         
         // declare hide keyboard tap
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboardTap))
         hideTap.numberOfTapsRequired = 1
+        hideTap.cancelsTouchesInView = false
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
@@ -102,8 +103,9 @@ class postIdeaVC: UITableViewController {
         
     }
     
+    
+    // enable scroll even there is no post
     override func viewDidAppear(_ animated: Bool) {
-        print(tableView.contentSize.height)
         if tableView.contentSize.height < self.view.frame.size.height {
             tableView.contentSize.height = self.view.frame.size.height * 1.5
         }
@@ -131,15 +133,14 @@ class postIdeaVC: UITableViewController {
     }
     
     
-    // header cell height
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return postIdeaHeaderHeight + 10
-    }
-    
     // initial header config func
     // call this only in viewDidLoad once
     func iniHeaderConfig() {
         header = tableView.dequeueReusableCell(withIdentifier: "postIdeaHeader") as! postIdeaHeader
+        
+        // automatic header cell height
+        self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedSectionHeaderHeight = 400;
         
         header.delegate = self
         
@@ -159,6 +160,10 @@ class postIdeaVC: UITableViewController {
                 
                 self.header.themeuuidLbl.text = themeuuid.last!
                 
+                // allow title up to 3 lines
+                self.header.titleLbl.numberOfLines = 3
+                self.header.titleLbl.sizeToFit()
+                
                 self.header.themeImgPFFile = object?.object(forKey: "theme") as! PFFile
                 (object?.object(forKey: "theme") as? PFFile)?.getDataInBackground(block: { (data, error) in
                     if error == nil {
@@ -167,6 +172,9 @@ class postIdeaVC: UITableViewController {
                         print(error!.localizedDescription)
                     }
                 })
+                
+                // reload to apply auto height and sizeToFit
+                self.tableView.reloadData()
             } else {
                 self.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this theme doesn't exist", comment: ""))
             }
@@ -308,7 +316,6 @@ class postIdeaVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return uuidArray.count
     }
     
@@ -328,6 +335,12 @@ class postIdeaVC: UITableViewController {
         cell.likeLbl.text = String(self.likesArray[indexPath.row])
         cell.usernameBtn.setTitle(self.usernameArray[indexPath.row], for: UIControlState.normal)
         cell.uuidLbl.text = self.uuidArray[indexPath.row]
+        
+        // allow title up to 3 lines
+        cell.titleLbl.numberOfLines = 3
+        cell.titleLbl.sizeToFit()
+        cell.ideaLbl.numberOfLines = 3
+        cell.ideaLbl.sizeToFit()
         
         // place theme image
         self.themeArray[indexPath.row].getDataInBackground { (data, error) in
@@ -395,6 +408,20 @@ class postIdeaVC: UITableViewController {
         }
     }
     
+    // selected a row
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("select")
+        // call cell for further cell data
+        let cell = tableView.cellForRow(at: indexPath) as! postCell
+        
+        commentuuid.append(cell.uuidLbl.text!)
+        commentowner.append(cell.usernameBtn.titleLabel!.text!)
+        
+        // present commentVC
+        let comment = self.storyboard?.instantiateViewController(withIdentifier: "commentVC") as! commentVC
+        self.navigationController?.pushViewController(comment, animated: true)
+    }
+    
     
     // preload func
     override func viewWillAppear(_ animated: Bool) {
@@ -409,9 +436,9 @@ class postIdeaVC: UITableViewController {
         if isLoggedIn {
             
             // save number of likeBtn taps to server
-            print("postIdeaVC send like count")
             for index in 0 ..< addLikeArray.count {
                 if addLikeArray[index] != 0 {
+                    print("postIdeaVC send like count")
                     
                     // update total likes in each post
                     let query = PFQuery(className: "posts")

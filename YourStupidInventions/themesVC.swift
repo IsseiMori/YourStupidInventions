@@ -254,6 +254,9 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
             }
         }
         
+        // allow title up to 3 lines
+        cell.titleLbl.numberOfLines = 3
+        
         // total posts of the theme
         cell.postsLbl.text = "\(totalPostsArray[indexPath.row]) \(NSLocalizedString("posts", comment: ""))"
         

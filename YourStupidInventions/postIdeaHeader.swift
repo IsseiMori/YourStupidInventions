@@ -9,8 +9,6 @@
 import UIKit
 import Parse
 
-var postIdeaHeaderHeight: CGFloat = 0
-
 class postIdeaHeader: UITableViewCell, UITextViewDelegate {
 
     // UI objects
@@ -58,14 +56,41 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         let themeWidth = width - 40
         let themeHeight = themeWidth / 16 * 9
         
-        postIdeaHeaderHeight = themeHeight + 155 + 15
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
+        themeImg.translatesAutoresizingMaskIntoConstraints = false
+        ideaTxt.translatesAutoresizingMaskIntoConstraints = false
+        sendBtn.translatesAutoresizingMaskIntoConstraints = false
+        bgView.translatesAutoresizingMaskIntoConstraints = false
         
-        bgView.frame = CGRect(x: 10, y: 10, width: width - 20, height: postIdeaHeaderHeight)
         
-        titleLbl.frame = CGRect(x: bgView.frame.origin.x + 10, y: bgView.frame.origin.y + 5, width: themeWidth, height: 30)
-        themeImg.frame = CGRect(x: bgView.frame.origin.x + 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 5, width: themeWidth, height: themeHeight)
-        ideaTxt.frame = CGRect(x: bgView.frame.origin.x + 10, y: themeImg.frame.origin.y + themeImg.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 80)
-        sendBtn.frame = CGRect(x: bgView.frame.origin.x + 10, y: ideaTxt.frame.origin.y + ideaTxt.frame.size.height + 5, width: bgView.frame.size.width - 20, height: 30)
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-20-[title]-10-[theme(\(themeHeight))]-10-[idea(80)]-10-[send(30)]-20-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "idea": ideaTxt, "send": sendBtn]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[title]-15-|",
+            options: [], metrics: nil, views: ["title": titleLbl]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[theme]-10-|",
+            options: [], metrics: nil, views: ["theme": themeImg]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[idea]-15-|",
+            options: [], metrics: nil, views: ["idea": ideaTxt]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-15-[send]-15-|",
+            options: [], metrics: nil, views: ["send": sendBtn]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-10-[bg]-10-|",
+            options: [], metrics: nil, views: ["bg": bgView]))
+        
+        self.contentView.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[bg]-10-|",
+            options: [], metrics: nil, views: ["bg": bgView]))
+    
         
         ideaTxt.backgroundColor = UIColor.groupTableViewBackground
         
@@ -78,7 +103,7 @@ class postIdeaHeader: UITableViewCell, UITextViewDelegate {
         bgView.backgroundColor = .white
         
         
-        sendBtn.layer.cornerRadius = self.frame.size.width / 100
+        sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
         
         // disable send button untill everything is filled

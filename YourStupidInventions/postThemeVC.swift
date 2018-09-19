@@ -46,6 +46,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                       NSLocalizedString("Entertainment", comment: ""),
                       NSLocalizedString("Sports", comment: ""),
                       NSLocalizedString("Others", comment: "")]
+    
+    var categories_en = ["Appliance",
+                         "Software",
+                         "Food",
+                         "Entertainment",
+                         "Sports",
+                         "Others"]
+    
     var langs = [NSLocalizedString("English", comment: ""),
                  NSLocalizedString("Japanese", comment: "")/*,
                  NSLocalizedString("Chinese", comment: "")*/]
@@ -381,9 +389,6 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // clicked send button
     @IBAction func sendBtn_clicked(_ sender: Any) {
-        
-        // start indicator animation
-        ActivityIndicator.startAnimating()
 
         // if status is already sent, return
         if didSend {
@@ -401,6 +406,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             return
         }
         
+        // start indicator animation
+        ActivityIndicator.startAnimating()
+        
         // change send status to yes
         didSend = true
         
@@ -416,10 +424,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         object["theme"] = themeFile
 
         object["username"] = PFUser.current()?.username
-        
-        object["adjective"] = NSLocalizedString("Innovative", comment: "")
+    
         object["noun"] = nounTxt.text!
-        object["category"] = categoryBtn.titleLabel!.text!
+        object["category"] = categoryBtn.layer.value(forKey: "category") as! String
+        object["adjective"] = NSLocalizedString("innovative in en", comment: "")
         
         if langBtn.titleLabel?.text == NSLocalizedString("English", comment: "") {
             object["title"] = "\(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
@@ -439,7 +447,7 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         object["totalPosts"] = 0
         
-        object["hashtags"] = "#\(NSLocalizedString("Innovative", comment: "")) #\(categoryBtn.titleLabel!.text!) #\(nounTxt.text!)"
+        object["hashtags"] = ""
         
         object.saveInBackground { (success, error) in
             if success {
@@ -486,10 +494,11 @@ extension postThemeVC: PickerViewKeyboardDelegate {
             return langs.count
         }
     }
-    func didDone(sender: PickerViewKeyboard, selectedData: String) {
+    func didDone(sender: PickerViewKeyboard, selectedData: String, selectedIndex: Int) {
         
         if sender == categoryBtn {
             categoryBtn.setTitle(selectedData, for: UIControlState.normal)
+            categoryBtn.layer.setValue(categories_en[selectedIndex], forKey: "category")
             categoryBtn.resignFirstResponder()
         } else {
             langBtn.setTitle(selectedData, for: UIControlState.normal)

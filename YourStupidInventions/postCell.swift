@@ -78,10 +78,6 @@ class postCell: UITableViewCell {
             options: [], metrics: nil, views: ["title": titleLbl]))
         
         self.contentView.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-15-[theme]-15-|",
-            options: [], metrics: nil, views: ["theme": themeImg]))
-        
-        self.contentView.addConstraints(NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-10-[theme]-10-|",
             options: [], metrics: nil, views: ["theme": themeImg]))
         

@@ -78,12 +78,6 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             let moreBtn = UIBarButtonItem(image: UIImage(named: "moreNav.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.more))
             self.navigationItem.rightBarButtonItem = moreBtn
         //}
-
-        // present commentHeaderCell as header
-        self.header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
-        self.header.delegate = self
-        //let headerView: UIView = headerCell.contentView
-        tableView.tableHeaderView = header.contentView
         
         // receive show and hide keyboard notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -137,6 +131,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         commentTxt.addSubview(placeholderLbl)
         
         sendBtn.setTitle(NSLocalizedString("Send", comment: ""), for: UIControlState.normal)
+        
+        // get data for header
+        iniHeader()
         
         // call alignment func
         alignment()
@@ -291,6 +288,11 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // set loading status to processing
         isLoading = true
         
+        // clean up
+        commentArray.removeAll(keepingCapacity: false)
+        usernameArray.removeAll(keepingCapacity: false)
+        dateArray.removeAll(keepingCapacity: false)
+        
         // get comments to this post
         let query = PFQuery(className: "comments")
         query.whereKey("to", equalTo: commentuuid.last!)
@@ -353,6 +355,10 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 
+                // reload tableView and end refresh animation
+                self.tableView.reloadData()
+                self.refresher.endRefreshing()
+                
                 // if no more object is found, end loadmore process
                 if objects?.count == 0 {
                     return
@@ -372,9 +378,8 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                     }
                 }
                 
-                // reload tableView and end refresh animation
+                // reload tableView
                 self.tableView.reloadData()
-                self.refresher.endRefreshing()
                 
                 
                 // set loading status to finished if loaded something
@@ -519,6 +524,93 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         commentTxt.frame.size.height = commentHeight
         commentTxt.frame.origin.y = sendBtn.frame.origin.y
         tableView.frame.size.height = self.tableViewHeight
+    }
+    
+    func iniHeader() {
+        header = tableView.dequeueReusableCell(withIdentifier: "commentHeaderCell") as! commentHeaderCell
+        
+        // automatic header cell height
+        self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedSectionHeaderHeight = 400;
+        
+        print("commentHeaderCell load header")
+        let query = PFQuery(className: "posts")
+        query.whereKey("uuid", equalTo: commentuuid.last!)
+        query.getFirstObjectInBackground { (object, error) in
+            if error == nil {
+                
+                if (object?.object(forKey: "title") == nil ||
+                    object?.object(forKey: "idea") == nil ||
+                    object?.value(forKey: "likes") == nil ||
+                    object?.object(forKey: "themeuuid") == nil
+                    ) {
+                    self.header.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
+                }
+                
+                self.header.titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(object?.object(forKey: "title") as! String)"
+                self.header.ideaLbl.text = object?.object(forKey: "idea") as? String
+                self.header.likeLbl.text = String(object?.value(forKey: "likes") as! Int)
+                self.header.uuidLbl.text = commentuuid.last!
+                self.header.usernameBtn.setTitle(commentowner.last!, for: UIControlState.normal)
+                self.header.themeuuid.text = object?.object(forKey: "themeuuid") as? String
+                
+                self.header.titleLbl.numberOfLines = 3
+                self.header.titleLbl.sizeToFit()
+                self.header.ideaLbl.numberOfLines = 3
+                self.header.ideaLbl.sizeToFit()
+                
+                // place theme image
+                (object?.object(forKey: "theme") as! PFFile).getDataInBackground { (data, error) in
+                    
+                    if error == nil {
+                        self.header.themeImg.image = UIImage(data: data!)
+                    } else {
+                        print(error!.localizedDescription)
+                    }
+                }
+                
+                // calculate date
+                let from = object?.createdAt
+                let now = Date()
+                let components: NSCalendar.Unit = [.second, .minute, .hour, .day, .weekOfMonth]
+                let difference = (Calendar.current as NSCalendar).components(components, from: from!, to: now, options: [])
+                
+                if difference.second! <= 0 {
+                    self.header.dateLbl.text = "now"
+                }
+                if difference.second! > 0 && difference.minute! == 0 {
+                    self.header.dateLbl.text = "\(difference.second!)s. ago"
+                }
+                if difference.minute! > 0 && difference.hour! == 0 {
+                    self.header.dateLbl.text = "\(difference.minute!)m. ago"
+                }
+                if difference.hour! > 0 && difference.day! == 0 {
+                    self.header.dateLbl.text = "\(difference.hour!)h. ago"
+                }
+                if difference.day! > 0 && difference.weekOfMonth! == 0 {
+                    self.header.dateLbl.text = "\(difference.day!)d. ago"
+                }
+                if difference.weekOfMonth! > 0 {
+                    self.header.dateLbl.text = "\(difference.weekOfMonth!)w. ago"
+                }
+                
+                // reload to apply automatic height and sizeToFit
+                self.tableView.reloadData()
+                
+            } else {
+                self.header.alertBack(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("this post doesn't exist", comment: ""))
+            }
+        }
+        
+        // set likeBtn to unlike
+        if header.likeBtn.titleLabel?.text != "like" {
+            header.likeBtn.setTitle("unlike", for: UIControlState.normal)
+            header.likeBtn.setBackgroundImage(UIImage(named: "money_unlike.png"), for: UIControlState.normal)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return header.contentView
     }
     
     
