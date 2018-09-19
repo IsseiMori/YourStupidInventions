@@ -35,6 +35,10 @@ class resetPasswordVC: UIViewController {
         cancelBtn.frame = CGRect(x: self.view.frame.size.width - self.view.frame.size.width / 4 - 20, y: resetBtn.frame.origin.y, width: self.view.frame.size.width / 4, height: 30)
         cancelBtn.layer.cornerRadius = cancelBtn.frame.size.width / 20
         
+        emailTxt.placeholder = NSLocalizedString("email", comment: "")
+        resetBtn.setTitle(NSLocalizedString("reset", comment: ""), for: UIControlState.normal)
+        cancelBtn.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControlState.normal)
+        
         // tap to hide keyboard
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
         hideTap.numberOfTapsRequired = 1

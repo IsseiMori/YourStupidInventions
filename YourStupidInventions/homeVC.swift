@@ -166,7 +166,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             if error == nil {
                 
                 // if no more object is found, and loadmore process
-                if objects?.count != 0 {
+                if objects?.count == 0 {
                     return
                 }
                 

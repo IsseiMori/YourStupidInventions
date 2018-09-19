@@ -60,6 +60,10 @@ class settingVC: FormViewController {
                     default:
                         break
                     }
+                    
+                    // save
+                    UserDefaults.standard.set(postIdeaPrimaryLang, forKey: "postIdeaPrimaryLang")
+                    UserDefaults.standard.synchronize()
                 })
             
             <<< MultipleSelectorRow<String>() {
@@ -88,6 +92,10 @@ class settingVC: FormViewController {
                             break
                         }
                     }
+                    
+                    // save
+                    UserDefaults.standard.set(selectedLanguages, forKey: "selectedLanguages")
+                    UserDefaults.standard.synchronize()
             }
         
         form +++ Section(NSLocalizedString("App information", comment: ""))

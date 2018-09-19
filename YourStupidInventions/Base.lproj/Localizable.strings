@@ -84,7 +84,7 @@
 "repeat password" = "Repeat password";
 "email" = "Email";
 "fullname" = "Name";
-"username ph" = "Between 4 to 15 lowercase letters, numbers, or underscores";
+"username ph" = "4 to 15 alphabets, numbers, or underscores";
 "password ph" = "Between 4 to 20 letters";
 "fullname ph" = "You can change this name anytime";
 
@@ -120,6 +120,10 @@
 
 // themeCell
 "posts" = "ideas";
+
+// resetPassword
+"Reset Password" = "Reset Password";
+"reset" = "Reset";
 
 // Alert
 "Error" = "Error";

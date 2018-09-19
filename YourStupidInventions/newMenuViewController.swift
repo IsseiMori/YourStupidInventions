@@ -66,6 +66,10 @@ class newMenuViewController: ButtonBarPagerTabStripViewController, UISearchBarDe
         // hide cancel button
         searchBar.showsCancelButton = false
         
+        // avoid bottom white space in iPhone X
+        // could be a better solution?
+        containerView.frame.size.height = self.view.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)! - (self.navigationController?.navigationBar.frame.size.height)!
+        
         super.viewDidLoad()
     }
 

@@ -120,6 +120,10 @@
 // themeCell
 "posts" = "アイデア";
 
+// resetPassword
+"Reset Password" = "パスワード再設定";
+"reset" = "再設定";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "空欄があります";
