@@ -263,7 +263,6 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let height = self.view.frame.size.height
         
         tableView.frame = CGRect(x: 0, y: 0, width: width, height: height / 1.096 - self.navigationController!.navigationBar.frame.size.height - 20)
-        print(tableView.frame.size.height)
         tableView.estimatedRowHeight = width / 5.333
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -739,7 +738,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             // menu.title = NSLocalizedString("Delete menu", comment: "")
             
             menu.addAction(shareTwitter)
-            menu.addAction(delete)
+            // menu.addAction(delete)
             menu.addAction(cancel)
         } else {
             

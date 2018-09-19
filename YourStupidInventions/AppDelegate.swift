@@ -15,6 +15,9 @@ var isLoggedIn = false
 // languages of posts to show
 var selectedLanguages: [String] = []
 
+// primary language of post idea
+var postIdeaPrimaryLang: String!
+
 // custom UIColors for this app
 let customColorYellow: UIColor = UIColor(red: 255.0 / 255.0, green: 189.0 / 255.0, blue: 0.0 / 255.0, alpha: 1) // #ffbd00
 let customColorBrown: UIColor = UIColor(red: 73/255, green: 72/255, blue: 62/255, alpha: 1) // #49483e
@@ -69,6 +72,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             selectedLanguages = langSet!
         }
         
+        // primary language of post idea
+        let UserDefault_postIdeaPrimaryLang = UserDefaults.standard.string(forKey: "postIdeaPrimaryLang")
+        if UserDefault_postIdeaPrimaryLang == nil {
+            if Locale.current.languageCode!.hasPrefix("jp") {
+                postIdeaPrimaryLang = "jp"
+            } else {
+                postIdeaPrimaryLang = "en"
+            }
+            // save
+            UserDefaults.standard.set(postIdeaPrimaryLang, forKey: "postIdeaPrimaryLang")
+            UserDefaults.standard.synchronize()
+        } else {
+            postIdeaPrimaryLang = UserDefault_postIdeaPrimaryLang
+        }
+        
         return true
     }
     
@@ -112,11 +130,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // if logged in
         if username != nil {
-            /*let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-            window?.rootViewController = myTabBar*/
             isLoggedIn = true
         }
+    }
+    
+    func resetView() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+        window?.rootViewController = myTabBar
     }
 
 }

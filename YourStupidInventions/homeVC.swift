@@ -159,10 +159,14 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
             
+            // reload collectionView and end refresh animation
+            self.collectionView?.reloadData()
+            self.refresher.endRefreshing()
+            
             if error == nil {
                 
                 // if no more object is found, and loadmore process
-                if objects?.count == 0 {
+                if objects?.count != 0 {
                     return
                 }
                 
@@ -183,10 +187,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                         self.likesArray.append(object.value(forKey: "likes") as! Int)
                     }
                 }
-                
-                // reload collectionView and end refresh animation
-                self.collectionView?.reloadData()
-                self.refresher.endRefreshing()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

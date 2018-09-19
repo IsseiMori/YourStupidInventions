@@ -47,8 +47,8 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                       NSLocalizedString("Sports", comment: ""),
                       NSLocalizedString("Others", comment: "")]
     var langs = [NSLocalizedString("English", comment: ""),
-                 NSLocalizedString("Japanese", comment: ""),
-                 NSLocalizedString("Chinese", comment: "")]
+                 NSLocalizedString("Japanese", comment: "")/*,
+                 NSLocalizedString("Chinese", comment: "")*/]
     
     // Done button on keyboard
     var kbToolBar: UIToolbar!
@@ -228,17 +228,26 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         sendBtn.setTitle(NSLocalizedString("Publish", comment: ""), for: UIControlState.normal)
         
         // set post language as default language
-        if selectedLanguages.count == 0 {
+        if postIdeaPrimaryLang == "en" {
             langBtn.setTitle(NSLocalizedString("English", comment: ""), for: UIControlState.normal)
+        } else if postIdeaPrimaryLang == "jp" {
+            langBtn.setTitle(NSLocalizedString("Japanese", comment: ""), for: UIControlState.normal)
         } else {
-            langBtn.setTitle(NSLocalizedString(selectedLanguages[0], comment: ""), for: UIControlState.normal)
+            langBtn.setTitle(NSLocalizedString("Chinese", comment: ""), for: UIControlState.normal)
         }
         
         // set the first row as default
         categoryBtn.setTitle(NSLocalizedString(categories[0], comment: ""), for: UIControlState.normal)
+    
         
         // set title label
-        titleLbl.text = "\(NSLocalizedString("what is", comment: "")) \(NSLocalizedString("Innovative", comment: "")) \(nounTxt.text!)"
+        if postIdeaPrimaryLang == "en "{
+            titleLbl.text = "\(NSLocalizedString("what is in en", comment: "")) \(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
+        } else if postIdeaPrimaryLang == "jp" {
+            titleLbl.text = "\(NSLocalizedString("what is in jp", comment: "")) \(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
+        } else {
+            titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
+        }
     
     }
 

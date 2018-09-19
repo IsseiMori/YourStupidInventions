@@ -40,6 +40,28 @@ class settingVC: FormViewController {
                 }.cellUpdate { (cell, row) in
                     cell.accessoryType = .disclosureIndicator
                 }
+            
+            <<< PushRow<String>() {
+                $0.title = NSLocalizedString("primary language of post idea", comment: "")
+                $0.options = [NSLocalizedString("English", comment: ""),
+                              NSLocalizedString("Japanese", comment: "")/*,
+                     NSLocalizedString("Chinese", comment: "")*/]
+                $0.selectorTitle = NSLocalizedString("primary language of post idea", comment: "")
+                // check selected language by default
+                $0.value = NSLocalizedString(postIdeaPrimaryLang, comment: "")
+                }.onChange({ (row) in
+                    switch row.value! {
+                    case NSLocalizedString("English", comment: ""):
+                        postIdeaPrimaryLang = "en"
+                    case NSLocalizedString("Japanese", comment: ""):
+                        postIdeaPrimaryLang = "jp"
+                    case NSLocalizedString("Chinese", comment: ""):
+                        postIdeaPrimaryLang = "ch"
+                    default:
+                        break
+                    }
+                })
+            
             <<< MultipleSelectorRow<String>() {
                 $0.title = NSLocalizedString("Language of shown posts", comment: "")
                 $0.options = [NSLocalizedString("English", comment: ""),
@@ -66,22 +88,7 @@ class settingVC: FormViewController {
                             break
                         }
                     }
-                    
-                    // save
-                    UserDefaults.standard.set(selectedLanguages, forKey: "selectedLanguages")
-                    UserDefaults.standard.synchronize()
-                }.onPresent({ (from, to) in
-                    // new back button
-                    to.navigationItem.hidesBackButton = true
-                    let backBtn = UIBarButtonItem(image: UIImage(named: "back.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.back))
-                    to.navigationItem.leftBarButtonItem = backBtn
-                    
-                    // swipe to go back
-                    let backSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.back))
-                    backSwipe.direction = UISwipeGestureRecognizerDirection.right
-                    to.view.addGestureRecognizer(backSwipe)
-                    
-                })
+            }
         
         form +++ Section(NSLocalizedString("App information", comment: ""))
             <<< LabelRow() {
@@ -90,7 +97,7 @@ class settingVC: FormViewController {
                     self.navigationController?.pushViewController(reportProblemVC, animated: true)
                 }.cellUpdate { (cell, row) in
                     cell.accessoryType = .disclosureIndicator
-        }
+            }
         
         form +++ Section()
             <<< ButtonRow() {

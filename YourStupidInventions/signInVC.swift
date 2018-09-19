@@ -78,7 +78,7 @@ class signInVC: UIViewController {
     func alignment() {
         
         // font of label
-        label.font = UIFont(name: "Pacifico", size: 25)
+        //label.font = UIFont(name: "Pacifico", size: 25)
         label.textColor = customColorYellow
         
         label.frame = CGRect(x: 10, y: 80, width: self.view.frame.size.width - 20, height: 50)
@@ -141,6 +141,7 @@ class signInVC: UIViewController {
                 // call login function from AppDeligate.swift class
                 let appDeligate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDeligate.login()
+                appDeligate.resetView()
                 
             } else {
                 // alert message

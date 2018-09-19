@@ -58,6 +58,7 @@
 "Report a problem" = "Report a Problem";
 "Log out" = "Log out";
 "Language of shown posts" = "Language of shown posts";
+"primary language of post idea" = "Default language selection of post idea";
 "English" = "English";
 "Japanese" = "Japanese";
 "Chinese" = "Chinese";
@@ -73,7 +74,7 @@
 
 // signInVC
 "Sign In" = "Sign In";
-"Your-Weird-Inventions" = "Your-Weird-Inventions";
+"Your-Stupid-Inventions" = "Your Weird Inventions";
 "username" = "Username";
 "password" = "Password";
 "forgot password?" = "forgot password?";
@@ -83,7 +84,7 @@
 "repeat password" = "Repeat password";
 "email" = "Email";
 "fullname" = "Name";
-"username ph" = "Between 4 to 15 letters";
+"username ph" = "Between 4 to 15 lowercase letters, numbers, or underscores";
 "password ph" = "Between 4 to 20 letters";
 "fullname ph" = "You can change this name anytime";
 
@@ -125,8 +126,8 @@
 "fill in all fields" = "Please fill in all fields.";
 "invalid username/password" = "Invalid username/password.";
 "password do not match" = "Password do not match.";
-"username too short" = "Username has to be between 4 to 15 letters.";
 "password too short" = "Password has to be between 4 to 20 letters.";
+"username format error" = "Username has to be between 4 to 15 letters and may contain only lowercase letters, numbers, and underscores.";
 "invalid email" = "Invalid email.";
 "username taken" = "This username is taken by another user.";
 "image not uploaded" = "Upload an image for your theme.";

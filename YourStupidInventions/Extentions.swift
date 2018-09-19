@@ -18,3 +18,11 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
+
+extension String {
+    // Return true if the string contains only alphabets, numbers, and underscores, false otherwise
+    func isAlphanumeric() -> Bool {
+        return NSPredicate(format: "SELF MATCHES %@", "[a-zA-Z0-9_]+").evaluate(with: self)
+    }
+}

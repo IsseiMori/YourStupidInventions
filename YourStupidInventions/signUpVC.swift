@@ -100,6 +100,17 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         emailTxt.inputAccessoryView = kbToolBar
         fullnameTxt.inputAccessoryView = kbToolBar
         
+        usernameLbl.text = NSLocalizedString("username", comment: "")
+        passwordLbl.text = NSLocalizedString("password", comment: "")
+        repeatPasswordLbl.text = NSLocalizedString("repeat password", comment: "")
+        emailLbl.text = NSLocalizedString("email", comment: "")
+        fullnameLbl.text = NSLocalizedString("fullname", comment: "")
+        
+        usernameTxt.placeholder = NSLocalizedString("username ph", comment: "")
+        passwordTxt.placeholder = NSLocalizedString("password ph", comment: "")
+        fullnameTxt.placeholder = NSLocalizedString("fullname ph", comment: "")
+        
+        signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
         
         // alignment
         avaImg.frame = CGRect(x: self.view.frame.size.width / 2 - 40, y: 30, width: 80, height: 80)
@@ -137,17 +148,6 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         signUpBtn.backgroundColor = UIColor.lightGray
         signUpBtn.isEnabled = false
         
-        usernameLbl.text = NSLocalizedString("username", comment: "")
-        passwordLbl.text = NSLocalizedString("password", comment: "")
-        repeatPasswordLbl.text = NSLocalizedString("repeat password", comment: "")
-        emailLbl.text = NSLocalizedString("email", comment: "")
-        fullnameLbl.text = NSLocalizedString("fullname", comment: "")
-        
-        usernameTxt.placeholder = NSLocalizedString("username ph", comment: "")
-        passwordTxt.placeholder = NSLocalizedString("password ph", comment: "")
-        fullnameTxt.placeholder = NSLocalizedString("fullname ph", comment: "")
-        
-        signUpBtn.setTitle(NSLocalizedString("Sign Up", comment: ""), for: UIControlState.normal)
         
         // set UITextField delegate
         usernameTxt.delegate = self
@@ -248,11 +248,10 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
-        // if different password
-        if passwordTxt.text != repeatPasswordTxt.text {
-            
+        // if username contains other than alphabets, numbers, and underscores
+        if !(usernameTxt.text?.isAlphanumeric())! {
             // alert message
-            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("password do not match", comment: ""))
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username format error", comment: ""))
             
             return
         }
@@ -261,7 +260,16 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         if (usernameTxt.text?.count)! < 4 || (usernameTxt.text?.count)! > 15 {
             
             // alert message
-            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username too short", comment: ""))
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("username  format", comment: ""))
+            
+            return
+        }
+        
+        // if different password
+        if passwordTxt.text != repeatPasswordTxt.text {
+            
+            // alert message
+            alert(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("password do not match", comment: ""))
             
             return
         }
