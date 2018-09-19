@@ -287,10 +287,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! postCell
-    
-        if self.uuidArray.count == 0 {
-            return cell
-        }
         
         // cell color
         cell.backgroundColor = UIColor.clear
@@ -304,9 +300,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // allow title up to 3 lines
         cell.titleLbl.numberOfLines = 3
-        cell.titleLbl.sizeToFit()
         cell.ideaLbl.numberOfLines = 3
-        cell.ideaLbl.sizeToFit()
         
         // place theme image
         self.themeArray[indexPath.row].getDataInBackground { (data, error) in

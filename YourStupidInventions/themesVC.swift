@@ -170,8 +170,6 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // increase page size
         self.page = self.page + self.pageLimit
         
-        self.isLoading = false
-        
         print("themesVC loadmore")
         self.processQuery(query: query)
         
@@ -242,8 +240,6 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     
     // cell config
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.count)
-        print(indexPath.row)
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! themeCell
         
@@ -259,9 +255,11 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         }
         
         // allow title up to 3 lines
+        // idk but this doesn't work like rankingVC
+        let titleLblWidth = cell.titleLbl.frame.size.width
         cell.titleLbl.numberOfLines = 3
-        cell.titleLbl.textAlignment = .center
         cell.titleLbl.sizeToFit()
+        cell.titleLbl.frame.size.width = titleLblWidth
         
         // total posts of the theme
         cell.postsLbl.text = "\(totalPostsArray[indexPath.row]) \(NSLocalizedString("posts", comment: ""))"

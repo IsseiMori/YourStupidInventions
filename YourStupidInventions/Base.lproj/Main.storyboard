@@ -1815,6 +1815,17 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="uploadImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="B6Z-ts-lA2">
+                                        <rect key="frame" x="162" y="181" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to upload an image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUG-i3-O7G">
+                                        <rect key="frame" x="98" y="239" width="178" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1825,6 +1836,7 @@
                         <outlet property="categoryBtn" destination="oM1-zr-sbU" id="GEV-bd-z6K"/>
                         <outlet property="categoryBtnTri" destination="F6P-CC-PQh" id="EbT-tS-E3z"/>
                         <outlet property="categoryLbl" destination="nud-zR-ScB" id="xwm-ps-Fz5"/>
+                        <outlet property="fileImg" destination="B6Z-ts-lA2" id="k5U-xc-ldy"/>
                         <outlet property="langBtn" destination="vsk-DC-c4a" id="2La-zH-DQW"/>
                         <outlet property="langBtnTri" destination="3GM-W6-HVp" id="Hx8-06-byo"/>
                         <outlet property="langLbl" destination="IRY-Vl-w8n" id="TFb-sz-F2D"/>
@@ -1834,11 +1846,12 @@
                         <outlet property="sendBtn" destination="47J-9k-3wc" id="uTH-Bk-IBO"/>
                         <outlet property="themeImg" destination="TiL-Ia-iSJ" id="SLB-DV-LWh"/>
                         <outlet property="titleLbl" destination="ZEM-IW-vF5" id="0x8-kz-pBU"/>
+                        <outlet property="uploadLbl" destination="mUG-i3-O7G" id="BzQ-tB-Et5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLl-nm-VmJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2360.8000000000002" y="2879.9100449775115"/>
+            <point key="canvasLocation" x="2360.8000000000002" y="2879.5566502463057"/>
         </scene>
     </scenes>
     <resources>
@@ -1855,6 +1868,7 @@
         <image name="setting.png" width="24" height="24"/>
         <image name="triangle.png" width="24" height="24"/>
         <image name="unlike.png" width="270" height="270"/>
+        <image name="uploadImg.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DJZ-yf-TYt"/>

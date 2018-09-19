@@ -12,7 +12,7 @@
 
 // menu tabBar items
 "All" = "全て";
-"Appliance" = "電化製品";
+"Appliance" = "家電";
 "Software" = "ソフトウェア";
 "Food" = "食べ物";
 "Entertainment" = "エンタメ";
@@ -109,6 +109,7 @@
 "what is in en" = "What is :  ";
 "what is in jp" = "お題 :  ";
 "what is in ch" = "What is :  ";
+"tap to upload an image" = "タップで画像をアップロード";
 
 // newMenuViewController
 "Search" = "検索";

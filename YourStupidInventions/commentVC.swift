@@ -362,9 +362,9 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 // if loadComments, clean up arrays
                 if self.page == self.pageLimit {
                     // clean up
-                    commentArray.removeAll(keepingCapacity: false)
-                    usernameArray.removeAll(keepingCapacity: false)
-                    dateArray.removeAll(keepingCapacity: false)
+                    self.commentArray.removeAll(keepingCapacity: false)
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.dateArray.removeAll(keepingCapacity: false)
                 }
                 
                 // store comments in arrays

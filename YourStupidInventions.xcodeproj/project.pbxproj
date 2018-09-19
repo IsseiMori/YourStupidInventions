@@ -81,6 +81,8 @@
 		850FBC1E2150C2AA00F922A5 /* Icon_1024pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC1D2150C2AA00F922A5 /* Icon_1024pt.png */; };
 		850FBC202150C33000F922A5 /* icon_flip_1024pt.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC1F2150C33000F922A5 /* icon_flip_1024pt.png */; };
 		850FBC222150C73100F922A5 /* tutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FBC212150C73100F922A5 /* tutorialVC.swift */; };
+		850FBC242152D25200F922A5 /* fileImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC232152D25200F922A5 /* fileImg.png */; };
+		850FBC262152D4DE00F922A5 /* uploadImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC252152D4DD00F922A5 /* uploadImg.png */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -178,6 +180,8 @@
 		850FBC1D2150C2AA00F922A5 /* Icon_1024pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_1024pt.png; sourceTree = "<group>"; };
 		850FBC1F2150C33000F922A5 /* icon_flip_1024pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_flip_1024pt.png; sourceTree = "<group>"; };
 		850FBC212150C73100F922A5 /* tutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tutorialVC.swift; sourceTree = "<group>"; };
+		850FBC232152D25200F922A5 /* fileImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fileImg.png; sourceTree = "<group>"; };
+		850FBC252152D4DD00F922A5 /* uploadImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadImg.png; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 		850C2BA921334A9F0095A3D7 /* button items */ = {
 			isa = PBXGroup;
 			children = (
+				850FBC252152D4DD00F922A5 /* uploadImg.png */,
+				850FBC232152D25200F922A5 /* fileImg.png */,
 				8507F347214B8DE500269446 /* setting@2x.png */,
 				8507F346214B8DE400269446 /* setting@3x.png */,
 				8507F31321487D2400269446 /* money_like.png */,
@@ -462,6 +468,7 @@
 				850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */,
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
 				850C2BA621334A7F0095A3D7 /* comment.png in Resources */,
+				850FBC242152D25200F922A5 /* fileImg.png in Resources */,
 				850C2BA721334A7F0095A3D7 /* like.png in Resources */,
 				8507F33A214B883F00269446 /* leaf@3x.png in Resources */,
 				8507F3022147BA3B00269446 /* triangle.png in Resources */,
@@ -471,6 +478,7 @@
 				8507F33B214B883F00269446 /* ranking.png in Resources */,
 				850C2B96213316E20095A3D7 /* Pacifico.ttf in Resources */,
 				8507F339214B883F00269446 /* idea@2x.png in Resources */,
+				850FBC262152D4DE00F922A5 /* uploadImg.png in Resources */,
 				850C2BD4213514190095A3D7 /* back@2x.png in Resources */,
 				8507F33D214B883F00269446 /* idea@3x.png in Resources */,
 				8507F31521487D2500269446 /* money_like.png in Resources */,

@@ -16,6 +16,9 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var themeImg: UIImageView!
     
+    @IBOutlet weak var fileImg: UIImageView!
+    @IBOutlet weak var uploadLbl: UILabel!
+    
     @IBOutlet weak var nounLbl: UILabel!
     @IBOutlet weak var nounTxt: UITextField!
     
@@ -186,26 +189,82 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     func alignment() {
         
         let width = self.view.frame.size.width
-        
-        titleLbl.frame = CGRect(x: 10, y: 10, width: width - 20, height: 30)
-        
         let themeImgWidth = width - 20
         let themeImgHeight = themeImgWidth / 16 * 9
-        themeImg.frame = CGRect(x: 10, y: titleLbl.frame.origin.y + 30, width: themeImgWidth, height: themeImgHeight)
         
-        nounLbl.frame = CGRect(x: 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.2, height: 30)
-        nounTxt.frame = CGRect(x: width - width * 0.7 - 10, y: themeImg.frame.origin.y + themeImgHeight + 10, width: width * 0.7, height: 30)
+        titleLbl.frame = CGRect(x: 10, y: 10, width: width - 20, height: 90)
+        themeImg.frame = CGRect(x: 10, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: themeImgWidth, height: themeImgHeight)
         
-        categoryLbl.frame = CGRect(x: 10, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width * 0.2, height: 30)
-        categoryBtn.frame = CGRect(x: width - 10 - width * 0.7, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 10, width: width * 0.7, height: 30)
-        categoryBtnTri.frame = CGRect(x: width - 10 - width * 0.7 + 5, y: nounTxt.frame.origin.y + nounTxt.frame.size.height + 18, width: 16, height: 14)
-
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
+        themeImg.translatesAutoresizingMaskIntoConstraints = false
+        nounLbl.translatesAutoresizingMaskIntoConstraints = false
+        nounTxt.translatesAutoresizingMaskIntoConstraints = false
+        categoryLbl.translatesAutoresizingMaskIntoConstraints = false
+        categoryBtn.translatesAutoresizingMaskIntoConstraints = false
+        categoryBtnTri.translatesAutoresizingMaskIntoConstraints = false
+        langLbl.translatesAutoresizingMaskIntoConstraints = false
+        langBtn.translatesAutoresizingMaskIntoConstraints = false
+        langBtnTri.translatesAutoresizingMaskIntoConstraints = false
+        sendBtn.translatesAutoresizingMaskIntoConstraints = false
+        fileImg.translatesAutoresizingMaskIntoConstraints = false
+        uploadLbl.translatesAutoresizingMaskIntoConstraints = false
         
-        langLbl.frame = CGRect(x: 10, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 10, width: width * 0.2, height: 30)
-        langBtn.frame = CGRect(x: width - 10 - width * 0.7, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 10, width: width * 0.7, height: 30)
-        langBtnTri.frame = CGRect(x: width - 10 - width * 0.7 + 5, y: categoryBtn.frame.origin.y + categoryBtn.frame.size.height + 18, width: 16, height: 14)
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-10-[title]-10-[theme(\(themeImgHeight))]-10-[nounLbl(30)]-10-[categoryLbl(30)]-10-[langLbl(30)]-10-[send(30)]-10-|",
+            options: [], metrics: nil, views: ["title": titleLbl, "theme": themeImg, "nounLbl": nounLbl, "categoryLbl": categoryLbl, "langLbl": langLbl, "send": sendBtn]))
         
-        sendBtn.frame = CGRect(x: 10, y: langBtn.frame.origin.y + langBtn.frame.size.height + 10, width: width - 20, height: 30)
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:[theme]-10-[nounTxt(30)]-10-[categoryBtn(30)]-10-[langBtn(30)]",
+            options: [], metrics: nil, views: ["theme": themeImg, "nounTxt": nounTxt, "categoryBtn": categoryBtn, "langBtn": langBtn]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:[theme]-(\(-30 - themeImgHeight / 2))-[fileImg(50)]-0-[uploadLbl]",
+            options: [], metrics: nil, views: ["theme": themeImg, "fileImg": fileImg, "uploadLbl": uploadLbl]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:[nounTxt]-18-[categoryBtnTri(14)]-26-[langBtnTri(14)]",
+            options: [], metrics: nil, views: ["nounTxt": nounTxt, "categoryBtnTri": categoryBtnTri, "langBtnTri": langBtnTri]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[title]-10-|",
+            options: [], metrics: nil, views: ["title": titleLbl]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[theme(\(themeImgWidth))]-10-|",
+            options: [], metrics: nil, views: ["theme": themeImg]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:[theme]-(\(-25 - themeImgWidth / 2))-[fileImg(50)]",
+            options: [], metrics: nil, views: ["theme": themeImg, "fileImg": fileImg]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[uploadLbl]-10-|",
+            options: [], metrics: nil, views: ["uploadLbl": uploadLbl]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[nounLbl]-10-[nounTxt(\(width * 0.7))]-10-|",
+            options: [], metrics: nil, views: ["nounLbl": nounLbl, "nounTxt": nounTxt]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[categoryLbl]-10-[categoryBtn(\(width * 0.7))]-10-|",
+            options: [], metrics: nil, views: ["categoryLbl": categoryLbl, "categoryBtn": categoryBtn]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[langLbl]-10-[langBtn(\(width * 0.7))]-10-|",
+            options: [], metrics: nil, views: ["langLbl": langLbl, "langBtn": langBtn]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:[categoryBtnTri(16)]-(-30)-[categoryBtn]",
+            options: [], metrics: nil, views: ["categoryBtnTri": categoryBtnTri, "categoryBtn": categoryBtn]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:[langBtnTri(16)]-(-30)-[langBtn]",
+            options: [], metrics: nil, views: ["langBtnTri": langBtnTri, "langBtn": langBtn]))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-10-[send]-10-|",
+            options: [], metrics: nil, views: ["send": sendBtn]))
+        
         
         sendBtn.layer.cornerRadius = 5
         sendBtn.clipsToBounds = true
@@ -256,6 +315,14 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         } else {
             titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
         }
+        
+        let titleLblFrame = titleLbl.frame
+        titleLbl.numberOfLines = 3
+        titleLbl.sizeToFit()
+        titleLbl.frame = titleLblFrame
+        
+        uploadLbl.text = NSLocalizedString("tap to upload an image", comment: "")
+        uploadLbl.textAlignment = .center
     
     }
 
