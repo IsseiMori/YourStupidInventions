@@ -207,7 +207,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                 self.view.endEditing(true)
                 
                 //dismiss editVC
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
                 
                 // send notification to reload homeVC
                 // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil )

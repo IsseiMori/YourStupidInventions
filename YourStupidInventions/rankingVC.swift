@@ -121,6 +121,7 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
         let query = PFQuery(className: "posts")
         query.limit = self.pageLimit
+        self.page = self.pageLimit
         
         // sort by likes or time
         if !self.sortBy.isEmpty {

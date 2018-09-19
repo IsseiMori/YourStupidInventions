@@ -107,6 +107,7 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let query = PFQuery(className: "posts")
         query.whereKey("username", equalTo: guestname.last!)
         query.limit = pageLimit
+        self.page = self.pageLimit
         query.addDescendingOrder("createdAt")
         
         print("guestVC loadPosts")

@@ -295,6 +295,8 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         let query = PFQuery(className: "comments")
         query.whereKey("to", equalTo: commentuuid.last!)
         query.limit = self.pageLimit
+        self.page = self.pageLimit
+        
         query.addAscendingOrder("createdAt")
         print("commentVC loadComments")
         processQuery(query: query)

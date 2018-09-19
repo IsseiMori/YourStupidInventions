@@ -99,6 +99,7 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         
         let query = PFQuery(className: "themes")
         query.limit = pageLimit
+        self.page = self.pageLimit
         query.addDescendingOrder("createdAt")
         
         // filter

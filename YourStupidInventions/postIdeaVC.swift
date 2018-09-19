@@ -102,6 +102,13 @@ class postIdeaVC: UITableViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print(tableView.contentSize.height)
+        if tableView.contentSize.height < self.view.frame.size.height {
+            tableView.contentSize.height = self.view.frame.size.height * 1.5
+        }
+    }
+    
     // tapped done button on keyboard
     @objc func doneButtonTapped() {
         self.view.endEditing(true)
@@ -193,6 +200,7 @@ class postIdeaVC: UITableViewController {
         
         let query = PFQuery(className: "posts")
         query.limit = pageLimit
+        self.page = self.pageLimit
         query.whereKey("themeuuid", equalTo: themeuuid.last!)
         query.addDescendingOrder("likes")
         
