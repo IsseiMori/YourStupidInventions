@@ -125,6 +125,10 @@
 "Reset Password" = "Reset Password";
 "reset" = "Reset";
 
+// NotificationVC
+"has commented on your post" = "has commented on your post.";
+"liked your post" = "liked your post.";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "Please fill in all fields.";

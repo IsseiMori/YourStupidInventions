@@ -123,10 +123,10 @@ class notificationsVC: UITableViewController {
         
         // define info
         if typeArray[indexPath.row] == "comment" {
-            cell.infoLbl.text = "has commented on your post."
+            cell.infoLbl.text = NSLocalizedString("has commented on your post", comment: "")
         }
         if typeArray[indexPath.row] == "like" {
-            cell.infoLbl.text = "liked your post."
+            cell.infoLbl.text = NSLocalizedString("liked your post", comment: "")
         }
         
         // assign index of button
@@ -143,7 +143,7 @@ class notificationsVC: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! notificationsCell
         
         // going to own comments
-        if cell.infoLbl.text == "has commented on your post." {
+        if cell.infoLbl.text == NSLocalizedString("has commented on your post", comment: "") {
             
             // send related data to global variables
             commentuuid.append(uuidArray[indexPath.row])
@@ -154,7 +154,7 @@ class notificationsVC: UITableViewController {
             self.navigationController?.pushViewController(comment, animated: true)
         }
         // going to liked post
-        if cell.infoLbl.text == "liked your post." {
+        if cell.infoLbl.text == NSLocalizedString("liked your post", comment: "") {
             
             // send related data to global variables
             commentuuid.append(uuidArray[indexPath.row])

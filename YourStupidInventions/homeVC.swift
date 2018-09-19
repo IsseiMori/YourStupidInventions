@@ -278,6 +278,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                     totalLikes = totalLikes + (object.value(forKey: "likes") as? Int32)!
                 }
                 self.likeCount = totalLikes
+                self.collectionView?.reloadData()
                 
             } else {
                 print(error!.localizedDescription)

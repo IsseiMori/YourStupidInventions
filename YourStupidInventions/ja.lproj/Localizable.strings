@@ -124,6 +124,10 @@
 "Reset Password" = "パスワード再設定";
 "reset" = "再設定";
 
+// NotificationVC
+"has commented on your post" = "があなたの投稿にコメントしました";
+"liked your post" = "があなたの投稿にポイントを送りました";
+
 // Alert
 "Error" = "Error";
 "fill in all fields" = "空欄があります";

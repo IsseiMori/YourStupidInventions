@@ -353,6 +353,15 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             sendBtn.backgroundColor = customColorYellow
             sendBtn.isEnabled = true
         }
+        
+        // update title label
+        if langBtn.titleLabel?.text == NSLocalizedString("English", comment: "") {
+            titleLbl.text = "\(NSLocalizedString("what is in en", comment: "")) \(NSLocalizedString("innovative in en", comment: "")) \(nounTxt.text!)"
+        } else if langBtn.titleLabel?.text == NSLocalizedString("Japanese", comment: "") {
+            titleLbl.text = "\(NSLocalizedString("what is in jp", comment: "")) \(NSLocalizedString("innovative in jp", comment: "")) \(nounTxt.text!)"
+        } else {
+            titleLbl.text = "\(NSLocalizedString("what is in ch", comment: "")) \(NSLocalizedString("innovative in ch", comment: "")) \(nounTxt.text!)"
+        }
     }
     
     // typed a character

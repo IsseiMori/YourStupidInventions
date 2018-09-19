@@ -26,7 +26,7 @@ class resetPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Reset Password"
+        self.navigationItem.title = NSLocalizedString("Reset Password", comment: "")
         
         emailTxt.frame = CGRect(x: 10, y: 120, width: self.view.frame.size.width - 20, height:  30)
         resetBtn.frame = CGRect(x: 20, y: emailTxt.frame.origin.y + 50, width: self.view.frame.size.width / 4, height: 30)

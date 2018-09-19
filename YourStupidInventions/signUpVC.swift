@@ -338,6 +338,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                 // call login func from AppDeligate.swift  class
                 let appDeligate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDeligate.login()
+                appDeligate.resetView()
                 
             } else {
                 // alert message
