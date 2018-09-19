@@ -277,9 +277,11 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
 
     override func viewWillLayoutSubviews() {
         // move up UI for iPhoneX
-        tableView.frame.size.height = tableView.frame.size.height - self.view.safeAreaInsets.bottom
-        commentTxt.frame.origin.y = commentTxt.frame.origin.y - self.view.safeAreaInsets.bottom
-        sendBtn.frame.origin.y = sendBtn.frame.origin.y - self.view.safeAreaInsets.bottom
+        if #available(iOS 11.0, *) {
+            tableView.frame.size.height = tableView.frame.size.height - self.view.safeAreaInsets.bottom
+            commentTxt.frame.origin.y = commentTxt.frame.origin.y - self.view.safeAreaInsets.bottom
+            sendBtn.frame.origin.y = sendBtn.frame.origin.y - self.view.safeAreaInsets.bottom
+        }
     }
     
     // load comments

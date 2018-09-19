@@ -399,6 +399,10 @@ class postThemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         themeImg.image = croppedImage
         
         isImgPicked = true
+        
+        // hide tap to upload image and label
+        fileImg.isHidden = true
+        uploadLbl.isHidden = true
     }
 
     
