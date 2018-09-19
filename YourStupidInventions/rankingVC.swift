@@ -107,17 +107,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
         
         // set loading status to processing
         isLoading = true
-        
-        // clean up
-        self.titleArray.removeAll(keepingCapacity: false)
-        self.uuidArray.removeAll(keepingCapacity: false)
-        self.themeArray.removeAll(keepingCapacity: false)
-        self.ideaArray.removeAll(keepingCapacity: false)
-        self.usernameArray.removeAll(keepingCapacity: false)
-        self.fullnameArray.removeAll(keepingCapacity: false)
-        self.dateArray.removeAll(keepingCapacity: false)
-        self.likesArray.removeAll(keepingCapacity: false)
-        self.addLikeArray.removeAll(keepingCapacity: false)
     
         let query = PFQuery(className: "posts")
         query.limit = self.pageLimit
@@ -233,6 +222,20 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
                     return
                 }
                 
+                // if loadPosts, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    self.titleArray.removeAll(keepingCapacity: false)
+                    self.uuidArray.removeAll(keepingCapacity: false)
+                    self.themeArray.removeAll(keepingCapacity: false)
+                    self.ideaArray.removeAll(keepingCapacity: false)
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.fullnameArray.removeAll(keepingCapacity: false)
+                    self.dateArray.removeAll(keepingCapacity: false)
+                    self.likesArray.removeAll(keepingCapacity: false)
+                    self.addLikeArray.removeAll(keepingCapacity: false)
+                }
+                
                 // find related objects
                 for object in objects! {
                     
@@ -282,7 +285,6 @@ class rankingVC: UITableViewController, IndicatorInfoProvider {
     
     // cell config
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! postCell
     

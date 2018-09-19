@@ -82,7 +82,7 @@ class editVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     // method to finilize UIImagePickerController action
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        avaImg.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -59,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let langSet = UserDefaults.standard.stringArray(forKey: "selectedLanguages")
         // if this is the first time using app, set device default language as selected languages
         if langSet == nil {
-            if Locale.current.languageCode!.hasPrefix("jp") {
+            print("device language is \(Locale.current.languageCode!)")
+            if Locale.current.languageCode!.hasPrefix("ja") {
                 selectedLanguages.append("jp")
             } else {
                 selectedLanguages.append("en")
@@ -75,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // primary language of post idea
         let UserDefault_postIdeaPrimaryLang = UserDefaults.standard.string(forKey: "postIdeaPrimaryLang")
         if UserDefault_postIdeaPrimaryLang == nil {
-            if Locale.current.languageCode!.hasPrefix("jp") {
+            if Locale.current.languageCode!.hasPrefix("ja") {
                 postIdeaPrimaryLang = "jp"
             } else {
                 postIdeaPrimaryLang = "en"

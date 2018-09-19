@@ -288,11 +288,6 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
         // set loading status to processing
         isLoading = true
         
-        // clean up
-        commentArray.removeAll(keepingCapacity: false)
-        usernameArray.removeAll(keepingCapacity: false)
-        dateArray.removeAll(keepingCapacity: false)
-        
         // get comments to this post
         let query = PFQuery(className: "comments")
         query.whereKey("to", equalTo: commentuuid.last!)
@@ -362,6 +357,14 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
                 // if no more object is found, end loadmore process
                 if objects?.count == 0 {
                     return
+                }
+                
+                // if loadComments, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    commentArray.removeAll(keepingCapacity: false)
+                    usernameArray.removeAll(keepingCapacity: false)
+                    dateArray.removeAll(keepingCapacity: false)
                 }
                 
                 // store comments in arrays

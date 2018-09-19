@@ -91,12 +91,6 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         // set loading status to processing
         isLoading = true
         
-        // clean up arrays
-        self.titleArray.removeAll(keepingCapacity: false)
-        self.themeuuidArray.removeAll(keepingCapacity: false)
-        self.themeImgArray.removeAll(keepingCapacity: false)
-        self.totalPostsArray.removeAll(keepingCapacity: false)
-        
         let query = PFQuery(className: "themes")
         query.limit = pageLimit
         self.page = self.pageLimit
@@ -200,6 +194,15 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
                     return
                 }
                 
+                // if loadPosts, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    self.titleArray.removeAll(keepingCapacity: false)
+                    self.themeuuidArray.removeAll(keepingCapacity: false)
+                    self.themeImgArray.removeAll(keepingCapacity: false)
+                    self.totalPostsArray.removeAll(keepingCapacity: false)
+                }
+                
                 // store objects data into arrays
                 for object in objects! {
                     
@@ -239,7 +242,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
     
     // cell config
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print(indexPath.count)
+        print(indexPath.row)
         // define cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! themeCell
         
@@ -256,6 +260,8 @@ class themesVC: UITableViewController, IndicatorInfoProvider {
         
         // allow title up to 3 lines
         cell.titleLbl.numberOfLines = 3
+        cell.titleLbl.textAlignment = .center
+        cell.titleLbl.sizeToFit()
         
         // total posts of the theme
         cell.postsLbl.text = "\(totalPostsArray[indexPath.row]) \(NSLocalizedString("posts", comment: ""))"

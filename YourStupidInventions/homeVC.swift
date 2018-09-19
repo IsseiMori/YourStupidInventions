@@ -94,12 +94,6 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // set loading status to processing
         isLoading = true
         
-        // clean up
-        self.uuidArray.removeAll(keepingCapacity: false)
-        self.themeImgArray.removeAll(keepingCapacity: false)
-        self.ideaArray.removeAll(keepingCapacity: false)
-        self.likesArray.removeAll(keepingCapacity: false)
-        
         let query = PFQuery(className: "posts")
         query.whereKey("username", equalTo: PFUser.current()!.username!)
         query.limit = pageLimit
@@ -160,8 +154,7 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
             
-            // reload collectionView and end refresh animation
-            self.collectionView?.reloadData()
+            // refresh animation
             self.refresher.endRefreshing()
             
             if error == nil {
@@ -169,6 +162,15 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 // if no more object is found, and loadmore process
                 if objects?.count == 0 {
                     return
+                }
+                
+                // if loadPosts, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    self.uuidArray.removeAll(keepingCapacity: false)
+                    self.themeImgArray.removeAll(keepingCapacity: false)
+                    self.ideaArray.removeAll(keepingCapacity: false)
+                    self.likesArray.removeAll(keepingCapacity: false)
                 }
                 
                 // find objects related to our request
@@ -188,6 +190,8 @@ class homeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                         self.likesArray.append(object.value(forKey: "likes") as! Int)
                     }
                 }
+                
+                self.collectionView?.reloadData()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

@@ -98,12 +98,6 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         // set loading status to processing
         isLoading = true
         
-        // clean up
-        self.uuidArray.removeAll(keepingCapacity: false)
-        self.themeImgArray.removeAll(keepingCapacity: false)
-        self.ideaArray.removeAll(keepingCapacity: false)
-        self.likesArray.removeAll(keepingCapacity: false)
-        
         let query = PFQuery(className: "posts")
         query.whereKey("username", equalTo: guestname.last!)
         query.limit = pageLimit
@@ -180,30 +174,35 @@ class guestVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func processQuery(query: PFQuery<PFObject>) {
         query.findObjectsInBackground { (objects, error) in
             
+            // refresh animation
+            self.refresher.endRefreshing()
+            
             if error == nil {
                 
+                // if no more object is found, and loadmore process
+                if objects?.count == 0 {
+                    return
+                }
+                
+                // if loadPosts, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    self.uuidArray.removeAll(keepingCapacity: false)
+                    self.themeImgArray.removeAll(keepingCapacity: false)
+                    self.ideaArray.removeAll(keepingCapacity: false)
+                    self.likesArray.removeAll(keepingCapacity: false)
+                }
                 
                 // find objects related to our request
                 for object in objects! {
-                    
-                    // check empty
-                    if (object.object(forKey: "uuid") != nil &&
-                        object.object(forKey: "theme") != nil &&
-                        object.object(forKey: "idea") != nil &&
-                        object.value(forKey: "likes") != nil
-                        ) {
-                    
-                        // add found data to arrays
-                        self.uuidArray.append(object.object(forKey: "uuid") as! String)
-                        self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
-                        self.ideaArray.append(object.object(forKey: "idea") as! String)
-                        self.likesArray.append(object.value(forKey: "likes") as! Int)
-                    }
+                    // add found data to arrays
+                    self.uuidArray.append(object.object(forKey: "uuid") as! String)
+                    self.themeImgArray.append(object.object(forKey: "theme") as! PFFile)
+                    self.ideaArray.append(object.object(forKey: "idea") as! String)
+                    self.likesArray.append(object.value(forKey: "likes") as! Int)
                 }
                 
-                // reload collectionView and end refresh animation
                 self.collectionView?.reloadData()
-                self.refresher.endRefreshing()
                 
                 // set loading status to finished if loaded something
                 if !(objects?.isEmpty)! {

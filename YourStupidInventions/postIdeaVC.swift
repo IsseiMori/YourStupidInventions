@@ -195,17 +195,6 @@ class postIdeaVC: UITableViewController {
         // set loading status to processing
         isLoading = true
         
-        // clean up
-        self.titleArray.removeAll(keepingCapacity: false)
-        self.uuidArray.removeAll(keepingCapacity: false)
-        self.themeArray.removeAll(keepingCapacity: false)
-        self.ideaArray.removeAll(keepingCapacity: false)
-        self.usernameArray.removeAll(keepingCapacity: false)
-        self.fullnameArray.removeAll(keepingCapacity: false)
-        self.dateArray.removeAll(keepingCapacity: false)
-        self.likesArray.removeAll(keepingCapacity: false)
-        self.addLikeArray.removeAll(keepingCapacity: false)
-        
         let query = PFQuery(className: "posts")
         query.limit = pageLimit
         self.page = self.pageLimit
@@ -271,6 +260,20 @@ class postIdeaVC: UITableViewController {
                 // if no more object is found, end loadmore process
                 if objects?.count == 0 {
                     return
+                }
+                
+                // if loadPosts, clean up arrays
+                if self.page == self.pageLimit {
+                    // clean up
+                    self.titleArray.removeAll(keepingCapacity: false)
+                    self.uuidArray.removeAll(keepingCapacity: false)
+                    self.themeArray.removeAll(keepingCapacity: false)
+                    self.ideaArray.removeAll(keepingCapacity: false)
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.fullnameArray.removeAll(keepingCapacity: false)
+                    self.dateArray.removeAll(keepingCapacity: false)
+                    self.likesArray.removeAll(keepingCapacity: false)
+                    self.addLikeArray.removeAll(keepingCapacity: false)
                 }
                 
                 // find related objects
