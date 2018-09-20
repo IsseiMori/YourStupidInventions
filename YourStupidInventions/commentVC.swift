@@ -817,7 +817,7 @@ class commentVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITa
             
             // show tweet view
             let composer = TWTRComposer()
-            composer.setText("[\(self.header.titleLbl.text!)]  \(self.header.ideaLbl.text!) #YourStupidInventions ")
+            composer.setText("[\(self.header.titleLbl.text!)]  \(self.header.ideaLbl.text!) \(NSLocalizedString("twitter hashtag", comment: ""))")
             composer.setImage(self.header.themeImg.image)
             composer.show(from: self) { (result) in
             }
