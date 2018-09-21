@@ -83,6 +83,7 @@
 		850FBC222150C73100F922A5 /* tutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FBC212150C73100F922A5 /* tutorialVC.swift */; };
 		850FBC242152D25200F922A5 /* fileImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC232152D25200F922A5 /* fileImg.png */; };
 		850FBC262152D4DE00F922A5 /* uploadImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC252152D4DD00F922A5 /* uploadImg.png */; };
+		85AB868B2154674E002F3D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85AB868A2154674E002F3D70 /* InfoPlist.strings */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -115,7 +116,6 @@
 		8507F31421487D2400269446 /* money_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money_unlike.png; sourceTree = "<group>"; };
 		8507F319214906C300269446 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8507F31B214906CB00269446 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourStupidInventions-Bridging-Header.h"; sourceTree = "<group>"; };
 		8507F320214B2EBD00269446 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		8507F326214B3E0200269446 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
 		8507F328214B3ED700269446 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
@@ -182,6 +182,8 @@
 		850FBC212150C73100F922A5 /* tutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tutorialVC.swift; sourceTree = "<group>"; };
 		850FBC232152D25200F922A5 /* fileImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fileImg.png; sourceTree = "<group>"; };
 		850FBC252152D4DD00F922A5 /* uploadImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadImg.png; sourceTree = "<group>"; };
+		85AB868A2154674E002F3D70 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		85AB868F21546E6D002F3D70 /* YourStupidInventions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourStupidInventions-Bridging-Header.h"; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 		85C95796213206D000AEFD2E = {
 			isa = PBXGroup;
 			children = (
+				85AB868F21546E6D002F3D70 /* YourStupidInventions-Bridging-Header.h */,
 				85C957A1213206D000AEFD2E /* YourStupidInventions */,
 				85C957A0213206D000AEFD2E /* Products */,
 				85C957B421320B4500AEFD2E /* Frameworks */,
@@ -326,6 +329,7 @@
 				85C957A9213206D600AEFD2E /* Assets.xcassets */,
 				85C957AB213206D600AEFD2E /* LaunchScreen.storyboard */,
 				85C957AE213206D600AEFD2E /* Info.plist */,
+				85AB868A2154674E002F3D70 /* InfoPlist.strings */,
 				850C2B892132F18C0095A3D7 /* Pacifico.ttf */,
 				850C2B9421330FD10095A3D7 /* signInVC.swift */,
 				850C2B97213322410095A3D7 /* signUpVC.swift */,
@@ -358,7 +362,6 @@
 				8507F2F52145F95F00269446 /* reportProblemVC.swift */,
 				8507F2FD21462B1B00269446 /* Localizable.strings */,
 				8507F2FF2147AEFC00269446 /* PickerViewKeyboard.swift */,
-				8507F31D2149942200269446 /* YourStupidInventions-Bridging-Header.h */,
 				8507F320214B2EBD00269446 /* Extentions.swift */,
 				850FBC1B2150BF3C00F922A5 /* splashVC.swift */,
 				850FBC212150C73100F922A5 /* tutorialVC.swift */,
@@ -468,6 +471,7 @@
 				850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */,
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
 				850C2BA621334A7F0095A3D7 /* comment.png in Resources */,
+				85AB868B2154674E002F3D70 /* InfoPlist.strings in Resources */,
 				850FBC242152D25200F922A5 /* fileImg.png in Resources */,
 				850C2BA721334A7F0095A3D7 /* like.png in Resources */,
 				8507F33A214B883F00269446 /* leaf@3x.png in Resources */,
@@ -789,7 +793,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.issei.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions/YourStupidInventions-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -817,7 +821,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.issei.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions/YourStupidInventions-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "Pods/**";

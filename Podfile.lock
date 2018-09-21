@@ -5,7 +5,7 @@ PODS:
     - Parse/Core (= 1.17.1)
   - Parse/Core (1.17.1):
     - Bolts/Tasks (~> 1.9)
-  - RSKImageCropper (2.1.0)
+  - RSKImageCropper (2.2.0)
   - Spring (1.0.5)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.0):
@@ -43,7 +43,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
   Parse: d3edaf8c7c722cb33cb83ba7821d015ae32d362d
-  RSKImageCropper: 0d0c6d8525a2381f03fde32a47c6703817a2feed
+  RSKImageCropper: bd0bdf765b27c046c89728d65075b363a3b665c2
   Spring: 3c7666eccefdeb87140008dc81043f89f8dbb787
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: bc7bd086b9b724a1d888745a054e1d0b1ecc4f3f
