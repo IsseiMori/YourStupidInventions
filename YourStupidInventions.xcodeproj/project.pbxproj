@@ -83,7 +83,7 @@
 		850FBC222150C73100F922A5 /* tutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FBC212150C73100F922A5 /* tutorialVC.swift */; };
 		850FBC242152D25200F922A5 /* fileImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC232152D25200F922A5 /* fileImg.png */; };
 		850FBC262152D4DE00F922A5 /* uploadImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 850FBC252152D4DD00F922A5 /* uploadImg.png */; };
-		85AB868B2154674E002F3D70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85AB868A2154674E002F3D70 /* InfoPlist.strings */; };
+		85B34DBE215623B700E25A40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85B34DC0215623B700E25A40 /* InfoPlist.strings */; };
 		85C957A3213206D000AEFD2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C957A2213206D000AEFD2E /* AppDelegate.swift */; };
 		85C957A8213206D000AEFD2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A6213206D000AEFD2E /* Main.storyboard */; };
 		85C957AA213206D600AEFD2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85C957A9213206D600AEFD2E /* Assets.xcassets */; };
@@ -182,8 +182,9 @@
 		850FBC212150C73100F922A5 /* tutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tutorialVC.swift; sourceTree = "<group>"; };
 		850FBC232152D25200F922A5 /* fileImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fileImg.png; sourceTree = "<group>"; };
 		850FBC252152D4DD00F922A5 /* uploadImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uploadImg.png; sourceTree = "<group>"; };
-		85AB868A2154674E002F3D70 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		85AB868F21546E6D002F3D70 /* YourStupidInventions-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourStupidInventions-Bridging-Header.h"; sourceTree = "<group>"; };
+		85B34DBF215623B700E25A40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85B34DC1215623C800E25A40 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85C9579F213206D000AEFD2E /* YourStupidInventions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourStupidInventions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C957A2213206D000AEFD2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C957A7213206D000AEFD2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -329,7 +330,7 @@
 				85C957A9213206D600AEFD2E /* Assets.xcassets */,
 				85C957AB213206D600AEFD2E /* LaunchScreen.storyboard */,
 				85C957AE213206D600AEFD2E /* Info.plist */,
-				85AB868A2154674E002F3D70 /* InfoPlist.strings */,
+				85B34DC0215623B700E25A40 /* InfoPlist.strings */,
 				850C2B892132F18C0095A3D7 /* Pacifico.ttf */,
 				850C2B9421330FD10095A3D7 /* signInVC.swift */,
 				850C2B97213322410095A3D7 /* signUpVC.swift */,
@@ -471,7 +472,7 @@
 				850C2C32213DE9B20095A3D7 /* pbg.jpg in Resources */,
 				850C2B9F213329160095A3D7 /* pp.jpg in Resources */,
 				850C2BA621334A7F0095A3D7 /* comment.png in Resources */,
-				85AB868B2154674E002F3D70 /* InfoPlist.strings in Resources */,
+				85B34DBE215623B700E25A40 /* InfoPlist.strings in Resources */,
 				850FBC242152D25200F922A5 /* fileImg.png in Resources */,
 				850C2BA721334A7F0095A3D7 /* like.png in Resources */,
 				8507F33A214B883F00269446 /* leaf@3x.png in Resources */,
@@ -636,6 +637,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		85B34DC0215623B700E25A40 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85B34DBF215623B700E25A40 /* en */,
+				85B34DC1215623C800E25A40 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		85C957A6213206D000AEFD2E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -779,7 +789,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 23AGNQRQP7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -793,10 +804,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.issei.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e0699801-b7f2-4362-b75d-5bf4b2b9cb2d";
+				PROVISIONING_PROFILE_SPECIFIER = YourStupidInventions_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
@@ -807,7 +820,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 23AGNQRQP7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -821,9 +835,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.issei.YourStupidInventions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a0c15bd6-4d16-4519-a770-8f1d7b3c2517";
+				PROVISIONING_PROFILE_SPECIFIER = YourStupidInventions_dist;
 				SWIFT_OBJC_BRIDGING_HEADER = "YourStupidInventions-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;
